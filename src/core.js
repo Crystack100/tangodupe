@@ -104,7 +104,7 @@ var TangoCore = (function () {
     return out;
   }
 
-  // difficulty: "easy" | "hard"
+  // difficulty: "easy" | "medium" | "hard"
   function generate(seed, difficulty) {
     var rand = rng(seed);
     var sol = randomSolution(rand);
@@ -127,7 +127,7 @@ var TangoCore = (function () {
         var e = edges.splice(k, 1)[0];
         if (solve(givens, edges, 2).count !== 1) edges.splice(k, 0, e);
       }
-    } else {
+    } else if (difficulty === "easy") {
       // Easy: hand back a few cells so there are more footholds.
       shuffle(removed, rand).slice(0, 4).forEach(function (i) { givens[i] = sol[i]; });
     }
@@ -161,6 +161,22 @@ var TangoCore = (function () {
     return { badCells: badCells, badEdges: badEdges, solved: full && badCells.size === 0 };
   }
 
-  return { N: N, generate: generate, solve: solve, check: check, rng: rng };
+  // Level n always maps to the same puzzle, so levels are unlimited and repeatable.
+  function levelDifficulty(n) { return n <= 5 ? "easy" : n <= 20 ? "medium" : "hard"; }
+  function level(n) {
+    var seed = (Math.imul(n, 2654435761) ^ 0x5bd1e995) >>> 0;
+    var p = generate(seed, levelDifficulty(n));
+    p.level = n;
+    return p;
+  }
+  // Seconds needed for 3 and 2 stars; anything slower still earns 1 star.
+  var STAR_TIMES = { easy: [40, 90], medium: [60, 150], hard: [90, 240] };
+  function stars(difficulty, seconds) {
+    var t = STAR_TIMES[difficulty];
+    return seconds <= t[0] ? 3 : seconds <= t[1] ? 2 : 1;
+  }
+
+  return { N: N, generate: generate, level: level, levelDifficulty: levelDifficulty,
+    STAR_TIMES: STAR_TIMES, stars: stars, solve: solve, check: check, rng: rng };
 })();
 if (typeof module !== "undefined") module.exports = TangoCore;

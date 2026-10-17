@@ -1,6 +1,6 @@
-# Tango
+# Tango Cats
 
-A suns-and-moons logic puzzle for phones, inspired by LinkedIn's Tango. Unlimited levels, 1-3 stars per level based on solve time, and a theme store paid for with stars.
+A cozy cat logic puzzle for phones, inspired by LinkedIn's Tango. Unlimited levels, 1-3 stars per level based on solve time, and a theme store paid for with stars.
 
 - `src/core.js`: puzzle generator, solver and rule checker (plain JavaScript).
 - `src/game.html`: the game screen.

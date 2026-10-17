@@ -1,11 +1,11 @@
 {
-  "name": "Tango",
-  "short_name": "Tango",
-  "description": "Suns and moons logic puzzle",
+  "name": "Tango Cats",
+  "short_name": "Tango Cats",
+  "description": "A cozy cat logic puzzle with unlimited levels",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#e9eef5",
-  "theme_color": "#18212f",
+  "background_color": "#fde8da",
+  "theme_color": "#ff8a5c",
   "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }

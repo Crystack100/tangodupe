@@ -3,75 +3,85 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#18212f">
+<meta name="theme-color" content="#ff8a5c">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
 <link rel="apple-touch-icon" href="icon.svg">
 </head>
 <body>
-<title>Tango</title>
+<title>Tango Cats</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;700;800&display=swap">
 <style>
-/* Layout: one phone column with three screens (home, level, store); the board is the hero.
-   Skins: "daybreak" follows the system light/dark setting; bought skins are fixed looks set by data-skin. */
+/* Layout: a phone app shell. Top status bar, one screen at a time (home, level map, shop, puzzle),
+   and a bottom tab bar. The cats on the board are the hero.
+   Skins: "cozy" follows the system light/dark setting; bought skins are fixed looks set by data-skin. */
 :root {
-  --bg: #e7edf5; --bg2: #f4f1fb;
-  --surface: #ffffff; --cell: #f5f7fb; --given: #e2e8f1; --line: #d3dbe6;
-  --ink: #18212f; --muted: #5f6b7d; --accent: #4655c9; --on-accent: #ffffff;
-  --sun: #f0a020; --sun-core: #ffd25e; --moon: #4655c9;
-  --star: #f5b301; --star-off: #d3dbe6;
-  --bad: #d63c58; --bad-soft: rgba(214, 60, 88, .14);
-  --shadow: rgba(24, 33, 47, .28);
-  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
-  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #fde8da; --bg2: #f1def6;
+  --surface: #fffaf5; --cell: #fff0e4; --given: #f7dccb; --line: #efcdb8;
+  --ink: #4a2e2a; --muted: #8c6a62; --accent: #ff8a5c; --on-accent: #ffffff;
+  --sun: #d9761f; --sun-core: #ffb35c; --moon: #5d5878;
+  --star: #ffb92e; --star-off: #efcdb8;
+  --bad: #e5484d; --bad-soft: rgba(229, 72, 77, .16);
+  --shadow: rgba(74, 46, 42, .22);
+  --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #0d1220; --bg2: #191a35; --surface: #171e2e; --cell: #1d2538; --given: #29334a; --line: #313c54;
-    --ink: #e8ecf4; --muted: #9ba7bb; --accent: #95a2ff; --on-accent: #0d1220;
-    --sun: #f5b23a; --sun-core: #ffd774; --moon: #95a2ff; --star: #ffc93c; --star-off: #34405a;
-    --bad: #ff6680; --bad-soft: rgba(255, 102, 128, .16); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
+    --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
+    --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14;
+    --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
+    --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #0d1220; --bg2: #191a35; --surface: #171e2e; --cell: #1d2538; --given: #29334a; --line: #313c54;
-  --ink: #e8ecf4; --muted: #9ba7bb; --accent: #95a2ff; --on-accent: #0d1220;
-  --sun: #f5b23a; --sun-core: #ffd774; --moon: #95a2ff; --star: #ffc93c; --star-off: #34405a;
-  --bad: #ff6680; --bad-soft: rgba(255, 102, 128, .16); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
+  --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
+  --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14;
+  --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
+  --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
 }
-/* Store skins come after the system blocks so they win when equipped. */
+/* Shop skins come after the system blocks so they win when equipped. */
 :root[data-skin="midnight"] {
-  --bg: #0a0f24; --bg2: #1d1747; --surface: #141a36; --cell: #1a2244; --given: #252f5a; --line: #2e3a6a;
-  --ink: #eef0ff; --muted: #a2a9cf; --accent: #ffd56b; --on-accent: #141a36;
-  --sun: #ffb938; --sun-core: #ffe08a; --moon: #c9d2ff; --star: #ffd56b; --star-off: #2e3a6a;
-  --bad: #ff6f8a; --bad-soft: rgba(255, 111, 138, .18); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+  --bg: #0f1230; --bg2: #24184a; --surface: #1a1d42; --cell: #212553; --given: #2c3166; --line: #383e7a;
+  --ink: #eef0ff; --muted: #a9afd6; --accent: #ffd56b; --on-accent: #1a1d42;
+  --sun: #e89a2c; --sun-core: #ffd27a; --moon: #b8c0f0; --star: #ffd56b; --star-off: #383e7a;
+  --bad: #ff6f8a; --bad-soft: rgba(255, 111, 138, .2); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
 }
 :root[data-skin="sakura"] {
-  --bg: #fde8ef; --bg2: #fff6e9; --surface: #fffafc; --cell: #fff1f5; --given: #f8d9e4; --line: #f0c6d5;
-  --ink: #4a1f33; --muted: #8b5a70; --accent: #c2417a; --on-accent: #ffffff;
-  --sun: #f2793d; --sun-core: #ffc07a; --moon: #7a3d8f; --star: #f2a33d; --star-off: #f0c6d5;
-  --bad: #d12f4a; --bad-soft: rgba(209, 47, 74, .14); --shadow: rgba(122, 61, 92, .25); color-scheme: light;
+  --bg: #ffe3ee; --bg2: #fff4e3; --surface: #fffafc; --cell: #ffeef4; --given: #fbd5e3; --line: #f4c2d4;
+  --ink: #57243b; --muted: #95607a; --accent: #e3528f; --on-accent: #ffffff;
+  --sun: #e0703a; --sun-core: #ffb48a; --moon: #8c5aa5; --star: #f7a83a; --star-off: #f4c2d4;
+  --bad: #d12f4a; --bad-soft: rgba(209, 47, 74, .15); --shadow: rgba(122, 61, 92, .22); color-scheme: light;
 }
 :root[data-skin="matcha"] {
-  --bg: #e5ecd9; --bg2: #f3efdf; --surface: #fbfcf6; --cell: #f1f4e8; --given: #dde5cc; --line: #c7d3b0;
-  --ink: #23301b; --muted: #5d6b4f; --accent: #4d7a2a; --on-accent: #ffffff;
-  --sun: #d99a1e; --sun-core: #f6d36b; --moon: #2f5d3a; --star: #d99a1e; --star-off: #c7d3b0;
-  --bad: #c2412d; --bad-soft: rgba(194, 65, 45, .14); --shadow: rgba(35, 48, 27, .25); color-scheme: light;
+  --bg: #e4edd6; --bg2: #f5efdc; --surface: #fbfcf5; --cell: #eff4e4; --given: #dbe5c8; --line: #c6d4ad;
+  --ink: #2c3a21; --muted: #64735a; --accent: #6a9a3a; --on-accent: #ffffff;
+  --sun: #c98a1c; --sun-core: #f2cd6b; --moon: #4f6b45; --star: #e0a21e; --star-off: #c6d4ad;
+  --bad: #c2412d; --bad-soft: rgba(194, 65, 45, .15); --shadow: rgba(44, 58, 33, .22); color-scheme: light;
 }
 :root[data-skin="ocean"] {
-  --bg: #06303d; --bg2: #0a4a57; --surface: #0c3e4c; --cell: #0f4858; --given: #155a6b; --line: #1d6a7c;
-  --ink: #e4fbff; --muted: #9fd3dc; --accent: #ff8a65; --on-accent: #06303d;
-  --sun: #ff8a65; --sun-core: #ffc29e; --moon: #5ee6f0; --star: #ffcf6e; --star-off: #1d6a7c;
-  --bad: #ff5c7a; --bad-soft: rgba(255, 92, 122, .2); --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
+  --bg: #08334a; --bg2: #0b4d5e; --surface: #0e4158; --cell: #124c63; --given: #185d75; --line: #216d86;
+  --ink: #e6fbff; --muted: #a2d3df; --accent: #ff9670; --on-accent: #08334a;
+  --sun: #f07a52; --sun-core: #ffb999; --moon: #7fe0ea; --star: #ffd170; --star-off: #216d86;
+  --bad: #ff5c7a; --bad-soft: rgba(255, 92, 122, .22); --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
 }
 :root[data-skin="arcade"] {
-  --bg: #07060d; --bg2: #1b0830; --surface: #110e1d; --cell: #161226; --given: #221a3a; --line: #3a2a63;
-  --ink: #f6f0ff; --muted: #b6a6dc; --accent: #ff3fb4; --on-accent: #07060d;
-  --sun: #ffe14a; --sun-core: #fff3a6; --moon: #3ff0ff; --star: #ffe14a; --star-off: #3a2a63;
-  --bad: #ff3f5e; --bad-soft: rgba(255, 63, 94, .22); --shadow: rgba(255, 63, 180, .25); color-scheme: dark;
+  --bg: #0a0712; --bg2: #200a36; --surface: #151024; --cell: #1b142e; --given: #271d42; --line: #3d2c66;
+  --ink: #f7f0ff; --muted: #b9a8de; --accent: #ff4fbf; --on-accent: #0a0712;
+  --sun: #ffd23a; --sun-core: #fff09a; --moon: #44e8ff; --star: #ffe14a; --star-off: #3d2c66;
+  --bad: #ff3f5e; --bad-soft: rgba(255, 63, 94, .25); --shadow: rgba(255, 79, 191, .25); color-scheme: dark;
+}
+/* Cat details derive from the fur colors, so every skin gets matching faces.
+   Declared on every element so a shop card's own fur colors flow into its previews. */
+* {
+  --moon-line: color-mix(in srgb, var(--moon) 62%, #000);
+  --eye: #2b1b16;
+  --eye2: color-mix(in srgb, var(--moon) 20%, #fff);
+  --nose: #f2899b;
+  --press: color-mix(in srgb, var(--accent) 70%, #000);
 }
 
 * { box-sizing: border-box; }
@@ -79,279 +89,347 @@
 html, body { min-height: 100%; }
 body {
   margin: 0; color: var(--ink); font: 15px/1.5 var(--font-body);
-  background: var(--bg) linear-gradient(160deg, var(--bg2), var(--bg) 60%) fixed;
-  padding-inline: 16px; padding-block: 14px 36px;
-  -webkit-tap-highlight-color: transparent; transition: background-color .3s;
+  background: var(--bg) linear-gradient(170deg, var(--bg2), var(--bg) 55%) fixed;
+  padding-inline: 16px; padding-block: 0 calc(96px + env(safe-area-inset-bottom, 0px));
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+  touch-action: manipulation; transition: background-color .3s;
 }
-button { font: inherit; color: inherit; }
+body.playing { padding-bottom: 24px; }
+button { font: inherit; color: inherit; touch-action: manipulation; }
 .app { max-width: 440px; margin: 0 auto; }
-.screen { display: flex; flex-direction: column; gap: 14px; }
+.screen { display: flex; flex-direction: column; gap: 14px; animation: slide .25s ease-out; }
+@keyframes slide { from { opacity: 0; transform: translateY(8px); } }
 
-/* top bar */
-.bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 44px; }
-.bar h2 { font: 700 1.25rem/1 var(--font-display); margin: 0; flex: 1; text-align: center; }
-.icon-btn {
-  width: 44px; height: 44px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface);
-  display: grid; place-items: center; cursor: pointer; flex: none;
-}
-.icon-btn svg { width: 20px; height: 20px; stroke: var(--ink); fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-.wallet {
-  display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px;
-  background: var(--surface); border: 1px solid var(--line); font: 700 1rem var(--font-display);
+/* status bar */
+.status { display: flex; align-items: center; gap: 10px; padding-block: 12px 4px; }
+.status h2 { font: 700 1.3rem/1 var(--font-display); margin: 0; flex: 1; }
+.pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px 7px 9px; border-radius: 999px;
+  background: var(--surface); box-shadow: 0 3px 0 var(--line); font: 700 1.05rem var(--font-display);
   font-variant-numeric: tabular-nums; flex: none;
 }
-.wallet svg, .star svg { fill: var(--star); }
+.pill svg { width: 22px; height: 22px; fill: var(--star); }
+.round {
+  width: 46px; height: 46px; border-radius: 16px; border: 0; background: var(--surface); box-shadow: 0 4px 0 var(--line);
+  display: grid; place-items: center; cursor: pointer; flex: none;
+}
+.round:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.round svg { width: 22px; height: 22px; stroke: var(--ink); fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+
+/* chunky game buttons */
+.chunky {
+  border: 0; border-radius: 22px; background: var(--accent); color: var(--on-accent);
+  font: 700 1.35rem var(--font-display); padding: 16px 24px; cursor: pointer; width: 100%;
+  box-shadow: 0 6px 0 var(--press); transition: transform .08s, box-shadow .08s;
+}
+.chunky:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--press); }
+.soft {
+  border: 0; border-radius: 18px; background: var(--surface); color: var(--ink); cursor: pointer;
+  font: 700 1rem var(--font-display); padding: 12px 8px; box-shadow: 0 4px 0 var(--line);
+  display: inline-flex; gap: 6px; justify-content: center; align-items: center;
+}
+.soft:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.soft:disabled { opacity: .45; cursor: default; transform: none; }
+.soft small { font: 600 .78rem var(--font-body); color: var(--muted); }
+:is(.chunky, .soft, .round, .node, .tab, .cell):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
 /* home */
-.logo { text-align: center; padding-block: 8px 0; }
-.logo h1 { font: 800 3.4rem/1 var(--font-display); letter-spacing: -.04em; margin: 0; display: inline-flex; align-items: center; gap: .25rem; }
-.logo h1 svg { width: .72em; height: .72em; }
-.logo p { margin: 6px 0 0; color: var(--muted); }
-.hero {
-  background: var(--surface); border-radius: 24px; padding: 22px 20px; text-align: center;
-  box-shadow: 0 18px 40px -26px var(--shadow); border: 1px solid var(--line);
-  display: grid; gap: 14px; justify-items: center;
+.mascot-card {
+  position: relative; background: var(--surface); border-radius: 32px; padding: 22px 20px 24px;
+  box-shadow: 0 8px 0 var(--line), 0 24px 40px -30px var(--shadow); text-align: center; display: grid; gap: 12px; justify-items: center;
 }
-.hero .eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .75rem; font-weight: 700; color: var(--muted); }
-.hero .big { font: 800 3rem/1 var(--font-display); letter-spacing: -.03em; }
-.chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: .78rem; font-weight: 700; background: var(--given); color: var(--muted); text-transform: capitalize; }
-.play {
-  border: 0; border-radius: 18px; background: var(--accent); color: var(--on-accent);
-  font: 800 1.25rem var(--font-display); padding: 15px 44px; cursor: pointer;
-  box-shadow: 0 10px 22px -12px var(--accent); width: 100%;
+.mascot { width: 160px; height: 130px; animation: bob 3s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(-6px); } }
+.bubble {
+  position: relative; background: var(--cell); border-radius: 16px; padding: 6px 14px;
+  font: 600 .9rem/1.25 var(--font-display); color: var(--muted); margin-bottom: -4px;
 }
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
-.stat { background: var(--cell); border-radius: 14px; padding: 8px 4px; }
-.stat b { display: block; font: 700 1.2rem var(--font-display); font-variant-numeric: tabular-nums; }
-.stat span { font-size: .75rem; color: var(--muted); }
-.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.tile {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 14px;
-  text-align: left; cursor: pointer; display: grid; gap: 2px;
+.bubble::after {
+  content: ""; position: absolute; left: 50%; bottom: -7px; margin-left: -7px;
+  border: 7px solid transparent; border-bottom: 0; border-top-color: var(--cell);
 }
-.tile b { font: 700 1.05rem var(--font-display); }
-.tile span { color: var(--muted); font-size: .82rem; }
-.section-title { font: 700 1.05rem var(--font-display); margin: 6px 0 0; display: flex; justify-content: space-between; align-items: baseline; }
-.section-title span { font: 500 .8rem var(--font-body); color: var(--muted); }
-.levels { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
-.lvl {
-  aspect-ratio: 1; border-radius: 14px; border: 1px solid var(--line); background: var(--surface);
-  cursor: pointer; display: grid; place-items: center; align-content: center; gap: 2px; padding: 0;
-  font: 700 1.05rem var(--font-display); font-variant-numeric: tabular-nums; max-width: 100%;
-}
-.lvl small { font-size: .6rem; letter-spacing: 1px; color: var(--star); line-height: 1; }
-.lvl small i { color: var(--star-off); font-style: normal; }
-.lvl.next { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-.lvl.locked { opacity: .4; cursor: default; }
-.pager { display: flex; justify-content: center; gap: 10px; align-items: center; color: var(--muted); font-size: .85rem; }
-.pager button { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 6px 12px; cursor: pointer; font-weight: 600; }
-.pager button:disabled { opacity: .4; cursor: default; }
+.title { font: 700 2.6rem/1 var(--font-display); margin: 0; letter-spacing: -.01em; }
+.title em { font-style: normal; color: var(--accent); }
+.next-label { font: 600 1.05rem var(--font-display); color: var(--muted); margin: 0; }
+.diff { display: inline-block; padding: 2px 12px; border-radius: 999px; font: 600 .82rem var(--font-display); background: var(--cell); color: var(--muted); text-transform: capitalize; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat { background: var(--surface); border-radius: 20px; padding: 10px 6px; text-align: center; box-shadow: 0 4px 0 var(--line); }
+.stat b { display: block; font: 700 1.4rem var(--font-display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: .74rem; color: var(--muted); font-weight: 700; }
 
-/* level screen */
+/* level map: a winding trail, lowest level at the bottom */
+.map { position: relative; display: flex; flex-direction: column-reverse; gap: 18px; padding-block: 30px 16px; overflow: hidden; }
+.map::before {
+  content: ""; position: absolute; left: 50%; top: 40px; bottom: 40px; width: 10px; margin-left: -5px;
+  background: repeating-linear-gradient(var(--line) 0 14px, transparent 14px 26px); border-radius: 6px;
+}
+.node-row { display: flex; justify-content: center; }
+.node {
+  position: relative; width: 72px; height: 72px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--surface); box-shadow: 0 6px 0 var(--line); font: 700 1.5rem var(--font-display);
+  display: grid; place-items: center; transform: translateX(var(--x)); font-variant-numeric: tabular-nums;
+}
+.node:active { box-shadow: 0 2px 0 var(--line); translate: 0 4px; }
+.node .ns { position: absolute; bottom: -11px; left: 50%; transform: translateX(-50%); display: flex; }
+.node .ns svg { width: 18px; height: 18px; fill: var(--star-off); stroke: var(--surface); stroke-width: 2; paint-order: stroke; }
+.node .ns svg.on { fill: var(--star); }
+.node.current { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 0 var(--press); animation: pulse 1.6s ease-in-out infinite; }
+.node .paw { position: absolute; top: -30px; width: 36px; height: 30px; }
+@keyframes pulse { 50% { scale: 1.06; } }
+.node.locked { opacity: .55; cursor: default; }
+.node svg.lock { width: 24px; height: 24px; fill: var(--muted); }
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* puzzle */
 .meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.timer { font: 700 1.6rem var(--font-display); font-variant-numeric: tabular-nums; }
-.goals { display: flex; gap: 10px; font-size: .78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
-.goals b { color: var(--star); letter-spacing: 1px; }
-.goals .miss { opacity: .45; text-decoration: line-through; }
+.timer { font: 700 1.7rem var(--font-display); font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
+.timer svg { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 2.6; stroke-linecap: round; }
+.goals { display: flex; flex-direction: column; align-items: flex-end; font: 600 .8rem/1.4 var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums; }
+.goals span { display: inline-flex; align-items: center; gap: 1px; }
+.goals svg { width: 13px; height: 13px; fill: var(--star); }
+.goals .miss { opacity: .4; text-decoration: line-through; }
 .board-wrap {
-  position: relative; background: var(--surface); border-radius: 22px; padding: 10px;
-  box-shadow: 0 22px 44px -28px var(--shadow); border: 1px solid var(--line);
+  position: relative; background: var(--surface); border-radius: 30px; padding: 12px;
+  box-shadow: 0 8px 0 var(--line), 0 26px 44px -30px var(--shadow);
 }
 .board {
   position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr));
-  aspect-ratio: 1; max-width: 100%; gap: 4px;
+  aspect-ratio: 1; max-width: 100%; gap: 5px;
 }
 .cell {
-  position: relative; border: 0; padding: 0; margin: 0; background: var(--cell); border-radius: 10px;
-  cursor: pointer; min-width: 0; min-height: 0; box-shadow: inset 0 -2px 0 var(--line);
-  transition: background-color .15s;
+  position: relative; border: 0; padding: 0; margin: 0; background: var(--cell); border-radius: 14px;
+  cursor: pointer; min-width: 0; min-height: 0; box-shadow: inset 0 -3px 0 var(--line);
 }
-.cell:active { transform: scale(.96); }
 .cell.given { background: var(--given); cursor: default; box-shadow: none; }
-.cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); box-shadow: inset 0 0 0 2px var(--bad); }
-.cell:focus-visible { outline: 3px solid var(--accent); outline-offset: 1px; z-index: 1; }
-.cell svg { position: absolute; left: 18%; top: 18%; width: 64%; height: 64%; }
-.cell.pop svg { animation: pop .2s cubic-bezier(.3, 1.6, .5, 1); }
-@keyframes pop { from { transform: scale(.4); } to { transform: scale(1); } }
-.sun-ray { stroke: var(--sun); stroke-width: 7; stroke-linecap: round; }
-.sun-disc { fill: var(--sun-core); stroke: var(--sun); stroke-width: 6; }
-.moon-shape { fill: var(--moon); }
+.cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); box-shadow: inset 0 0 0 2.5px var(--bad); animation: shake .3s; }
+@keyframes shake { 25% { translate: -2px 0; } 75% { translate: 2px 0; } }
+.cell svg { position: absolute; left: 8%; top: 10%; width: 84%; height: 84%; }
+.cell.pop svg { animation: pop .28s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes pop { from { transform: scale(.3) rotate(-12deg); } }
 .mark {
-  position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%;
-  background: var(--surface); border: 1.5px solid var(--line); display: grid; place-items: center;
-  font: 800 14px/1 var(--font-display); color: var(--muted); pointer-events: none; z-index: 2;
+  position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
+  background: var(--surface); box-shadow: 0 2px 0 var(--line); display: grid; place-items: center;
+  font: 700 15px/1 var(--font-display); color: var(--accent); pointer-events: none; z-index: 2;
 }
-.mark.bad { color: var(--surface); background: var(--bad); border-color: var(--bad); }
+.mark.bad { color: var(--surface); background: var(--bad); box-shadow: none; }
 .actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.btn {
-  border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 14px;
-  font: 600 .95rem var(--font-body); padding: 12px 6px; cursor: pointer; display: inline-flex; gap: 6px; justify-content: center; align-items: center;
-}
-.btn small { color: var(--muted); font-weight: 500; }
-.btn:disabled { opacity: .45; cursor: default; }
-.btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-.btn:focus-visible, .play:focus-visible, .tile:focus-visible, .lvl:focus-visible, .icon-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 12px 16px; }
-summary { font-weight: 600; cursor: pointer; }
-details ul { margin: 10px 0 2px; padding-left: 1.1rem; display: grid; gap: 6px; color: var(--muted); }
-details li b { color: var(--ink); }
+.rules { background: var(--surface); border-radius: 22px; padding: 14px 18px; box-shadow: 0 4px 0 var(--line); }
+.rules summary { font: 600 1.05rem var(--font-display); cursor: pointer; }
+.rules ul { margin: 10px 0 2px; padding: 0; list-style: none; display: grid; gap: 8px; color: var(--muted); font-weight: 600; }
+.rules li { display: flex; gap: 10px; align-items: center; }
+.rules li svg { width: 30px; height: 30px; flex: none; }
+.rules li b { color: var(--ink); }
+.rules .sym { width: 30px; flex: none; text-align: center; font: 700 1.1rem var(--font-display); color: var(--accent); }
 
 /* win */
 .win {
-  position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; border-radius: 22px;
-  background: color-mix(in srgb, var(--surface) 82%, transparent); backdrop-filter: blur(3px);
+  position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; border-radius: 30px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent); backdrop-filter: blur(4px);
 }
-.win-card { text-align: center; padding: 16px; display: grid; gap: 10px; justify-items: center; }
-.win-card h3 { font: 800 2.1rem/1 var(--font-display); margin: 0; letter-spacing: -.02em; }
-.win-stars { display: flex; gap: 6px; }
-.win-stars svg { width: 54px; height: 54px; fill: var(--star-off); }
-.win-stars svg.on { fill: var(--star); animation: starIn .45s cubic-bezier(.3, 1.7, .5, 1) both; }
-.win-stars svg:nth-child(2) { transform: translateY(-10px); }
-.win-stars svg.on:nth-child(2) { animation-delay: .18s; }
-.win-stars svg.on:nth-child(3) { animation-delay: .36s; }
-@keyframes starIn { from { transform: scale(0) rotate(-40deg); } }
-.win-card p { margin: 0; color: var(--muted); }
-.win-card .earn { font: 700 1rem var(--font-display); color: var(--ink); }
-.win-btns { display: flex; gap: 8px; }
-.win-btns .btn { padding-inline: 18px; }
-.board.solved .cell { animation: wave .5s ease-out both; animation-delay: calc(var(--d) * 25ms); }
-@keyframes wave { 40% { transform: scale(.85); } }
+.win-card { text-align: center; padding: 14px; display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 300px; }
+.win-cat { width: 100px; height: 100px; animation: hop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+@keyframes hop { from { transform: translateY(30px) scale(.6); opacity: 0; } }
+.win-stars { display: flex; gap: 4px; align-items: flex-end; }
+.win-stars svg { width: 48px; height: 48px; fill: var(--star-off); }
+.win-stars svg:nth-child(2) { width: 60px; height: 60px; }
+.win-stars svg.on { fill: var(--star); animation: starIn .5s cubic-bezier(.3, 1.8, .5, 1) both; animation-delay: calc(.25s + var(--i) * .18s); }
+@keyframes starIn { from { transform: scale(0) rotate(-60deg); } }
+.win-card h3 { font: 700 2rem/1 var(--font-display); margin: 0; }
+.win-card p { margin: 0; color: var(--muted); font-weight: 700; }
+.win-card .earn { color: var(--ink); font: 600 1.05rem var(--font-display); }
+.win-btns { display: grid; grid-template-columns: auto 1fr; gap: 10px; width: 100%; margin-top: 4px; }
+.win-btns .chunky { font-size: 1.1rem; padding: 12px 18px; }
+.win-btns .soft { padding-inline: 16px; }
 
-/* store */
-.store-intro { color: var(--muted); margin: 0; text-align: center; font-size: .9rem; }
-.skins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+/* shop */
+.shop-intro { margin: 0; color: var(--muted); font-weight: 700; text-align: center; }
+.skins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .skin {
-  border-radius: 20px; padding: 12px; display: grid; gap: 10px; border: 2px solid transparent;
-  background: var(--sb); color: var(--si); box-shadow: 0 12px 26px -20px var(--shadow); min-width: 0;
+  border-radius: 26px; padding: 12px; display: grid; gap: 10px; background: var(--bg); color: var(--ink);
+  box-shadow: 0 6px 0 var(--line); min-width: 0; border: 3px solid transparent; text-align: center;
 }
 .skin.equipped { border-color: var(--accent); }
-.skin .mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--ss); padding: 6px; border-radius: 12px; }
-.skin .mini span { aspect-ratio: 1; border-radius: 6px; background: var(--sc); display: grid; place-items: center; }
-.skin .mini svg { width: 70%; height: 70%; }
-.skin b { font: 700 1rem var(--font-display); }
-.skin button {
-  border: 0; border-radius: 12px; padding: 9px 6px; font-weight: 700; cursor: pointer;
-  background: var(--sa); color: var(--so); display: inline-flex; justify-content: center; align-items: center; gap: 4px;
+.skin .mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 5px; background: var(--surface); padding: 7px; border-radius: 18px; }
+.skin .mini span { aspect-ratio: 1; border-radius: 10px; background: var(--cell); position: relative; }
+.skin .mini svg { position: absolute; inset: 8%; width: 84%; height: 84%; }
+.skin b { font: 600 1.05rem var(--font-display); }
+.skin .chunky { font-size: 1rem; padding: 9px 6px; border-radius: 16px; box-shadow: 0 4px 0 var(--press); display: inline-flex; justify-content: center; align-items: center; gap: 4px; }
+.skin .chunky:disabled { opacity: .6; cursor: default; transform: none; }
+.skin .chunky svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* tab bar */
+.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 8; display: flex; justify-content: center;
+  padding: 8px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px);
+  border-top: 2px solid var(--line);
 }
-.skin button:disabled { opacity: .55; cursor: default; }
-.skin button svg { width: 14px; height: 14px; fill: currentColor; }
+.tabs-in { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; max-width: 440px; }
+.tab {
+  border: 0; background: transparent; border-radius: 16px; padding: 6px 4px; cursor: pointer; color: var(--muted);
+  display: grid; justify-items: center; gap: 1px; font: 600 .8rem var(--font-display);
+}
+.tab svg { width: 26px; height: 26px; fill: currentColor; }
+.tab[aria-current="page"] { color: var(--accent); background: var(--cell); }
+
+/* splash and toast */
+.splash {
+  position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; align-content: center; gap: 12px;
+  background: var(--bg); text-align: center; transition: opacity .35s;
+}
+.splash svg { width: 130px; height: 130px; animation: bob 1.2s ease-in-out infinite; }
+.splash p { margin: 0; font: 600 1.05rem var(--font-display); color: var(--muted); max-width: 16rem; }
+.splash.out { opacity: 0; pointer-events: none; }
 .toast {
-  position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
-  background: var(--ink); color: var(--surface); padding: 10px 18px; border-radius: 999px; font-weight: 600; z-index: 20; white-space: nowrap;
+  position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+  background: var(--ink); color: var(--surface); padding: 10px 18px; border-radius: 999px; font: 600 1rem var(--font-display); z-index: 20; white-space: nowrap;
 }
 @media (prefers-reduced-motion: reduce) {
-  .cell.pop svg, .board.solved .cell, .win-stars svg.on { animation: none; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
+    <!-- Sunny: the orange tabby (the "sun" piece) -->
     <symbol id="sun" viewBox="0 0 100 100">
-      <g class="sun-ray">
-        <line x1="50" y1="6" x2="50" y2="17"/><line x1="50" y1="83" x2="50" y2="94"/>
-        <line x1="6" y1="50" x2="17" y2="50"/><line x1="83" y1="50" x2="94" y2="50"/>
-        <line x1="19" y1="19" x2="26" y2="26"/><line x1="74" y1="74" x2="81" y2="81"/>
-        <line x1="19" y1="81" x2="26" y2="74"/><line x1="74" y1="26" x2="81" y2="19"/>
-      </g>
-      <circle class="sun-disc" cx="50" cy="50" r="22"/>
+      <path d="M15 46 L19 9 L44 28 Z M85 46 L81 9 L56 28 Z" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M22 20 L24 33 L33 27 Z M78 20 L76 33 L67 27 Z" fill="var(--nose)"/>
+      <ellipse cx="50" cy="58" rx="38" ry="33" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="5"/>
+      <path d="M50 27 v9 M40 29 l2 8 M60 29 l-2 8" stroke="var(--sun)" stroke-width="4.5" stroke-linecap="round"/>
+      <circle cx="36" cy="57" r="5.5" fill="var(--eye)"/><circle cx="64" cy="57" r="5.5" fill="var(--eye)"/>
+      <circle cx="37.8" cy="55" r="1.8" fill="#fff"/><circle cx="65.8" cy="55" r="1.8" fill="#fff"/>
+      <path d="M46 66 h8 l-4 4.5 z" fill="var(--nose)"/>
+      <path d="M50 70 q-4 6 -9 3 M50 70 q4 6 9 3" stroke="var(--eye)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <ellipse cx="27" cy="69" rx="6" ry="3.5" fill="var(--nose)" opacity=".45"/><ellipse cx="73" cy="69" rx="6" ry="3.5" fill="var(--nose)" opacity=".45"/>
     </symbol>
+    <!-- Luna: the sleepy night cat (the "moon" piece) -->
     <symbol id="moon" viewBox="0 0 100 100">
-      <path class="moon-shape" d="M62 10a40 40 0 1 0 28 62A34 34 0 0 1 62 10z"/>
+      <path d="M15 46 L19 9 L44 28 Z M85 46 L81 9 L56 28 Z" fill="var(--moon)" stroke="var(--moon-line)" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M22 20 L24 33 L33 27 Z M78 20 L76 33 L67 27 Z" fill="var(--nose)"/>
+      <ellipse cx="50" cy="58" rx="38" ry="33" fill="var(--moon)" stroke="var(--moon-line)" stroke-width="5"/>
+      <path d="M45 30 a8 8 0 1 0 11 9 a6.5 6.5 0 1 1 -11 -9z" fill="var(--eye2)"/>
+      <path d="M29 58 q7 6 14 0 M57 58 q7 6 14 0" stroke="var(--eye2)" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <path d="M46 66 h8 l-4 4.5 z" fill="var(--nose)"/>
+      <path d="M50 70 q-4 6 -9 3 M50 70 q4 6 9 3" stroke="var(--eye2)" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M13 62 h-9 M13 69 l-8 3 M87 62 h9 M87 69 l8 3" stroke="var(--moon-line)" stroke-width="2.4" stroke-linecap="round"/>
     </symbol>
     <symbol id="star" viewBox="0 0 24 24">
-      <path d="M12 2.5l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.2l-5.9 3.2 1.3-6.5L2.5 9.3l6.6-.8z"/>
+      <path d="M12 2.2c.5 0 .9.3 1.1.7l2.3 4.7 5.1.8c1 .1 1.4 1.4.7 2.1l-3.7 3.6.9 5.1c.2 1-.9 1.8-1.8 1.3L12 18.1l-4.6 2.4c-.9.5-2-.3-1.8-1.3l.9-5.1-3.7-3.6c-.7-.7-.3-2 .7-2.1l5.1-.8 2.3-4.7c.2-.4.6-.7 1.1-.7z"/>
+    </symbol>
+    <symbol id="paw" viewBox="0 0 40 34">
+      <ellipse cx="20" cy="23" rx="9" ry="8"/>
+      <circle cx="8" cy="13" r="4.5"/><circle cx="16" cy="6" r="4.5"/>
+      <circle cx="25" cy="6" r="4.5"/><circle cx="33" cy="13" r="4.5"/>
     </symbol>
   </defs>
 </svg>
 
+<div class="splash" id="splash">
+  <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
+  <p>Untangling yarn and fluffing pillows…</p>
+</div>
+
 <main class="app">
   <!-- HOME -->
   <section id="home" class="screen" aria-label="Home">
-    <div class="bar">
-      <span style="width:44px"></span>
-      <span class="wallet" aria-label="Stars to spend"><svg width="18" height="18"><use href="#star"/></svg><span class="w-count">0</span></span>
+    <div class="status">
+      <h2>Hi there!</h2>
+      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
     </div>
-    <div class="logo">
-      <h1><svg aria-hidden="true"><use href="#sun"/></svg>Tango<svg aria-hidden="true"><use href="#moon"/></svg></h1>
-      <p>Suns, moons, and a lot of levels.</p>
+    <div class="mascot-card">
+      <span class="bubble" id="bubble">Meow! Ready?</span>
+      <svg class="mascot" viewBox="0 0 160 130" aria-hidden="true">
+        <use href="#moon" x="68" y="18" width="88" height="88"/>
+        <use href="#sun" x="0" y="26" width="104" height="104"/>
+      </svg>
+      <h1 class="title">Tango <em>Cats</em></h1>
+      <p class="next-label" id="h-level">Level 1</p>
+      <span class="diff" id="h-diff">easy</span>
+      <button class="chunky" id="h-play" type="button">Play</button>
     </div>
-    <div class="hero">
-      <span class="eyebrow">Next up</span>
-      <span class="big" id="h-level">Level 1</span>
-      <span class="chip" id="h-diff">easy</span>
-      <button class="play" id="h-play" type="button">Play</button>
-      <div class="stats">
-        <div class="stat"><b id="s-cleared">0</b><span>Levels cleared</span></div>
-        <div class="stat"><b id="s-stars">0</b><span>Stars earned</span></div>
-        <div class="stat"><b id="s-perfect">0</b><span>3-star levels</span></div>
-      </div>
-    </div>
-    <div class="row2">
-      <button class="tile" id="h-store" type="button"><b>Theme store</b><span id="h-store-sub">Spend your stars</span></button>
-      <button class="tile" id="h-how" type="button"><b>How to play</b><span>The four rules</span></button>
-    </div>
-    <h3 class="section-title">Levels <span id="pg-label">1–30</span></h3>
-    <div class="levels" id="levels"></div>
-    <div class="pager">
-      <button id="pg-prev" type="button">Previous</button>
-      <button id="pg-next" type="button">Next</button>
+    <div class="stats">
+      <div class="stat"><b id="s-cleared">0</b><span>Cleared</span></div>
+      <div class="stat"><b id="s-stars">0</b><span>Stars won</span></div>
+      <div class="stat"><b id="s-perfect">0</b><span>Perfect</span></div>
     </div>
   </section>
 
-  <!-- LEVEL -->
-  <section id="game" class="screen" aria-label="Level" hidden>
-    <div class="bar">
-      <button class="icon-btn" id="g-back" type="button" aria-label="Back to levels"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <!-- LEVEL MAP -->
+  <section id="levels" class="screen" aria-label="Levels" hidden>
+    <div class="status">
+      <h2 id="map-title">Levels 1–20</h2>
+      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+    </div>
+    <div class="pager">
+      <button class="soft" id="pg-prev" type="button">Earlier</button>
+      <button class="soft" id="pg-next" type="button">Later</button>
+    </div>
+    <div class="map" id="map"></div>
+  </section>
+
+  <!-- SHOP -->
+  <section id="store" class="screen" aria-label="Shop" hidden>
+    <div class="status">
+      <h2>Cat shop</h2>
+      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+    </div>
+    <p class="shop-intro">Win stars by solving fast, then dress up the whole game.</p>
+    <div class="skins" id="skins"></div>
+  </section>
+
+  <!-- PUZZLE -->
+  <section id="game" class="screen" aria-label="Puzzle" hidden>
+    <div class="status">
+      <button class="round" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <h2 id="g-title">Level 1</h2>
-      <span class="wallet" aria-label="Stars to spend"><svg width="18" height="18"><use href="#star"/></svg><span class="w-count">0</span></span>
+      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
     </div>
     <div class="meta">
-      <span class="timer" id="timer" aria-label="Time">0:00</span>
+      <span class="timer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><span id="timer" aria-label="Time">0:00</span></span>
       <div class="goals" id="goals"></div>
     </div>
     <div class="board-wrap">
-      <div class="board" id="board" role="grid" aria-label="Tango board, 6 by 6"></div>
+      <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>
       <div class="win" id="win" hidden>
         <div class="win-card">
+          <svg class="win-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
           <div class="win-stars" id="win-stars"></div>
-          <h3 id="win-title">Solved!</h3>
+          <h3 id="win-title">Purrfect!</h3>
           <p id="win-time">0:42</p>
           <p class="earn" id="win-earn"></p>
           <div class="win-btns">
-            <button class="btn" id="win-replay" type="button">Replay</button>
-            <button class="btn primary" id="win-next" type="button">Next level</button>
+            <button class="soft" id="win-replay" type="button" aria-label="Replay level"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>
+            <button class="chunky" id="win-next" type="button">Next level</button>
           </div>
         </div>
       </div>
     </div>
     <div class="actions">
-      <button class="btn" id="undo" type="button">Undo</button>
-      <button class="btn" id="hint" type="button">Hint <small>+15s</small></button>
-      <button class="btn" id="clear" type="button">Clear</button>
+      <button class="soft" id="undo" type="button">Undo</button>
+      <button class="soft" id="hint" type="button">Hint <small>+15s</small></button>
+      <button class="soft" id="clear" type="button">Clear</button>
     </div>
-    <details id="rules">
+    <details class="rules" id="rules">
       <summary>How to play</summary>
       <ul>
-        <li>Tap a square to cycle <b>sun</b>, <b>moon</b>, then empty.</li>
-        <li>Each row and column holds <b>3 suns and 3 moons</b>.</li>
-        <li><b>No more than 2</b> of the same symbol may sit next to each other.</li>
-        <li>Squares joined by <b>=</b> match. Squares joined by <b>×</b> are opposite.</li>
-        <li>Finish fast for up to <b>3 stars</b>, then spend them on themes.</li>
+        <li><svg viewBox="0 0 100 100"><use href="#sun"/></svg><span>Tap a square for <b>Sunny</b>, tap again for <b>Luna</b>, once more to clear.</span></li>
+        <li><span class="sym">3+3</span><span>Every row and column has <b>3 of each cat</b>.</span></li>
+        <li><span class="sym">≤2</span><span><b>No more than 2</b> of the same cat side by side.</span></li>
+        <li><span class="sym">=</span><span>Cats joined by <b>=</b> are the same cat.</span></li>
+        <li><span class="sym">×</span><span>Cats joined by <b>×</b> are different cats.</span></li>
       </ul>
     </details>
   </section>
-
-  <!-- STORE -->
-  <section id="store" class="screen" aria-label="Theme store" hidden>
-    <div class="bar">
-      <button class="icon-btn" id="st-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <h2>Theme store</h2>
-      <span class="wallet" aria-label="Stars to spend"><svg width="18" height="18"><use href="#star"/></svg><span class="w-count">0</span></span>
-    </div>
-    <p class="store-intro">Earn stars by clearing levels quickly, then unlock a new look.</p>
-    <div class="skins" id="skins"></div>
-  </section>
 </main>
+
+<nav class="tabs" id="tabs" aria-label="Main">
+  <div class="tabs-in">
+    <button class="tab" data-to="home" type="button"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
+    <button class="tab" data-to="levels" type="button"><svg viewBox="0 0 40 34"><use href="#paw"/></svg>Levels</button>
+    <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
+  </div>
+</nav>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <script>
@@ -541,44 +619,60 @@ if (typeof module !== "undefined") module.exports = TangoCore;
 </script>
 <script>
 (function () {
-  var T = TangoCore, N = T.N, PAGE = 30, HINT_COST = 15;
-  // Preview colors live here because a card shows a skin before it is equipped.
+  var T = TangoCore, N = T.N, PAGE = 20, HINT_COST = 15;
+  // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
-    { id: "daybreak", name: "Daybreak", price: 0, c: ["#ffffff", "#18212f", "#f5f7fb", "#e2e8f1", "#4655c9", "#ffffff", "#f0a020", "#ffd25e", "#4655c9"] },
-    { id: "midnight", name: "Midnight", price: 8, c: ["#141a36", "#eef0ff", "#1a2244", "#252f5a", "#ffd56b", "#141a36", "#ffb938", "#ffe08a", "#c9d2ff"] },
-    { id: "sakura", name: "Sakura", price: 20, c: ["#fffafc", "#4a1f33", "#fff1f5", "#f8d9e4", "#c2417a", "#ffffff", "#f2793d", "#ffc07a", "#7a3d8f"] },
-    { id: "matcha", name: "Matcha", price: 35, c: ["#fbfcf6", "#23301b", "#f1f4e8", "#dde5cc", "#4d7a2a", "#ffffff", "#d99a1e", "#f6d36b", "#2f5d3a"] },
-    { id: "ocean", name: "Deep Ocean", price: 55, c: ["#0c3e4c", "#e4fbff", "#0f4858", "#155a6b", "#ff8a65", "#06303d", "#ff8a65", "#ffc29e", "#5ee6f0"] },
-    { id: "arcade", name: "Neon Arcade", price: 80, c: ["#110e1d", "#f6f0ff", "#161226", "#221a3a", "#ff3fb4", "#07060d", "#ffe14a", "#fff3a6", "#3ff0ff"] }
+    { id: "cozy", name: "Cozy", price: 0, v: { bg: "#fde8da", surface: "#fffaf5", cell: "#fff0e4", ink: "#4a2e2a", accent: "#ff8a5c", "on-accent": "#ffffff", line: "#efcdb8", sun: "#d9761f", "sun-core": "#ffb35c", moon: "#5d5878" } },
+    { id: "midnight", name: "Midnight", price: 8, v: { bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
+    { id: "sakura", name: "Sakura", price: 20, v: { bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
+    { id: "matcha", name: "Matcha", price: 35, v: { bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
+    { id: "ocean", name: "Deep Ocean", price: 55, v: { bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
+    { id: "arcade", name: "Neon Arcade", price: 80, v: { bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
   ];
+  var CHEERS = ["Meow! Ready?", "Paws and think.", "Purr-fectly logical.", "Yarn you ready?", "One more level?", "Nap after this one."];
   var $ = function (id) { return document.getElementById(id); };
-  var save = { best: {}, times: {}, wallet: 0, owned: ["daybreak"], skin: "daybreak", play: null };
+  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
 
   function load() {
-    try { var s = JSON.parse(localStorage.getItem("tango:v2")); if (s && s.best) save = Object.assign(save, s); } catch (e) {}
+    try {
+      var s = JSON.parse(localStorage.getItem("tango:v2"));
+      if (s && s.best) {
+        save = Object.assign(save, s);
+        // Earlier builds called the free skin "daybreak".
+        save.owned = save.owned.map(function (id) { return id === "daybreak" ? "cozy" : id; });
+        if (save.skin === "daybreak") save.skin = "cozy";
+      }
+    } catch (e) {}
   }
   function persist() { try { localStorage.setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
   function totalStars() { var t = 0; for (var k in save.best) t += save.best[k]; return t; }
-  function starsHtml(n, max) {
-    var s = ""; for (var i = 0; i < (max || 3); i++) s += i < n ? "★" : "<i>★</i>"; return s;
+  function starSvgs(n) {
+    var s = ""; for (var i = 0; i < 3; i++) s += '<svg class="' + (i < n ? "on" : "") + '" viewBox="0 0 24 24"><use href="#star"/></svg>'; return s;
   }
   function toast(msg) {
     var el = $("toast"); el.textContent = msg; el.hidden = false;
     clearTimeout(toastT); toastT = setTimeout(function () { el.hidden = true; }, 1800);
   }
   function show(screen) {
-    ["home", "game", "store"].forEach(function (s) { $(s).hidden = s !== screen; });
-    if (screen !== "game") stopClock();
+    ["home", "levels", "store", "game"].forEach(function (s) { $(s).hidden = s !== screen; });
+    var inGame = screen === "game";
+    $("tabs").hidden = inGame; document.body.classList.toggle("playing", inGame);
+    document.querySelectorAll(".tab").forEach(function (t) {
+      if (t.dataset.to === screen) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
+    });
+    if (!inGame) stopClock();
     window.scrollTo(0, 0);
     if (screen === "home") renderHome();
+    if (screen === "levels") renderMap();
     if (screen === "store") renderStore();
   }
+  document.querySelectorAll(".tab").forEach(function (t) { t.onclick = function () { show(t.dataset.to); }; });
   function applySkin() {
-    if (save.skin === "daybreak") document.documentElement.removeAttribute("data-skin");
+    if (save.skin === "cozy") document.documentElement.removeAttribute("data-skin");
     else document.documentElement.setAttribute("data-skin", save.skin);
   }
   function renderWallet() {
@@ -587,40 +681,47 @@ if (typeof module !== "undefined") module.exports = TangoCore;
 
   /* ---------- home ---------- */
   function renderHome() {
-    var n = nextLevel();
-    $("h-level").textContent = "Level " + n;
-    $("h-diff").textContent = T.levelDifficulty(n);
-    $("h-play").textContent = play && !play.done ? "Continue level " + play.level : "Play";
-    var cleared = Object.keys(save.best).length, perfect = 0;
-    for (var k in save.best) if (save.best[k] === 3) perfect++;
-    $("s-cleared").textContent = cleared; $("s-stars").textContent = totalStars(); $("s-perfect").textContent = perfect;
-    var cheapest = SKINS.filter(function (s) { return save.owned.indexOf(s.id) < 0; })[0];
-    $("h-store-sub").textContent = cheapest ? "Next: " + cheapest.name + " · " + cheapest.price + "★" : "Every theme owned";
+    var n = nextLevel(), resume = play && !play.done;
+    $("h-level").textContent = resume ? "Level " + play.level + " is waiting" : "Next up: Level " + n;
+    $("h-diff").textContent = T.levelDifficulty(resume ? play.level : n);
+    $("h-play").textContent = resume ? "Continue" : "Play";
+    $("bubble").textContent = CHEERS[(n + new Date().getMinutes()) % CHEERS.length];
+    var perfect = 0; for (var k in save.best) if (save.best[k] === 3) perfect++;
+    $("s-cleared").textContent = Object.keys(save.best).length;
+    $("s-stars").textContent = totalStars(); $("s-perfect").textContent = perfect;
     renderWallet();
-    var from = page * PAGE + 1, box = $("levels");
+  }
+  $("h-play").onclick = function () { if (play && !play.done) resumeLevel(); else startLevel(nextLevel()); };
+
+  /* ---------- level map ---------- */
+  function renderMap() {
+    renderWallet();
+    var n = nextLevel(), from = page * PAGE + 1, box = $("map");
     box.innerHTML = "";
     for (var i = from; i < from + PAGE; i++) {
-      var b = document.createElement("button");
-      b.type = "button"; b.className = "lvl" + (i === n ? " next" : "") + (unlocked(i) ? "" : " locked");
-      b.disabled = !unlocked(i);
-      b.innerHTML = i + (save.best[i] ? "<small>" + starsHtml(save.best[i]) + "</small>" : "");
-      b.setAttribute("aria-label", "Level " + i + (save.best[i] ? ", " + save.best[i] + " stars" : unlocked(i) ? "" : ", locked"));
+      var row = document.createElement("div"), b = document.createElement("button"), open = unlocked(i);
+      row.className = "node-row";
+      b.type = "button"; b.className = "node" + (i === n ? " current" : "") + (open ? "" : " locked");
+      b.style.setProperty("--x", Math.round(Math.sin((i - 1) * 0.9) * 80) + "px");
+      b.disabled = !open;
+      b.innerHTML = open
+        ? i + (save.best[i] ? '<span class="ns">' + starSvgs(save.best[i]) + "</span>" : "") +
+          (i === n ? '<svg class="paw" viewBox="0 0 40 34" fill="var(--accent)" aria-hidden="true"><use href="#paw"/></svg>' : "")
+        : '<svg class="lock" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg>';
+      b.setAttribute("aria-label", "Level " + i + (save.best[i] ? ", " + save.best[i] + " stars" : open ? "" : ", locked"));
       b.onclick = startLevel.bind(null, i);
-      box.appendChild(b);
+      row.appendChild(b); box.appendChild(row);
     }
-    $("pg-label").textContent = from + "–" + (from + PAGE - 1);
+    $("map-title").textContent = "Levels " + from + "–" + (from + PAGE - 1);
     $("pg-prev").disabled = page === 0;
     $("pg-next").disabled = from + PAGE > n;
+    var cur = box.querySelector(".current");
+    if (cur) setTimeout(function () { cur.scrollIntoView({ block: "center" }); }, 0);
   }
-  $("pg-prev").onclick = function () { page = Math.max(0, page - 1); renderHome(); };
-  $("pg-next").onclick = function () { page++; renderHome(); };
-  $("h-play").onclick = function () {
-    if (play && !play.done) resumeLevel(); else startLevel(nextLevel());
-  };
-  $("h-store").onclick = function () { show("store"); };
-  $("h-how").onclick = function () { $("rules").open = true; if (play && !play.done) resumeLevel(); else startLevel(nextLevel()); };
+  $("pg-prev").onclick = function () { page = Math.max(0, page - 1); renderMap(); };
+  $("pg-next").onclick = function () { page++; renderMap(); };
 
-  /* ---------- level ---------- */
+  /* ---------- puzzle ---------- */
   function startLevel(n) {
     var p = T.level(n);
     play = { level: n, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
@@ -639,46 +740,44 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     for (var i = 0; i < N * N; i++) {
       var b = document.createElement("button");
       b.type = "button"; b.className = "cell"; b.id = "c" + i;
-      b.style.setProperty("--d", Math.floor(i / N) + (i % N));
       b.addEventListener("click", tap.bind(null, i));
       b.addEventListener("keydown", key.bind(null, i));
       boardEl.appendChild(b); cells.push(b);
     }
-    // Gap-aware placement: each cell is (100% - 5 gaps) / 6 wide, gaps are 4px.
+    // Gap-aware placement: each cell is (100% - 5 gaps) / 6 wide, gaps are 5px.
     play.edges.forEach(function (e) {
       var m = document.createElement("span"), r = Math.floor(e.a / N), c = e.a % N, horiz = e.b === e.a + 1;
       m.className = "mark"; m.textContent = e.type === "=" ? "=" : "×";
       var cx = horiz ? c + 1 : c + .5, cy = horiz ? r + .5 : r + 1;
-      m.style.left = "calc((100% - 20px) * " + (cx / N) + " + " + (horiz ? 4 * c + 2 : 4 * c) + "px)";
-      m.style.top = "calc((100% - 20px) * " + (cy / N) + " + " + (horiz ? 4 * r : 4 * r + 2) + "px)";
+      m.style.left = "calc((100% - 25px) * " + (cx / N) + " + " + (horiz ? 5 * c + 2.5 : 5 * c) + "px)";
+      m.style.top = "calc((100% - 25px) * " + (cy / N) + " + " + (horiz ? 5 * r : 5 * r + 2.5) + "px)";
       boardEl.appendChild(m); marks.push(m);
     });
   }
   function render(changed) {
-    var res = T.check(play.board, play.edges), names = ["sun", "moon"];
+    var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
     cells.forEach(function (el, i) {
       var v = play.board[i], given = play.givens[i] !== -1;
       el.classList.toggle("given", given);
       el.classList.toggle("bad", res.badCells.has(i));
-      el.innerHTML = v === -1 ? "" : '<svg aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
+      el.innerHTML = v === -1 ? "" : '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
       el.setAttribute("aria-label", "Row " + (Math.floor(i / N) + 1) + ", column " + (i % N + 1) + ": " +
-        (v === -1 ? "empty" : names[v]) + (given ? ", fixed" : ""));
+        (v === -1 ? "empty" : words[v]) + (given ? ", fixed" : ""));
       el.classList.toggle("pop", i === changed);
     });
     marks.forEach(function (m, j) { m.classList.toggle("bad", res.badEdges.has(j)); });
     $("undo").disabled = play.done || !play.history.length;
     $("hint").disabled = $("clear").disabled = play.done;
-    $("board").classList.toggle("solved", play.done);
     $("win").hidden = !play.done;
     renderClock(); renderWallet();
   }
   function renderClock() {
     $("timer").textContent = fmt(play.elapsed);
-    var t = T.STAR_TIMES[play.difficulty];
+    var t = T.STAR_TIMES[play.difficulty], st = '<svg viewBox="0 0 24 24"><use href="#star"/></svg>';
     $("goals").innerHTML =
-      '<span class="' + (play.elapsed > t[0] ? "miss" : "") + '"><b>★★★</b> ' + fmt(t[0]) + '</span>' +
-      '<span class="' + (play.elapsed > t[1] ? "miss" : "") + '"><b>★★</b> ' + fmt(t[1]) + '</span>';
+      '<span class="' + (play.elapsed > t[0] ? "miss" : "") + '">' + st + st + st + "&nbsp;under " + fmt(t[0]) + "</span>" +
+      '<span class="' + (play.elapsed > t[1] ? "miss" : "") + '">' + st + st + "&nbsp;under " + fmt(t[1]) + "</span>";
   }
   function set(i, v) {
     if (play.done || play.givens[i] !== -1 || play.board[i] === v) return;
@@ -707,11 +806,13 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (got > prev) save.best[n] = got;
     if (!save.times[n] || play.elapsed < save.times[n]) save.times[n] = play.elapsed;
     save.wallet += gain;
-    var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
+    var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
     $("win-stars").innerHTML = s;
-    $("win-title").textContent = got === 3 ? "Perfect!" : got === 2 ? "Great!" : "Solved!";
+    $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
     $("win-time").textContent = "Time " + fmt(play.elapsed) + " · best " + fmt(save.times[n]);
-    $("win-earn").textContent = gain ? "+" + gain + " ★ to spend" : prev === 3 ? "Already perfect" : "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for more stars";
+    $("win-earn").textContent = gain ? "+" + gain + " ★ for the shop" : prev === 3 ? "Already purrfect" :
+      "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
+    if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
     persist();
   }
   function startClock() {
@@ -743,39 +844,34 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (play.done) return;
     play.board = play.givens.slice(); play.history = []; render(); persist();
   };
-  $("g-back").onclick = function () { persist(); show("home"); };
+  $("g-back").onclick = function () { persist(); show(play.done ? "levels" : "home"); };
   $("win-next").onclick = function () { startLevel(play.level + 1); };
   $("win-replay").onclick = function () { startLevel(play.level); };
 
-  /* ---------- store ---------- */
+  /* ---------- shop ---------- */
   function renderStore() {
     renderWallet();
     var box = $("skins"); box.innerHTML = "";
     SKINS.forEach(function (s) {
-      var owned = save.owned.indexOf(s.id) >= 0, on = save.skin === s.id, c = s.c;
+      var owned = save.owned.indexOf(s.id) >= 0, on = save.skin === s.id, css = "";
+      for (var k in s.v) css += "--" + k + ":" + s.v[k] + ";";
       var card = document.createElement("div");
       card.className = "skin" + (on ? " equipped" : "");
-      card.style.cssText = "--sb:" + c[0] + ";--si:" + c[1] + ";--sc:" + c[2] + ";--ss:" + c[3] + ";--sa:" + c[4] + ";--so:" + c[5];
-      var mini = "", pat = [0, 1, 0, 1, -1, 1, 1, 0, 0];
-      pat.forEach(function (v) {
-        mini += "<span>" + (v === 0
-          ? '<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="26" fill="' + c[7] + '" stroke="' + c[6] + '" stroke-width="10"/></svg>'
-          : v === 1 ? '<svg viewBox="0 0 100 100"><path d="M62 10a40 40 0 1 0 28 62A34 34 0 0 1 62 10z" fill="' + c[8] + '"/></svg>' : "") + "</span>";
-      });
-      var label = on ? "Equipped" : owned ? "Use" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
-      card.innerHTML = '<div class="mini">' + mini + "</div><b>" + s.name + "</b>" +
-        '<button type="button" ' + (on ? "disabled" : "") + ">" + label + "</button>";
+      card.style.cssText = css;
+      var cat = function (id) { return '<span><svg viewBox="0 0 100 100"><use href="#' + id + '"/></svg></span>'; };
+      var label = on ? "Wearing" : owned ? "Wear" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
+      card.innerHTML = '<div class="mini">' + cat("sun") + cat("moon") + cat("moon") + cat("sun") + "</div><b>" + s.name +
+        '</b><button class="chunky" type="button" ' + (on ? "disabled" : "") + ">" + label + "</button>";
       card.querySelector("button").onclick = function () {
         if (!owned) {
           if (save.wallet < s.price) { toast("You need " + (s.price - save.wallet) + " more ★"); return; }
-          save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked");
+          save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked!");
         }
         save.skin = s.id; applySkin(); persist(); renderStore();
       };
       box.appendChild(card);
     });
   }
-  $("st-back").onclick = function () { show("home"); };
 
   /* ---------- boot ---------- */
   function start(data) {
@@ -784,11 +880,15 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     play = save.play && save.play.board ? save.play : null;
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin();
-    if (data && data.screen === "game" && play) resumeLevel();
-    else show(data && data.screen === "store" ? "store" : "home");
+    var screen = data && data.screen;
+    if (screen === "game" && play) resumeLevel(); else show(screen || "home");
+    var splash = $("splash");
+    if (screen) splash.hidden = true;
+    else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 900);
   }
   if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () {
-    return { save: save, screen: !$("game").hidden ? "game" : !$("store").hidden ? "store" : "home" };
+    var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];
+    return { save: save, screen: cur };
   });
   window.claude && window.claude.hot && window.claude.hot.ready
     ? window.claude.hot.ready(start)

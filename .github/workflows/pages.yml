@@ -1,8 +1,7 @@
 # Publishes the installable web app to GitHub Pages.
+# Manual for now: Pages needs the repo to be public (or a paid plan) and Pages turned on in Settings.
 name: Web app
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read

@@ -1,0 +1,338 @@
+<title>Tango</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+/* Layout: one narrow phone column; header, status strip, the 6x6 board as hero, actions, rules. */
+:root {
+  --bg: #e9eef5;
+  --surface: #ffffff;
+  --cell: #f6f8fb;
+  --given: #dfe6ef;
+  --line: #c9d3e0;
+  --ink: #18212f;
+  --muted: #5d6a7c;
+  --sun: #f0a020;
+  --sun-core: #ffcf5c;
+  --moon: #4655c9;
+  --bad: #d63c58;
+  --bad-soft: rgba(214, 60, 88, .14);
+  --ring: #4655c9;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1320; --surface: #171e2d; --cell: #1d2537; --given: #2a3449; --line: #313c53;
+    --ink: #e7ebf3; --muted: #9aa6ba; --sun: #f5b23a; --sun-core: #ffd774; --moon: #95a2ff;
+    --bad: #ff6680; --bad-soft: rgba(255, 102, 128, .16); --ring: #95a2ff; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e1320; --surface: #171e2d; --cell: #1d2537; --given: #2a3449; --line: #313c53;
+  --ink: #e7ebf3; --muted: #9aa6ba; --sun: #f5b23a; --sun-core: #ffd774; --moon: #95a2ff;
+  --bad: #ff6680; --bad-soft: rgba(255, 102, 128, .16); --ring: #95a2ff; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { min-height: 100%; }
+body {
+  background: var(--bg); color: var(--ink); font: 15px/1.5 var(--font-body);
+  padding-inline: 16px; padding-block: 20px 40px;
+  -webkit-tap-highlight-color: transparent;
+}
+.app { max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+header { display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; }
+h1 {
+  font: 800 2.6rem/1 var(--font-display); letter-spacing: -.03em; margin: 0;
+  display: flex; align-items: center; gap: .3rem;
+}
+h1 svg { width: .8em; height: .8em; }
+.tag { color: var(--muted); font-size: .85rem; margin: 4px 0 0; }
+.seg { display: inline-flex; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+.seg button {
+  border: 0; background: transparent; color: var(--muted); font: 600 .85rem var(--font-body);
+  padding: 6px 14px; border-radius: 999px; cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+.strip { display: flex; justify-content: space-between; align-items: baseline; font-size: .85rem; color: var(--muted); }
+.strip b { color: var(--ink); font-weight: 600; }
+.timer { font: 500 1.15rem var(--font-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.board-wrap { background: var(--surface); border-radius: 18px; padding: 10px; box-shadow: 0 1px 0 var(--line), 0 12px 30px -18px rgba(24, 33, 47, .45); }
+.board { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); aspect-ratio: 1; max-width: 100%; border-radius: 10px; overflow: hidden; outline: 1px solid var(--line); }
+.cell {
+  position: relative; border: 0; padding: 0; margin: 0; background: var(--cell);
+  box-shadow: inset -1px -1px 0 var(--line); cursor: pointer; display: grid; place-items: center;
+  font: inherit; color: inherit; min-width: 0; min-height: 0;
+}
+.cell:nth-child(6n) { box-shadow: inset 0 -1px 0 var(--line); }
+.cell.given { background: var(--given); cursor: default; }
+.cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); }
+.cell:focus-visible { outline: 3px solid var(--ring); outline-offset: -3px; z-index: 1; }
+.cell svg { position: absolute; left: 21%; top: 21%; width: 58%; height: 58%; }
+.cell.pop svg { animation: pop .18s ease-out; }
+@keyframes pop { from { transform: scale(.6); } to { transform: scale(1); } }
+.sun-ray { stroke: var(--sun); stroke-width: 7; stroke-linecap: round; }
+.sun-disc { fill: var(--sun-core); stroke: var(--sun); stroke-width: 6; }
+.moon-shape { fill: var(--moon); }
+
+.mark {
+  position: absolute; width: 20px; height: 20px; margin: -10px 0 0 -10px; border-radius: 50%;
+  background: var(--surface); border: 1.5px solid var(--line); display: grid; place-items: center;
+  font: 800 13px/1 var(--font-display); color: var(--muted); pointer-events: none; z-index: 2;
+}
+.mark.bad { color: var(--surface); background: var(--bad); border-color: var(--bad); }
+
+.actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.btn {
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px;
+  font: 600 .9rem var(--font-body); padding: 11px 6px; cursor: pointer;
+}
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.btn:focus-visible, .seg button:focus-visible { outline: 3px solid var(--ring); outline-offset: 2px; }
+
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 16px; }
+summary { font-weight: 600; cursor: pointer; }
+details ul { margin: 10px 0 2px; padding-left: 1.1rem; display: grid; gap: 6px; color: var(--muted); }
+details li b { color: var(--ink); }
+
+.win {
+  position: absolute; inset: 0; display: grid; place-items: center; z-index: 5;
+  background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(2px);
+}
+.win-card { text-align: center; padding: 18px 22px; }
+.win-card h2 { font: 800 2rem/1.1 var(--font-display); margin: 0 0 4px; letter-spacing: -.02em; }
+.win-card p { margin: 0 0 14px; color: var(--muted); }
+.win-card .btn { padding-inline: 20px; }
+.board.solved .cell { animation: wave .5s ease-out both; animation-delay: calc(var(--d) * 22ms); }
+@keyframes wave { 40% { transform: scale(.88); } }
+@media (prefers-reduced-motion: reduce) {
+  .cell.pop svg, .board.solved .cell { animation: none; }
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="sun" viewBox="0 0 100 100">
+      <g class="sun-ray">
+        <line x1="50" y1="6" x2="50" y2="17"/><line x1="50" y1="83" x2="50" y2="94"/>
+        <line x1="6" y1="50" x2="17" y2="50"/><line x1="83" y1="50" x2="94" y2="50"/>
+        <line x1="19" y1="19" x2="26" y2="26"/><line x1="74" y1="74" x2="81" y2="81"/>
+        <line x1="19" y1="81" x2="26" y2="74"/><line x1="74" y1="26" x2="81" y2="19"/>
+      </g>
+      <circle class="sun-disc" cx="50" cy="50" r="22"/>
+    </symbol>
+    <symbol id="moon" viewBox="0 0 100 100">
+      <path class="moon-shape" d="M62 10a40 40 0 1 0 28 62A34 34 0 0 1 62 10z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="app">
+  <header>
+    <div>
+      <h1><svg aria-hidden="true"><use href="#sun"/></svg>Tango<svg aria-hidden="true"><use href="#moon"/></svg></h1>
+      <p class="tag">Fill the grid with suns and moons.</p>
+    </div>
+    <div class="seg" role="group" aria-label="Difficulty">
+      <button id="d-easy" type="button" aria-pressed="true">Easy</button>
+      <button id="d-hard" type="button" aria-pressed="false">Hard</button>
+    </div>
+  </header>
+
+  <div class="strip">
+    <span id="label">Daily puzzle</span>
+    <span class="timer" id="timer" aria-label="Time">0:00</span>
+  </div>
+
+  <div class="board-wrap" style="position:relative">
+    <div class="board" id="board" role="grid" aria-label="Tango board, 6 by 6"></div>
+    <div class="win" id="win" hidden>
+      <div class="win-card">
+        <h2>Solved!</h2>
+        <p id="win-text">0:00</p>
+        <button class="btn primary" id="win-next" type="button">Next puzzle</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" id="undo" type="button">Undo</button>
+    <button class="btn" id="hint" type="button">Hint</button>
+    <button class="btn" id="clear" type="button">Clear</button>
+    <button class="btn primary" id="new" type="button">New</button>
+  </div>
+
+  <details id="rules" open>
+    <summary>How to play</summary>
+    <ul>
+      <li>Tap a square to cycle <b>sun</b>, <b>moon</b>, then empty.</li>
+      <li>Each row and column holds <b>3 suns and 3 moons</b>.</li>
+      <li><b>No more than 2</b> of the same symbol may sit next to each other.</li>
+      <li>Squares joined by <b>=</b> match. Squares joined by <b>×</b> are opposite.</li>
+      <li>Every puzzle has exactly one answer, so you never need to guess.</li>
+    </ul>
+  </details>
+</main>
+
+<script>
+/*CORE*/
+</script>
+<script>
+(function () {
+  var T = TangoCore, N = T.N;
+  var boardEl = document.getElementById("board"), timerEl = document.getElementById("timer");
+  var labelEl = document.getElementById("label"), winEl = document.getElementById("win");
+  var state, cells = [], marks = [], tick = null;
+
+  function store(key, val) {
+    try {
+      if (val === undefined) return JSON.parse(localStorage.getItem("tango:" + key));
+      localStorage.setItem("tango:" + key, JSON.stringify(val));
+    } catch (e) { return null; }
+  }
+  function todaySeed() {
+    var d = new Date();
+    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  }
+  function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+
+  function newGame(seed, difficulty, daily) {
+    var p = T.generate(seed, difficulty);
+    state = {
+      puzzle: { givens: p.givens, edges: p.edges, solution: p.solution },
+      seed: seed, difficulty: difficulty, daily: !!daily,
+      board: p.givens.slice(), history: [], elapsed: 0, done: false
+    };
+    build(); render(); startClock(); save();
+  }
+
+  function build() {
+    boardEl.innerHTML = ""; cells = []; marks = [];
+    for (var i = 0; i < N * N; i++) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "cell"; b.id = "c" + i;
+      b.style.setProperty("--d", (Math.floor(i / N) + (i % N)));
+      b.addEventListener("click", tap.bind(null, i));
+      b.addEventListener("keydown", key.bind(null, i));
+      boardEl.appendChild(b); cells.push(b);
+    }
+    state.puzzle.edges.forEach(function (e) {
+      var m = document.createElement("span"), r = Math.floor(e.a / N), c = e.a % N;
+      m.className = "mark"; m.textContent = e.type === "=" ? "=" : "×";
+      var horiz = e.b === e.a + 1;
+      m.style.left = ((c + (horiz ? 1 : .5)) / N * 100) + "%";
+      m.style.top = ((r + (horiz ? .5 : 1)) / N * 100) + "%";
+      boardEl.appendChild(m); marks.push(m);
+    });
+  }
+
+  function render(changed) {
+    var res = T.check(state.board, state.puzzle.edges), names = ["sun", "moon"];
+    if (res.solved && !state.done) win();
+    cells.forEach(function (el, i) {
+      var v = state.board[i], given = state.puzzle.givens[i] !== -1;
+      el.classList.toggle("given", given);
+      el.classList.toggle("bad", res.badCells.has(i));
+      el.innerHTML = v === -1 ? "" : '<svg aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
+      el.setAttribute("aria-label", "Row " + (Math.floor(i / N) + 1) + ", column " + (i % N + 1) + ": " +
+        (v === -1 ? "empty" : names[v]) + (given ? ", fixed" : ""));
+      el.classList.toggle("pop", i === changed);
+    });
+    marks.forEach(function (m, j) { m.classList.toggle("bad", res.badEdges.has(j)); });
+    labelEl.innerHTML = (state.daily ? "<b>Daily</b> · " : "<b>Puzzle " + (state.seed % 10000) + "</b> · ") +
+      (state.difficulty === "hard" ? "Hard" : "Easy");
+    document.getElementById("d-easy").setAttribute("aria-pressed", state.difficulty === "easy");
+    document.getElementById("d-hard").setAttribute("aria-pressed", state.difficulty === "hard");
+    document.getElementById("undo").disabled = state.done || !state.history.length;
+    document.getElementById("hint").disabled = state.done;
+    timerEl.textContent = fmt(state.elapsed);
+    boardEl.classList.toggle("solved", state.done);
+    winEl.hidden = !state.done;
+  }
+
+  function set(i, v) {
+    if (state.done || state.puzzle.givens[i] !== -1 || state.board[i] === v) return;
+    state.history.push([i, state.board[i]]);
+    state.board[i] = v;
+    render(i); save();
+  }
+  function tap(i) { set(i, state.board[i] === -1 ? 0 : state.board[i] === 0 ? 1 : -1); }
+  function key(i, ev) {
+    var r = Math.floor(i / N), c = i % N, to = null;
+    if (ev.key === "ArrowRight") to = r * N + Math.min(N - 1, c + 1);
+    else if (ev.key === "ArrowLeft") to = r * N + Math.max(0, c - 1);
+    else if (ev.key === "ArrowDown") to = Math.min(N - 1, r + 1) * N + c;
+    else if (ev.key === "ArrowUp") to = Math.max(0, r - 1) * N + c;
+    else if (ev.key === "s" || ev.key === "1") set(i, 0);
+    else if (ev.key === "m" || ev.key === "2") set(i, 1);
+    else if (ev.key === "Backspace" || ev.key === "Delete" || ev.key === "0") set(i, -1);
+    else return;
+    ev.preventDefault();
+    if (to !== null) cells[to].focus();
+  }
+
+  function win() {
+    state.done = true; stopClock();
+    var key = (state.daily ? "best-daily-" : "best-") + state.difficulty, best = store(key);
+    var isBest = best == null || state.elapsed < best;
+    if (isBest) store(key, state.elapsed);
+    document.getElementById("win-text").textContent = "Solved in " + fmt(state.elapsed) +
+      (isBest ? " · new best" : " · best " + fmt(best));
+    save();
+  }
+
+  function startClock() {
+    stopClock();
+    tick = setInterval(function () {
+      if (state.done || document.hidden) return;
+      state.elapsed++; timerEl.textContent = fmt(state.elapsed);
+      if (state.elapsed % 5 === 0) save();
+    }, 1000);
+  }
+  function stopClock() { if (tick) clearInterval(tick); tick = null; }
+  function save() { store("game", state); }
+
+  document.getElementById("undo").onclick = function () {
+    var h = state.history.pop(); if (!h) return;
+    state.board[h[0]] = h[1]; render(h[0]); save();
+  };
+  document.getElementById("hint").onclick = function () {
+    var sol = state.puzzle.solution, res = T.check(state.board, state.puzzle.edges), pick = -1;
+    // Fix a wrong square first, otherwise fill an empty one.
+    for (var i = 0; i < N * N && pick < 0; i++) if (state.board[i] !== -1 && state.board[i] !== sol[i]) pick = i;
+    if (pick < 0) {
+      var empty = []; for (i = 0; i < N * N; i++) if (state.board[i] === -1) empty.push(i);
+      pick = empty[Math.floor(Math.random() * empty.length)];
+    }
+    if (pick == null) return;
+    state.elapsed += 10; set(pick, sol[pick]); cells[pick].focus();
+  };
+  document.getElementById("clear").onclick = function () {
+    if (state.done) return;
+    state.board = state.puzzle.givens.slice(); state.history = []; render(); save();
+  };
+  function fresh(difficulty) { newGame(Math.floor(Math.random() * 1e9), difficulty || state.difficulty, false); }
+  document.getElementById("new").onclick = function () { fresh(); };
+  document.getElementById("win-next").onclick = function () { fresh(); };
+  document.getElementById("d-easy").onclick = function () { if (state.difficulty !== "easy") fresh("easy"); };
+  document.getElementById("d-hard").onclick = function () { if (state.difficulty !== "hard") fresh("hard"); };
+
+  function start(data) {
+    var saved = (data && data.game) || store("game");
+    if (saved && saved.puzzle && saved.board && saved.board.length === N * N &&
+        !(saved.daily && saved.seed !== todaySeed())) {
+      state = saved; state.history = state.history || [];
+      build(); render(); if (!state.done) startClock();
+    } else {
+      newGame(todaySeed(), "easy", true);
+    }
+  }
+  if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () { return { game: state }; });
+  window.claude && window.claude.hot && window.claude.hot.ready
+    ? window.claude.hot.ready(start)
+    : start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+})();
+</script>

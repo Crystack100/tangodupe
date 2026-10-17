@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: write
 jobs:
   apk:
     runs-on: ubuntu-latest
@@ -27,3 +29,10 @@ jobs:
         with:
           name: tango-android
           path: mobile/android/app/build/outputs/apk/debug/app-debug.apk
+      # Attach the app file to a "latest" release so it downloads straight to a phone, no unzipping.
+      - run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk tango.apk
+          gh release delete latest --yes --cleanup-tag || true
+          gh release create latest tango.apk --title "Tango (latest build)" --notes "Built from ${GITHUB_SHA::7}. Open this page on your Android phone and tap tango.apk to install."
+        env:
+          GH_TOKEN: ${{ github.token }}

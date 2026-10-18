@@ -136,7 +136,7 @@ var TangoCore = (function () {
 
   // Find rule breaks on a player board. Returns sets of cell indexes and edge indexes.
   function check(board, edges) {
-    var badCells = new Set(), badEdges = new Set(), r, c, k;
+    var badCells = new Set(), badEdges = new Set(), triples = new Set(), r, c, k;
     function line(get) {
       var cnt = [0, 0], idx = [];
       for (k = 0; k < N; k++) { idx.push(get(k)); if (board[get(k)] !== -1) cnt[board[get(k)]]++; }
@@ -147,6 +147,7 @@ var TangoCore = (function () {
         var a = board[idx[k]];
         if (a !== -1 && a === board[idx[k + 1]] && a === board[idx[k + 2]]) {
           badCells.add(idx[k]); badCells.add(idx[k + 1]); badCells.add(idx[k + 2]);
+          triples.add(idx[k]); triples.add(idx[k + 1]); triples.add(idx[k + 2]);
         }
       }
     }
@@ -158,7 +159,7 @@ var TangoCore = (function () {
       if (e.type === "=" ? x !== y : x === y) { badEdges.add(j); badCells.add(e.a); badCells.add(e.b); }
     });
     var full = board.every(function (v) { return v !== -1; });
-    return { badCells: badCells, badEdges: badEdges, solved: full && badCells.size === 0 };
+    return { badCells: badCells, badEdges: badEdges, triples: triples, solved: full && badCells.size === 0 };
   }
 
   // Level n always maps to the same puzzle, so levels are unlimited and repeatable.

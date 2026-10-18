@@ -953,7 +953,7 @@ var TangoCore = (function () {
 
   // Find rule breaks on a player board. Returns sets of cell indexes and edge indexes.
   function check(board, edges) {
-    var badCells = new Set(), badEdges = new Set(), r, c, k;
+    var badCells = new Set(), badEdges = new Set(), triples = new Set(), r, c, k;
     function line(get) {
       var cnt = [0, 0], idx = [];
       for (k = 0; k < N; k++) { idx.push(get(k)); if (board[get(k)] !== -1) cnt[board[get(k)]]++; }
@@ -964,6 +964,7 @@ var TangoCore = (function () {
         var a = board[idx[k]];
         if (a !== -1 && a === board[idx[k + 1]] && a === board[idx[k + 2]]) {
           badCells.add(idx[k]); badCells.add(idx[k + 1]); badCells.add(idx[k + 2]);
+          triples.add(idx[k]); triples.add(idx[k + 1]); triples.add(idx[k + 2]);
         }
       }
     }
@@ -975,7 +976,7 @@ var TangoCore = (function () {
       if (e.type === "=" ? x !== y : x === y) { badEdges.add(j); badCells.add(e.a); badCells.add(e.b); }
     });
     var full = board.every(function (v) { return v !== -1; });
-    return { badCells: badCells, badEdges: badEdges, solved: full && badCells.size === 0 };
+    return { badCells: badCells, badEdges: badEdges, triples: triples, solved: full && badCells.size === 0 };
   }
 
   // Level n always maps to the same puzzle, so levels are unlimited and repeatable.
@@ -1192,14 +1193,30 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       boardEl.appendChild(m); marks.push(m);
     });
   }
-  // Broken rules (three in a row, more than 3 of a cat in a line, = or × not respected) show at once.
+  // Three alike in a row turns red at once. Other broken rules (= or ×, more than 3 of a cat in a line)
+  // wait until the player pauses, so tapping through Sunny to reach Luna never flashes red.
   // A cat that is wrong but breaks no rule stays quiet; a full board that isn't the answer gets a nudge.
-  var shown = { cells: new Set(), edges: new Set() };
-  function render(changed) {
+  var ERROR_DELAY = 1200, shown = { cells: new Set(), edges: new Set() }, errT = null;
+  function render(changed, reveal) {
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
-    if (changed != null && res.badCells.size > shown.cells.size) Audio.sfx("oops");
-    shown = { cells: res.badCells, edges: res.badEdges };
+    clearTimeout(errT);
+    var before = shown.cells.size;
+    if (changed != null && !reveal) {
+      // Keep marks already showing that still apply (except on the square just tapped), add triples now, hold the rest.
+      var keep = Array.from(shown.cells).filter(function (i) { return i !== changed && res.badCells.has(i); });
+      shown = {
+        cells: new Set(keep.concat(Array.from(res.triples))),
+        edges: new Set(Array.from(shown.edges).filter(function (j) {
+          var e = play.edges[j]; return e.a !== changed && e.b !== changed && res.badEdges.has(j);
+        }))
+      };
+      if (res.badCells.size > shown.cells.size || res.badEdges.size > shown.edges.size)
+        errT = setTimeout(function () { if (play && !play.done) render(null, true); }, ERROR_DELAY);
+    } else {
+      shown = { cells: res.badCells, edges: res.badEdges };
+    }
+    if ((changed != null || reveal) && shown.cells.size > before) Audio.sfx("oops");
     var full = play.board.every(function (v) { return v !== -1; });
     if (changed != null && full && !res.solved) toast("Not quite! Look for the red squares");
     cells.forEach(function (el, i) {

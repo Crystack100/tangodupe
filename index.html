@@ -344,7 +344,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px);
   border-top: 2px solid var(--line);
 }
-.tabs-in { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; width: 100%; max-width: 440px; }
+.tabs-in { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; max-width: 440px; }
 .tab {
   border: 0; background: transparent; border-radius: 8px; padding: 6px 4px; cursor: pointer; color: var(--muted);
   display: grid; justify-items: center; gap: 1px; font: 600 .8rem var(--font-display);
@@ -357,8 +357,34 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; align-content: center; gap: 12px;
   background: var(--bg); text-align: center; transition: opacity .35s;
 }
-.splash svg { width: 130px; height: 130px; animation: bob 1.2s ease-in-out infinite; }
-.splash p { margin: 0; font: 600 1.05rem var(--font-display); color: var(--muted); max-width: 16rem; }
+.sp-cats { display: flex; gap: 6px; }
+.sp-cats svg { width: 84px; height: 84px; animation: spIn .45s cubic-bezier(.3, 1.6, .5, 1) both; }
+.sp-cats svg + svg { animation-delay: .18s; }
+@keyframes spIn { from { transform: translateY(18px) scale(.6); opacity: 0; } }
+.sp-name { margin: 6px 0 0; font: 800 1.9rem/1 var(--font-display); color: var(--brand); letter-spacing: .02em; text-transform: uppercase; animation: spIn .45s .3s both; }
+.sp-bar { width: 140px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 10px; }
+.sp-bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; animation: spFill 1s .15s ease-out forwards; }
+@keyframes spFill { to { width: 100%; } }
+.ad-banner {
+  display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 8px 10px; border: 1.5px dashed var(--line); border-radius: 8px;
+  color: var(--muted); font: 600 .8rem var(--font-display);
+}
+.ad-banner span, .ad-tag { background: var(--muted); color: var(--surface); font: 700 .65rem/1 var(--font-display); padding: 3px 5px; border-radius: 3px; }
+.ad-x { margin-left: auto; border: 0; background: none; color: var(--accent); font: 700 .8rem var(--font-display); cursor: pointer; padding: 6px; }
+.ad-full { position: fixed; inset: 0; z-index: 28; display: grid; place-items: center; background: rgba(20, 16, 14, .82); padding: 16px; }
+.ad-card { width: 100%; max-width: 360px; min-height: 60svh; background: var(--surface); border-radius: 12px; padding: 16px; display: grid; align-content: space-between; justify-items: center; gap: 12px; text-align: center; }
+.ad-card .ad-tag { justify-self: start; }
+.ad-body { margin: 0; font: 700 1.2rem var(--font-display); color: var(--ink); }
+.ad-body small { font: 500 .85rem var(--font-body); color: var(--muted); }
+.ad-card .soft { width: 100%; }
+.ad-card .ad-x { margin: 0; }
+.noads { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 10px; background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow); }
+.noads div { flex: 1; display: grid; }
+.noads b { font: 700 1.1rem var(--font-display); }
+.noads span { color: var(--muted); font-size: .85rem; font-weight: 600; }
+.noads .chunky { width: auto; font-size: 1rem; padding: 10px 16px; }
+.noads .chunky:disabled { opacity: .6; }
+body.no-ads .ad-banner { display: none; }
 .splash.out { opacity: 0; pointer-events: none; }
 .toast {
   position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
@@ -482,8 +508,12 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 </svg>
 
 <div class="splash" id="splash">
-  <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
-  <p>Untangling yarn and fluffing pillows…</p>
+  <div class="sp-cats" aria-hidden="true">
+    <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
+    <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+  </div>
+  <p class="sp-name">Tango Cats</p>
+  <div class="sp-bar" aria-hidden="true"><i></i></div>
 </div>
 
 <div class="bg-tiles" id="bg-tiles" aria-hidden="true"></div>
@@ -491,12 +521,9 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   <!-- HOME -->
   <section id="home" class="screen" aria-label="Home">
     <div class="top3">
-      <button class="avatar" id="h-avatar" type="button" aria-label="Your stats">
-        <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
-        <span class="lv" id="h-lv">1</span>
-      </button>
+      <span></span>
       <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
-      <button class="round" id="h-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></button>
+      <span></span>
     </div>
     <div class="home-main">
       <h1 class="logo" aria-label="Tango Cats">
@@ -546,6 +573,10 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
     </div>
     <p class="shop-intro">Win stars by solving fast, then dress up the whole game.</p>
     <div class="skins" id="skins"></div>
+    <div class="noads" id="noads">
+      <div><b>Remove ads</b><span id="noads-sub">No banners or ads between levels, forever.</span></div>
+      <button class="chunky" id="noads-buy" type="button">$2.99</button>
+    </div>
   </section>
 
   <!-- PUZZLE -->
@@ -590,14 +621,25 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
         <li><span class="sym">×</span><span>Cats joined by <b>×</b> are different cats.</span></li>
       </ul>
     </details>
+    <div class="ad-banner" id="ad-banner"><span>Ad</span>Banner ad space (AdMob in the app)<button type="button" class="ad-x" id="ad-banner-x">Remove ads</button></div>
   </section>
 </main>
+
+<div class="ad-full" id="ad-full" hidden>
+  <div class="ad-card" role="dialog" aria-modal="true" aria-label="Advertisement">
+    <span class="ad-tag">Ad</span>
+    <p class="ad-body">Full-screen ad space<br><small>In the app, Google AdMob shows a real ad here between levels.</small></p>
+    <button class="soft" id="ad-close" type="button" disabled>Close in 5</button>
+    <button class="ad-x" id="ad-full-x" type="button">Remove ads</button>
+  </div>
+</div>
 
 <nav class="tabs" id="tabs" aria-label="Main">
   <div class="tabs-in">
     <button class="tab" data-to="home" type="button"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
     <button class="tab" data-to="levels" type="button"><svg viewBox="0 0 40 34"><use href="#paw"/></svg>Levels</button>
     <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
+    <button class="tab" id="t-settings" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>Settings</button>
   </div>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -616,6 +658,8 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
       <button type="button" data-m="off">Off</button>
     </div>
     <p class="note" id="mistakes-note">Rule breaks turn red after you stop tapping for a moment.</p>
+    <h4>Ads</h4>
+    <button class="soft" id="s-noads" type="button">Remove ads · $2.99</button>
     <button class="danger" id="reset" type="button">Reset all progress</button>
   </div>
 </div>
@@ -818,7 +862,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
   ];
   var $ = function (id) { return document.getElementById(id); };
-  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: "delay" };
+  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: "delay", noAds: false, wins: 0 };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
 
   function load() {
@@ -860,7 +904,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (screen === "levels") renderMap();
     if (screen === "store") renderStore();
   }
-  document.querySelectorAll(".tab").forEach(function (t) { t.onclick = function () { show(t.dataset.to); }; });
+  document.querySelectorAll(".tab[data-to]").forEach(function (t) { t.onclick = function () { show(t.dataset.to); }; });
+  $("t-settings").onclick = function () { openSheet(); };
   function applySkin() {
     if (save.skin === "cozy") document.documentElement.removeAttribute("data-skin");
     else document.documentElement.setAttribute("data-skin", save.skin);
@@ -875,7 +920,6 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var n = nextLevel(), resume = play && !play.done && !play.daily, lv = resume ? play.level : n;
     $("h-play-label").textContent = resume ? "Continue" : "Play";
     $("h-play-sub").textContent = "Level " + lv + " · " + T.levelDifficulty(lv);
-    $("h-lv").textContent = Object.keys(save.best).length;
     var today = save.daily[dayKey()];
     $("h-daily-label").textContent = play && !play.done && play.daily === dayKey() ? "Continue daily" :
       today ? "Daily " + "★★★".slice(0, today) + "☆☆☆".slice(today) : "Daily Puzzle";
@@ -921,8 +965,6 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     $("reset").textContent = "Reset all progress"; $("reset").dataset.armed = "";
     $("sheet").hidden = false;
   }
-  $("h-settings").onclick = openSheet;
-  $("h-avatar").onclick = openSheet;
   $("sheet-close").onclick = function () { $("sheet").hidden = true; };
   $("sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
   document.querySelectorAll("#mistakes button").forEach(function (b) {
@@ -931,8 +973,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("reset").onclick = function () {
     // Two taps, since the viewer can't show a confirm dialog.
     if (!this.dataset.armed) { this.dataset.armed = "1"; this.textContent = "Tap again to erase everything"; return; }
-    save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: save.mistakes };
-    play = null; page = 0; applySkin(); persist(); $("sheet").hidden = true; renderHome(); toast("Progress reset");
+    save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: save.mistakes, noAds: save.noAds, wins: 0 };
+    play = null; page = 0; applySkin(); applyAds(); persist(); $("sheet").hidden = true; renderHome(); toast("Progress reset");
   };
   $("h-play").onclick = function () { if (play && !play.done && !play.daily) resumeLevel(); else startLevel(nextLevel()); };
 
@@ -1069,6 +1111,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var got = T.stars(play.difficulty, play.elapsed), prev = book[n] || 0;
     var gain = Math.max(0, got - prev);
     if (got > prev) book[n] = got;
+    save.wins = (save.wins || 0) + 1;
     if (!save.times[tkey] || play.elapsed < save.times[tkey]) save.times[tkey] = play.elapsed;
     save.wallet += gain;
     var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
@@ -1110,7 +1153,42 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     play.board = play.givens.slice(); play.history = []; render(); persist();
   };
   $("g-back").onclick = function () { persist(); show(play.done && !play.daily ? "levels" : "home"); };
-  $("win-next").onclick = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
+  $("win-next").onclick = function () {
+    var go = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
+    // An ad between levels every third win, unless ads were removed.
+    if (!save.noAds && save.wins % 3 === 0) showAd(go); else go();
+  };
+
+  /* ---------- ads ----------
+     Placeholders for the web build. In the store app these become AdMob calls
+     (banner on the puzzle screen, interstitial every third win), and "Remove ads"
+     becomes a one-time in-app purchase. */
+  function applyAds() {
+    document.body.classList.toggle("no-ads", !!save.noAds);
+    $("noads-buy").textContent = save.noAds ? "Owned" : "$2.99"; $("noads-buy").disabled = !!save.noAds;
+    $("noads-sub").textContent = save.noAds ? "Thanks for supporting Tango Cats!" : "No banners or ads between levels, forever.";
+    $("s-noads").textContent = save.noAds ? "Ads removed · bring them back (testing)" : "Remove ads · $2.99";
+  }
+  function removeAds() {
+    // Web test build: no real payment, this just flips the switch.
+    save.noAds = true; persist(); applyAds(); $("ad-full").hidden = true;
+    toast("Ads removed");
+    if (adDone) { var f = adDone; adDone = null; f(); }
+  }
+  var adDone = null, adT = null;
+  function showAd(done) {
+    adDone = done; var left = 5, btn = $("ad-close");
+    $("ad-full").hidden = false; btn.disabled = true; btn.textContent = "Close in " + left;
+    clearInterval(adT);
+    adT = setInterval(function () {
+      left--;
+      if (left > 0) { btn.textContent = "Close in " + left; return; }
+      clearInterval(adT); btn.disabled = false; btn.textContent = "Close";
+    }, 1000);
+  }
+  $("ad-close").onclick = function () { $("ad-full").hidden = true; clearInterval(adT); if (adDone) { var f = adDone; adDone = null; f(); } };
+  $("ad-full-x").onclick = $("ad-banner-x").onclick = $("noads-buy").onclick = removeAds;
+  $("s-noads").onclick = function () { if (save.noAds) { save.noAds = false; persist(); applyAds(); } else removeAds(); };
   $("win-replay").onclick = function () { if (play.daily) { play = null; $("h-daily").onclick(); } else startLevel(play.level); };
 
   /* ---------- shop ---------- */
@@ -1154,12 +1232,12 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (play && play.daily && play.daily !== dayKey()) play = save.play = null;
     buildTiles();
     page = Math.floor((nextLevel() - 1) / PAGE);
-    applySkin();
+    applySkin(); applyAds();
     var screen = data && data.screen;
     if (screen === "game" && play) resumeLevel(); else show(screen || "home");
     var splash = $("splash");
     if (screen) splash.hidden = true;
-    else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 900);
+    else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 1250);
   }
   if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () {
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];

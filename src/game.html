@@ -472,6 +472,29 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .win-btns .chunky:active { transform: translateY(5px); animation: none; box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 1px 0 var(--acc-dk); }
 .win-btns .soft:active { transform: translateY(4px); box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 1px 0 var(--slab); }
 @media (prefers-reduced-motion: reduce) { .win * { animation-iteration-count: 1 !important; } }
+
+/* star timeline: why you got this many stars */
+.win-card.st { gap: 10px; padding: 16px 16px 14px; }
+.st-head { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.st-head svg { width: 26px; height: 26px; fill: none; stroke: var(--alt); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.st-head b { font: 800 1.9rem/1 var(--font-display); font-variant-numeric: tabular-nums; }
+.st-head .new { position: static; background: var(--bad); color: #fff; font: 700 .7rem/1 var(--font-display); font-style: normal; padding: 4px 7px; border-radius: 5px; rotate: 6deg; text-transform: uppercase; box-shadow: 0 2px 0 #9e2a2e; }
+.st-track { position: relative; display: flex; gap: 4px; height: 46px; margin-top: 30px; padding: 4px; border-radius: 12px; background: var(--slab); box-shadow: inset 0 2px 4px rgb(0 0 0 / .25); }
+.st-seg { position: relative; display: flex; align-items: center; justify-content: center; gap: 1px; border-radius: 8px; min-width: 0;
+  background: color-mix(in srgb, var(--cell) 80%, var(--surface)); opacity: .55; transition: opacity .3s 1.3s; }
+.st-seg svg { width: 15px; height: 15px; flex: none; fill: var(--star); filter: drop-shadow(0 1.5px 0 var(--gold-dk)); }
+.st-seg[data-n="3"] { background: linear-gradient(#ffe48a, #ffc23d); } .st-seg[data-n="2"] { background: linear-gradient(#ffeec2, #ffd98a); } .st-seg[data-n="1"] { background: linear-gradient(#f3e3d4, #e2cdb9); }
+.st-seg.here { opacity: 1; box-shadow: inset 0 2px 0 rgb(255 255 255 / .55), 0 3px 0 var(--gold-dk), 0 0 0 2.5px #fff; z-index: 1; }
+.st-pin { position: absolute; top: -32px; left: 4px; width: 0; transition: left 1.1s .7s cubic-bezier(.3, 1.1, .4, 1); z-index: 2; }
+.st-pin svg { position: absolute; left: -21px; width: 42px; height: 42px; filter: drop-shadow(0 3px 3px rgb(0 0 0 / .3)); }
+.st-pin::after { content: ""; position: absolute; left: -2px; top: 34px; width: 4px; height: 46px; border-radius: 2px; background: var(--ink); box-shadow: 0 0 0 1.5px var(--surface); }
+.st-ticks { position: relative; height: 18px; margin-top: -4px; font: 700 .8rem var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums; }
+.st-ticks span { position: absolute; translate: -50% 0; }
+.st-ticks span::before { content: ""; position: absolute; left: 50%; top: -8px; width: 2px; height: 6px; background: var(--muted); }
+.st-why { margin: 2px 0 0; display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; font: 700 1rem var(--font-display); }
+.st-why .pill { display: inline-flex; align-items: center; gap: 1px; padding: 3px 8px; border-radius: 999px; background: linear-gradient(#ffe48a, #ffc23d); box-shadow: 0 2px 0 var(--gold-dk); color: #6b3d06; }
+.st-why .pill svg { width: 15px; height: 15px; fill: #fff; filter: drop-shadow(0 1px 0 var(--gold-dk)); }
+.st-why b { font-variant-numeric: tabular-nums; }
 .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
 .confetti i { position: absolute; top: -20px; width: 9px; height: 14px; border-radius: 2px; animation: fall var(--d) var(--w) cubic-bezier(.25, .5, .5, 1) forwards; opacity: 0; }
 @keyframes fall { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 100% { opacity: 0; transform: translate(var(--x), 105vh) rotate(var(--r)); } }
@@ -807,23 +830,20 @@ body.no-ads .ad-banner { display: none; }
     </div>
     <div class="win-stars" id="win-stars"></div>
     <h3 id="win-title">Purrfect!</h3>
-    <div class="win-card">
-      <div class="win-stats">
-        <div><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><b id="win-time">0:42</b><span>Time</span></div>
-        <div><svg viewBox="0 0 24 24" class="ic"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg><b id="win-best">0:42</b><span>Best</span><i class="new" id="win-new" hidden>New!</i></div>
-        <div><svg viewBox="0 0 24 24" class="ic fill"><use href="#star"/></svg><b id="win-gain">+0</b><span>Earned</span></div>
+    <div class="win-card st">
+      <div class="st-head"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><b id="st-time">0:00</b><i class="new" id="win-new" hidden>Best!</i></div>
+      <div class="st-track" id="st-track" aria-hidden="true">
+        <div class="st-seg" data-n="3"></div><div class="st-seg" data-n="2"></div><div class="st-seg" data-n="1"></div>
+        <div class="st-pin" id="st-pin"><svg viewBox="0 0 100 100"><use href="#sun"/></svg></div>
       </div>
-      <div class="win-goal" id="win-goal">
-        <div class="wg-top"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9 7 4h10l2 5zM5 10h14v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1zM10 14h4"/></svg><span id="wg-name">Next theme</span></span><b id="wg-count">0 / 8</b></div>
-        <div class="wg-bar"><i id="wg-fill"></i></div>
-      </div>
+      <div class="st-ticks" id="st-ticks" aria-hidden="true"></div>
+      <p class="st-why" id="st-why"></p>
     </div>
     <button class="league" id="league" type="button" aria-label="Open the leaderboard">
       <div class="lg-head"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg>Cat League</span><b id="lg-rank">#50</b><i id="lg-up" hidden></i></div>
       <ol class="lg-rows" id="lg-rows"></ol>
       <span class="lg-more">See full leaderboard</span>
     </button>
-    <p class="win-tip" id="win-earn"></p>
     <div class="win-btns">
       <button class="chunky" id="win-next" type="button">Next level</button>
       <div class="win-row">
@@ -1186,23 +1206,12 @@ body.no-ads .ad-banner { display: none; }
     var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/><use class="rim" href="#star"/><path class="shine" d="M8.6 9.4c1.2-.4 1.9-1.3 2.6-2.8"/></svg>';
     $("win-stars").innerHTML = s;
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
-    $("win-time").textContent = fmt(play.elapsed); $("win-best").textContent = fmt(save.times[tkey]);
     $("win-new").hidden = !(oldBest && play.elapsed < oldBest);
     $("win-label").textContent = play.daily ? "Daily clear" : "Level " + play.level + " clear";
-    countUp($("win-gain"), gain);
-    // Progress toward the next theme in the shop.
-    var goal = SKINS.filter(function (x) { return save.owned.indexOf(x.id) < 0; })[0];
-    $("wg-fill").style.width = "0";
-    if (goal) {
-      $("wg-name").textContent = "Next theme: " + goal.name;
-      $("wg-count").textContent = Math.min(save.wallet, goal.price) + " / " + goal.price;
-      var frac = Math.min(1, save.wallet / goal.price);
-      requestAnimationFrame(function () { requestAnimationFrame(function () { $("wg-fill").style.width = frac * 100 + "%"; }); });
-    } else { $("wg-name").textContent = "Every theme unlocked"; $("wg-count").textContent = save.wallet + " ★"; $("wg-fill").style.width = "100%"; }
+    starTrack(got);
     confetti(got);
     var total = totalStars(); showLeague(total - gain, total);
-    $("win-earn").textContent = got === 3 ? (gain ? "" : "Already purrfect") :
-      "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
+
   }
   /* Cat League. Rivals are simulated for now: once the app ships, swap this list for
      Game Center / Google Play Games or a small leaderboard server. */
@@ -1246,6 +1255,20 @@ body.no-ads .ad-banner { display: none; }
   };
   $("lb-close").onclick = function () { $("board-sheet").hidden = true; };
   $("board-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
+  // The timeline: 3-star zone, 2-star zone, 1-star zone, with a cat pin at your time.
+  function starTrack(got) {
+    var t = T.STAR_TIMES[play.difficulty], end = t[1] + (t[1] - t[0]) * .7, e = play.elapsed;
+    var star = '<svg viewBox="0 0 24 24"><use href="#star"/></svg>';
+    var segs = $("st-track").querySelectorAll(".st-seg"), widths = [t[0], t[1] - t[0], end - t[1]];
+    segs.forEach(function (el, i) { el.style.flex = widths[i] + " 1 0"; el.innerHTML = new Array(4 - i).join(star); el.classList.toggle("here", 3 - i === got); });
+    $("st-time").textContent = fmt(e);
+    $("st-ticks").innerHTML = '<span style="left:' + (t[0] / end * 100) + '%">' + fmt(t[0]) + '</span><span style="left:' + (t[1] / end * 100) + '%">' + fmt(t[1]) + "</span>";
+    var pin = $("st-pin"), x = Math.min(e, end * .97) / end;
+    pin.style.transition = "none"; pin.style.left = "4px"; pin.offsetWidth; pin.style.transition = "";
+    requestAnimationFrame(function () { pin.style.left = "calc(4px + " + x + " * (100% - 8px))"; });
+    $("st-why").innerHTML = got === 3 ? '<span class="pill">' + star + star + star + "</span> Under <b>" + fmt(t[0]) + "!</b>" :
+      "Beat <b>" + fmt(t[got === 2 ? 0 : 1]) + '</b> for <span class="pill">' + new Array(got + 2).join(star) + "</span>";
+  }
   function countUp(el, to) {
     var n = 0; el.textContent = "+0";
     if (!to) return;

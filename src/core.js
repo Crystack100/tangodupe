@@ -136,18 +136,21 @@ var TangoCore = (function () {
 
   // Find rule breaks on a player board. Returns sets of cell indexes and edge indexes.
   function check(board, edges) {
-    var badCells = new Set(), badEdges = new Set(), triples = new Set(), r, c, k;
+    var badCells = new Set(), badEdges = new Set(), triples = new Set(), runs = [], r, c, k;
     function line(get) {
       var cnt = [0, 0], idx = [];
       for (k = 0; k < N; k++) { idx.push(get(k)); if (board[get(k)] !== -1) cnt[board[get(k)]]++; }
       [0, 1].forEach(function (v) {
         if (cnt[v] > HALF) idx.forEach(function (i) { if (board[i] === v) badCells.add(i); });
       });
+      var run = null, runEnd = -1;
       for (k = 0; k + 2 < N; k++) {
         var a = board[idx[k]];
         if (a !== -1 && a === board[idx[k + 1]] && a === board[idx[k + 2]]) {
           badCells.add(idx[k]); badCells.add(idx[k + 1]); badCells.add(idx[k + 2]);
           triples.add(idx[k]); triples.add(idx[k + 1]); triples.add(idx[k + 2]);
+          // A run of four or more is one long run, not overlapping threes.
+          if (run && runEnd === k + 1) { run.push(idx[k + 2]); runEnd = k + 2; } else { run = [idx[k], idx[k + 1], idx[k + 2]]; runEnd = k + 2; runs.push(run); }
         }
       }
     }
@@ -159,7 +162,7 @@ var TangoCore = (function () {
       if (e.type === "=" ? x !== y : x === y) { badEdges.add(j); badCells.add(e.a); badCells.add(e.b); }
     });
     var full = board.every(function (v) { return v !== -1; });
-    return { badCells: badCells, badEdges: badEdges, triples: triples, solved: full && badCells.size === 0 };
+    return { badCells: badCells, badEdges: badEdges, triples: triples, runs: runs, solved: full && badCells.size === 0 };
   }
 
   // Level n always maps to the same puzzle, so levels are unlimited and repeatable.

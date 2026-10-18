@@ -417,6 +417,73 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .win-btns { margin-top: auto; width: 100%; display: grid; gap: 10px; padding-top: 6px; }
 .win-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .win-btns .chunky { font-size: 1.3rem; padding: 17px; }
+
+/* results page: depth pass */
+.win { --acc-dk: color-mix(in srgb, var(--accent) 68%, #000); --acc-lt: color-mix(in srgb, var(--accent) 70%, #fff);
+  --slab: color-mix(in srgb, var(--surface) 82%, #000); --gold-dk: #c97a14;
+  background: radial-gradient(90% 46% at 50% 18%, color-mix(in srgb, var(--star) 34%, transparent), transparent 72%),
+    radial-gradient(140% 70% at 50% 0%, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%) var(--bg); }
+.win-ribbon { padding: 11px 34px 12px; border-radius: 4px; background: linear-gradient(var(--acc-lt), var(--accent) 55%, color-mix(in srgb, var(--accent) 88%, #000));
+  color: #fff; text-shadow: 0 2px 0 var(--acc-dk); font-size: 1.1rem;
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / .45), inset 0 -3px 0 rgb(0 0 0 / .14), 0 5px 0 var(--acc-dk), 0 14px 24px -8px var(--acc-dk); }
+.win-ribbon::before, .win-ribbon::after { top: 12px; width: 26px; background: var(--acc-dk); }
+.win-ribbon::before { left: -20px; } .win-ribbon::after { right: -20px; }
+.win-hero { height: 190px; }
+.rays { width: 380px; height: 380px; background: repeating-conic-gradient(color-mix(in srgb, var(--star) 46%, transparent) 0 8deg, transparent 8deg 20deg); }
+.win-hero .glow { position: absolute; width: 190px; height: 190px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--star) 70%, #fff) 0, color-mix(in srgb, var(--star) 40%, transparent) 38%, transparent 70%); animation: breathe 2.4s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.12); opacity: .8; } }
+.win-hero .podium { position: absolute; bottom: 10px; width: 210px; height: 34px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 35%, color-mix(in srgb, var(--star) 45%, #fff), color-mix(in srgb, var(--accent) 55%, var(--surface)) 75%);
+  box-shadow: 0 7px 0 var(--acc-dk), 0 18px 26px -10px rgb(0 0 0 / .45); animation: rise .45s .1s ease-out both; }
+.win-cats { margin-bottom: 18px; }
+.win-cats svg { width: 116px; height: 116px; filter: drop-shadow(0 8px 6px rgb(0 0 0 / .25)); }
+.win-hero .spark { position: absolute; width: 18px; height: 18px; background: #fff; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+  filter: drop-shadow(0 0 4px var(--star)); animation: twinkle 1.8s var(--d, 0s) ease-in-out infinite both; }
+@keyframes twinkle { 0%, 100% { transform: scale(0) rotate(0); opacity: 0; } 50% { transform: scale(1) rotate(90deg); opacity: 1; } }
+.win-stars { gap: 2px; margin-top: -18px; position: relative; z-index: 1; }
+.win-stars svg { width: 62px; height: 62px; overflow: visible; filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--star-off) 70%, #000)); }
+.win-stars svg:nth-child(2) { width: 84px; height: 84px; translate: 0 -14px; }
+.win-stars svg.on { fill: url(#g-star); filter: drop-shadow(0 4px 0 var(--gold-dk)) drop-shadow(0 0 12px color-mix(in srgb, var(--star) 70%, transparent)); }
+.win-stars svg .rim { fill: none; stroke: var(--gold-dk); stroke-width: 1.1; stroke-linejoin: round; }
+.win-stars svg:not(.on) .rim, .win-stars svg:not(.on) .shine { display: none; }
+.win-stars svg .shine { fill: none; stroke: #fff; stroke-width: 1.5; stroke-linecap: round; opacity: .75; }
+.win-stars svg.on::after { content: none; }
+.win h3 { font-weight: 900; font-size: 2.9rem; color: #fff; letter-spacing: .01em;
+  text-shadow: 2px 0 0 var(--acc-dk), -2px 0 0 var(--acc-dk), 0 2px 0 var(--acc-dk), 0 -2px 0 var(--acc-dk),
+    2px 2px 0 var(--acc-dk), -2px 2px 0 var(--acc-dk), 2px -2px 0 var(--acc-dk), -2px -2px 0 var(--acc-dk),
+    0 5px 0 var(--acc-dk), 0 7px 0 color-mix(in srgb, var(--acc-dk) 80%, #000), 0 12px 18px rgb(0 0 0 / .3); }
+.win-card, .league { background: linear-gradient(color-mix(in srgb, var(--surface) 94%, #fff), var(--surface));
+  box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 5px 0 var(--slab), 0 16px 28px -14px rgb(0 0 0 / .5); }
+.win-stats { gap: 8px; }
+.win-stats div + div { border-left: 0; }
+.win-stats div { background: var(--cell); border-radius: 10px; padding: 26px 4px 8px; margin-top: 16px; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--cell) 88%, #000); }
+.win-stats .ic { position: absolute; top: -16px; left: 50%; translate: -50% 0; width: 34px; height: 34px; padding: 7px; border-radius: 50%;
+  stroke: #fff; background: linear-gradient(color-mix(in srgb, var(--c) 75%, #fff), var(--c)); box-shadow: 0 3px 0 color-mix(in srgb, var(--c) 65%, #000); box-sizing: border-box; }
+.win-stats .ic.fill { fill: #fff; }
+.win-stats div:nth-child(1) { --c: var(--alt); } .win-stats div:nth-child(2) { --c: #9b7be0; } .win-stats div:nth-child(3) { --c: #f0a01c; }
+.win-stats b { font-size: 1.55rem; font-weight: 800; }
+.win-stats .new { top: -8px; right: -4px; box-shadow: 0 2px 0 #9e2a2e; z-index: 1; }
+.win-goal { border-top: 0; padding-top: 0; }
+.wg-top span { display: flex; align-items: center; gap: 6px; } .wg-top span svg { width: 18px; height: 18px; fill: var(--accent); }
+.wg-bar { height: 16px; border-radius: 8px; padding: 3px; background: var(--slab); box-shadow: inset 0 2px 3px rgb(0 0 0 / .25); }
+.wg-bar i { border-radius: 5px; background: repeating-linear-gradient(-45deg, rgb(255 255 255 / .22) 0 6px, transparent 6px 12px), linear-gradient(var(--acc-lt), var(--accent));
+  background-size: 17px 100%, auto; box-shadow: inset 0 2px 0 rgb(255 255 255 / .45); animation: stripes .8s linear infinite; min-width: 10px; }
+@keyframes stripes { to { background-position: 17px 0, 0 0; } }
+.lg-head svg { width: 30px; height: 30px; padding: 6px; border-radius: 50%; stroke: #fff; box-sizing: border-box; background: linear-gradient(#ffd977, #f0a01c); box-shadow: 0 3px 0 var(--gold-dk); }
+.lg-head i { box-shadow: 0 2px 0 #2f7d47; }
+.lg-rows li { box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--cell) 88%, #000); }
+.lg-rows li.me { background: linear-gradient(var(--acc-lt), var(--accent)); color: #fff; box-shadow: 0 3px 0 var(--acc-dk); text-shadow: 0 1px 0 var(--acc-dk); }
+.lg-rows li.me .n, .lg-rows li.me .sc { color: #fff; } .lg-rows li.me .sc svg { fill: #fff; }
+.win-btns .chunky, .win-btns .soft { position: relative; overflow: hidden; transition: transform .08s, box-shadow .08s; }
+.win-btns .chunky { background: linear-gradient(var(--acc-lt), var(--accent) 60%); color: #fff; text-shadow: 0 2px 0 var(--acc-dk); font-weight: 800; letter-spacing: .02em;
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 6px 0 var(--acc-dk), 0 16px 24px -10px var(--acc-dk); animation: nudge 2.4s 2.2s ease-in-out infinite; }
+.win-btns .chunky::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .45), transparent); animation: shine 2.4s 2.2s ease-in-out infinite; }
+@keyframes shine { 0%, 40% { left: -60%; } 75%, 100% { left: 130%; } }
+@keyframes nudge { 0%, 70%, 100% { transform: none; } 80% { transform: scale(1.04); } 90% { transform: scale(.99); } }
+.win-btns .soft { background: linear-gradient(color-mix(in srgb, var(--surface) 94%, #fff), var(--surface)); box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 5px 0 var(--slab), 0 12px 18px -10px rgb(0 0 0 / .4); padding: 14px 8px; }
+.win-btns .chunky:active { transform: translateY(5px); animation: none; box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 1px 0 var(--acc-dk); }
+.win-btns .soft:active { transform: translateY(4px); box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 1px 0 var(--slab); }
+@media (prefers-reduced-motion: reduce) { .win * { animation-iteration-count: 1 !important; } }
 .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
 .confetti i { position: absolute; top: -20px; width: 9px; height: 14px; border-radius: 2px; animation: fall var(--d) var(--w) cubic-bezier(.25, .5, .5, 1) forwards; opacity: 0; }
 @keyframes fall { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 100% { opacity: 0; transform: translate(var(--x), 105vh) rotate(var(--r)); } }
@@ -525,6 +592,7 @@ body.no-ads .ad-banner { display: none; }
     <radialGradient id="g-ear" cx=".4" cy=".2" r=".95">
       <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/>
     </radialGradient>
+    <linearGradient id="g-star" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3a8"/><stop offset=".45" stop-color="#ffcf3f"/><stop offset="1" stop-color="#f39a12"/></linearGradient>
     <linearGradient id="g-gloss" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
@@ -740,6 +808,10 @@ body.no-ads .ad-banner { display: none; }
     <div class="win-ribbon"><span id="win-label">Level 1</span></div>
     <div class="win-hero" aria-hidden="true">
       <div class="rays"></div>
+      <div class="glow"></div>
+      <div class="podium"></div>
+      <i class="spark" style="left:16%;top:22%;--d:.2s"></i><i class="spark" style="right:14%;top:14%;--d:.9s"></i>
+      <i class="spark" style="left:24%;bottom:30%;--d:1.4s;width:12px;height:12px"></i><i class="spark" style="right:22%;bottom:38%;--d:.5s;width:12px;height:12px"></i>
       <div class="win-cats">
         <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
         <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
@@ -754,7 +826,7 @@ body.no-ads .ad-banner { display: none; }
         <div><svg viewBox="0 0 24 24" class="ic fill"><use href="#star"/></svg><b id="win-gain">+0</b><span>Earned</span></div>
       </div>
       <div class="win-goal" id="win-goal">
-        <div class="wg-top"><span id="wg-name">Next theme</span><b id="wg-count">0 / 8</b></div>
+        <div class="wg-top"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9 7 4h10l2 5zM5 10h14v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1zM10 14h4"/></svg><span id="wg-name">Next theme</span></span><b id="wg-count">0 / 8</b></div>
         <div class="wg-bar"><i id="wg-fill"></i></div>
       </div>
     </div>
@@ -1246,6 +1318,12 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     $("undo").disabled = play.done || !play.history.length;
     $("hint").disabled = $("clear").disabled = play.done;
     $("win").hidden = !play.done;
+    // Reopened on a finished puzzle (reload): fill the results page from what was saved.
+    if (play.done && !$("win").dataset.filled) {
+      var got = T.stars(play.difficulty, play.elapsed);
+      fillWin(play.result || { got: got, gain: 0, prev: got, best: 0 });
+    }
+    if (!play.done) delete $("win").dataset.filled;
     renderClock(); renderWallet();
   }
   function renderClock() {
@@ -1291,7 +1369,16 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var oldBest = save.times[tkey];
     if (!save.times[tkey] || play.elapsed < save.times[tkey]) save.times[tkey] = play.elapsed;
     save.wallet += gain;
-    var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
+    play.result = { got: got, gain: gain, prev: prev, best: oldBest || 0 };
+    fillWin(play.result);
+    for (var q = 0; q < got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
+    if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
+    persist();
+  }
+  function fillWin(r) {
+    var got = r.got, gain = r.gain, prev = r.prev, oldBest = r.best, tkey = play.daily ? "d" + play.daily : play.level;
+    $("win").dataset.filled = "1";
+    var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/><use class="rim" href="#star"/><path class="shine" d="M8.6 9.4c1.2-.4 1.9-1.3 2.6-2.8"/></svg>';
     $("win-stars").innerHTML = s;
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
     $("win-time").textContent = fmt(play.elapsed); $("win-best").textContent = fmt(save.times[tkey]);
@@ -1309,11 +1396,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     } else { $("wg-name").textContent = "Every theme unlocked"; $("wg-count").textContent = save.wallet + " ★"; $("wg-fill").style.width = "100%"; }
     confetti(got);
     var total = totalStars(); showLeague(total - gain, total);
-    for (var q = 0; q < got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
     $("win-earn").textContent = got === 3 ? (gain ? "" : "Already purrfect") :
       "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
-    if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
-    persist();
   }
   /* Cat League. Rivals are simulated for now: once the app ships, swap this list for
      Game Center / Google Play Games or a small leaderboard server. */

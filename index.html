@@ -301,23 +301,34 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 
 /* win */
 .win {
-  position: absolute; inset: 0; z-index: 5; display: grid; place-items: center; border-radius: 12px;
-  background: color-mix(in srgb, var(--surface) 86%, transparent); backdrop-filter: blur(4px);
+  position: fixed; inset: 0; z-index: 26; overflow: auto; background: var(--bg);
+  display: grid; justify-items: center; padding: calc(24px + env(safe-area-inset-top, 0px)) 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  animation: winIn .35s ease-out;
 }
-.win-card { text-align: center; padding: 14px; display: grid; gap: 8px; justify-items: center; width: 100%; max-width: 300px; }
-.win-cat { width: 100px; height: 100px; animation: hop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+.win::before { content: ""; position: fixed; inset: 0; background: var(--motif, none); pointer-events: none; }
+@keyframes winIn { from { opacity: 0; transform: translateY(16px); } }
+.win-page { position: relative; width: 100%; max-width: 400px; min-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
+.win-label { margin: 8px 0 0; font: 700 .85rem var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.win-cats { display: flex; gap: 6px; margin-top: auto; }
+.win-cats svg { width: 96px; height: 96px; animation: hop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
+.win-cats svg + svg { animation-delay: .12s; }
 @keyframes hop { from { transform: translateY(30px) scale(.6); opacity: 0; } }
-.win-stars { display: flex; gap: 4px; align-items: flex-end; }
-.win-stars svg { width: 48px; height: 48px; fill: var(--star-off); }
-.win-stars svg:nth-child(2) { width: 60px; height: 60px; }
-.win-stars svg.on { fill: var(--star); animation: starIn .5s cubic-bezier(.3, 1.8, .5, 1) both; animation-delay: calc(.25s + var(--i) * .18s); }
+.win-stars { display: flex; gap: 8px; align-items: flex-end; }
+.win-stars svg { width: 54px; height: 54px; fill: var(--star-off); }
+.win-stars svg:nth-child(2) { width: 70px; height: 70px; }
+.win-stars svg.on { fill: var(--star); animation: starIn .5s cubic-bezier(.3, 1.8, .5, 1) both; animation-delay: calc(.35s + var(--i) * .18s); }
 @keyframes starIn { from { transform: scale(0) rotate(-60deg); } }
-.win-card h3 { font: 700 2rem/1 var(--font-display); margin: 0; }
-.win-card p { margin: 0; color: var(--muted); font-weight: 700; }
-.win-card .earn { color: var(--ink); font: 600 1.05rem var(--font-display); }
-.win-btns { display: grid; grid-template-columns: auto 1fr; gap: 10px; width: 100%; margin-top: 4px; }
-.win-btns .chunky { font-size: 1.1rem; padding: 12px 18px; }
-.win-btns .soft { padding-inline: 16px; }
+.win h3 { font: 800 2.4rem/1 var(--font-display); margin: 0; }
+.win-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; margin-top: 6px; }
+.win-stats div { background: var(--surface); border-radius: 10px; padding: 12px 6px; box-shadow: 0 6px 16px -8px var(--shadow); display: grid; gap: 2px; }
+.win-stats span { font: 600 .75rem var(--font-display); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.win-stats b { font: 700 1.35rem var(--font-display); font-variant-numeric: tabular-nums; }
+.win-stats b svg { width: 20px; height: 20px; fill: var(--star); vertical-align: -2px; }
+.win-page > h3 + .win-stats { margin-top: 10px; }
+.win-tip { margin: 0 0 auto; color: var(--muted); font: 600 .95rem var(--font-display); min-height: 1.4em; }
+.win-btns { margin-top: auto; width: 100%; display: grid; gap: 10px; padding-top: 12px; }
+.win-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.win-btns .chunky { font-size: 1.25rem; padding: 16px; }
 
 /* shop */
 .shop-intro { margin: 0; color: var(--muted); font-weight: 700; text-align: center; }
@@ -592,19 +603,6 @@ body.no-ads .ad-banner { display: none; }
     </div>
     <div class="board-wrap">
       <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>
-      <div class="win" id="win" hidden>
-        <div class="win-card">
-          <svg class="win-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
-          <div class="win-stars" id="win-stars"></div>
-          <h3 id="win-title">Purrfect!</h3>
-          <p id="win-time">0:42</p>
-          <p class="earn" id="win-earn"></p>
-          <div class="win-btns">
-            <button class="soft" id="win-replay" type="button" aria-label="Replay level"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg></button>
-            <button class="chunky" id="win-next" type="button">Next level</button>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="actions">
       <button class="soft" id="undo" type="button">Undo</button>
@@ -624,6 +622,31 @@ body.no-ads .ad-banner { display: none; }
     <div class="ad-banner" id="ad-banner"><span>Ad</span>Banner ad space (AdMob in the app)<button type="button" class="ad-x" id="ad-banner-x">Remove ads</button></div>
   </section>
 </main>
+
+<section class="win" id="win" aria-label="Level complete" hidden>
+  <div class="win-page">
+    <p class="win-label" id="win-label">Level 1 cleared</p>
+    <div class="win-cats" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
+      <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+    </div>
+    <div class="win-stars" id="win-stars"></div>
+    <h3 id="win-title">Purrfect!</h3>
+    <div class="win-stats">
+      <div><span>Time</span><b id="win-time">0:42</b></div>
+      <div><span>Best</span><b id="win-best">0:42</b></div>
+      <div><span>Earned</span><b id="win-gain">+0 ★</b></div>
+    </div>
+    <p class="win-tip" id="win-earn"></p>
+    <div class="win-btns">
+      <button class="chunky" id="win-next" type="button">Next level</button>
+      <div class="win-row">
+        <button class="soft" id="win-replay" type="button">Play again</button>
+        <button class="soft" id="win-home" type="button">Home</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="ad-full" id="ad-full" hidden>
   <div class="ad-card" role="dialog" aria-modal="true" aria-label="Advertisement">
@@ -892,6 +915,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     clearTimeout(toastT); toastT = setTimeout(function () { el.hidden = true; }, 1800);
   }
   function show(screen) {
+    if (screen !== "game") $("win").hidden = true;
     ["home", "levels", "store", "game"].forEach(function (s) { $(s).hidden = s !== screen; });
     var inGame = screen === "game";
     $("tabs").hidden = inGame; document.body.classList.toggle("playing", inGame);
@@ -1117,8 +1141,10 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
     $("win-stars").innerHTML = s;
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
-    $("win-time").textContent = "Time " + fmt(play.elapsed) + " · best " + fmt(save.times[tkey]);
-    $("win-earn").textContent = gain ? "+" + gain + " ★ for the shop" : prev === 3 ? "Already purrfect" :
+    $("win-time").textContent = fmt(play.elapsed); $("win-best").textContent = fmt(save.times[tkey]);
+    $("win-gain").innerHTML = "+" + gain + ' <svg viewBox="0 0 24 24"><use href="#star"/></svg>';
+    $("win-label").textContent = play.daily ? "Daily puzzle solved" : "Level " + play.level + " cleared";
+    $("win-earn").textContent = got === 3 ? (gain ? "Stars go to the shop" : "Already purrfect") :
       "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
     persist();
@@ -1189,6 +1215,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("ad-close").onclick = function () { $("ad-full").hidden = true; clearInterval(adT); if (adDone) { var f = adDone; adDone = null; f(); } };
   $("ad-full-x").onclick = $("ad-banner-x").onclick = $("noads-buy").onclick = removeAds;
   $("s-noads").onclick = function () { if (save.noAds) { save.noAds = false; persist(); applyAds(); } else removeAds(); };
+  $("win-home").onclick = function () { show("home"); };
   $("win-replay").onclick = function () { if (play.daily) { play = null; $("h-daily").onclick(); } else startLevel(play.level); };
 
   /* ---------- shop ---------- */

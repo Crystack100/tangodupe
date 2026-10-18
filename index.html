@@ -409,11 +409,13 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .cell.pop svg { animation: pop .3s cubic-bezier(.3, 1.8, .5, 1); }
 @keyframes pop { from { transform: scale(.3) translateY(20%); } }
 .mark {
-  position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
-  background: var(--surface); box-shadow: 0 2px 6px -3px var(--shadow); display: grid; place-items: center;
-  font: 800 15px/1 var(--font-display); color: var(--accent); pointer-events: none; z-index: 3;
+  position: absolute; width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; display: grid; place-items: center;
+  background: radial-gradient(circle at 50% 30%, #fff, #fff1e4); border: 2.5px solid #5b3f33;
+  box-shadow: 0 2px 0 #5b3f33, 0 4px 8px -2px rgb(0 0 0 / .45); pointer-events: none; z-index: 3;
 }
-.mark.bad { color: var(--surface); background: var(--bad); box-shadow: none; }
+.mark svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 3.6; stroke-linecap: round; }
+.mark.eq { color: #2b7fc0; } .mark.op { color: #e0572b; }
+.mark.bad { color: #fff; background: var(--bad); border-color: #a5262b; box-shadow: 0 2px 0 #a5262b, 0 0 0 4px rgb(232 72 77 / .3); }
 .actions { display: flex; justify-content: center; gap: 34px; padding-top: 4px; }
 .rbtn { border: 0; background: none; padding: 0; cursor: pointer; display: grid; justify-items: center; gap: 4px; font: 600 .82rem var(--font-display); color: var(--muted); }
 .rbtn .rb {
@@ -1403,7 +1405,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // Gap-aware placement: each cell is (100% - 5 gaps) / 6 wide, gaps are 5px.
     play.edges.forEach(function (e) {
       var m = document.createElement("span"), r = Math.floor(e.a / N), c = e.a % N, horiz = e.b === e.a + 1;
-      m.className = "mark"; m.textContent = e.type === "=" ? "=" : "×";
+      m.className = "mark " + (e.type === "=" ? "eq" : "op"); m.setAttribute("aria-label", e.type === "=" ? "same" : "opposite");
+      m.innerHTML = e.type === "=" ? '<svg viewBox="0 0 16 16"><path d="M3 5.2h10M3 10.8h10"/></svg>' : '<svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
       var cx = horiz ? c + 1 : c + .5, cy = horiz ? r + .5 : r + 1;
       m.style.left = "calc((100% - 25px) * " + (cx / N) + " + " + (horiz ? 5 * c + 2.5 : 5 * c) + "px)";
       m.style.top = "calc((100% - 25px) * " + (cy / N) + " + " + (horiz ? 5 * r : 5 * r + 2.5) + "px)";

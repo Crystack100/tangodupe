@@ -21,7 +21,7 @@
 :root {
   --bg: #fde8da; --bg2: #f1def6;
   --surface: #fffaf5; --cell: #fff0e4; --given: #f7dccb; --line: #efcdb8;
-  --ink: #4a2e2a; --muted: #8c6a62; --accent: #ff8a5c; --on-accent: #ffffff;
+  --ink: #4a2e2a; --muted: #8c6a62; --accent: #ff8a5c; --on-accent: #ffffff; --alt: #8e9bef; --brand: #7a4a2e;
   --sun: #d9761f; --sun-core: #ffb35c; --moon: #5d5878;
   --star: #ffb92e; --star-off: #efcdb8;
   --bad: #e5484d; --bad-soft: rgba(229, 72, 77, .16);
@@ -32,43 +32,43 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
-    --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14;
+    --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14; --alt: #8390e6; --brand: #f6d2b8;
     --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
     --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
-  --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14;
+  --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14; --alt: #8390e6; --brand: #f6d2b8;
   --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
   --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
 }
 /* Shop skins come after the system blocks so they win when equipped. */
-:root[data-skin="midnight"] {
+:root[data-skin="midnight"] { --alt: #8e9bef; --brand: #ffe3a1;
   --bg: #0f1230; --bg2: #24184a; --surface: #1a1d42; --cell: #212553; --given: #2c3166; --line: #383e7a;
   --ink: #eef0ff; --muted: #a9afd6; --accent: #ffd56b; --on-accent: #1a1d42;
   --sun: #e89a2c; --sun-core: #ffd27a; --moon: #b8c0f0; --star: #ffd56b; --star-off: #383e7a;
   --bad: #ff6f8a; --bad-soft: rgba(255, 111, 138, .2); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
 }
-:root[data-skin="sakura"] {
+:root[data-skin="sakura"] { --alt: #a98be0; --brand: #8a3a5c;
   --bg: #ffe3ee; --bg2: #fff4e3; --surface: #fffafc; --cell: #ffeef4; --given: #fbd5e3; --line: #f4c2d4;
   --ink: #57243b; --muted: #95607a; --accent: #e3528f; --on-accent: #ffffff;
   --sun: #e0703a; --sun-core: #ffb48a; --moon: #8c5aa5; --star: #f7a83a; --star-off: #f4c2d4;
   --bad: #d12f4a; --bad-soft: rgba(209, 47, 74, .15); --shadow: rgba(122, 61, 92, .22); color-scheme: light;
 }
-:root[data-skin="matcha"] {
+:root[data-skin="matcha"] { --alt: #8fae6a; --brand: #4d5f30;
   --bg: #e4edd6; --bg2: #f5efdc; --surface: #fbfcf5; --cell: #eff4e4; --given: #dbe5c8; --line: #c6d4ad;
   --ink: #2c3a21; --muted: #64735a; --accent: #6a9a3a; --on-accent: #ffffff;
   --sun: #c98a1c; --sun-core: #f2cd6b; --moon: #4f6b45; --star: #e0a21e; --star-off: #c6d4ad;
   --bad: #c2412d; --bad-soft: rgba(194, 65, 45, .15); --shadow: rgba(44, 58, 33, .22); color-scheme: light;
 }
-:root[data-skin="ocean"] {
+:root[data-skin="ocean"] { --alt: #4fb8c8; --brand: #ffd2bd;
   --bg: #08334a; --bg2: #0b4d5e; --surface: #0e4158; --cell: #124c63; --given: #185d75; --line: #216d86;
   --ink: #e6fbff; --muted: #a2d3df; --accent: #ff9670; --on-accent: #08334a;
   --sun: #f07a52; --sun-core: #ffb999; --moon: #7fe0ea; --star: #ffd170; --star-off: #216d86;
   --bad: #ff5c7a; --bad-soft: rgba(255, 92, 122, .22); --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
 }
-:root[data-skin="arcade"] {
+:root[data-skin="arcade"] { --alt: #7a5cff; --brand: #fff3a6;
   --bg: #0a0712; --bg2: #200a36; --surface: #151024; --cell: #1b142e; --given: #271d42; --line: #3d2c66;
   --ink: #f7f0ff; --muted: #b9a8de; --accent: #ff4fbf; --on-accent: #0a0712;
   --sun: #ffd23a; --sun-core: #fff09a; --moon: #44e8ff; --star: #ffe14a; --star-off: #3d2c66;
@@ -82,6 +82,7 @@
   --eye2: color-mix(in srgb, var(--moon) 20%, #fff);
   --nose: #f2899b;
   --press: color-mix(in srgb, var(--accent) 70%, #000);
+  --alt-press: color-mix(in srgb, var(--alt) 72%, #000);
 }
 
 * { box-sizing: border-box; }
@@ -133,49 +134,86 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .soft small { font: 600 .78rem var(--font-body); color: var(--muted); }
 :is(.chunky, .soft, .round, .node, .tab, .cell):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-/* home: a cozy window scene, then the play button and progress */
-.scene {
-  position: relative; border-radius: 34px; overflow: hidden; box-shadow: 0 8px 0 var(--line), 0 24px 40px -30px var(--shadow);
-  background: var(--surface);
+/* home: logo up top, two big buttons at the bottom, like a mobile puzzle game */
+.bg-tiles {
+  position: fixed; inset: -20px; z-index: 0; pointer-events: none; display: grid;
+  grid-template-columns: repeat(6, 1fr); gap: 8px; padding: 8px; opacity: .55;
 }
-.scene svg.room { display: block; width: 100%; height: auto; }
-.scene .twinkle { animation: twinkle 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
-.scene .twinkle:nth-of-type(2n) { animation-delay: -1.2s; }
-@keyframes twinkle { 50% { opacity: .35; transform: scale(.7); } }
-.scene .cat-sit { animation: bob 3s ease-in-out infinite; }
-.scene .cat-sit.late { animation-delay: -1.5s; }
-@keyframes bob { 50% { transform: translateY(-4px); } }
-.bubble {
-  position: absolute; top: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap;
-  background: var(--surface); border-radius: 999px; padding: 6px 14px; box-shadow: 0 3px 0 var(--line);
-  font: 600 .9rem/1.25 var(--font-display); color: var(--muted);
+.bg-tiles span { aspect-ratio: 1; border-radius: 16px; background: color-mix(in srgb, var(--line) 35%, transparent); position: relative; }
+.bg-tiles svg { position: absolute; inset: 18%; width: 64%; height: 64%; fill: color-mix(in srgb, var(--line) 70%, transparent); }
+.app { position: relative; z-index: 1; }
+#home { min-height: calc(100svh - 96px - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top, 0px)); }
+.top3 { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding-block: 12px 0; }
+.top3 > :last-child { justify-self: end; }
+.avatar {
+  position: relative; width: 58px; height: 58px; border-radius: 18px; border: 3px solid var(--sun-core); background: var(--surface);
+  box-shadow: 0 4px 0 var(--line); padding: 0; cursor: pointer; display: grid; place-items: center;
 }
-.home-title { text-align: center; display: grid; gap: 2px; margin-top: 4px; }
-.title { font: 700 2.7rem/1 var(--font-display); margin: 0; letter-spacing: -.01em; }
-.title em { font-style: normal; color: var(--accent); }
-.next-label { font: 600 1.05rem var(--font-display); color: var(--muted); margin: 0; }
-.next-label b { color: var(--ink); font-weight: 600; }
-.diff { display: inline-block; padding: 1px 10px; border-radius: 999px; font: 600 .8rem var(--font-display); background: var(--surface); color: var(--muted); text-transform: capitalize; vertical-align: 2px; margin-left: 4px; }
-.play-big { display: inline-flex; align-items: center; justify-content: center; gap: 10px; }
-.play-big svg { width: 26px; height: 26px; fill: currentColor; }
-.goal {
-  display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; background: var(--surface);
-  border-radius: 24px; padding: 12px 16px 12px 12px; box-shadow: 0 5px 0 var(--line); border: 0; text-align: left; cursor: pointer; width: 100%;
+.avatar svg { width: 46px; height: 46px; }
+.avatar .lv {
+  position: absolute; top: -8px; left: -8px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 99px;
+  background: var(--alt); color: #fff; font: 700 .8rem/24px var(--font-display); box-shadow: 0 2px 0 var(--alt-press);
 }
-.goal .duo { width: 58px; height: 46px; border-radius: 16px; background: var(--g-bg, var(--cell)); position: relative; flex: none; }
-.goal .duo svg { position: absolute; width: 34px; height: 34px; top: 6px; }
-.goal .duo svg:first-child { left: 2px; } .goal .duo svg:last-child { right: 2px; }
-.goal b { font: 600 1rem var(--font-display); display: block; }
-.goal small { color: var(--muted); font-weight: 700; font-size: .8rem; }
-.bar-track { display: block; height: 10px; border-radius: 99px; background: var(--cell); overflow: hidden; margin-top: 6px; }
-.bar-fill { display: block; height: 100%; border-radius: 99px; background: var(--star); width: 0; transition: width .6s cubic-bezier(.3, 1.2, .5, 1); }
-.chips { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-.chip-stat {
-  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; background: var(--surface);
-  box-shadow: 0 3px 0 var(--line); font: 600 .9rem var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums;
+.logo { text-align: center; margin-top: 34px; color: var(--brand); font: 700 4.3rem/1.04 var(--font-display); letter-spacing: .01em; text-transform: uppercase; }
+.logo .ln { display: flex; justify-content: center; align-items: flex-end; }
+.logo .o { display: inline-block; width: .82em; height: .98em; margin-inline: .02em; position: relative; top: .02em; }
+.logo .o-sun { fill: none; stroke: var(--accent); }
+.logo .o-moon { fill: none; stroke: var(--alt); }
+.logo .eared { position: relative; display: inline-block; }
+.logo .eared svg { position: absolute; left: 50%; top: -.22em; width: .62em; translate: -50% 0; }
+.logo .tail { display: block; width: 92px; height: 44px; margin: -2px auto 0; translate: 26px 0; }
+.home-cats { display: flex; justify-content: center; gap: 4px; margin-top: 18px; }
+.home-cats svg { width: 74px; height: 74px; animation: bob 3s ease-in-out infinite; }
+.home-cats svg:last-child { animation-delay: -1.5s; }
+@keyframes bob { 50% { transform: translateY(-5px); } }
+.goal-badge {
+  position: absolute; left: 0; top: 47%; display: grid; justify-items: center; gap: 0; border: 0; background: none; padding: 0; cursor: pointer;
 }
-.chip-stat b { color: var(--ink); font-weight: 700; }
-.chip-stat svg { width: 16px; height: 16px; fill: var(--star); }
+.goal-badge .ring { width: 74px; height: 74px; position: relative; }
+.goal-badge .ring > svg.prog { position: absolute; inset: 0; transform: rotate(-90deg); }
+.goal-badge .duo { position: absolute; inset: 10px; border-radius: 50%; background: var(--g-bg, var(--cell)); overflow: hidden; }
+.goal-badge .duo svg { position: absolute; width: 34px; height: 34px; top: 14px; }
+.goal-badge .duo svg:first-child { left: 0; } .goal-badge .duo svg:last-child { right: 0; }
+.goal-badge .tag {
+  margin-top: -10px; position: relative; padding: 2px 10px; border-radius: 99px; background: var(--ink); color: var(--surface);
+  font: 700 .8rem/1.4 var(--font-display); font-variant-numeric: tabular-nums; display: inline-flex; gap: 3px; align-items: center;
+}
+.goal-badge .tag svg { width: 12px; height: 12px; fill: var(--star); }
+.home-main { position: relative; flex: 1; display: flex; flex-direction: column; }
+.home-btns { margin-top: auto; display: grid; gap: 16px; padding-inline: 20px; padding-bottom: 8px; }
+.pillbtn {
+  border: 0; border-radius: 999px; padding: 18px 20px; font: 700 1.55rem/1 var(--font-display); color: #fff; cursor: pointer; width: 100%;
+  background: var(--accent); box-shadow: 0 6px 0 var(--press), 0 14px 26px -12px var(--accent); transition: transform .08s, box-shadow .08s;
+}
+.pillbtn:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--press); }
+.pillbtn.alt { background: var(--alt); box-shadow: 0 6px 0 var(--alt-press), 0 14px 26px -12px var(--alt); }
+.pillbtn.alt:active { box-shadow: 0 1px 0 var(--alt-press); }
+.pillbtn small { display: block; font: 600 .85rem var(--font-body); opacity: .9; margin-top: 4px; }
+.daily-wrap { display: grid; justify-items: center; }
+.timer-chip {
+  margin-top: -10px; position: relative; padding: 2px 10px 2px 8px; border-radius: 0 0 12px 12px; background: var(--alt-press); color: #fff;
+  font: 600 .85rem/1.5 var(--font-display); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 4px;
+}
+.timer-chip svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; }
+
+/* settings sheet */
+.sheet-bg { position: fixed; inset: 0; z-index: 25; background: rgba(20, 12, 10, .45); display: grid; align-items: end; justify-items: center; }
+.sheet {
+  width: 100%; max-width: 440px; background: var(--surface); border-radius: 30px 30px 0 0; padding: 18px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  display: grid; gap: 14px; animation: up .25s ease-out; max-height: 88svh; overflow: auto;
+}
+@keyframes up { from { transform: translateY(40px); opacity: 0; } }
+.sheet h3 { margin: 0; font: 700 1.4rem var(--font-display); display: flex; justify-content: space-between; align-items: center; }
+.sheet h4 { margin: 0; font: 600 1rem var(--font-display); color: var(--muted); }
+.seg3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--cell); padding: 4px; border-radius: 16px; }
+.seg3 button { border: 0; border-radius: 12px; padding: 9px 4px; background: transparent; font: 600 .95rem var(--font-display); color: var(--muted); cursor: pointer; }
+.seg3 button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 2px 0 var(--line); }
+.sheet .note { margin: -6px 0 0; color: var(--muted); font-size: .85rem; font-weight: 600; }
+.sheet-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.sheet-stats div { background: var(--cell); border-radius: 16px; padding: 8px; text-align: center; }
+.sheet-stats b { display: block; font: 700 1.3rem var(--font-display); font-variant-numeric: tabular-nums; }
+.sheet-stats span { font-size: .75rem; font-weight: 700; color: var(--muted); }
+.danger { background: none; border: 0; color: var(--bad); font: 600 .95rem var(--font-display); cursor: pointer; padding: 6px; justify-self: center; }
 
 /* level map: a winding trail, lowest level at the bottom */
 .map { position: relative; display: flex; flex-direction: column-reverse; gap: 18px; padding-block: 30px 16px; overflow: hidden; }
@@ -350,54 +388,42 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   <p>Untangling yarn and fluffing pillows…</p>
 </div>
 
+<div class="bg-tiles" id="bg-tiles" aria-hidden="true"></div>
 <main class="app">
   <!-- HOME -->
   <section id="home" class="screen" aria-label="Home">
-    <div class="status">
-      <h2 aria-hidden="true">&nbsp;</h2>
+    <div class="top3">
+      <button class="avatar" id="h-avatar" type="button" aria-label="Your stats">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
+        <span class="lv" id="h-lv">1</span>
+      </button>
       <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+      <button class="round" id="h-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg></button>
     </div>
-    <div class="scene">
-      <svg class="room" viewBox="0 0 340 230" aria-hidden="true">
-        <rect width="340" height="230" fill="var(--surface)"/>
-        <!-- window with a split sky: day on the left, night on the right -->
-        <rect x="40" y="22" width="260" height="150" rx="74" fill="var(--sun-core)" opacity=".28"/>
-        <path d="M170 22 h56 a74 74 0 0 1 74 74 v76 h-130z" fill="var(--moon)" opacity=".85"/>
-        <circle cx="104" cy="82" r="22" fill="var(--sun-core)"/>
-        <g stroke="var(--sun)" stroke-width="5" stroke-linecap="round">
-          <path d="M104 46v-8 M104 118v8 M68 82h-8 M140 82h8 M79 57l-6-6 M129 107l6 6 M79 107l-6 6 M129 57l6-6"/>
-        </g>
-        <path d="M238 54 a24 24 0 1 0 24 34 a19 19 0 1 1 -24 -34z" fill="var(--eye2)"/>
-        <path class="twinkle" d="M205 50l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="var(--star)"/>
-        <path class="twinkle" d="M275 120l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="var(--star)"/>
-        <path class="twinkle" d="M196 128l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="var(--star)"/>
-        <rect x="40" y="22" width="260" height="150" rx="74" fill="none" stroke="var(--line)" stroke-width="8"/>
-        <path d="M170 22v150" stroke="var(--line)" stroke-width="6"/>
-        <!-- sill, cushion and yarn -->
-        <rect x="20" y="166" width="300" height="18" rx="9" fill="var(--line)"/>
-        <ellipse cx="170" cy="190" rx="118" ry="24" fill="var(--accent)" opacity=".9"/>
-        <ellipse cx="170" cy="184" rx="104" ry="14" fill="var(--accent)"/>
-        <g class="cat-sit"><use href="#sun" x="78" y="96" width="96" height="96"/></g>
-        <g class="cat-sit late"><use href="#moon" x="168" y="102" width="88" height="88"/></g>
-        <circle cx="282" cy="196" r="17" fill="var(--sun)"/>
-        <path d="M268 188q14 -6 28 4 M266 198q16 -8 32 2 M272 208q12 -6 22 0" stroke="var(--sun-core)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <path d="M282 213q-20 12 -50 6" stroke="var(--sun)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-      </svg>
-      <span class="bubble" id="bubble">Meow! Ready?</span>
-    </div>
-    <div class="home-title">
-      <h1 class="title">Tango <em>Cats</em></h1>
-      <p class="next-label"><span id="h-level">Next up: <b>Level 1</b></span><span class="diff" id="h-diff">easy</span></p>
-    </div>
-    <button class="chunky play-big" id="h-play" type="button"><svg viewBox="0 0 40 34" aria-hidden="true"><use href="#paw"/></svg><span id="h-play-label">Play</span></button>
-    <button class="goal" id="h-goal" type="button">
-      <span class="duo" id="g-duo"><svg viewBox="0 0 100 100"><use href="#sun"/></svg><svg viewBox="0 0 100 100"><use href="#moon"/></svg></span>
-      <span><b id="g-name">Next theme: Midnight</b><small id="g-sub">0 of 8 stars</small><span class="bar-track"><span class="bar-fill" id="g-fill"></span></span></span>
-    </button>
-    <div class="chips">
-      <span class="chip-stat"><b id="s-cleared">0</b> cleared</span>
-      <span class="chip-stat"><svg><use href="#star"/></svg><b id="s-stars">0</b> won</span>
-      <span class="chip-stat"><b id="s-perfect">0</b> purrfect</span>
+    <div class="home-main">
+      <h1 class="logo" aria-label="Tango Cats">
+        <span class="ln" aria-hidden="true">TANG<svg class="o" viewBox="0 0 80 96"><path class="o-sun" d="M14 40 L16 10 L32 24 M66 40 L64 10 L48 24" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/><circle class="o-sun" cx="40" cy="58" r="28" stroke-width="15"/></svg></span>
+        <span class="ln" aria-hidden="true">C<span class="eared">A<svg viewBox="0 0 60 24"><path d="M6 22 L10 2 L24 14 M54 22 L50 2 L36 14" fill="none" stroke="var(--alt)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>TS</span>
+        <svg class="tail" viewBox="0 0 92 44" aria-hidden="true"><path d="M8 6 q4 30 34 30 q30 0 30 -18 q0 -12 -12 -12" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round"/><path d="M24 30 l-4 9 M40 35 l0 9 M56 32 l4 9" stroke="var(--sun)" stroke-width="5" stroke-linecap="round"/></svg>
+      </h1>
+      <div class="home-cats" aria-hidden="true">
+        <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
+        <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+      </div>
+      <button class="goal-badge" id="h-goal" type="button" aria-label="Next theme">
+        <span class="ring">
+          <svg class="prog" viewBox="0 0 74 74"><circle cx="37" cy="37" r="33" fill="var(--surface)" stroke="var(--line)" stroke-width="6"/><circle id="g-arc" cx="37" cy="37" r="33" fill="none" stroke="var(--star)" stroke-width="6" stroke-linecap="round" stroke-dasharray="0 999"/></svg>
+          <span class="duo" id="g-duo"><svg viewBox="0 0 100 100"><use href="#sun"/></svg><svg viewBox="0 0 100 100"><use href="#moon"/></svg></span>
+        </span>
+        <span class="tag"><svg><use href="#star"/></svg><span id="g-tag">0/8</span></span>
+      </button>
+      <div class="home-btns">
+        <button class="pillbtn" id="h-play" type="button"><span id="h-play-label">Play</span><small id="h-play-sub">Level 1 · easy</small></button>
+        <div class="daily-wrap">
+          <button class="pillbtn alt" id="h-daily" type="button"><span id="h-daily-label">Daily Puzzle</span></button>
+          <span class="timer-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><span id="h-daily-time">00:00:00</span></span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -477,6 +503,24 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   </div>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
+<div class="sheet-bg" id="sheet" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+    <h3><span id="sheet-title">Settings</span><button class="round" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <div class="sheet-stats">
+      <div><b id="s-cleared">0</b><span>Levels cleared</span></div>
+      <div><b id="s-stars">0</b><span>Stars won</span></div>
+      <div><b id="s-perfect">0</b><span>Purrfect</span></div>
+    </div>
+    <h4>Mistake marks</h4>
+    <div class="seg3" id="mistakes">
+      <button type="button" data-m="delay">Delayed</button>
+      <button type="button" data-m="instant">Right away</button>
+      <button type="button" data-m="off">Off</button>
+    </div>
+    <p class="note" id="mistakes-note">Rule breaks turn red after you stop tapping for a moment.</p>
+    <button class="danger" id="reset" type="button">Reset all progress</button>
+  </div>
+</div>
 
 <script>
 // Tango puzzle core: generator, solver and rule checker. Pure logic, no DOM.
@@ -675,9 +719,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     { id: "ocean", name: "Deep Ocean", price: 55, v: { bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
     { id: "arcade", name: "Neon Arcade", price: 80, v: { bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
   ];
-  var CHEERS = ["Meow! Ready?", "Paws and think.", "Purr-fectly logical.", "Yarn you ready?", "One more level?", "Nap after this one."];
   var $ = function (id) { return document.getElementById(id); };
-  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null };
+  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: "delay" };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
 
   function load() {
@@ -685,6 +728,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       var s = JSON.parse(localStorage.getItem("tango:v2"));
       if (s && s.best) {
         save = Object.assign(save, s);
+        save.daily = save.daily || {}; save.mistakes = save.mistakes || "delay";
         // Earlier builds called the free skin "daybreak".
         save.owned = save.owned.map(function (id) { return id === "daybreak" ? "cozy" : id; });
         if (save.skin === "daybreak") save.skin = "cozy";
@@ -695,7 +739,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
-  function totalStars() { var t = 0; for (var k in save.best) t += save.best[k]; return t; }
+  function totalStars() {
+    var t = 0, k; for (k in save.best) t += save.best[k]; for (k in save.daily || {}) t += save.daily[k]; return t;
+  }
   function starSvgs(n) {
     var s = ""; for (var i = 0; i < 3; i++) s += '<svg class="' + (i < n ? "on" : "") + '" viewBox="0 0 24 24"><use href="#star"/></svg>'; return s;
   }
@@ -726,32 +772,71 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
 
   /* ---------- home ---------- */
+  function dayKey(d) { d = d || new Date(); return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate(); }
   function renderHome() {
-    var n = nextLevel(), resume = play && !play.done, lv = resume ? play.level : n;
-    $("h-level").innerHTML = (resume ? "Paused on " : "Next up: ") + "<b>Level " + lv + "</b>";
-    $("h-diff").textContent = T.levelDifficulty(lv);
-    $("h-play-label").textContent = resume ? "Continue" : "Play level " + n;
-    $("bubble").textContent = CHEERS[(n + new Date().getMinutes()) % CHEERS.length];
-    var perfect = 0; for (var k in save.best) if (save.best[k] === 3) perfect++;
-    $("s-cleared").textContent = Object.keys(save.best).length;
-    $("s-stars").textContent = totalStars(); $("s-perfect").textContent = perfect;
+    var n = nextLevel(), resume = play && !play.done && !play.daily, lv = resume ? play.level : n;
+    $("h-play-label").textContent = resume ? "Continue" : "Play";
+    $("h-play-sub").textContent = "Level " + lv + " · " + T.levelDifficulty(lv);
+    $("h-lv").textContent = Object.keys(save.best).length;
+    var today = save.daily[dayKey()];
+    $("h-daily-label").textContent = play && !play.done && play.daily === dayKey() ? "Continue daily" :
+      today ? "Daily " + "★★★".slice(0, today) + "☆☆☆".slice(today) : "Daily Puzzle";
+    renderCountdown();
     // Progress toward the cheapest theme not owned yet, previewed in its own colors.
     var goal = SKINS.filter(function (s) { return save.owned.indexOf(s.id) < 0; })[0], duo = $("g-duo");
     duo.style.cssText = "";
+    $("h-goal").hidden = !goal;
     if (goal) {
       for (var v in goal.v) duo.style.setProperty("--" + v, goal.v[v]);
       duo.style.setProperty("--g-bg", goal.v.cell);
-      $("g-name").textContent = "Next theme: " + goal.name;
-      $("g-sub").textContent = save.wallet >= goal.price ? "Ready to unlock in the shop!" : save.wallet + " of " + goal.price + " stars";
-      $("g-fill").style.width = Math.min(100, Math.round(save.wallet / goal.price * 100)) + "%";
-    } else {
-      $("g-name").textContent = "Every theme unlocked";
-      $("g-sub").textContent = "Keep going for purrfect scores"; $("g-fill").style.width = "100%";
+      $("g-tag").textContent = Math.min(save.wallet, goal.price) + "/" + goal.price;
+      var len = 2 * Math.PI * 33, frac = Math.min(1, save.wallet / goal.price);
+      $("g-arc").setAttribute("stroke-dasharray", (len * frac).toFixed(1) + " 999");
+      $("g-arc").style.opacity = frac > 0 ? 1 : 0;
+      $("h-goal").setAttribute("aria-label", "Next theme: " + goal.name + ", " + save.wallet + " of " + goal.price + " stars");
     }
     renderWallet();
   }
+  function renderCountdown() {
+    var now = new Date(), mid = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1), t = Math.floor((mid - now) / 1000);
+    var two = function (x) { return (x < 10 ? "0" : "") + x; };
+    $("h-daily-time").textContent = two(Math.floor(t / 3600)) + ":" + two(Math.floor(t / 60) % 60) + ":" + two(t % 60);
+  }
+  setInterval(function () { if (!$("home").hidden) renderCountdown(); }, 1000);
   $("h-goal").onclick = function () { show("store"); };
-  $("h-play").onclick = function () { if (play && !play.done) resumeLevel(); else startLevel(nextLevel()); };
+  $("h-daily").onclick = function () {
+    if (play && !play.done && play.daily === dayKey()) return resumeLevel();
+    var key = dayKey(), p = T.generate((key * 2246822519) >>> 0, "medium");
+    play = { level: 0, daily: key, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
+             board: p.givens.slice(), history: [], elapsed: 0, done: false };
+    save.play = play; persist(); resumeLevel();
+  };
+
+  /* ---------- settings ---------- */
+  var NOTES = { delay: "Rule breaks turn red after you stop tapping for a moment.", instant: "Rule breaks turn red as soon as they happen.", off: "No red marks. You find out when the board is full." };
+  function openSheet() {
+    var perfect = 0; for (var k in save.best) if (save.best[k] === 3) perfect++;
+    $("s-cleared").textContent = Object.keys(save.best).length;
+    $("s-stars").textContent = totalStars(); $("s-perfect").textContent = perfect;
+    document.querySelectorAll("#mistakes button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.m === save.mistakes); });
+    $("mistakes-note").textContent = NOTES[save.mistakes];
+    $("reset").textContent = "Reset all progress"; $("reset").dataset.armed = "";
+    $("sheet").hidden = false;
+  }
+  $("h-settings").onclick = openSheet;
+  $("h-avatar").onclick = openSheet;
+  $("sheet-close").onclick = function () { $("sheet").hidden = true; };
+  $("sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
+  document.querySelectorAll("#mistakes button").forEach(function (b) {
+    b.onclick = function () { save.mistakes = b.dataset.m; persist(); openSheet(); };
+  });
+  $("reset").onclick = function () {
+    // Two taps, since the viewer can't show a confirm dialog.
+    if (!this.dataset.armed) { this.dataset.armed = "1"; this.textContent = "Tap again to erase everything"; return; }
+    save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: save.mistakes };
+    play = null; page = 0; applySkin(); persist(); $("sheet").hidden = true; renderHome(); toast("Progress reset");
+  };
+  $("h-play").onclick = function () { if (play && !play.done && !play.daily) resumeLevel(); else startLevel(nextLevel()); };
 
   /* ---------- level map ---------- */
   function renderMap() {
@@ -791,7 +876,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
   function resumeLevel() {
     show("game");
-    $("g-title").textContent = "Level " + play.level;
+    $("g-title").textContent = play.daily ? "Daily Puzzle" : "Level " + play.level;
+    $("win-next").textContent = play.daily ? "Back home" : "Next level";
     build(); render(); if (!play.done) startClock();
   }
   function build() {
@@ -820,7 +906,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
     clearTimeout(errT);
-    if (changed != null && !reveal) {
+    if (save.mistakes === "off") {
+      shown = { cells: new Set(), edges: new Set() };
+    } else if (changed != null && !reveal && save.mistakes !== "instant") {
       // Keep mistakes already on screen that still stand; hold back new ones.
       shown.cells = new Set(Array.from(shown.cells).filter(function (i) { return i !== changed && res.badCells.has(i); }));
       shown.edges = new Set(Array.from(shown.edges).filter(function (j) {
@@ -874,15 +962,16 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
   function win() {
     play.done = true; stopClock();
-    var n = play.level, got = T.stars(play.difficulty, play.elapsed), prev = save.best[n] || 0;
+    var book = play.daily ? save.daily : save.best, n = play.daily ? play.daily : play.level, tkey = play.daily ? "d" + n : n;
+    var got = T.stars(play.difficulty, play.elapsed), prev = book[n] || 0;
     var gain = Math.max(0, got - prev);
-    if (got > prev) save.best[n] = got;
-    if (!save.times[n] || play.elapsed < save.times[n]) save.times[n] = play.elapsed;
+    if (got > prev) book[n] = got;
+    if (!save.times[tkey] || play.elapsed < save.times[tkey]) save.times[tkey] = play.elapsed;
     save.wallet += gain;
     var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
     $("win-stars").innerHTML = s;
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
-    $("win-time").textContent = "Time " + fmt(play.elapsed) + " · best " + fmt(save.times[n]);
+    $("win-time").textContent = "Time " + fmt(play.elapsed) + " · best " + fmt(save.times[tkey]);
     $("win-earn").textContent = gain ? "+" + gain + " ★ for the shop" : prev === 3 ? "Already purrfect" :
       "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
@@ -917,9 +1006,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (play.done) return;
     play.board = play.givens.slice(); play.history = []; render(); persist();
   };
-  $("g-back").onclick = function () { persist(); show(play.done ? "levels" : "home"); };
-  $("win-next").onclick = function () { startLevel(play.level + 1); };
-  $("win-replay").onclick = function () { startLevel(play.level); };
+  $("g-back").onclick = function () { persist(); show(play.done && !play.daily ? "levels" : "home"); };
+  $("win-next").onclick = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
+  $("win-replay").onclick = function () { if (play.daily) { play = null; $("h-daily").onclick(); } else startLevel(play.level); };
 
   /* ---------- shop ---------- */
   function renderStore() {
@@ -947,10 +1036,20 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
 
   /* ---------- boot ---------- */
+  function buildTiles() {
+    // Faint board pattern behind every screen, with the odd cat and × like a puzzle in progress.
+    var box = $("bg-tiles"), html = "", cat = '<svg viewBox="0 0 100 100"><path d="M15 46 L19 9 L44 28 L56 28 L81 9 L85 46 A38 33 0 1 1 15 46z"/></svg>';
+    var x = '<svg viewBox="0 0 100 100"><path d="M24 24 L76 76 M76 24 L24 76" stroke="currentColor" stroke-width="12" stroke-linecap="round" style="stroke: color-mix(in srgb, var(--line) 70%, transparent)"/></svg>';
+    for (var i = 0; i < 6 * 16; i++) html += "<span>" + ((i * 7) % 11 === 3 ? cat : (i * 5) % 13 === 4 ? x : "") + "</span>";
+    box.innerHTML = html;
+  }
+
   function start(data) {
     load();
     if (data && data.save) save = data.save;
     play = save.play && save.play.board ? save.play : null;
+    if (play && play.daily && play.daily !== dayKey()) play = save.play = null;
+    buildTiles();
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin();
     var screen = data && data.screen;

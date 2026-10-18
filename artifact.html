@@ -293,7 +293,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 /* level map, game style: a winding road with chunky 3D bubbles */
 #levels, #store { --acc-dk: color-mix(in srgb, var(--accent) 68%, #000); --acc-lt: color-mix(in srgb, var(--accent) 70%, #fff); --slab: color-mix(in srgb, var(--surface) 80%, #000); }
-.status h2 { font: 700 1.9rem/1 var(--font-display); color: var(--brand); letter-spacing: .01em; text-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 35%, transparent); }
+.status h2 { font: 600 1.75rem/1 var(--font-display); color: var(--brand); letter-spacing: .01em; }
 .pager .soft { gap: 4px; font: 600 1.05rem var(--font-display); border-radius: 14px; background: linear-gradient(color-mix(in srgb, var(--surface) 94%, #fff), var(--surface));
   box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 4px 0 var(--slab), 0 10px 16px -10px rgb(0 0 0 / .4); }
 .pager .soft svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
@@ -625,10 +625,10 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .skin .chunky:disabled { opacity: .6; cursor: default; transform: none; }
 .skin .chunky svg { width: 16px; height: 16px; fill: currentColor; }
 /* shop type: bolder names, calmer subtitles, chunky buy buttons */
-.shop-intro { font: 500 .95rem/1.4 var(--font-body); }
-.skin b { font: 700 1.3rem/1.1 var(--font-display); letter-spacing: .01em; }
-.skin small { margin-top: -10px; font: 500 .88rem var(--font-body); }
-.skin .chunky { font: 700 1.15rem/1 var(--font-display); padding: 11px 6px; border-radius: 12px; text-shadow: 0 1.5px 0 color-mix(in srgb, var(--accent) 60%, #000);
+.shop-intro { font: 400 .95rem/1.4 var(--font-body); }
+.skin b { font: 500 1.2rem/1.1 var(--font-display); letter-spacing: .01em; }
+.skin small { margin-top: -10px; font: 400 .85rem var(--font-body); }
+.skin .chunky { font: 500 1.05rem/1 var(--font-display); padding: 11px 6px; border-radius: 12px; text-shadow: none;
   box-shadow: inset 0 2px 0 rgb(255 255 255 / .35), 0 4px 0 color-mix(in srgb, var(--accent) 62%, #000); }
 .skin .chunky:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 62%, #000); }
 .skin .chunky:disabled { box-shadow: none; text-shadow: none; }
@@ -1700,7 +1700,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       card.className = "skin sk-" + s.id + (on ? " equipped" : "");
       card.style.cssText = css;
       var cat = function (id) { return '<span><svg viewBox="0 0 100 100"><use href="#' + id + '"/></svg></span>'; };
-      var label = on ? "Wearing" : owned ? "Wear" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
+      var label = on ? "Equipped" : owned ? "Equip" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
       card.innerHTML = '<div class="mini">' + cat("sun") + cat("moon") + cat("moon") + cat("sun") + "</div><b>" + s.name + "</b><small>" + s.tag +
         '</small><button class="chunky" type="button" ' + (on ? "disabled" : "") + ">" + label + "</button>";
       card.querySelector("button").onclick = function () {

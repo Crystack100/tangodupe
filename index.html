@@ -301,34 +301,63 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 
 /* win */
 .win {
-  position: fixed; inset: 0; z-index: 26; overflow: auto; background: var(--bg);
-  display: grid; justify-items: center; padding: calc(24px + env(safe-area-inset-top, 0px)) 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  position: fixed; inset: 0; z-index: 26; overflow: auto; overflow-x: hidden; display: grid; justify-items: center;
+  background: var(--bg) radial-gradient(120% 60% at 50% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 16px calc(20px + env(safe-area-inset-bottom, 0px));
   animation: winIn .35s ease-out;
 }
 .win::before { content: ""; position: fixed; inset: 0; background: var(--motif, none); pointer-events: none; }
-@keyframes winIn { from { opacity: 0; transform: translateY(16px); } }
-.win-page { position: relative; width: 100%; max-width: 400px; min-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; }
-.win-label { margin: 8px 0 0; font: 700 .85rem var(--font-display); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.win-cats { display: flex; gap: 6px; margin-top: auto; }
-.win-cats svg { width: 96px; height: 96px; animation: hop .6s cubic-bezier(.3, 1.6, .5, 1) both; }
-.win-cats svg + svg { animation-delay: .12s; }
+@keyframes winIn { from { opacity: 0; } }
+.win-page { position: relative; width: 100%; max-width: 400px; min-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center; }
+.win-ribbon {
+  position: relative; margin-top: 10px; padding: 9px 30px; background: var(--accent); color: var(--on-accent);
+  font: 800 1.05rem/1 var(--font-display); letter-spacing: .12em; text-transform: uppercase;
+  box-shadow: 0 8px 18px -10px var(--accent); animation: drop .5s cubic-bezier(.3, 1.5, .5, 1) both;
+}
+.win-ribbon::before, .win-ribbon::after { content: ""; position: absolute; top: 7px; width: 20px; height: 100%; background: var(--press); z-index: -1; }
+.win-ribbon::before { left: -16px; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 40% 50%); }
+.win-ribbon::after { right: -16px; clip-path: polygon(0 0, 100% 0, 60% 50%, 100% 100%, 0 100%); }
+.win-ribbon span { position: relative; }
+@keyframes drop { from { transform: translateY(-40px); opacity: 0; } }
+.win-hero { position: relative; display: grid; place-items: center; width: 100%; height: 170px; margin-top: auto; }
+.rays {
+  position: absolute; width: 330px; height: 330px; border-radius: 50%; animation: spin 24s linear infinite;
+  background: repeating-conic-gradient(color-mix(in srgb, var(--star) 34%, transparent) 0 9deg, transparent 9deg 22.5deg);
+  -webkit-mask: radial-gradient(circle, #000 18%, transparent 62%); mask: radial-gradient(circle, #000 18%, transparent 62%);
+}
+@keyframes spin { to { transform: rotate(1turn); } }
+.win-cats { position: relative; display: flex; gap: 4px; }
+.win-cats svg { width: 104px; height: 104px; animation: hop .6s .15s cubic-bezier(.3, 1.6, .5, 1) both, bob 2.6s 1s ease-in-out infinite; }
+.win-cats svg + svg { animation-delay: .27s, 2.3s; }
 @keyframes hop { from { transform: translateY(30px) scale(.6); opacity: 0; } }
-.win-stars { display: flex; gap: 8px; align-items: flex-end; }
-.win-stars svg { width: 54px; height: 54px; fill: var(--star-off); }
-.win-stars svg:nth-child(2) { width: 70px; height: 70px; }
-.win-stars svg.on { fill: var(--star); animation: starIn .5s cubic-bezier(.3, 1.8, .5, 1) both; animation-delay: calc(.35s + var(--i) * .18s); }
-@keyframes starIn { from { transform: scale(0) rotate(-60deg); } }
-.win h3 { font: 800 2.4rem/1 var(--font-display); margin: 0; }
-.win-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; margin-top: 6px; }
-.win-stats div { background: var(--surface); border-radius: 10px; padding: 12px 6px; box-shadow: 0 6px 16px -8px var(--shadow); display: grid; gap: 2px; }
-.win-stats span { font: 600 .75rem var(--font-display); color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-.win-stats b { font: 700 1.35rem var(--font-display); font-variant-numeric: tabular-nums; }
-.win-stats b svg { width: 20px; height: 20px; fill: var(--star); vertical-align: -2px; }
-.win-page > h3 + .win-stats { margin-top: 10px; }
-.win-tip { margin: 0 0 auto; color: var(--muted); font: 600 .95rem var(--font-display); min-height: 1.4em; }
-.win-btns { margin-top: auto; width: 100%; display: grid; gap: 10px; padding-top: 12px; }
+.win-stars { display: flex; gap: 6px; align-items: flex-end; margin-top: -8px; }
+.win-stars svg { width: 56px; height: 56px; fill: var(--star-off); filter: drop-shadow(0 3px 0 color-mix(in srgb, var(--ink) 12%, transparent)); }
+.win-stars svg:nth-child(2) { width: 74px; height: 74px; translate: 0 -10px; }
+.win-stars svg.on { fill: var(--star); animation: starIn .55s cubic-bezier(.3, 1.8, .5, 1) both; animation-delay: calc(.45s + var(--i) * .2s); }
+@keyframes starIn { from { transform: scale(0) rotate(-70deg); } }
+.win h3 { font: 800 2.5rem/1 var(--font-display); margin: 2px 0 0; animation: hop .5s .35s both; }
+.win-card { width: 100%; background: var(--surface); border-radius: 12px; box-shadow: 0 12px 30px -16px var(--shadow); padding: 14px; display: grid; gap: 14px; animation: rise .45s .5s ease-out both; }
+@keyframes rise { from { transform: translateY(16px); opacity: 0; } }
+.win-stats { display: grid; grid-template-columns: repeat(3, 1fr); }
+.win-stats div { position: relative; display: grid; justify-items: center; gap: 2px; padding: 2px 4px; }
+.win-stats div + div { border-left: 1.5px solid var(--line); }
+.win-stats .ic { width: 22px; height: 22px; fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.win-stats .ic.fill { fill: var(--star); stroke: none; }
+.win-stats b { font: 700 1.45rem/1.1 var(--font-display); font-variant-numeric: tabular-nums; }
+.win-stats span { font: 600 .72rem var(--font-display); color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.win-stats .new { position: absolute; top: -10px; right: 2px; background: var(--bad); color: #fff; font: 700 .65rem/1 var(--font-display); font-style: normal; padding: 3px 6px; border-radius: 4px; rotate: 8deg; text-transform: uppercase; }
+.win-goal { display: grid; gap: 6px; padding-top: 12px; border-top: 1.5px solid var(--line); }
+.wg-top { display: flex; justify-content: space-between; font: 600 .85rem var(--font-display); color: var(--muted); }
+.wg-top b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.wg-bar { height: 10px; border-radius: 5px; background: var(--cell); overflow: hidden; }
+.wg-bar i { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg, var(--star), var(--accent)); transition: width .9s 1s cubic-bezier(.3, 1, .4, 1); }
+.win-tip { margin: 0; color: var(--muted); font: 600 .95rem var(--font-display); min-height: 1.4em; }
+.win-btns { margin-top: auto; width: 100%; display: grid; gap: 10px; padding-top: 6px; }
 .win-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.win-btns .chunky { font-size: 1.25rem; padding: 16px; }
+.win-btns .chunky { font-size: 1.3rem; padding: 17px; }
+.confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 1; }
+.confetti i { position: absolute; top: -20px; width: 9px; height: 14px; border-radius: 2px; animation: fall var(--d) var(--w) cubic-bezier(.25, .5, .5, 1) forwards; opacity: 0; }
+@keyframes fall { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 100% { opacity: 0; transform: translate(var(--x), 105vh) rotate(var(--r)); } }
 
 /* shop */
 .shop-intro { margin: 0; color: var(--muted); font-weight: 700; text-align: center; }
@@ -624,25 +653,35 @@ body.no-ads .ad-banner { display: none; }
 </main>
 
 <section class="win" id="win" aria-label="Level complete" hidden>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
   <div class="win-page">
-    <p class="win-label" id="win-label">Level 1 cleared</p>
-    <div class="win-cats" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
-      <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+    <div class="win-ribbon"><span id="win-label">Level 1</span></div>
+    <div class="win-hero" aria-hidden="true">
+      <div class="rays"></div>
+      <div class="win-cats">
+        <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
+        <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+      </div>
     </div>
     <div class="win-stars" id="win-stars"></div>
     <h3 id="win-title">Purrfect!</h3>
-    <div class="win-stats">
-      <div><span>Time</span><b id="win-time">0:42</b></div>
-      <div><span>Best</span><b id="win-best">0:42</b></div>
-      <div><span>Earned</span><b id="win-gain">+0 ★</b></div>
+    <div class="win-card">
+      <div class="win-stats">
+        <div><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><b id="win-time">0:42</b><span>Time</span></div>
+        <div><svg viewBox="0 0 24 24" class="ic"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg><b id="win-best">0:42</b><span>Best</span><i class="new" id="win-new" hidden>New!</i></div>
+        <div><svg viewBox="0 0 24 24" class="ic fill"><use href="#star"/></svg><b id="win-gain">+0</b><span>Earned</span></div>
+      </div>
+      <div class="win-goal" id="win-goal">
+        <div class="wg-top"><span id="wg-name">Next theme</span><b id="wg-count">0 / 8</b></div>
+        <div class="wg-bar"><i id="wg-fill"></i></div>
+      </div>
     </div>
     <p class="win-tip" id="win-earn"></p>
     <div class="win-btns">
       <button class="chunky" id="win-next" type="button">Next level</button>
       <div class="win-row">
-        <button class="soft" id="win-replay" type="button">Play again</button>
-        <button class="soft" id="win-home" type="button">Home</button>
+        <button class="soft" id="win-replay" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Play again</button>
+        <button class="soft" id="win-home" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
       </div>
     </div>
   </div>
@@ -1136,18 +1175,45 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var gain = Math.max(0, got - prev);
     if (got > prev) book[n] = got;
     save.wins = (save.wins || 0) + 1;
+    var oldBest = save.times[tkey];
     if (!save.times[tkey] || play.elapsed < save.times[tkey]) save.times[tkey] = play.elapsed;
     save.wallet += gain;
     var s = ""; for (var k = 0; k < 3; k++) s += '<svg class="' + (k < got ? "on" : "") + '" style="--i:' + k + '" viewBox="0 0 24 24"><use href="#star"/></svg>';
     $("win-stars").innerHTML = s;
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
     $("win-time").textContent = fmt(play.elapsed); $("win-best").textContent = fmt(save.times[tkey]);
-    $("win-gain").innerHTML = "+" + gain + ' <svg viewBox="0 0 24 24"><use href="#star"/></svg>';
-    $("win-label").textContent = play.daily ? "Daily puzzle solved" : "Level " + play.level + " cleared";
-    $("win-earn").textContent = got === 3 ? (gain ? "Stars go to the shop" : "Already purrfect") :
+    $("win-new").hidden = !(oldBest && play.elapsed < oldBest);
+    $("win-label").textContent = play.daily ? "Daily clear" : "Level " + play.level + " clear";
+    countUp($("win-gain"), gain);
+    // Progress toward the next theme in the shop.
+    var goal = SKINS.filter(function (x) { return save.owned.indexOf(x.id) < 0; })[0];
+    $("wg-fill").style.width = "0";
+    if (goal) {
+      $("wg-name").textContent = "Next theme: " + goal.name;
+      $("wg-count").textContent = Math.min(save.wallet, goal.price) + " / " + goal.price;
+      var frac = Math.min(1, save.wallet / goal.price);
+      requestAnimationFrame(function () { requestAnimationFrame(function () { $("wg-fill").style.width = frac * 100 + "%"; }); });
+    } else { $("wg-name").textContent = "Every theme unlocked"; $("wg-count").textContent = save.wallet + " ★"; $("wg-fill").style.width = "100%"; }
+    confetti(got);
+    $("win-earn").textContent = got === 3 ? (gain ? "" : "Already purrfect") :
       "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
     persist();
+  }
+  function countUp(el, to) {
+    var n = 0; el.textContent = "+0";
+    if (!to) return;
+    setTimeout(function step() { n++; el.textContent = "+" + n; if (n < to) setTimeout(step, 180); }, 700);
+  }
+  function confetti(stars) {
+    var box = $("confetti"), cs = getComputedStyle(document.documentElement), html = "";
+    var cols = ["--accent", "--alt", "--star", "--sun-core", "--moon"].map(function (v) { return cs.getPropertyValue(v).trim(); });
+    for (var i = 0; i < 14 + stars * 14; i++) {
+      html += '<i style="left:' + Math.random() * 100 + "%;background:" + cols[i % cols.length] + ";--d:" + (1.6 + Math.random() * 1.4).toFixed(2) +
+        "s;--w:" + (Math.random() * .6).toFixed(2) + "s;--x:" + Math.round(Math.random() * 120 - 60) + "px;--r:" + Math.round(Math.random() * 720 - 360) + "deg" +
+        (i % 3 ? "" : ";border-radius:50%;width:10px;height:10px") + '"></i>';
+    }
+    box.innerHTML = html;
   }
   function startClock() {
     stopClock();

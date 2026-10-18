@@ -213,6 +213,14 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .sheet-stats div { background: var(--cell); border-radius: 8px; padding: 8px; text-align: center; }
 .sheet-stats b { display: block; font: 700 1.3rem var(--font-display); font-variant-numeric: tabular-nums; }
 .sheet-stats span { font-size: .75rem; font-weight: 700; color: var(--muted); }
+.slider { display: grid; grid-template-columns: 24px 64px 1fr 34px; align-items: center; gap: 10px; background: var(--cell); border-radius: 10px; padding: 12px 14px; }
+.slider svg { width: 22px; height: 22px; color: var(--accent); }
+.slider label { font: 600 1rem var(--font-display); }
+.slider output { font: 700 .9rem var(--font-display); color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.slider input { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; border-radius: 4px; margin: 0;
+  background: linear-gradient(var(--accent), var(--accent)) 0 / var(--p, 50%) 100% no-repeat, var(--line); outline: none; }
+.slider input::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); box-shadow: 0 2px 6px -2px var(--shadow); }
+.slider input::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--surface); border: 3px solid var(--accent); }
 .danger { background: none; border: 0; color: var(--bad); font: 600 .95rem var(--font-display); cursor: pointer; padding: 6px; justify-self: center; }
 
 /* level map: a winding trail, lowest level at the bottom */
@@ -472,8 +480,12 @@ body.no-ads .ad-banner { display: none; }
       <path d="M22 24 Q22 15 26 16 L37 27 L25 37 Z M78 24 Q78 15 74 16 L63 27 L75 37 Z" fill="var(--nose)" opacity=".8"/>
       <path d="M22 24 Q22 15 26 16 L37 27 L25 37 Z M78 24 Q78 15 74 16 L63 27 L75 37 Z" fill="url(#g-ear)"/>
       <ellipse cx="50" cy="58" rx="38" ry="33" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="3"/>
-      <path d="M50 26 v10 M39 28 l2.5 8 M61 28 l-2.5 8 M13 54 h7 M14.5 62 h6 M87 54 h-7 M85.5 62 h-6" stroke="var(--sun)" stroke-width="4.5" stroke-linecap="round" opacity=".85"/>
+      <path d="M13 54 h7 M14.5 62 h6 M87 54 h-7 M85.5 62 h-6" stroke="var(--sun)" stroke-width="4.5" stroke-linecap="round" opacity=".85"/>
       <ellipse cx="50" cy="58" rx="38" ry="33" fill="url(#g-shade)"/>
+      <g transform="translate(50 35)" fill="#fff3c2" stroke="var(--sun)" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M0 -10.5 L2.3 -6.4 L6.9 -7.9 L6.4 -3.2 L10.5 0 L6.4 3.2 L6.9 7.9 L2.3 6.4 L0 10.5 L-2.3 6.4 L-6.9 7.9 L-6.4 3.2 L-10.5 0 L-6.4 -3.2 L-6.9 -7.9 L-2.3 -6.4 Z" fill="#ffe27a"/>
+        <circle r="4.6"/>
+      </g>
       <ellipse cx="50" cy="71" rx="15" ry="10.5" fill="#fff" opacity=".38"/>
       <ellipse cx="33" cy="38" rx="13" ry="6" transform="rotate(-20 33 38)" fill="url(#g-gloss)"/>
       <ellipse cx="35" cy="56.5" rx="6.6" ry="7.6" fill="url(#g-eye)"/><ellipse cx="65" cy="56.5" rx="6.6" ry="7.6" fill="url(#g-eye)"/>
@@ -710,7 +722,7 @@ body.no-ads .ad-banner { display: none; }
     <button class="tab" data-to="home" type="button"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
     <button class="tab" data-to="levels" type="button"><svg viewBox="0 0 40 34"><use href="#paw"/></svg>Levels</button>
     <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
-    <button class="tab" id="t-settings" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>Settings</button>
+    <button class="tab" id="t-settings" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg>Settings</button>
   </div>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
@@ -722,13 +734,18 @@ body.no-ads .ad-banner { display: none; }
       <div><b id="s-stars">0</b><span>Stars won</span></div>
       <div><b id="s-perfect">0</b><span>Purrfect</span></div>
     </div>
-    <h4>Mistake marks</h4>
-    <div class="seg3" id="mistakes">
-      <button type="button" data-m="delay">Delayed</button>
-      <button type="button" data-m="instant">Right away</button>
-      <button type="button" data-m="off">Off</button>
+    <div class="slider">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="3" fill="currentColor"/><circle cx="17.5" cy="16" r="3" fill="currentColor"/></svg>
+      <label for="s-music">Music</label>
+      <input type="range" id="s-music" min="0" max="100" step="1">
+      <output id="s-music-v">40</output>
     </div>
-    <p class="note" id="mistakes-note">Rule breaks turn red after you stop tapping for a moment.</p>
+    <div class="slider">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <label for="s-sound">Sound</label>
+      <input type="range" id="s-sound" min="0" max="100" step="1">
+      <output id="s-sound-v">70</output>
+    </div>
     <h4>Ads</h4>
     <button class="soft" id="s-noads" type="button">Remove ads · $2.99</button>
     <button class="danger" id="reset" type="button">Reset all progress</button>
@@ -933,7 +950,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
   ];
   var $ = function (id) { return document.getElementById(id); };
-  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: "delay", noAds: false, wins: 0 };
+  var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, noAds: false, wins: 0, music: 40, sound: 70 };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
 
   function load() {
@@ -941,7 +958,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       var s = JSON.parse(localStorage.getItem("tango:v2"));
       if (s && s.best) {
         save = Object.assign(save, s);
-        save.daily = save.daily || {}; save.mistakes = save.mistakes || "delay";
+        save.daily = save.daily || {}; 
         // Earlier builds called the free skin "daybreak".
         save.owned = save.owned.map(function (id) { return id === "daybreak" ? "cozy" : id; });
         if (save.skin === "daybreak") save.skin = "cozy";
@@ -1027,25 +1044,26 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   };
 
   /* ---------- settings ---------- */
-  var NOTES = { delay: "Rule breaks turn red after you stop tapping for a moment.", instant: "Rule breaks turn red as soon as they happen.", off: "No red marks. You find out when the board is full." };
   function openSheet() {
     var perfect = 0; for (var k in save.best) if (save.best[k] === 3) perfect++;
     $("s-cleared").textContent = Object.keys(save.best).length;
     $("s-stars").textContent = totalStars(); $("s-perfect").textContent = perfect;
-    document.querySelectorAll("#mistakes button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.m === save.mistakes); });
-    $("mistakes-note").textContent = NOTES[save.mistakes];
+    ["music", "sound"].forEach(function (k) { var el = $("s-" + k); el.value = save[k]; paintSlider(el); });
     $("reset").textContent = "Reset all progress"; $("reset").dataset.armed = "";
     $("sheet").hidden = false;
   }
   $("sheet-close").onclick = function () { $("sheet").hidden = true; };
   $("sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
-  document.querySelectorAll("#mistakes button").forEach(function (b) {
-    b.onclick = function () { save.mistakes = b.dataset.m; persist(); openSheet(); };
+  function paintSlider(el) { el.style.setProperty("--p", el.value + "%"); $(el.id + "-v").textContent = el.value; }
+  ["music", "sound"].forEach(function (k) {
+    var el = $("s-" + k);
+    el.oninput = function () { save[k] = +el.value; paintSlider(el); Audio.volumes(); };
+    el.onchange = function () { persist(); if (k === "sound") Audio.sfx("place0"); };
   });
   $("reset").onclick = function () {
     // Two taps, since the viewer can't show a confirm dialog.
     if (!this.dataset.armed) { this.dataset.armed = "1"; this.textContent = "Tap again to erase everything"; return; }
-    save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: save.mistakes, noAds: save.noAds, wins: 0 };
+    save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, noAds: save.noAds, wins: 0, music: save.music, sound: save.sound };
     play = null; page = 0; applySkin(); applyAds(); persist(); $("sheet").hidden = true; renderHome(); toast("Progress reset");
   };
   $("h-play").onclick = function () { if (play && !play.done && !play.daily) resumeLevel(); else startLevel(nextLevel()); };
@@ -1118,9 +1136,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
     clearTimeout(errT);
-    if (save.mistakes === "off") {
-      shown = { cells: new Set(), edges: new Set() };
-    } else if (changed != null && !reveal && save.mistakes !== "instant") {
+    if (changed != null && !reveal) {
       // Keep mistakes already on screen that still stand; hold back new ones.
       shown.cells = new Set(Array.from(shown.cells).filter(function (i) { return i !== changed && res.badCells.has(i); }));
       shown.edges = new Set(Array.from(shown.edges).filter(function (j) {
@@ -1128,6 +1144,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }));
       if (res.badCells.size) errT = setTimeout(function () { if (play && !play.done) render(null, true); }, ERROR_DELAY);
     } else {
+      if (reveal && res.badCells.size) Audio.sfx("oops");
       shown = { cells: res.badCells, edges: res.badEdges };
     }
     cells.forEach(function (el, i) {
@@ -1163,6 +1180,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (play.done || play.givens[i] !== -1 || play.board[i] === v) return;
     play.history.push([i, play.board[i]]);
     play.board[i] = v;
+    Audio.sfx(v === -1 ? "clear" : "place" + v);
     render(i); persist();
   }
   function tap(i) { set(i, play.board[i] === -1 ? 0 : play.board[i] === 0 ? 1 : -1); }
@@ -1180,7 +1198,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (to !== null) cells[to].focus();
   }
   function win() {
-    play.done = true; stopClock();
+    play.done = true; stopClock(); Audio.sfx("win");
     var book = play.daily ? save.daily : save.best, n = play.daily ? play.daily : play.level, tkey = play.daily ? "d" + n : n;
     var got = T.stars(play.difficulty, play.elapsed), prev = book[n] || 0;
     var gain = Math.max(0, got - prev);
@@ -1206,6 +1224,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       requestAnimationFrame(function () { requestAnimationFrame(function () { $("wg-fill").style.width = frac * 100 + "%"; }); });
     } else { $("wg-name").textContent = "Every theme unlocked"; $("wg-count").textContent = save.wallet + " ★"; $("wg-fill").style.width = "100%"; }
     confetti(got);
+    for (var q = 0; q < got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
     $("win-earn").textContent = got === 3 ? (gain ? "" : "Already purrfect") :
       "Beat " + fmt(T.STAR_TIMES[play.difficulty][Math.max(prev, got) >= 2 ? 0 : 1]) + " for another star";
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
@@ -1312,13 +1331,86 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       card.querySelector("button").onclick = function () {
         if (!owned) {
           if (save.wallet < s.price) { toast("You need " + (s.price - save.wallet) + " more ★"); return; }
-          save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked!");
+          save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked!"); Audio.sfx("coin");
         }
         save.skin = s.id; applySkin(); persist(); renderStore();
       };
       box.appendChild(card);
     });
   }
+
+  /* ---------- sound and music ----------
+     Everything is synthesized with Web Audio, so there are no files to load.
+     iOS only allows audio after a tap, so the context starts on the first touch. */
+  var Audio = (function () {
+    var ctx = null, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
+    function ensure() {
+      if (!ctx) {
+        var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+        ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination);
+        musicBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus.connect(master); sfxBus.connect(master);
+        volumes();
+      }
+      if (ctx.state === "suspended") ctx.resume();
+      return ctx;
+    }
+    function volumes() {
+      if (!ctx) return;
+      var m = (save.music || 0) / 100, f = (save.sound || 0) / 100;
+      musicBus.gain.setTargetAtTime(m * m * .5, ctx.currentTime, .05);
+      sfxBus.gain.setTargetAtTime(f * f * .9, ctx.currentTime, .02);
+      if (m > 0) startMusic(); else stopMusic();
+    }
+    function note(bus, freq, t, dur, type, vol, glideTo) {
+      var o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = type || "sine"; o.frequency.setValueAtTime(freq, t);
+      if (glideTo) o.frequency.exponentialRampToValueAtTime(glideTo, t + dur * .8);
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol || .3, t + .012);
+      g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      o.connect(g); g.connect(bus); o.start(t); o.stop(t + dur + .05);
+    }
+    var SFX = {
+      place0: function (t) { note(sfxBus, 620, t, .14, "sine", .35, 940); },
+      place1: function (t) { note(sfxBus, 520, t, .18, "triangle", .3, 390); },
+      clear: function (t) { note(sfxBus, 300, t, .08, "sine", .2, 200); },
+      tap: function (t) { note(sfxBus, 900, t, .05, "sine", .12); },
+      oops: function (t) { note(sfxBus, 330, t, .12, "square", .06); note(sfxBus, 262, t + .11, .16, "square", .06); },
+      coin: function (t) { note(sfxBus, 988, t, .1, "square", .08); note(sfxBus, 1319, t + .08, .3, "square", .08); },
+      star: function (t, i) { note(sfxBus, [784, 988, 1175][i || 0], t, .4, "triangle", .3); },
+      win: function (t) { [523, 659, 784, 1047].forEach(function (f, k) { note(sfxBus, f, t + k * .09, .35, "triangle", .28); }); }
+    };
+    function sfx(name, arg) {
+      if (!save.sound || !ensure()) return;
+      SFX[name](ctx.currentTime + .01, arg);
+    }
+    // A slow, cozy loop: C - Am - F - G, soft arpeggios over a sine bass.
+    var CHORDS = [[261.6, 329.6, 392], [220, 261.6, 329.6], [174.6, 220, 261.6], [196, 246.9, 293.7]];
+    var MELODY = [659.3, 0, 587.3, 523.3, 0, 440, 523.3, 0, 587.3, 0, 523.3, 440, 392, 0, 440, 0];
+    var BEAT = 60 / 84 / 2;
+    function schedule() {
+      while (nextBeat < ctx.currentTime + .35) {
+        var chord = CHORDS[Math.floor(step / 8) % 4], k = step % 8;
+        if (k === 0) note(musicBus, chord[0] / 2, nextBeat, BEAT * 7, "sine", .28);
+        note(musicBus, chord[[0, 1, 2, 1][k % 4]] * (k >= 4 ? 2 : 1), nextBeat, BEAT * 1.8, "triangle", .07);
+        var mel = MELODY[step % 32 < 16 ? step % 16 : (step + 5) % 16];
+        if (step % 2 === 0 && mel && step % 64 >= 16) note(musicBus, mel, nextBeat, BEAT * 3, "sine", .09);
+        nextBeat += BEAT; step++;
+      }
+    }
+    function startMusic() {
+      if (timer || !ctx || document.hidden) return;
+      nextBeat = ctx.currentTime + .1; timer = setInterval(schedule, 120);
+    }
+    function stopMusic() { clearInterval(timer); timer = null; }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) stopMusic(); else if (ctx && save.music) startMusic(); });
+    // First touch unlocks audio; button taps get a soft click.
+    document.addEventListener("pointerdown", function () { if (ensure()) volumes(); }, { once: false, passive: true });
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("button");
+      if (b && !b.classList.contains("cell") && !b.disabled) sfx("tap");
+    });
+    return { sfx: sfx, volumes: volumes };
+  })();
 
   /* ---------- boot ---------- */
   function buildTiles() {

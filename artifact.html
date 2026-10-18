@@ -1130,23 +1130,16 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       boardEl.appendChild(m); marks.push(m);
     });
   }
-  // New mistakes show only after a pause, so tapping through Sunny to reach Luna never flashes red.
-  var ERROR_DELAY = 1200, shown = { cells: new Set(), edges: new Set() }, errT = null;
-  function render(changed, reveal) {
+  // Broken rules (three in a row, more than 3 of a cat in a line, = or × not respected) show at once.
+  // A cat that is wrong but breaks no rule stays quiet; a full board that isn't the answer gets a nudge.
+  var shown = { cells: new Set(), edges: new Set() };
+  function render(changed) {
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
-    clearTimeout(errT);
-    if (changed != null && !reveal) {
-      // Keep mistakes already on screen that still stand; hold back new ones.
-      shown.cells = new Set(Array.from(shown.cells).filter(function (i) { return i !== changed && res.badCells.has(i); }));
-      shown.edges = new Set(Array.from(shown.edges).filter(function (j) {
-        var e = play.edges[j]; return e.a !== changed && e.b !== changed && res.badEdges.has(j);
-      }));
-      if (res.badCells.size) errT = setTimeout(function () { if (play && !play.done) render(null, true); }, ERROR_DELAY);
-    } else {
-      if (reveal && res.badCells.size) Audio.sfx("oops");
-      shown = { cells: res.badCells, edges: res.badEdges };
-    }
+    if (changed != null && res.badCells.size > shown.cells.size) Audio.sfx("oops");
+    shown = { cells: res.badCells, edges: res.badEdges };
+    var full = play.board.every(function (v) { return v !== -1; });
+    if (changed != null && full && !res.solved) toast("Not quite! Look for the red squares");
     cells.forEach(function (el, i) {
       var v = play.board[i], given = play.givens[i] !== -1;
       el.classList.toggle("given", given);

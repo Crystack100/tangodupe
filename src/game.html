@@ -238,54 +238,79 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .node svg.lock { width: 24px; height: 24px; fill: var(--muted); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* puzzle */
-.meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.timer { font: 700 1.7rem var(--font-display); font-variant-numeric: tabular-nums; display: flex; align-items: center; gap: 6px; }
-.timer svg { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 2.6; stroke-linecap: round; }
-.goals {
-  display: grid; justify-items: center; gap: 5px; padding: 7px 12px 8px; border-radius: 8px;
-  background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow);
+/* puzzle: chips up top, rule strip, a bright tiled board, round tool buttons */
+.g-head { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding-top: 10px; }
+.g-head h2 { margin: 0; text-align: center; font: 700 1.35rem/1 var(--font-display); }
+.g-icon { width: 44px; height: 44px; border: 0; background: none; padding: 0; display: grid; place-items: center; cursor: pointer; color: var(--ink); }
+.g-icon svg { width: 26px; height: 26px; fill: none; stroke: currentColor; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
+.chips { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px; }
+.chips > :last-child { justify-self: end; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 6px; border-radius: 10px; background: var(--surface);
+  box-shadow: 0 4px 12px -6px var(--shadow); font: 700 1.05rem var(--font-display); font-variant-numeric: tabular-nums; justify-self: start;
 }
-.goals .gs { display: flex; gap: 2px; }
-.goals .gs svg { width: 20px; height: 20px; fill: var(--star); transition: fill .3s; }
-.goals .gs svg.off { fill: var(--star-off); animation: starLose .45s ease-out; }
-.goals .gbar { width: 66px; height: 5px; border-radius: 3px; background: var(--line); overflow: hidden; }
-.goals .gbar i { display: block; height: 100%; border-radius: 3px; background: var(--star); transition: width 1s linear; }
-.goals .gl { font: 700 .72rem/1 var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums; }
-.goals.last .gbar { display: none; }
+.chip svg { width: 30px; height: 30px; }
+.chip .sw { width: 24px; height: 24px; }
+.chip b { color: #4caf6a; }
+.goals { display: grid; justify-items: center; gap: 2px; }
+.goals .gs { display: flex; gap: 1px; align-items: flex-end; }
+.goals .gs svg { width: 24px; height: 24px; fill: var(--star); transition: fill .3s; filter: drop-shadow(0 2px 0 color-mix(in srgb, var(--sun) 45%, transparent)); }
+.goals .gs svg:nth-child(2) { width: 30px; height: 30px; }
+.goals .gs svg.off { fill: var(--star-off); filter: none; animation: starLose .45s ease-out; }
+.goals .gbar { display: none; }
+.goals .gl { font: 700 .7rem/1 var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums; }
 @keyframes starLose { 0% { transform: scale(1.25) rotate(0); } 60% { transform: scale(.8) rotate(-12deg); } 100% { transform: none; } }
+.rule-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; border-radius: 12px; background: var(--surface);
+  box-shadow: 0 6px 16px -10px var(--shadow);
+}
+.rule-strip div { background: var(--cell); border-radius: 8px; padding: 7px 4px; text-align: center; font: 500 .72rem/1.25 var(--font-display); color: var(--muted); }
+.rule-strip b { display: block; font: 800 .95rem/1.2 var(--font-display); color: var(--ink); }
 .board-wrap {
-  position: relative; background: var(--surface); border-radius: 12px; padding: 12px;
+  position: relative; background: var(--surface); border-radius: 14px; padding: 10px;
   box-shadow: 0 14px 34px -18px var(--shadow);
 }
 .board {
   position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr));
   aspect-ratio: 1; max-width: 100%; gap: 5px;
 }
+/* Beveled tiles, tinted by the cat sitting on them. */
 .cell {
-  position: relative; border: 0; padding: 0; margin: 0; background: var(--cell); border-radius: 6px;
-  cursor: pointer; min-width: 0; min-height: 0; box-shadow: none;
+  --tile: var(--cell);
+  position: relative; border: 0; padding: 0; margin: 0; border-radius: 7px; cursor: pointer; min-width: 0; min-height: 0;
+  background: var(--tile);
+  box-shadow: inset 0 -4px 0 color-mix(in srgb, var(--tile) 80%, #000), inset 0 2px 0 color-mix(in srgb, var(--tile) 55%, #fff);
 }
-.cell.given { background: var(--given); cursor: default; box-shadow: none; }
+.cell.v0 { --tile: color-mix(in srgb, var(--sun-core) 55%, var(--surface)); }
+.cell.v1 { --tile: color-mix(in srgb, var(--moon) 55%, var(--surface)); }
+.cell.given.v0 { --tile: color-mix(in srgb, var(--sun-core) 80%, var(--sun)); }
+.cell.given.v1 { --tile: color-mix(in srgb, var(--moon) 85%, var(--moon-line)); }
+.cell.given { cursor: default; }
 .cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); box-shadow: inset 0 0 0 2.5px var(--bad); animation: shake .3s; }
 @keyframes shake { 25% { translate: -2px 0; } 75% { translate: 2px 0; } }
-.cell svg { position: absolute; left: 8%; top: 10%; width: 84%; height: 84%; }
-.cell.pop svg { animation: pop .28s cubic-bezier(.3, 1.8, .5, 1); }
-@keyframes pop { from { transform: scale(.3) rotate(-12deg); } }
+/* Cats sit a little larger than their tile so they pop out of the board. */
+.cell svg {
+  position: absolute; left: -7%; top: -16%; width: 114%; height: 114%; z-index: 1; pointer-events: none;
+  filter: drop-shadow(0 3px 2px rgba(40, 20, 10, .28));
+}
+.cell.pop svg { animation: pop .3s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes pop { from { transform: scale(.3) translateY(20%); } }
 .mark {
   position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
   background: var(--surface); box-shadow: 0 2px 6px -3px var(--shadow); display: grid; place-items: center;
-  font: 700 15px/1 var(--font-display); color: var(--accent); pointer-events: none; z-index: 2;
+  font: 800 15px/1 var(--font-display); color: var(--accent); pointer-events: none; z-index: 3;
 }
 .mark.bad { color: var(--surface); background: var(--bad); box-shadow: none; }
-.actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.rules { background: var(--surface); border-radius: 10px; padding: 14px 18px; box-shadow: 0 6px 16px -8px var(--shadow); }
-.rules summary { font: 600 1.05rem var(--font-display); cursor: pointer; }
-.rules ul { margin: 10px 0 2px; padding: 0; list-style: none; display: grid; gap: 8px; color: var(--muted); font-weight: 600; }
-.rules li { display: flex; gap: 10px; align-items: center; }
-.rules li svg { width: 30px; height: 30px; flex: none; }
-.rules li b { color: var(--ink); }
-.rules .sym { width: 30px; flex: none; text-align: center; font: 700 1.1rem var(--font-display); color: var(--accent); }
+.actions { display: flex; justify-content: center; gap: 34px; padding-top: 4px; }
+.rbtn { border: 0; background: none; padding: 0; cursor: pointer; display: grid; justify-items: center; gap: 4px; font: 600 .82rem var(--font-display); color: var(--muted); }
+.rbtn .rb {
+  position: relative; width: 62px; height: 62px; border-radius: 50%; background: var(--surface); color: var(--ink); display: grid; place-items: center;
+  box-shadow: 0 8px 18px -8px var(--shadow), inset 0 -3px 0 color-mix(in srgb, var(--surface) 88%, #000); transition: transform .08s;
+}
+.rbtn:active .rb { transform: scale(.92); }
+.rbtn svg { width: 28px; height: 28px; }
+.rbtn:disabled { opacity: .45; cursor: default; }
+.rbtn .badge { position: absolute; top: -6px; right: -12px; background: #e5484d; color: #fff; font: 700 .68rem/1 var(--font-display); font-style: normal; padding: 4px 6px; border-radius: 999px; box-shadow: 0 2px 0 #b33035; }
 
 /* win */
 .win {
@@ -427,14 +452,14 @@ body.no-ads .ad-banner { display: none; }
   <defs>
     <!-- Neutral light and shade, laid over each cat's own fur color so they look round in every skin. -->
     <radialGradient id="g-shade" cx=".36" cy=".28" r=".85">
-      <stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/>
-      <stop offset=".72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".42" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/>
     </radialGradient>
     <radialGradient id="g-ear" cx=".4" cy=".2" r=".95">
       <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/>
     </radialGradient>
     <linearGradient id="g-gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="g-eye" cx=".38" cy=".3" r=".75">
       <stop offset="0" stop-color="#6b5566"/><stop offset=".55" stop-color="#2b1b16"/><stop offset="1" stop-color="#0d0705"/>
@@ -609,33 +634,29 @@ body.no-ads .ad-banner { display: none; }
 
   <!-- PUZZLE -->
   <section id="game" class="screen" aria-label="Puzzle" hidden>
-    <div class="status">
-      <button class="round" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <div class="g-head">
+      <button class="g-icon" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <h2 id="g-title">Level 1</h2>
-      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+      <span class="g-icon" aria-hidden="true"></span>
     </div>
-    <div class="meta">
-      <span class="timer"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><span id="timer" aria-label="Time">0:00</span></span>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg><span id="g-filled" aria-label="Squares filled"><b>0</b>/36</span></span>
       <div class="goals" id="goals"></div>
+      <span class="chip"><svg class="sw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="2"/><path d="M12 9.5v4l2.6 1.8" stroke="var(--brand)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 2.5h4M12 2.5v3" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/></svg><span id="timer" aria-label="Time">0:00</span></span>
+    </div>
+    <div class="rule-strip">
+      <div><b>3 + 3</b>of each cat per row &amp; column</div>
+      <div><b>No 3</b>of the same cat in a row</div>
+      <div><b>= &#215;</b>same cat &#183; different cat</div>
     </div>
     <div class="board-wrap">
       <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>
     </div>
     <div class="actions">
-      <button class="soft" id="undo" type="button">Undo</button>
-      <button class="soft" id="hint" type="button">Hint <small>+15s</small></button>
-      <button class="soft" id="clear" type="button">Clear</button>
+      <button class="rbtn" id="undo" type="button"><span class="rb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>Undo</button>
+      <button class="rbtn" id="hint" type="button"><span class="rb"><svg viewBox="0 0 24 24"><path d="M12 2.5a7 7 0 0 0-4 12.7V18h8v-2.8A7 7 0 0 0 12 2.5z" fill="#ffd34d" stroke="#e3a21c" stroke-width="1.6"/><path d="M9 20.5h6" stroke="#9b8a7e" stroke-width="2.4" stroke-linecap="round"/><path d="M9.5 7.5a3 3 0 0 1 2.5-1.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><i class="badge">+15s</i></span>Hint</button>
+      <button class="rbtn" id="clear" type="button"><span class="rb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></span>Clear</button>
     </div>
-    <details class="rules" id="rules">
-      <summary>How to play</summary>
-      <ul>
-        <li><svg viewBox="0 0 100 100"><use href="#sun"/></svg><span>Tap a square for <b>Sunny</b>, tap again for <b>Luna</b>, once more to clear.</span></li>
-        <li><span class="sym">3+3</span><span>Every row and column has <b>3 of each cat</b>.</span></li>
-        <li><span class="sym">≤2</span><span><b>No more than 2</b> of the same cat side by side.</span></li>
-        <li><span class="sym">=</span><span>Cats joined by <b>=</b> are the same cat.</span></li>
-        <li><span class="sym">×</span><span>Cats joined by <b>×</b> are different cats.</span></li>
-      </ul>
-    </details>
     <div class="ad-banner" id="ad-banner"><span>Ad</span>Banner ad space (AdMob in the app)<button type="button" class="ad-x" id="ad-banner-x">Remove ads</button></div>
   </section>
 </main>
@@ -930,6 +951,7 @@ body.no-ads .ad-banner { display: none; }
     cells.forEach(function (el, i) {
       var v = play.board[i], given = play.givens[i] !== -1;
       el.classList.toggle("given", given);
+      el.classList.toggle("v0", v === 0); el.classList.toggle("v1", v === 1);
       el.classList.toggle("bad", shown.cells.has(i));
       el.innerHTML = v === -1 ? "" : '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
       el.setAttribute("aria-label", "Row " + (Math.floor(i / N) + 1) + ", column " + (i % N + 1) + ": " +
@@ -937,6 +959,7 @@ body.no-ads .ad-banner { display: none; }
       el.classList.toggle("pop", i === changed);
     });
     marks.forEach(function (m, j) { m.classList.toggle("bad", shown.edges.has(j)); });
+    $("g-filled").firstChild.textContent = play.board.filter(function (v) { return v !== -1; }).length;
     $("undo").disabled = play.done || !play.history.length;
     $("hint").disabled = $("clear").disabled = play.done;
     $("win").hidden = !play.done;

@@ -17,25 +17,17 @@
 <style>
 /* Layout: a phone app shell. Top status bar, one screen at a time (home, level map, shop, puzzle),
    and a bottom tab bar. The cats on the board are the hero.
-   Skins: "cozy" follows the system light/dark setting; bought skins are fixed looks set by data-skin. */
+   Skins: "cozy" is always the light look; bought skins are fixed looks set by data-skin. */
 :root {
-  --bg: #faf3ee; --bg2: #faf3ee;
-  --surface: #ffffff; --cell: #fcefe6; --given: #f6e2d6; --line: #efdfd3;
-  --ink: #5b3f33; --muted: #a08a7e; --accent: #f5a35b; --on-accent: #ffffff; --alt: #6fb6dc; --brand: #7b5440;
+  --bg: #f6f5f3; --bg2: #f6f5f3;
+  --surface: #ffffff; --cell: #ffffff; --given: #f1efec; --line: #e9e6e2;
+  --ink: #3f3a36; --muted: #958c86; --accent: #f5a35b; --on-accent: #ffffff; --alt: #6fb6dc; --brand: #6b4f40;
   --sun: #e38b3e; --sun-core: #ffc583; --moon: #a9c3d4; --eye2-base: #34495a;
-  --star: #ffc54d; --star-off: #eee0d6;
+  --star: #ffc54d; --star-off: #e7e3df;
   --bad: #e8676b; --bad-soft: rgba(232, 103, 107, .16);
-  --shadow: rgba(120, 84, 64, .2);
+  --shadow: rgba(60, 50, 40, .14);
   --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
   --font-body: "Fredoka", "Avenir Next Rounded", system-ui, -apple-system, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #1c1917; --bg2: #1c1917; --surface: #282421; --cell: #312c28; --given: #3b3530; --line: #4a423b;
-    --ink: #f6eee8; --muted: #b9aca2; --accent: #f5a35b; --on-accent: #2a1a10; --alt: #6fb6dc; --brand: #f3d6bf;
-    --sun: #e38b3e; --sun-core: #ffc583; --moon: #a9c3d4; --eye2-base: #34495a; --star: #ffc54d; --star-off: #4a423b;
-    --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
-  }
 }
 :root[data-theme="dark"] {
   --bg: #1c1917; --bg2: #1c1917; --surface: #282421; --cell: #312c28; --given: #3b3530; --line: #4a423b;
@@ -400,6 +392,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .cell.given.v1 { --tile: color-mix(in srgb, var(--moon) 85%, var(--moon-line)); }
 .cell.given { cursor: default; }
 .cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); box-shadow: inset 0 0 0 2.5px var(--bad); animation: shake .3s; }
+
 @keyframes shake { 25% { translate: -2px 0; } 75% { translate: 2px 0; } }
 /* Cats sit a little larger than their tile so they pop out of the board. */
 .cell svg {
@@ -416,6 +409,16 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .mark svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 3.6; stroke-linecap: round; }
 .mark.eq { color: #2b7fc0; } .mark.op { color: #e0572b; }
 .mark.bad { color: #fff; background: var(--bad); border-color: #a5262b; box-shadow: 0 2px 0 #a5262b, 0 0 0 4px rgb(232 72 77 / .3); }
+/* Clean board: white card, flat white squares, grey for the starting cats, small crisp signs. */
+.board-wrap { padding: 8px; border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 10px 28px -16px var(--shadow); }
+.board { gap: 3px; }
+.cell, .cell.v0, .cell.v1 { --tile: var(--cell); border-radius: 10px; box-shadow: inset 0 0 0 1px var(--line); }
+.cell.given, .cell.given.v0, .cell.given.v1 { --tile: var(--given); box-shadow: none; }
+.cell svg { left: 6%; top: 3%; width: 88%; height: 88%; filter: drop-shadow(0 2px 1.5px rgb(40 30 20 / .22)); }
+.mark { width: 22px; height: 22px; margin: -11px 0 0 -11px; border: 0; border-radius: 50%; background: var(--surface); box-shadow: none; color: #55504c; }
+.mark.eq, .mark.op { color: #55504c; }
+.mark svg { width: 13px; height: 13px; stroke-width: 3.6; }
+.mark.bad { color: var(--bad); background: #ffe3e3; border: 0; box-shadow: 0 0 0 2px #ffe3e3; }
 .actions { display: flex; justify-content: center; gap: 34px; padding-top: 4px; }
 .rbtn { border: 0; background: none; padding: 0; cursor: pointer; display: grid; justify-items: center; gap: 4px; font: 600 .82rem var(--font-display); color: var(--muted); }
 .rbtn .rb {
@@ -705,9 +708,6 @@ body.no-ads .ad-banner { display: none; }
   html.on-home #scroll { overflow: hidden; }
   html.on-home #home { height: calc(min(880px, 100vh - 48px) - 110px); }
   .tabs { border-radius: 0 0 46px 46px; padding-bottom: 18px; }
-}
-@media (min-width: 600px) and (min-height: 640px) and (prefers-color-scheme: dark) {
-  html:not([data-theme="light"]) { background: #121012; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -1214,7 +1214,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   var T = TangoCore, N = T.N, PAGE = 20, HINT_COST = 15;
   // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
-    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#a08a7e", bg: "#faf3ee", surface: "#ffffff", cell: "#fcefe6", ink: "#5b3f33", accent: "#f5a35b", "on-accent": "#ffffff", line: "#efdfd3", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
+    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
     { id: "midnight", name: "Midnight", tag: "Starry night", price: 8, v: { "eye2-base": "initial", muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
     { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { "eye2-base": "initial", muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
     { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { "eye2-base": "initial", muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },

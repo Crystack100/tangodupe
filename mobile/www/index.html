@@ -518,10 +518,19 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .lg-rows li.me { background: color-mix(in srgb, var(--accent) 22%, var(--surface)); box-shadow: inset 0 0 0 2px var(--accent); }
 .lg-rows li.me .n { color: var(--ink); }
 .lg-rows li.medal .n { color: #d39a12; font-weight: 800; }
-.league .lg-rows li.me { animation: climb .9s 1.1s cubic-bezier(.3, 1.2, .4, 1) both; }
-.league .lg-rows li.passed { animation: sink .9s 1.1s cubic-bezier(.3, 1.2, .4, 1) both; }
-@keyframes climb { from { transform: translateY(var(--from, 0)); } }
-@keyframes sink { from { transform: translateY(calc(-100% - 4px)); } }
+.league .lg-rows { overflow: visible; }
+/* Your row lifts off its old spot, slides up over the players you passed, then drops into place. */
+.league .lg-rows li.me { position: relative; z-index: 2; animation: climb 1.7s 1.2s cubic-bezier(.5, 0, .25, 1) both; }
+.league .lg-rows li.passed { animation: sink 1.7s 1.2s cubic-bezier(.5, 0, .25, 1) both; }
+@keyframes climb {
+  0% { transform: translateY(var(--from, 0)); }
+  18% { transform: translateY(var(--from, 0)) scale(1.06); box-shadow: 0 14px 22px -8px rgb(0 0 0 / .35), 0 3px 0 var(--acc-dk); }
+  78% { transform: translateY(0) scale(1.06); box-shadow: 0 14px 22px -8px rgb(0 0 0 / .35), 0 3px 0 var(--acc-dk); }
+  90% { transform: translateY(0) scale(.98); }
+  100% { transform: none; }
+}
+@keyframes sink { 0%, 22% { transform: translateY(calc(-100% - 4px)); } 75%, 100% { transform: none; } }
+.lg-rank-pop { animation: pop .35s cubic-bezier(.3, 1.8, .5, 1); }
 .lg-more { font: 600 .8rem var(--font-display); color: var(--accent); text-align: center; }
 #board-sheet { z-index: 27; }
 .lb-sheet .lb-all { position: relative; max-height: 62svh; overflow-y: auto; }
@@ -1625,6 +1634,18 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     $("lg-rows").innerHTML = html;
     var mine = $("lg-rows").querySelector(".me");
     if (mine) mine.style.setProperty("--from", "calc(" + Math.min(climbed, 3 - (me - start)) + " * (100% + 4px))");
+    // Count the rank number down while your row slides up.
+    clearInterval(showLeague.t);
+    if (mine && climbed) {
+      var n = old + 1, num = mine.querySelector(".n"), head = $("lg-rank");
+      num.textContent = head.textContent = "#" + n;
+      setTimeout(function () {
+        showLeague.t = setInterval(function () {
+          n--; num.textContent = head.textContent = "#" + n; Audio.sfx("tap");
+          if (n <= me + 1) { clearInterval(showLeague.t); head.classList.remove("lg-rank-pop"); head.offsetWidth; head.classList.add("lg-rank-pop"); Audio.sfx("coin"); }
+        }, Math.max(60, 950 / climbed));
+      }, 1500);
+    }
   }
   $("league").onclick = function () {
     var table = leagueTable(totalStars());

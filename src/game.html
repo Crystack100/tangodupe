@@ -272,8 +272,12 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; border-radius: 12px; background: var(--surface);
   box-shadow: 0 6px 16px -10px var(--shadow);
 }
-.rule-strip div { background: var(--cell); border-radius: 8px; padding: 7px 4px; text-align: center; font: 500 .72rem/1.25 var(--font-display); color: var(--muted); }
-.rule-strip b { display: block; font: 800 .95rem/1.2 var(--font-display); color: var(--ink); }
+.rule-strip div { display: flex; align-items: center; gap: 5px; background: var(--cell); border-radius: 8px; padding: 6px 5px; font: 600 .68rem/1.2 var(--font-display); color: var(--ink); }
+.rule-strip svg { width: 36px; height: 36px; flex: none; }
+.rule-strip .rt { fill: var(--surface); stroke: color-mix(in srgb, var(--line) 80%, var(--ink) 10%); stroke-width: .8; }
+.rule-strip .rt.t0 { fill: color-mix(in srgb, var(--sun-core) 55%, var(--surface)); }
+.rule-strip .rt.t1 { fill: color-mix(in srgb, var(--moon) 55%, var(--surface)); }
+.rule-strip .rs { font: 800 13px var(--font-display); fill: var(--accent); text-anchor: middle; }
 .board-wrap {
   position: relative; background: var(--surface); border-radius: 14px; padding: 10px;
   box-shadow: 0 14px 34px -18px var(--shadow);
@@ -657,9 +661,9 @@ body.no-ads .ad-banner { display: none; }
       <span class="chip"><svg class="sw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="2"/><path d="M12 9.5v4l2.6 1.8" stroke="var(--brand)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 2.5h4M12 2.5v3" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/></svg><span id="timer" aria-label="Time">0:00</span></span>
     </div>
     <div class="rule-strip">
-      <div><b>3 + 3</b>of each cat per row &amp; column</div>
-      <div><b>No 3</b>of the same cat in a row</div>
-      <div><b>= &#215;</b>same cat &#183; different cat</div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="6.5" width="15" height="15"/><rect x="15.3" y="8.0" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="14.3" y="6.5" width="15" height="15"/><rect x="29.6" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="6.5" width="15" height="15"/><rect x="1.0" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="0.0" y="20.8" width="15" height="15"/><rect x="15.3" y="22.3" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="20.8" width="15" height="15"/><rect x="29.6" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="28.6" y="20.8" width="15" height="15"/></svg><span>3 of each per row &amp; col</span></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="14.0" width="15" height="15"/><rect x="15.3" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="14.0" width="15" height="15"/><rect x="29.6" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="14.0" width="15" height="15"/><path d="M6 10 38 34M38 10 6 34" stroke="var(--bad)" stroke-width="2.6" opacity=".9" stroke-linecap="round"/></svg><span>No 3 in a row</span></div>
+      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="2.5" width="16" height="16"/><rect x="29" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="28" y="2.5" width="16" height="16"/><rect x="1" y="26" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="24.5" width="16" height="16"/><rect x="29" y="26" width="14" height="14" rx="2.5" class="rt t1"/><use href="#moon" x="28" y="24.5" width="16" height="16"/><text x="22" y="15.5" class="rs">=</text><text x="22" y="37.5" class="rs">&#215;</text></svg><span>= same<br>&#215; opposite</span></div>
     </div>
     <div class="board-wrap">
       <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>

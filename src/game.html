@@ -7,13 +7,13 @@
    and a bottom tab bar. The cats on the board are the hero.
    Skins: "cozy" follows the system light/dark setting; bought skins are fixed looks set by data-skin. */
 :root {
-  --bg: #fde8da; --bg2: #f1def6;
-  --surface: #fffaf5; --cell: #fff0e4; --given: #f7dccb; --line: #efcdb8;
-  --ink: #4a2e2a; --muted: #8c6a62; --accent: #ff8a5c; --on-accent: #ffffff; --alt: #8e9bef; --brand: #7a4a2e;
-  --sun: #d9761f; --sun-core: #ffb35c; --moon: #5d5878;
-  --star: #ffb92e; --star-off: #efcdb8;
-  --bad: #e5484d; --bad-soft: rgba(229, 72, 77, .16);
-  --shadow: rgba(74, 46, 42, .22);
+  --bg: #faf3ee; --bg2: #faf3ee;
+  --surface: #ffffff; --cell: #fcefe6; --given: #f6e2d6; --line: #efdfd3;
+  --ink: #5b3f33; --muted: #a08a7e; --accent: #f5a35b; --on-accent: #ffffff; --alt: #9caaf3; --brand: #7b5440;
+  --sun: #e38b3e; --sun-core: #ffc583; --moon: #aab5f4; --eye2-base: #4d4a86;
+  --star: #ffc54d; --star-off: #eee0d6;
+  --bad: #e8676b; --bad-soft: rgba(232, 103, 107, .16);
+  --shadow: rgba(120, 84, 64, .2);
   --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
   --font-body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -21,42 +21,42 @@
   :root:not([data-theme="light"]) {
     --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
     --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14; --alt: #8390e6; --brand: #f6d2b8;
-    --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
+    --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --eye2-base: initial; --star: #ffcc4d; --star-off: #4b3d5a;
     --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --bg: #1d1626; --bg2: #2c1d33; --surface: #2a2133; --cell: #33293f; --given: #3f324d; --line: #4b3d5a;
   --ink: #f8ece6; --muted: #c4afbd; --accent: #ff9a6c; --on-accent: #2a1a14; --alt: #8390e6; --brand: #f6d2b8;
-  --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --star: #ffcc4d; --star-off: #4b3d5a;
+  --sun: #f08a32; --sun-core: #ffbf70; --moon: #9a93c2; --eye2-base: initial; --star: #ffcc4d; --star-off: #4b3d5a;
   --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
 }
 /* Shop skins come after the system blocks so they win when equipped. */
-:root[data-skin="midnight"] { --alt: #8e9bef; --brand: #ffe3a1;
+:root[data-skin="midnight"] { --eye2-base: initial; --alt: #8e9bef; --brand: #ffe3a1;
   --bg: #0f1230; --bg2: #24184a; --surface: #1a1d42; --cell: #212553; --given: #2c3166; --line: #383e7a;
   --ink: #eef0ff; --muted: #a9afd6; --accent: #ffd56b; --on-accent: #1a1d42;
   --sun: #e89a2c; --sun-core: #ffd27a; --moon: #b8c0f0; --star: #ffd56b; --star-off: #383e7a;
   --bad: #ff6f8a; --bad-soft: rgba(255, 111, 138, .2); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
 }
-:root[data-skin="sakura"] { --alt: #a98be0; --brand: #8a3a5c;
+:root[data-skin="sakura"] { --eye2-base: initial; --alt: #a98be0; --brand: #8a3a5c;
   --bg: #ffe3ee; --bg2: #fff4e3; --surface: #fffafc; --cell: #ffeef4; --given: #fbd5e3; --line: #f4c2d4;
   --ink: #57243b; --muted: #95607a; --accent: #e3528f; --on-accent: #ffffff;
   --sun: #e0703a; --sun-core: #ffb48a; --moon: #8c5aa5; --star: #f7a83a; --star-off: #f4c2d4;
   --bad: #d12f4a; --bad-soft: rgba(209, 47, 74, .15); --shadow: rgba(122, 61, 92, .22); color-scheme: light;
 }
-:root[data-skin="matcha"] { --alt: #8fae6a; --brand: #4d5f30;
+:root[data-skin="matcha"] { --eye2-base: initial; --alt: #8fae6a; --brand: #4d5f30;
   --bg: #e4edd6; --bg2: #f5efdc; --surface: #fbfcf5; --cell: #eff4e4; --given: #dbe5c8; --line: #c6d4ad;
   --ink: #2c3a21; --muted: #64735a; --accent: #6a9a3a; --on-accent: #ffffff;
   --sun: #c98a1c; --sun-core: #f2cd6b; --moon: #4f6b45; --star: #e0a21e; --star-off: #c6d4ad;
   --bad: #c2412d; --bad-soft: rgba(194, 65, 45, .15); --shadow: rgba(44, 58, 33, .22); color-scheme: light;
 }
-:root[data-skin="ocean"] { --alt: #4fb8c8; --brand: #ffd2bd;
+:root[data-skin="ocean"] { --eye2-base: initial; --alt: #4fb8c8; --brand: #ffd2bd;
   --bg: #08334a; --bg2: #0b4d5e; --surface: #0e4158; --cell: #124c63; --given: #185d75; --line: #216d86;
   --ink: #e6fbff; --muted: #a2d3df; --accent: #ff9670; --on-accent: #08334a;
   --sun: #f07a52; --sun-core: #ffb999; --moon: #7fe0ea; --star: #ffd170; --star-off: #216d86;
   --bad: #ff5c7a; --bad-soft: rgba(255, 92, 122, .22); --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
 }
-:root[data-skin="arcade"] { --alt: #7a5cff; --brand: #fff3a6;
+:root[data-skin="arcade"] { --eye2-base: initial; --alt: #7a5cff; --brand: #fff3a6;
   --bg: #0a0712; --bg2: #200a36; --surface: #151024; --cell: #1b142e; --given: #271d42; --line: #3d2c66;
   --ink: #f7f0ff; --muted: #b9a8de; --accent: #ff4fbf; --on-accent: #0a0712;
   --sun: #ffd23a; --sun-core: #fff09a; --moon: #44e8ff; --star: #ffe14a; --star-off: #3d2c66;
@@ -71,7 +71,7 @@
 :root[data-skin="arcade"], .skin.sk-arcade { --tiles: .2; --acc-shades: inline; --motif: radial-gradient(ellipse at 50% 110%, rgba(255, 79, 191, .35), transparent 55%), linear-gradient(rgba(255, 79, 191, .14) 1px, transparent 1px) 0 0/34px 34px, linear-gradient(90deg, rgba(68, 232, 255, .12) 1px, transparent 1px) 0 0/34px 34px; }
 .skin { --motif: none; --acc-star: none; --acc-blossom: none; --acc-sprout: none; --acc-bubbles: none; --acc-shades: none; }
 body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--motif, none); }
-:root[data-skin="arcade"] .board-wrap { box-shadow: 0 0 0 2px var(--accent), 0 0 30px -4px rgba(255, 79, 191, .55), 0 8px 0 var(--line); }
+:root[data-skin="arcade"] .board-wrap { box-shadow: 0 0 0 2px var(--accent), 0 0 30px -4px rgba(255, 79, 191, .55), 0 14px 34px -18px var(--shadow); }
 :root[data-skin="arcade"] .cell svg { filter: drop-shadow(0 0 5px rgba(68, 232, 255, .35)); }
 :root[data-skin="ocean"] .board-wrap, :root[data-skin="midnight"] .board-wrap { background: linear-gradient(160deg, color-mix(in srgb, var(--surface) 80%, #fff), var(--surface) 45%); }
 /* Cat details derive from the fur colors, so every skin gets matching faces.
@@ -79,7 +79,7 @@ body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-event
 * {
   --moon-line: color-mix(in srgb, var(--moon) 62%, #000);
   --eye: #2b1b16;
-  --eye2: color-mix(in srgb, var(--moon) 20%, #fff);
+  --eye2: var(--eye2-base, color-mix(in srgb, var(--moon) 20%, #fff));
   --nose: #f2899b;
   --press: color-mix(in srgb, var(--accent) 70%, #000);
   --alt-press: color-mix(in srgb, var(--alt) 72%, #000);
@@ -106,30 +106,30 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .status h2 { font: 700 1.3rem/1 var(--font-display); margin: 0; flex: 1; }
 .pill {
   display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px 7px 9px; border-radius: 999px;
-  background: var(--surface); box-shadow: 0 3px 0 var(--line); font: 700 1.05rem var(--font-display);
+  background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow); font: 700 1.05rem var(--font-display);
   font-variant-numeric: tabular-nums; flex: none;
 }
 .pill svg { width: 22px; height: 22px; fill: var(--star); }
 .round {
-  width: 46px; height: 46px; border-radius: 16px; border: 0; background: var(--surface); box-shadow: 0 4px 0 var(--line);
+  width: 46px; height: 46px; border-radius: 16px; border: 0; background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow);
   display: grid; place-items: center; cursor: pointer; flex: none;
 }
-.round:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.round:active { transform: scale(.96); box-shadow: 0 2px 6px -3px var(--shadow); }
 .round svg { width: 22px; height: 22px; stroke: var(--ink); fill: none; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 
 /* chunky game buttons */
 .chunky {
   border: 0; border-radius: 22px; background: var(--accent); color: var(--on-accent);
   font: 700 1.35rem var(--font-display); padding: 16px 24px; cursor: pointer; width: 100%;
-  box-shadow: 0 6px 0 var(--press); transition: transform .08s, box-shadow .08s;
+  box-shadow: 0 10px 22px -10px var(--accent); transition: transform .08s, box-shadow .08s;
 }
-.chunky:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--press); }
+.chunky:active { transform: scale(.96); box-shadow: 0 4px 10px -6px var(--accent); }
 .soft {
   border: 0; border-radius: 18px; background: var(--surface); color: var(--ink); cursor: pointer;
-  font: 700 1rem var(--font-display); padding: 12px 8px; box-shadow: 0 4px 0 var(--line);
+  font: 700 1rem var(--font-display); padding: 12px 8px; box-shadow: 0 6px 16px -8px var(--shadow);
   display: inline-flex; gap: 6px; justify-content: center; align-items: center;
 }
-.soft:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--line); }
+.soft:active { transform: scale(.96); box-shadow: 0 2px 6px -3px var(--shadow); }
 .soft:disabled { opacity: .45; cursor: default; transform: none; }
 .soft small { font: 600 .78rem var(--font-body); color: var(--muted); }
 :is(.chunky, .soft, .round, .node, .tab, .cell):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
@@ -147,12 +147,12 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .top3 > :last-child { justify-self: end; }
 .avatar {
   position: relative; width: 58px; height: 58px; border-radius: 18px; border: 3px solid var(--sun-core); background: var(--surface);
-  box-shadow: 0 4px 0 var(--line); padding: 0; cursor: pointer; display: grid; place-items: center;
+  box-shadow: 0 6px 16px -8px var(--shadow); padding: 0; cursor: pointer; display: grid; place-items: center;
 }
 .avatar svg { width: 46px; height: 46px; }
 .avatar .lv {
   position: absolute; top: -8px; left: -8px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 99px;
-  background: var(--alt); color: #fff; font: 700 .8rem/24px var(--font-display); box-shadow: 0 2px 0 var(--alt-press);
+  background: var(--alt); color: #fff; font: 700 .8rem/24px var(--font-display); box-shadow: none;
 }
 .logo { text-align: center; margin-top: 34px; color: var(--brand); font: 700 4.3rem/1.04 var(--font-display); letter-spacing: .01em; text-transform: uppercase; }
 .logo .ln { display: flex; justify-content: center; align-items: flex-end; }
@@ -183,15 +183,15 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .home-btns { margin-top: auto; display: grid; gap: 16px; padding-inline: 20px; padding-bottom: 8px; }
 .pillbtn {
   border: 0; border-radius: 999px; padding: 18px 20px; font: 700 1.55rem/1 var(--font-display); color: #fff; cursor: pointer; width: 100%;
-  background: var(--accent); box-shadow: 0 6px 0 var(--press), 0 14px 26px -12px var(--accent); transition: transform .08s, box-shadow .08s;
+  background: var(--accent); box-shadow: 0 10px 22px -10px var(--accent); transition: transform .08s, box-shadow .08s;
 }
-.pillbtn:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--press); }
-.pillbtn.alt { background: var(--alt); box-shadow: 0 6px 0 var(--alt-press), 0 14px 26px -12px var(--alt); }
-.pillbtn.alt:active { box-shadow: 0 1px 0 var(--alt-press); }
+.pillbtn:active { transform: scale(.96); box-shadow: 0 4px 10px -6px var(--accent); }
+.pillbtn.alt { background: var(--alt); box-shadow: 0 10px 22px -10px var(--alt); }
+.pillbtn.alt:active { box-shadow: 0 4px 10px -6px var(--accent); }
 .pillbtn small { display: block; font: 600 .85rem var(--font-body); opacity: .9; margin-top: 4px; }
 .daily-wrap { display: grid; justify-items: center; }
 .timer-chip {
-  margin-top: -10px; position: relative; padding: 2px 10px 2px 8px; border-radius: 0 0 12px 12px; background: var(--alt-press); color: #fff;
+  margin-top: -10px; position: relative; padding: 2px 10px 2px 8px; border-radius: 0 0 12px 12px; background: color-mix(in srgb, var(--alt) 86%, #000); color: #fff;
   font: 600 .85rem/1.5 var(--font-display); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 4px;
 }
 .timer-chip svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; }
@@ -207,7 +207,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .sheet h4 { margin: 0; font: 600 1rem var(--font-display); color: var(--muted); }
 .seg3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--cell); padding: 4px; border-radius: 16px; }
 .seg3 button { border: 0; border-radius: 12px; padding: 9px 4px; background: transparent; font: 600 .95rem var(--font-display); color: var(--muted); cursor: pointer; }
-.seg3 button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 2px 0 var(--line); }
+.seg3 button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 2px 6px -3px var(--shadow); }
 .sheet .note { margin: -6px 0 0; color: var(--muted); font-size: .85rem; font-weight: 600; }
 .sheet-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .sheet-stats div { background: var(--cell); border-radius: 16px; padding: 8px; text-align: center; }
@@ -224,14 +224,14 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .node-row { display: flex; justify-content: center; }
 .node {
   position: relative; width: 72px; height: 72px; border-radius: 50%; border: 0; cursor: pointer;
-  background: var(--surface); box-shadow: 0 6px 0 var(--line); font: 700 1.5rem var(--font-display);
+  background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow); font: 700 1.5rem var(--font-display);
   display: grid; place-items: center; transform: translateX(var(--x)); font-variant-numeric: tabular-nums;
 }
-.node:active { box-shadow: 0 2px 0 var(--line); translate: 0 4px; }
+.node:active { box-shadow: 0 2px 6px -3px var(--shadow); scale: .96; }
 .node .ns { position: absolute; bottom: -11px; left: 50%; transform: translateX(-50%); display: flex; }
 .node .ns svg { width: 18px; height: 18px; fill: var(--star-off); stroke: var(--surface); stroke-width: 2; paint-order: stroke; }
 .node .ns svg.on { fill: var(--star); }
-.node.current { background: var(--accent); color: var(--on-accent); box-shadow: 0 6px 0 var(--press); animation: pulse 1.6s ease-in-out infinite; }
+.node.current { background: var(--accent); color: var(--on-accent); box-shadow: 0 10px 22px -10px var(--accent); animation: pulse 1.6s ease-in-out infinite; }
 .node .paw { position: absolute; top: -30px; width: 36px; height: 30px; }
 @keyframes pulse { 50% { scale: 1.06; } }
 .node.locked { opacity: .55; cursor: default; }
@@ -244,7 +244,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .timer svg { width: 22px; height: 22px; stroke: var(--muted); fill: none; stroke-width: 2.6; stroke-linecap: round; }
 .goals {
   display: grid; justify-items: center; gap: 5px; padding: 7px 12px 8px; border-radius: 16px;
-  background: var(--surface); box-shadow: 0 3px 0 var(--line);
+  background: var(--surface); box-shadow: 0 6px 16px -8px var(--shadow);
 }
 .goals .gs { display: flex; gap: 2px; }
 .goals .gs svg { width: 20px; height: 20px; fill: var(--star); transition: fill .3s; }
@@ -256,7 +256,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 @keyframes starLose { 0% { transform: scale(1.25) rotate(0); } 60% { transform: scale(.8) rotate(-12deg); } 100% { transform: none; } }
 .board-wrap {
   position: relative; background: var(--surface); border-radius: 30px; padding: 12px;
-  box-shadow: 0 8px 0 var(--line), 0 26px 44px -30px var(--shadow);
+  box-shadow: 0 14px 34px -18px var(--shadow);
 }
 .board {
   position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr));
@@ -264,7 +264,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 }
 .cell {
   position: relative; border: 0; padding: 0; margin: 0; background: var(--cell); border-radius: 14px;
-  cursor: pointer; min-width: 0; min-height: 0; box-shadow: inset 0 -3px 0 var(--line);
+  cursor: pointer; min-width: 0; min-height: 0; box-shadow: none;
 }
 .cell.given { background: var(--given); cursor: default; box-shadow: none; }
 .cell.bad { background-image: repeating-linear-gradient(135deg, var(--bad-soft) 0 6px, transparent 6px 12px); box-shadow: inset 0 0 0 2.5px var(--bad); animation: shake .3s; }
@@ -274,12 +274,12 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 @keyframes pop { from { transform: scale(.3) rotate(-12deg); } }
 .mark {
   position: absolute; width: 24px; height: 24px; margin: -12px 0 0 -12px; border-radius: 50%;
-  background: var(--surface); box-shadow: 0 2px 0 var(--line); display: grid; place-items: center;
+  background: var(--surface); box-shadow: 0 2px 6px -3px var(--shadow); display: grid; place-items: center;
   font: 700 15px/1 var(--font-display); color: var(--accent); pointer-events: none; z-index: 2;
 }
 .mark.bad { color: var(--surface); background: var(--bad); box-shadow: none; }
 .actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.rules { background: var(--surface); border-radius: 22px; padding: 14px 18px; box-shadow: 0 4px 0 var(--line); }
+.rules { background: var(--surface); border-radius: 22px; padding: 14px 18px; box-shadow: 0 6px 16px -8px var(--shadow); }
 .rules summary { font: 600 1.05rem var(--font-display); cursor: pointer; }
 .rules ul { margin: 10px 0 2px; padding: 0; list-style: none; display: grid; gap: 8px; color: var(--muted); font-weight: 600; }
 .rules li { display: flex; gap: 10px; align-items: center; }
@@ -312,7 +312,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .skins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .skin {
   border-radius: 26px; padding: 12px; display: grid; gap: 10px; background: var(--bg); color: var(--ink);
-  box-shadow: 0 6px 0 var(--line); min-width: 0; border: 3px solid transparent; text-align: center;
+  box-shadow: 0 6px 16px -8px var(--shadow); min-width: 0; border: 3px solid transparent; text-align: center;
 }
 .skin.equipped { border-color: var(--accent); }
 .skin { background: var(--motif, none), var(--bg); }
@@ -321,7 +321,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 .skin .mini span { aspect-ratio: 1; border-radius: 10px; background: var(--cell); position: relative; }
 .skin .mini svg { position: absolute; inset: 8%; width: 84%; height: 84%; }
 .skin b { font: 600 1.05rem var(--font-display); }
-.skin .chunky { font-size: 1rem; padding: 9px 6px; border-radius: 16px; box-shadow: 0 4px 0 var(--press); display: inline-flex; justify-content: center; align-items: center; gap: 4px; }
+.skin .chunky { font-size: 1rem; padding: 9px 6px; border-radius: 16px; box-shadow: 0 10px 22px -10px var(--accent); display: inline-flex; justify-content: center; align-items: center; gap: 4px; }
 .skin .chunky:disabled { opacity: .6; cursor: default; transform: none; }
 .skin .chunky svg { width: 16px; height: 16px; fill: currentColor; }
 
@@ -361,14 +361,14 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   <defs>
     <!-- Neutral light and shade, laid over each cat's own fur color so they look round in every skin. -->
     <radialGradient id="g-shade" cx=".36" cy=".28" r=".85">
-      <stop offset="0" stop-color="#fff" stop-opacity=".5"/><stop offset=".38" stop-color="#fff" stop-opacity="0"/>
-      <stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset=".4" stop-color="#fff" stop-opacity="0"/>
+      <stop offset=".72" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".18"/>
     </radialGradient>
     <radialGradient id="g-ear" cx=".4" cy=".2" r=".95">
       <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".25"/>
     </radialGradient>
     <linearGradient id="g-gloss" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
     <radialGradient id="g-eye" cx=".38" cy=".3" r=".75">
       <stop offset="0" stop-color="#6b5566"/><stop offset=".55" stop-color="#2b1b16"/><stop offset="1" stop-color="#0d0705"/>
@@ -616,12 +616,12 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
   var T = TangoCore, N = T.N, PAGE = 20, HINT_COST = 15;
   // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
-    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#8c6a62", bg: "#fde8da", surface: "#fffaf5", cell: "#fff0e4", ink: "#4a2e2a", accent: "#ff8a5c", "on-accent": "#ffffff", line: "#efcdb8", sun: "#d9761f", "sun-core": "#ffb35c", moon: "#5d5878" } },
-    { id: "midnight", name: "Midnight", tag: "Starry night", price: 8, v: { muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
-    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
-    { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
-    { id: "ocean", name: "Deep Ocean", tag: "Bubbly deep sea", price: 55, v: { muted: "#a2d3df", bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
-    { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
+    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#a08a7e", bg: "#faf3ee", surface: "#ffffff", cell: "#fcefe6", ink: "#5b3f33", accent: "#f5a35b", "on-accent": "#ffffff", line: "#efdfd3", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#aab5f4", "eye2-base": "#4d4a86" } },
+    { id: "midnight", name: "Midnight", tag: "Starry night", price: 8, v: { "eye2-base": "initial", muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
+    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { "eye2-base": "initial", muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
+    { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { "eye2-base": "initial", muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
+    { id: "ocean", name: "Deep Ocean", tag: "Bubbly deep sea", price: 55, v: { "eye2-base": "initial", muted: "#a2d3df", bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
+    { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } }
   ];
   var $ = function (id) { return document.getElementById(id); };
   var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, mistakes: "delay" };

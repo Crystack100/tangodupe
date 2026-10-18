@@ -1,6 +1,6 @@
 {
-  "name": "Tango Cats",
-  "short_name": "Tango Cats",
+  "name": "Purrzle",
+  "short_name": "Purrzle",
   "description": "A cozy cat logic puzzle with unlimited levels",
   "start_url": "./index.html",
   "display": "standalone",

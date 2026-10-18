@@ -1,4 +1,4 @@
-<title>Tango Cats</title>
+<title>Purrzle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
@@ -146,7 +146,7 @@ html.on-home #home { height: calc(100svh - 96px - env(safe-area-inset-bottom, 0p
 .gear svg { width: 28px; height: 28px; fill: currentColor; stroke: none; transition: rotate .4s; }
 .gear:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--surface) 80%, #000); }
 .gear:active svg { rotate: 60deg; }
-html.on-home .logo { font-size: min(4.3rem, 7svh); margin-top: min(34px, 2.5svh); }
+html.on-home .logo { font-size: min(3.7rem, 7.5svh); margin-top: min(34px, 2.5svh); }
 html.on-home .logo .tail { height: min(44px, 5svh); }
 html.on-home .home-cats { margin-top: min(18px, 1.5svh); } html.on-home .home-cats svg { width: min(74px, 9svh); height: min(74px, 9svh); }
 html.on-home .home-btns { gap: min(16px, 2svh); } html.on-home .pillbtn { padding-block: min(18px, 2.1svh); }
@@ -169,6 +169,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .logo .o-moon { fill: none; stroke: var(--alt); }
 .logo .eared { position: relative; display: inline-block; }
 .logo .eared svg { position: absolute; left: 50%; top: -.22em; width: .62em; translate: -50% 0; }
+.logo .zle { color: var(--accent); }
 .logo .tail { display: block; width: 92px; height: 44px; margin: -2px auto 0; translate: 26px 0; }
 .home-cats { display: flex; justify-content: center; gap: 4px; margin-top: 18px; }
 .home-cats svg { width: 74px; height: 74px; animation: bob 3s ease-in-out infinite; }
@@ -852,7 +853,7 @@ body.no-ads .ad-banner { display: none; }
     <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
     <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
   </div>
-  <p class="sp-name">Tango Cats</p>
+  <p class="sp-name">Purrzle</p>
   <div class="sp-bar" aria-hidden="true"><i></i></div>
 </div>
 
@@ -867,9 +868,8 @@ body.no-ads .ad-banner { display: none; }
       <button class="round gear" id="t-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
     </div>
     <div class="home-main">
-      <h1 class="logo" aria-label="Tango Cats">
-        <span class="ln" aria-hidden="true">TANG<svg class="o" viewBox="0 0 80 96"><path class="o-sun" d="M14 40 L16 10 L32 24 M66 40 L64 10 L48 24" stroke-width="12" stroke-linejoin="round" stroke-linecap="round"/><circle class="o-sun" cx="40" cy="58" r="28" stroke-width="15"/></svg></span>
-        <span class="ln" aria-hidden="true">C<span class="eared">A<svg viewBox="0 0 60 24"><path d="M6 22 L10 2 L24 14 M54 22 L50 2 L36 14" fill="none" stroke="var(--alt)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>TS</span>
+      <h1 class="logo" aria-label="Purrzle">
+        <span class="ln" aria-hidden="true">P<span class="eared">U<svg viewBox="0 0 60 24"><path d="M6 22 L10 2 L24 14 M54 22 L50 2 L36 14" fill="none" stroke="var(--alt)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>RR<span class="zle">ZLE</span></span>
         <svg class="tail" viewBox="0 0 92 44" aria-hidden="true"><path d="M8 6 q4 30 34 30 q30 0 30 -18 q0 -12 -12 -12" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round"/><path d="M24 30 l-4 9 M40 35 l0 9 M56 32 l4 9" stroke="var(--sun)" stroke-width="5" stroke-linecap="round"/></svg>
       </h1>
       <div class="home-cats" aria-hidden="true">
@@ -1529,7 +1529,7 @@ body.no-ads .ad-banner { display: none; }
   function applyAds() {
     document.body.classList.toggle("no-ads", !!save.noAds);
     $("noads-buy").textContent = save.noAds ? "Owned" : "$2.99"; $("noads-buy").disabled = !!save.noAds;
-    $("noads-sub").textContent = save.noAds ? "Thanks for supporting Tango Cats!" : "No banners or ads between levels, forever.";
+    $("noads-sub").textContent = save.noAds ? "Thanks for supporting Purrzle!" : "No banners or ads between levels, forever.";
     $("s-noads").classList.toggle("owned", !!save.noAds);
     $("na-title").textContent = save.noAds ? "Ads removed" : "Remove ads";
     $("na-sub").textContent = save.noAds ? "Thanks! Tap to bring them back (testing)" : "No banners or pop-ups, forever";

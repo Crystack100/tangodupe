@@ -1,0 +1,38 @@
+workflows:
+  ios-testflight:
+    name: iOS TestFlight
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+    integrations:
+      app_store_connect: TangoCats ASC
+    environment:
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.alden.tangocats
+      node: 20
+      xcode: latest
+      vars:
+        APP_ID_BUNDLE: com.alden.tangocats
+    scripts:
+      - name: Install dependencies
+        working_directory: mobile
+        script: npm ci || npm install
+      - name: Sync web game into iOS
+        working_directory: mobile
+        script: npx cap sync ios
+      - name: Use signing profiles
+        script: xcode-project use-profiles
+      - name: Set build number
+        script: |
+          sed -i '' "s/CURRENT_PROJECT_VERSION = [0-9]*;/CURRENT_PROJECT_VERSION = $BUILD_NUMBER;/g" mobile/ios/App/App.xcodeproj/project.pbxproj
+      - name: Build ipa
+        script: |
+          xcode-project build-ipa \
+            --project mobile/ios/App/App.xcodeproj \
+            --scheme App
+    artifacts:
+      - build/ios/ipa/*.ipa
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true

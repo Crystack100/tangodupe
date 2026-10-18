@@ -13,4 +13,11 @@ Run `python3 ../build.py` after changing the game to refresh `www/`.
 - Google Play: a Google Play developer account (one-time $25). Build a signed bundle in Android Studio (Build > Generate Signed Bundle).
 - App Store: an Apple Developer account ($99/year) and a Mac with Xcode (Product > Archive, then upload).
 
-App id: `com.alden.tango` (change it in `capacitor.config.json` before the first store upload).
+App id: `com.alden.tangocats`.
+
+## TestFlight without a Mac (Codemagic)
+The repo root has `codemagic.yaml` with an "iOS TestFlight" workflow.
+1. In App Store Connect, create an app with bundle id `com.alden.tangocats`.
+2. In App Store Connect > Users and Access > Integrations, make an API key (App Manager role).
+3. In Codemagic, add the repo, then Team settings > Integrations > Developer Portal: add that key and name it exactly `TangoCats ASC`.
+4. Start the "iOS TestFlight" workflow. The build lands in TestFlight; install the TestFlight app on your iPhone to play it.

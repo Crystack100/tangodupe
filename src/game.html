@@ -229,8 +229,8 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 #sheet .slider output { position: absolute; right: 18px; top: 14px; line-height: 1.05rem !important; font: 600 .95rem/1 var(--font-display); color: var(--muted); }
 #sheet .slider { position: relative; }
 #sheet .slider input { grid-area: in; height: 14px; border-radius: 7px; box-shadow: inset 0 2px 3px rgb(0 0 0 / .25); }
-#sheet .slider input::-webkit-slider-thumb { width: 28px; height: 28px; border: 0; background: radial-gradient(circle at 50% 35%, #fff, #ffe9d4); box-shadow: 0 0 0 3px var(--accent), 0 3px 0 3px var(--acc-dk); }
-#sheet .slider input::-moz-range-thumb { width: 24px; height: 24px; border: 3px solid var(--accent); background: #fff; }
+#sheet .slider input::-webkit-slider-thumb { width: 18px; height: 18px; border: 0; background: radial-gradient(circle at 50% 35%, #fff, #ffe9d4); box-shadow: 0 0 0 2.5px var(--accent), 0 2px 0 2.5px var(--acc-dk); }
+#sheet .slider input::-moz-range-thumb { width: 14px; height: 14px; border: 3px solid var(--accent); background: #fff; }
 /* settings sheet */
 .sheet-bg { position: fixed; inset: 0; z-index: 25; background: rgba(20, 12, 10, .45); display: grid; align-items: end; justify-items: center; }
 .sheet {
@@ -299,6 +299,41 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .node.locked { opacity: .55; cursor: default; }
 .node svg.lock { width: 24px; height: 24px; fill: var(--muted); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* level map, game style: a winding road with chunky 3D bubbles */
+#levels, #store { --acc-dk: color-mix(in srgb, var(--accent) 68%, #000); --acc-lt: color-mix(in srgb, var(--accent) 70%, #fff); --slab: color-mix(in srgb, var(--surface) 80%, #000); }
+.status h2 { font: 700 1.9rem/1 var(--font-display); color: var(--brand); letter-spacing: .01em; text-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 35%, transparent); }
+.pager .soft { gap: 4px; font: 600 1.05rem var(--font-display); border-radius: 14px; background: linear-gradient(color-mix(in srgb, var(--surface) 94%, #fff), var(--surface));
+  box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 4px 0 var(--slab), 0 10px 16px -10px rgb(0 0 0 / .4); }
+.pager .soft svg { width: 18px; height: 18px; fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.pager .soft:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--slab); }
+.map-wrap { position: relative; }
+.map::before { content: none; }
+.map { gap: 26px; padding-block: 44px 20px; position: relative; z-index: 1; }
+.trail { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.trail path { fill: none; stroke-linecap: round; }
+.trail .road { stroke: var(--slab); stroke-width: 30; opacity: .35; }
+.trail .road-in { stroke: color-mix(in srgb, var(--cell) 85%, var(--surface)); stroke-width: 22; }
+.trail .road-done { stroke: color-mix(in srgb, var(--accent) 45%, var(--cell)); stroke-width: 22; }
+.trail .road-dash { stroke: var(--surface); stroke-width: 4; stroke-dasharray: 2 14; opacity: .9; }
+.node { width: 74px; height: 74px; font: 700 1.7rem/1 var(--font-display); color: var(--ink);
+  background: radial-gradient(circle at 50% 28%, #fffaf3, #ffe3c6 75%);
+  box-shadow: inset 0 -4px 0 rgb(0 0 0 / .06), 0 6px 0 color-mix(in srgb, var(--accent) 55%, var(--slab)), 0 14px 18px -10px rgb(0 0 0 / .45); }
+:root[data-theme="dark"] .node:not(.current):not(.locked), .node:not(.current):not(.locked) { color: #6b4433; }
+.node:active { scale: 1; transform: translateX(var(--x)) translateY(4px); box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 55%, var(--slab)); }
+.node .ns { bottom: auto; top: -15px; gap: 0; }
+.node .ns svg { width: 20px; height: 20px; stroke: color-mix(in srgb, var(--star) 50%, #8a5200); stroke-width: 1.4; filter: drop-shadow(0 1.5px 0 rgb(0 0 0 / .2)); }
+.node .ns svg:nth-child(2) { translate: 0 -5px; width: 24px; height: 24px; }
+.node .ns svg:not(.on) { fill: var(--star-off); stroke: color-mix(in srgb, var(--star-off) 70%, #000); }
+.node-row:has(.current) { position: relative; z-index: 2; margin-top: 34px; }
+.node.current { width: 88px; height: 88px; font-size: 2.1rem; color: #fff; text-shadow: 0 2px 0 var(--acc-dk);
+  background: radial-gradient(circle at 50% 30%, var(--acc-lt), var(--accent) 70%);
+  box-shadow: inset 0 3px 0 rgb(255 255 255 / .4), 0 7px 0 var(--acc-dk), 0 0 0 7px color-mix(in srgb, var(--accent) 25%, transparent), 0 16px 22px -8px var(--acc-dk); animation: none; }
+.node.current::after { content: ""; position: absolute; inset: -7px; border-radius: 50%; border: 3px solid var(--accent); animation: ring 1.6s ease-out infinite; }
+@keyframes ring { from { transform: scale(.9); opacity: .9; } to { transform: scale(1.35); opacity: 0; } }
+.node .peek { position: absolute; top: -50px; left: 50%; width: 58px; height: 58px; translate: -50% 0; filter: drop-shadow(0 4px 3px rgb(0 0 0 / .25)); animation: bob 2s ease-in-out infinite; }
+.node.locked { opacity: 1; background: color-mix(in srgb, var(--cell) 80%, var(--slab)); box-shadow: inset 0 3px 6px rgb(0 0 0 / .12), 0 4px 0 color-mix(in srgb, var(--slab) 85%, #000); }
+.node.locked svg.lock { width: 26px; height: 26px; fill: color-mix(in srgb, var(--muted) 80%, transparent); }
+
 
 /* puzzle: chips up top, rule strip, a bright tiled board, round tool buttons */
 .g-head { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; padding-top: 10px; }
@@ -577,6 +612,14 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .skin .chunky { font-size: 1rem; padding: 9px 6px; border-radius: 8px; box-shadow: 0 10px 22px -10px var(--accent); display: inline-flex; justify-content: center; align-items: center; gap: 4px; }
 .skin .chunky:disabled { opacity: .6; cursor: default; transform: none; }
 .skin .chunky svg { width: 16px; height: 16px; fill: currentColor; }
+/* shop type: bolder names, calmer subtitles, chunky buy buttons */
+.shop-intro { font: 500 .95rem/1.4 var(--font-body); }
+.skin b { font: 700 1.3rem/1.1 var(--font-display); letter-spacing: .01em; }
+.skin small { margin-top: -10px; font: 500 .88rem var(--font-body); }
+.skin .chunky { font: 700 1.15rem/1 var(--font-display); padding: 11px 6px; border-radius: 12px; text-shadow: 0 1.5px 0 color-mix(in srgb, var(--accent) 60%, #000);
+  box-shadow: inset 0 2px 0 rgb(255 255 255 / .35), 0 4px 0 color-mix(in srgb, var(--accent) 62%, #000); }
+.skin .chunky:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 62%, #000); }
+.skin .chunky:disabled { box-shadow: none; text-shadow: none; }
 
 /* tab bar */
 .tabs {
@@ -827,10 +870,10 @@ body.no-ads .ad-banner { display: none; }
       <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
     </div>
     <div class="pager">
-      <button class="soft" id="pg-prev" type="button">Earlier</button>
-      <button class="soft" id="pg-next" type="button">Later</button>
+      <button class="soft" id="pg-prev" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Earlier</button>
+      <button class="soft" id="pg-next" type="button">Later<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
-    <div class="map" id="map"></div>
+    <div class="map-wrap"><svg class="trail" id="trail" aria-hidden="true"></svg><div class="map" id="map"></div></div>
   </section>
 
   <!-- SHOP -->
@@ -1104,7 +1147,7 @@ body.no-ads .ad-banner { display: none; }
       b.disabled = !open;
       b.innerHTML = open
         ? i + (save.best[i] ? '<span class="ns">' + starSvgs(save.best[i]) + "</span>" : "") +
-          (i === n ? '<svg class="paw" viewBox="0 0 40 34" fill="var(--accent)" aria-hidden="true"><use href="#paw"/></svg>' : "")
+          (i === n ? '<svg class="peek" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>' : "")
         : '<svg class="lock" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z"/></svg>';
       b.setAttribute("aria-label", "Level " + i + (save.best[i] ? ", " + save.best[i] + " stars" : open ? "" : ", locked"));
       b.onclick = startLevel.bind(null, i);
@@ -1113,9 +1156,28 @@ body.no-ads .ad-banner { display: none; }
     $("map-title").textContent = "Levels " + from + "–" + (from + PAGE - 1);
     $("pg-prev").disabled = page === 0;
     $("pg-next").disabled = from + PAGE > n;
+    requestAnimationFrame(drawTrail);
     var cur = box.querySelector(".current");
     if (cur) setTimeout(function () { cur.scrollIntoView({ block: "center" }); }, 0);
   }
+  // A winding road through the level bubbles, done part in color.
+  function drawTrail() {
+    var box = $("map"), svg = $("trail"), base = box.getBoundingClientRect(), pts = [], done = 0;
+    box.querySelectorAll(".node").forEach(function (b) {
+      var r = b.getBoundingClientRect(); pts.push([r.left + r.width / 2 - base.left, r.top + r.height / 2 - base.top]);
+      if (!b.classList.contains("locked")) done = pts.length;
+    });
+    if (pts.length < 2) return;
+    function path(list) {
+      var d = "M" + list[0][0] + " " + list[0][1];
+      for (var i = 1; i < list.length; i++) { var a = list[i - 1], c = list[i], my = (a[1] + c[1]) / 2; d += " C" + a[0] + " " + my + " " + c[0] + " " + my + " " + c[0] + " " + c[1]; }
+      return d;
+    }
+    svg.setAttribute("viewBox", "0 0 " + base.width + " " + base.height);
+    svg.innerHTML = '<path class="road" d="' + path(pts) + '"/><path class="road-in" d="' + path(pts) + '"/>' +
+      (done > 1 ? '<path class="road-done" d="' + path(pts.slice(0, done)) + '"/>' : "") + '<path class="road-dash" d="' + path(pts) + '"/>';
+  }
+  window.addEventListener("resize", function () { if (!$("levels").hidden) drawTrail(); });
   $("pg-prev").onclick = function () { page = Math.max(0, page - 1); renderMap(); };
   $("pg-next").onclick = function () { page++; renderMap(); };
 

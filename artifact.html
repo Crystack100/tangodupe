@@ -822,6 +822,8 @@ body.no-ads .ad-banner { display: none; }
 /* rewarded videos */
 body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .ad-x { display: none; }
 /* Game sites like CrazyGames show their own ads and do not allow outside purchases. */
+.portal-only { display: none !important; }
+body.portal .portal-only { display: flex !important; text-decoration: none; }
 body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .ad-x { display: none; }
 .pop-card { align-self: center; border-radius: 20px; margin: 16px; width: calc(100% - 32px); text-align: center; }
 .pop-card h3 { justify-content: center; }
@@ -1217,6 +1219,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     <button class="how-btn" id="s-how" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg>How to play</button>
     <button class="how-btn" id="s-remind" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></svg><span>Daily reminder</span><b class="onoff" id="s-remind-v">Off</b></button>
     <button class="how-btn" id="s-privacy" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy choices</button>
+    <a class="how-btn portal-only" id="s-policy" href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy policy</a>
     <button class="noads-btn" id="s-noads" type="button">
       <span class="na-ic" aria-hidden="true"><b>AD</b></span>
       <span class="na-txt"><b id="na-title">Remove ads</b><small id="na-sub">No banners or pop-ups, forever</small></span>
@@ -1441,7 +1444,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
 
   function load() {
     try {
-      var s = JSON.parse(localStorage.getItem("tango:v2"));
+      var s = JSON.parse(store().getItem("tango:v2"));
       if (s && s.best) {
         save = Object.assign(save, s);
         save.daily = save.daily || {}; 
@@ -1451,7 +1454,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }
     } catch (e) {}
   }
-  function persist() { try { localStorage.setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
+  // On CrazyGames, saves go through their SDK so they follow the player's account across devices.
+  function store() { return PORTAL && CG.data ? CG.data : localStorage; }
+  function persist() { try { store().setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
@@ -1465,6 +1470,13 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var el = $("toast"); el.textContent = msg; el.hidden = false;
     clearTimeout(toastT); toastT = setTimeout(function () { el.hidden = true; }, 1800);
   }
+  // CrazyGames wants to know when the player is actually playing a puzzle.
+  var cgPlaying = false;
+  function gameplay(on) {
+    if (!PORTAL || on === cgPlaying) return;
+    cgPlaying = on;
+    try { if (on) CG.game.gameplayStart(); else CG.game.gameplayStop(); } catch (e) {}
+  }
   function show(screen) {
     if (screen !== "game") $("win").hidden = true;
     ["home", "levels", "store", "game"].forEach(function (s) { $(s).hidden = s !== screen; });
@@ -1476,6 +1488,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       if (t.dataset.to === screen) t.setAttribute("aria-current", "page"); else t.removeAttribute("aria-current");
     });
     if (!inGame) stopClock();
+    gameplay(inGame && !!play && !play.done);
     window.scrollTo(0, 0); $("scroll").scrollTop = 0; document.body.scrollTop = 0; document.documentElement.scrollTop = 0;
     if (screen === "home") renderHome();
     if (screen === "levels") renderMap();
@@ -1854,7 +1867,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (to !== null) cells[to].focus();
   }
   function win() {
-    play.done = true; stopClock(); Audio.sfx("win");
+    play.done = true; stopClock(); gameplay(false); Audio.sfx("win");
     var book = play.daily ? save.daily : save.best, n = play.daily ? play.daily : play.level, tkey = play.daily ? "d" + n : n;
     var got = T.stars(play.difficulty, play.elapsed), prev = book[n] || 0;
     var gain = Math.max(0, got - prev);
@@ -2083,7 +2096,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // Privacy first: Google's consent form (Europe and other places that need it), then Apple's
     // "Allow tracking?" prompt, then start the ad SDK.
     function start() {
-      if (PORTAL) { try { CG.init().catch(function () {}); } catch (e) {} return; }
+      if (PORTAL) return;
       if (!AdMob) return;
       AdMob.addListener("interstitialAdDismissed", function () { finish(); load("interstitial"); });
       AdMob.addListener("interstitialAdFailedToShow", function () { finish(); load("interstitial"); });
@@ -2104,8 +2117,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     }
     function show(kind, done) {
       if (PORTAL) {
-        open = true; Audio.hold(true);
-        var end = function (ok) { if (!open) return; open = false; Audio.hold(false); done(ok); };
+        var was = cgPlaying; open = true; Audio.hold(true); gameplay(false);
+        var end = function (ok) { if (!open) return; open = false; Audio.hold(false); gameplay(was); done(ok); };
         try {
           CG.ad.requestAd(kind === "rewarded" ? "rewarded" : "midgame",
             { adStarted: function () {}, adFinished: function () { end(true); }, adError: function () { end(kind !== "rewarded"); } });
@@ -2232,11 +2245,11 @@ if (typeof module !== "undefined") module.exports = TangoCore;
      Everything is synthesized with Web Audio, so there are no files to load.
      iOS only allows audio after a tap, so the context starts on the first touch. */
   var Audio = (function () {
-    var ctx = null, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
+    var ctx = null, muted = false, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
     function ensure() {
       if (!ctx) {
         var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
-        ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination);
+        ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination); master.gain.value = muted ? 0 : 1;
         musicBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus.connect(master); sfxBus.connect(master);
         volumes();
       }
@@ -2300,7 +2313,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     });
     // Quiet the music while a video ad plays.
     function hold(on) { if (on) stopMusic(); else if (ctx && save.music) startMusic(); }
-    return { sfx: sfx, volumes: volumes, hold: hold };
+    // CrazyGames' own mute button.
+    function mute(on) { muted = !!on; if (master) master.gain.value = muted ? 0 : 1; }
+    return { sfx: sfx, volumes: volumes, hold: hold, mute: mute };
   })();
 
   /* ---------- boot ---------- */
@@ -2334,7 +2349,17 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];
     return { save: save, screen: cur };
   });
-  window.claude && window.claude.hot && window.claude.hot.ready
+  // CrazyGames: wait for their SDK so the saved game can be read from it, and follow their mute setting.
+  if (PORTAL) {
+    var boot = function () {
+      try {
+        Audio.mute(CG.game.settings.muteAudio);
+        CG.game.addSettingsChangeListener(function (s) { Audio.mute(s.muteAudio); });
+      } catch (e) {}
+      start({});
+    };
+    try { CG.init().then(boot, boot); } catch (e) { boot(); }
+  } else window.claude && window.claude.hot && window.claude.hot.ready
     ? window.claude.hot.ready(start)
     : start((window.claude && window.claude.hot && window.claude.hot.data) || {});
 })();

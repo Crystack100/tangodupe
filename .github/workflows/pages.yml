@@ -1,7 +1,9 @@
 # Publishes the installable web app to GitHub Pages.
-# Manual for now: Pages needs the repo to be public (or a paid plan) and Pages turned on in Settings.
+# Runs on every push to main so the web version never falls behind.
 name: Web app
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -15,7 +17,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir site && cp index.html privacy.html manifest.webmanifest icon.svg sw.js site/
+      - run: mkdir site && cp index.html privacy.html manifest.webmanifest icon.svg icon-192.png icon-512.png apple-touch-icon.png sw.js site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

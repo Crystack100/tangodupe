@@ -25,7 +25,14 @@ head = """<!doctype html>
 <body>
 """
 tail = """
-<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function () {});</script>
+<script>
+if ("serviceWorker" in navigator) {
+  // When an update replaces an older worker, reload once so the new version shows straight away.
+  var hadWorker = !!navigator.serviceWorker.controller, reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", function () { if (hadWorker && !reloaded) { reloaded = true; location.reload(); } });
+  navigator.serviceWorker.register("sw.js").catch(function () {});
+}
+</script>
 </body>
 </html>
 """

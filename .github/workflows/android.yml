@@ -27,12 +27,12 @@ jobs:
         working-directory: mobile/android
       - uses: actions/upload-artifact@v4
         with:
-          name: tango-android
+          name: purrzle-android
           path: mobile/android/app/build/outputs/apk/debug/app-debug.apk
       # Attach the app file to a "latest" release so it downloads straight to a phone, no unzipping.
       - run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk tango.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk purrzle.apk
           gh release delete latest --yes --cleanup-tag || true
-          gh release create latest tango.apk --title "Tango (latest build)" --notes "Built from ${GITHUB_SHA::7}. Open this page on your Android phone and tap tango.apk to install."
+          gh release create latest purrzle.apk --title "Purrzle (latest build)" --notes "Built from ${GITHUB_SHA::7}. Open this page on your Android phone and tap purrzle.apk to install."
         env:
           GH_TOKEN: ${{ github.token }}

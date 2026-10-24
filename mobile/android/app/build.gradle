@@ -1,13 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.alden.tango"
+    namespace = "com.alden.purrzle"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.alden.tango"
+        applicationId "com.alden.purrzle"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
+        // Cloud builds pass BUILD_NUMBER so every Play Store upload gets a higher versionCode.
+        versionCode (System.getenv("BUILD_NUMBER") ?: "1").toInteger()
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
@@ -16,8 +17,20 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+    // Release signing comes from the upload keystore Codemagic provides (CM_KEYSTORE_*); local builds stay unsigned.
+    signingConfigs {
+        release {
+            if (System.getenv("CM_KEYSTORE_PATH")) {
+                storeFile file(System.getenv("CM_KEYSTORE_PATH"))
+                storePassword System.getenv("CM_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("CM_KEY_ALIAS")
+                keyPassword System.getenv("CM_KEY_PASSWORD")
+            }
+        }
+    }
     buildTypes {
         release {
+            if (System.getenv("CM_KEYSTORE_PATH")) signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

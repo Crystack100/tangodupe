@@ -1,4 +1,4 @@
-package com.alden.tango;
+package com.alden.purrzle;
 
 import com.getcapacitor.BridgeActivity;
 

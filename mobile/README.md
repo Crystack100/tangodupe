@@ -21,3 +21,11 @@ The repo root has `codemagic.yaml` with an "iOS TestFlight" workflow.
 2. In App Store Connect > Users and Access > Integrations, make an API key (App Manager role).
 3. In Codemagic, add the repo, then Team settings > Integrations > Developer Portal: add that key and name it exactly `Purrzle ASC`.
 4. Start the "iOS TestFlight" workflow. The build lands in TestFlight; install the TestFlight app on your iPhone to play it.
+
+## Android
+- Every push to `main` builds a test app (`purrzle.apk`) on GitHub Actions and attaches it to the "latest" release. Open that release on an Android phone and tap the file to install.
+- Google Play: the `android-play` workflow in `codemagic.yaml` builds a signed `.aab`.
+  1. Create a Google Play developer account (one-time $25).
+  2. In Codemagic, Team settings > Code signing identities > Android keystores: generate a keystore and name its reference `purrzle_upload`. Keep it safe; every Play update must be signed with it.
+  3. Run the "Android Play Store" workflow and download the `.aab`.
+  4. In Play Console, create the app Purrzle (package `com.alden.purrzle`), go to Testing > Internal testing, and upload the `.aab`.

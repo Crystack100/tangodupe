@@ -36,3 +36,25 @@ workflows:
       app_store_connect:
         auth: integration
         submit_to_testflight: true
+
+  android-play:
+    name: Android Play Store
+    max_build_duration: 60
+    instance_type: linux_x2
+    environment:
+      android_signing:
+        - purrzle_upload
+      node: 20
+      java: 21
+    scripts:
+      - name: Install dependencies
+        working_directory: mobile
+        script: npm ci || npm install
+      - name: Sync web game into Android
+        working_directory: mobile
+        script: npx cap sync android
+      - name: Build signed app bundle
+        working_directory: mobile/android
+        script: chmod +x gradlew && ./gradlew bundleRelease
+    artifacts:
+      - mobile/android/app/build/outputs/bundle/release/*.aab

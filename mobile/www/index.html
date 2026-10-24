@@ -404,7 +404,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 6px; border-radius: 12px; background: var(--surface);
   box-shadow: 0 6px 16px -10px var(--shadow);
 }
-.rule-strip div { display: flex; align-items: center; gap: 5px; background: var(--cell); border-radius: 8px; padding: 6px 5px; font: 600 .68rem/1.2 var(--font-display); color: var(--ink); }
+.rule-strip div { display: flex; align-items: center; gap: 5px; background: var(--cell); border-radius: 8px; padding: 6px 5px; font: 600 .74rem/1.2 var(--font-display); color: var(--ink); }
 .rule-strip svg { width: 36px; height: 36px; flex: none; }
 .rule-strip .rt { fill: var(--surface); stroke: color-mix(in srgb, var(--line) 80%, var(--ink) 10%); stroke-width: .8; }
 .rule-strip .rt.t0 { fill: color-mix(in srgb, var(--sun-core) 55%, var(--surface)); }
@@ -750,6 +750,28 @@ body.no-ads .ad-banner { display: none; }
 @media (min-width: 700px) {
   .app { max-width: 640px; }
   .skins { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important; }
+}
+/* Wide, landscape screens: puzzle on the right as big as the height allows, rules and buttons in a column beside it. */
+@media (min-width: 900px) and (min-aspect-ratio: 5/4) {
+  html.on-game .app { max-width: 1240px; }
+  html.on-game #game {
+    display: grid; column-gap: 40px; row-gap: 18px; justify-content: center; align-content: center; min-height: calc(100svh - 40px);
+    grid-template-columns: minmax(280px, 360px) auto;
+    grid-template-rows: auto auto auto 1fr auto;
+    grid-template-areas: "head head" "chips board" "rules board" "actions board" "ad ad";
+  }
+  html.on-game .g-head { grid-area: head; }
+  html.on-game .chips { grid-area: chips; align-self: end; }
+  html.on-game .rule-strip { grid-area: rules; display: grid; grid-template-columns: 1fr; gap: 10px; }
+  html.on-game .rule-strip div { padding: 12px 14px; gap: 14px; font-size: 1.05rem; border-radius: 14px; }
+  html.on-game .rule-strip svg { width: 64px; height: 64px; }
+  html.on-game .actions { grid-area: actions; align-self: start; justify-content: space-around; gap: 12px; }
+  html.on-game .board-wrap { grid-area: board; align-self: center; width: min(calc(100svh - 170px), calc(100vw - 480px), 820px); }
+  html.on-game .ad-banner { grid-area: ad; }
+  html.on-game .g-head h2 { font-size: 1.7rem; }
+  html.on-game .mark { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
+  html.on-game .mark svg { width: 21px; height: 21px; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

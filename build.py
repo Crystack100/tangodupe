@@ -4,9 +4,12 @@ root = pathlib.Path(__file__).parent
 game = (root / "src/game.html").read_text().replace("/*CORE*/", (root / "src/core.js").read_text())
 # Bundle the font so the app works offline and does not wait on Google Fonts.
 import base64
-font = base64.b64encode((root / "src/fredoka-latin.woff2").read_bytes()).decode()
-face = ('<style>@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 300 700; font-display: swap; '
-        'src: url(data:font/woff2;base64,' + font + ') format("woff2"); }</style>')
+def face_for(family, file, weights):
+    data = base64.b64encode((root / "src" / file).read_bytes()).decode()
+    return ('@font-face { font-family: "' + family + '"; font-style: normal; font-weight: ' + weights + '; font-display: swap; '
+            'src: url(data:font/woff2;base64,' + data + ') format("woff2"); }')
+face = "<style>" + "".join([face_for("Mali", "Mali-400.woff2", "300 500"), face_for("Mali", "Mali-600.woff2", "600"),
+                            face_for("Mali", "Mali-700.woff2", "700 900")]) + "</style>"
 gfonts = [l for l in game.splitlines() if "fonts.googleapis.com" in l or "fonts.gstatic.com" in l]
 for l in gfonts: game = game.replace(l + "\n", "")
 game = game.replace("<style>", face + "\n<style>", 1)

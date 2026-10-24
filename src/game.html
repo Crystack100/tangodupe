@@ -1,7 +1,7 @@
 <title>Purrzle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&display=swap">
 <style>
 /* Layout: a phone app shell. Top status bar, one screen at a time (home, level map, shop, puzzle),
    and a bottom tab bar. The cats on the board are the hero.
@@ -14,8 +14,8 @@
   --star: #ffc54d; --star-off: #e7e3df;
   --bad: #e8676b; --bad-soft: rgba(232, 103, 107, .16);
   --shadow: rgba(60, 50, 40, .14);
-  --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
-  --font-body: "Fredoka", "Avenir Next Rounded", system-ui, -apple-system, sans-serif;
+  --font-display: "Mali", "Avenir Next Rounded", system-ui, sans-serif;
+  --font-body: "Mali", "Avenir Next Rounded", system-ui, -apple-system, sans-serif;
 }
 :root[data-theme="dark"] {
   --bg: #1c1917; --bg2: #1c1917; --surface: #282421; --cell: #312c28; --given: #3b3530; --line: #4a423b;
@@ -857,6 +857,12 @@ html.on-home .home-cats svg { width: min(118px, 14svh) !important; height: min(1
   border: 2.5px solid var(--ink-line); box-shadow: inset 0 -7px 0 color-mix(in srgb, var(--tile) 70%, #000), inset 0 3px 0 color-mix(in srgb, var(--tile) 55%, #fff), 2px 4px 0 var(--ink-line); background: var(--tile); }
 .home-cats .seat.s0 { --tile: color-mix(in srgb, var(--sun-core) 75%, var(--sun)); }
 .home-cats .seat.s1 { --tile: color-mix(in srgb, var(--moon) 80%, var(--surface)); }
+
+/* Shop cards in the same sticker style */
+.noads, .skin { border: 2.5px solid var(--ink-line) !important; box-shadow: 2px 3px 0 var(--ink-line) !important; border-radius: 18px 15px 19px 14px !important; }
+.noads.freestars { background: var(--surface) !important; }
+.chunky { border: 2.5px solid var(--ink-line) !important; box-shadow: 2px 3px 0 var(--ink-line) !important; background: var(--accent) !important; text-shadow: none !important; border-radius: 14px 12px 15px 11px !important; }
+.chunky::after { display: none !important; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">

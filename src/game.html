@@ -729,6 +729,46 @@ body.no-ads .ad-banner { display: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* first-time tutorial: little lessons played on a mini row */
+.tut { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; padding: 16px; background: rgba(20, 12, 10, .5); }
+.tut-card { --acc-dk: color-mix(in srgb, var(--accent) 68%, #000); --acc-lt: color-mix(in srgb, var(--accent) 70%, #fff); --slab: color-mix(in srgb, var(--surface) 80%, #000);
+  position: relative; width: 100%; max-width: 380px; background: var(--surface); border-radius: 24px; padding: 18px 18px 20px; display: grid; justify-items: center; gap: 12px; text-align: center;
+  box-shadow: 0 6px 0 var(--slab), 0 24px 40px -12px rgb(0 0 0 / .5); animation: tutIn .35s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes tutIn { from { transform: scale(.85); opacity: 0; } }
+.tut-top { width: 100%; display: flex; justify-content: space-between; align-items: center; }
+.tut-dots { display: flex; gap: 6px; }
+.tut-dots i { width: 8px; height: 8px; border-radius: 4px; background: var(--line); transition: width .25s, background .25s; }
+.tut-dots i.on { width: 22px; background: var(--accent); }
+.tut-dots i.done { background: color-mix(in srgb, var(--accent) 45%, var(--surface)); }
+.tut-skip { border: 0; background: none; color: var(--muted); font: 500 .95rem var(--font-display); padding: 6px 4px; cursor: pointer; }
+.tut-cat { width: 74px; height: 74px; margin-top: -4px; filter: drop-shadow(0 4px 3px rgb(40 20 10 / .25)); }
+.tut-cat.bounce { animation: pop .4s cubic-bezier(.3, 1.8, .5, 1); }
+.tut-card h3 { margin: 0; font: 700 1.5rem/1.1 var(--font-display); color: var(--brand); }
+.tut-text { margin: 0; font: 500 1.02rem/1.35 var(--font-display); color: var(--ink); max-width: 30ch; }
+.tut-row { position: relative; display: flex; gap: 6px; padding: 8px; margin: 6px 0 2px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 22px -14px var(--shadow); }
+.tut-row .cell { width: 46px; height: 46px; flex: none; }
+.tut-row .cell.goal { box-shadow: inset 0 0 0 3px var(--accent); animation: goalPulse 1.2s ease-in-out infinite; }
+.tut-row .cell.goal.v0, .tut-row .cell.goal.v1 { animation: none; }
+@keyframes goalPulse { 50% { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 5px color-mix(in srgb, var(--accent) 30%, transparent); } }
+.tut-row .cell.ok { box-shadow: inset 0 0 0 3px #3fb27f; animation: none; }
+.tut-row .mark { top: 50%; }
+.tut-rules .tr-eq, .tut-rules .tr-op { font-weight: 700; font-size: 1.15rem; color: #2f86d6; } .tut-rules .tr-op { color: #f07a2a; }
+.tut-row .cell.bad, .tut-row .cell.bad.v0, .tut-row .cell.bad.v1 { box-shadow: inset 0 0 0 3px var(--bad), 0 0 0 3px rgb(232 72 77 / .25); animation: shake .3s; }
+.tut-msg { min-height: 2.6em; margin: 0; font: 600 .98rem/1.3 var(--font-display); color: var(--muted); display: grid; place-items: center; }
+.tut-msg.good { color: #2e9b68; } .tut-msg.bad { color: var(--bad); }
+.tut-rules { display: grid; gap: 8px; width: 100%; margin: 2px 0; padding: 0; list-style: none; text-align: left; }
+.tut-rules li { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; background: var(--cell); font: 500 .95rem/1.25 var(--font-display); }
+.tut-rules b { flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 700; font-size: .9rem; }
+.tut-go { width: 100%; border: 0; border-radius: 16px; padding: 15px; cursor: pointer; font: 800 1.2rem var(--font-display); letter-spacing: .02em; color: #fff; text-shadow: 0 2px 0 var(--acc-dk);
+  background: linear-gradient(var(--acc-lt), var(--accent) 60%); box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 5px 0 var(--acc-dk), 0 14px 22px -12px var(--acc-dk); transition: transform .08s, box-shadow .08s, opacity .2s; }
+.tut-go:active { transform: translateY(4px); box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 1px 0 var(--acc-dk); }
+.tut-go:disabled { opacity: .45; filter: grayscale(.4); cursor: default; }
+.tut-go:not(:disabled) { animation: tutReady .5s cubic-bezier(.3, 1.8, .5, 1); }
+@keyframes tutReady { from { transform: scale(.94); } }
+.how-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 0; border-radius: 16px; cursor: pointer; text-align: left; color: var(--ink);
+  background: var(--cell); box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--cell) 86%, #000); font: 600 1.05rem var(--font-display); }
+.how-btn svg { width: 40px; height: 40px; flex: none; padding: 9px; box-sizing: border-box; border-radius: 12px; color: #fff; background: linear-gradient(var(--acc-lt, #f8c08c), var(--accent)); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 68%, #000); fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1016,6 +1056,23 @@ body.no-ads .ad-banner { display: none; }
   </div>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
+
+<div class="tut" id="tut" role="dialog" aria-modal="true" aria-labelledby="tut-title" hidden>
+  <div class="tut-card">
+    <div class="tut-top"><div class="tut-dots" id="tut-dots"></div><button class="tut-skip" id="tut-skip" type="button">Skip</button></div>
+    <svg class="tut-cat" id="tut-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
+    <h3 id="tut-title">How to play</h3>
+    <p class="tut-text" id="tut-text"></p>
+    <div class="tut-row" id="tut-row"></div>
+    <ul class="tut-rules" id="tut-rules" hidden>
+      <li><b>1</b>No more than 2 of the same cat side by side</li>
+      <li><b>2</b>Each row and column has 3 Sunny and 3 Luna</li>
+      <li><b>3</b><span><span class="tr-eq">=</span> means same cat, <span class="tr-op">×</span> means different</span></li>
+    </ul>
+    <p class="tut-msg" id="tut-msg" aria-live="polite"></p>
+    <button class="tut-go" id="tut-go" type="button">Next</button>
+  </div>
+</div>
 <div class="sheet-bg" id="sheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
     <h3 class="set-head"><span id="sheet-title">Settings</span><button class="round set-x" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
@@ -1038,6 +1095,7 @@ body.no-ads .ad-banner { display: none; }
       <input type="range" id="s-sound" min="0" max="100" step="1">
       <output id="s-sound-v">70</output>
     </div>
+    <button class="how-btn" id="s-how" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg>How to play</button>
     <button class="noads-btn" id="s-noads" type="button">
       <span class="na-ic" aria-hidden="true"><b>AD</b></span>
       <span class="na-txt"><b id="na-title">Remove ads</b><small id="na-sub">No banners or pop-ups, forever</small></span>
@@ -1159,6 +1217,7 @@ body.no-ads .ad-banner { display: none; }
   setInterval(function () { if (!$("home").hidden) renderCountdown(); }, 1000);
   $("h-goal").onclick = function () { show("store"); };
   $("h-daily").onclick = function () {
+    if (!save.tutDone) return openTut(function () { $("h-daily").onclick(); });
     if (play && !play.done && play.daily === dayKey()) return resumeLevel();
     var key = dayKey(), p = T.generate((key * 2246822519) >>> 0, "medium");
     play = { level: 0, daily: key, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
@@ -1234,7 +1293,94 @@ body.no-ads .ad-banner { display: none; }
   $("pg-next").onclick = function () { page++; renderMap(); };
 
   /* ---------- puzzle ---------- */
+
+  // First-time tutorial: five tiny lessons, each solved by tapping the glowing square.
+  var TUT = [
+    { title: "Meet Sunny and Luna", text: "Tap the glowing square to place Sunny. Tap it again for Luna.", row: [-1], goal: 0, answer: 1, cat: "sun",
+      say: { 0: "That's Sunny! Tap again for Luna.", 1: "And that's Luna! A third tap clears the square." } },
+    { title: "No three in a row", text: "Never put 3 of the same cat side by side.", row: [0, 0, -1, 1], goal: 2, answer: 1, cat: "sun",
+      bad: { 0: { msg: "Three Sunnys in a row! Tap again to swap.", cells: [0, 1, 2] } } },
+    { title: "Three of each", text: "Every row and column holds 3 Sunny and 3 Luna.", row: [1, 0, 0, 1, 0, -1], goal: 5, answer: 1, cat: "moon",
+      bad: { 0: { msg: "That's 4 Sunnys. Only 3 of each fit in a row.", cells: [1, 2, 4, 5] } } },
+    { title: "= means the same", text: "Cats joined by = must be the same.", row: [-1, 1], edges: [{ a: 0, type: "=" }], goal: 0, answer: 1, cat: "moon",
+      bad: { 0: { msg: "The = wants matching cats. Try Luna.", edge: 0 } } },
+    { title: "× means different", text: "Cats joined by × must be different.", row: [0, -1], edges: [{ a: 0, type: "×" }], goal: 1, answer: 1, cat: "sun",
+      bad: { 0: { msg: "The × wants different cats. Try Luna.", edge: 0 } } },
+    { title: "You're ready!", text: "Fill every square so all the rules hold. Each puzzle has exactly one answer, so you never need to guess.", rules: true, cat: "sun" }
+  ];
+  var tut = null;
+  function openTut(then) {
+    tut = { step: 0, then: then };
+    $("tut-dots").innerHTML = TUT.map(function () { return "<i></i>"; }).join("");
+    $("tut").hidden = false; tutStep();
+  }
+  function closeTut() {
+    $("tut").hidden = true; save.tutDone = true; persist();
+    var f = tut && tut.then; tut = null; if (f) f();
+  }
+  function tutStep() {
+    var L = TUT[tut.step], cat = $("tut-cat");
+    tut.row = (L.row || []).slice();
+    $("tut-title").textContent = L.title; $("tut-text").textContent = L.text;
+    cat.innerHTML = '<use href="#' + L.cat + '"/>'; cat.classList.remove("bounce");
+    $("tut-dots").querySelectorAll("i").forEach(function (d, k) { d.className = k === tut.step ? "on" : k < tut.step ? "done" : ""; });
+    $("tut-rules").hidden = !L.rules; $("tut-row").hidden = !!L.rules;
+    $("tut-skip").hidden = !!L.rules;
+    var last = tut.step === TUT.length - 1;
+    $("tut-go").textContent = last ? (tut.then ? "Let's play!" : "Got it") : "Next";
+    $("tut-go").disabled = !L.rules;
+    tutMsg("", "");
+    if (!L.rules) tutRow();
+  }
+  function tutMsg(t, kind) { var m = $("tut-msg"); m.textContent = t; m.className = "tut-msg" + (kind ? " " + kind : ""); }
+  function tutRow(badCells, badEdge) {
+    var L = TUT[tut.step], box = $("tut-row"), names = ["sun", "moon"], CW = 46, GAP = 6;
+    box.innerHTML = "";
+    tut.row.forEach(function (v, i) {
+      var b = document.createElement("button"), given = L.row[i] !== -1;
+      b.type = "button"; b.className = "cell" + (given ? " given" : "") + (v === 0 ? " v0" : v === 1 ? " v1" : "");
+      if (i === L.goal) b.classList.add(tut.solved ? "ok" : "goal");
+      if (badCells && badCells.indexOf(i) >= 0) b.classList.add("bad");
+      if (v !== -1) b.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
+      b.setAttribute("aria-label", v === -1 ? "Empty square" : v === 0 ? "Sunny" : "Luna");
+      if (i === tut.changed) b.classList.add("pop");
+      if (!given) b.onclick = function () { tutTap(i); };
+      box.appendChild(b);
+    });
+    (L.edges || []).forEach(function (e, j) {
+      var m = document.createElement("span");
+      m.className = "mark " + (e.type === "=" ? "eq" : "op") + (badEdge === j ? " bad" : "");
+      m.innerHTML = e.type === "=" ? '<svg viewBox="0 0 16 16"><path d="M3 5.2h10M3 10.8h10"/></svg>' : '<svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
+      m.style.left = (8 + (e.a + 1) * CW + e.a * GAP + GAP / 2) + "px";
+      box.appendChild(m);
+    });
+    tut.changed = null;
+  }
+  function tutTap(i) {
+    var L = TUT[tut.step];
+    if (tut.solved && tut.step > 0) return;
+    var v = tut.row[i] === -1 ? 0 : tut.row[i] === 0 ? 1 : -1;
+    tut.row[i] = v; tut.changed = i;
+    Audio.sfx(v === -1 ? "clear" : "place" + v);
+    var bad = L.bad && L.bad[v];
+    if (L.say && L.say[v] != null) tutMsg(L.say[v], v === L.answer ? "good" : "");
+    else if (bad) { tutMsg(bad.msg, "bad"); Audio.sfx("oops"); }
+    else if (v === L.answer) tutMsg(["", "Nice! Luna fits.", "Perfect, 3 of each.", "Yes! Both are Luna.", "Right! Sunny and Luna differ."][tut.step] || "Nice!", "good");
+    else tutMsg("", "");
+    if (v === L.answer && !tut.solved) {
+      tut.solved = true; $("tut-go").disabled = false; Audio.sfx("star", 1);
+      var cat = $("tut-cat"); cat.classList.remove("bounce"); void cat.offsetWidth; cat.classList.add("bounce");
+    }
+    tutRow(bad && bad.cells, bad && bad.edge);
+  }
+  $("tut-go").onclick = function () {
+    if (tut.step >= TUT.length - 1) return closeTut();
+    tut.step++; tut.solved = false; tutStep();
+  };
+  $("tut-skip").onclick = closeTut;
+  $("s-how").onclick = function () { $("sheet").hidden = true; openTut(null); };
   function startLevel(n) {
+    if (n === 1 && !save.tutDone && !(tut)) return openTut(function () { startLevel(1); });
     var p = T.level(n);
     play = { level: n, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
              board: p.givens.slice(), history: [], elapsed: 0, done: false };
@@ -1668,6 +1814,7 @@ body.no-ads .ad-banner { display: none; }
   function start(data) {
     load();
     if (data && data.save) save = data.save;
+    if (!save.tutDone && (save.wins || Object.keys(save.best).length)) save.tutDone = true;
     play = save.play && save.play.board ? save.play : null;
     if (play && play.daily && play.daily !== dayKey()) play = save.play = null;
     buildTiles();

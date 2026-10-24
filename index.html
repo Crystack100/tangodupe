@@ -1452,7 +1452,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
 
   function load() {
     try {
-      var s = JSON.parse(localStorage.getItem("tango:v2"));
+      var s = JSON.parse(store().getItem("tango:v2"));
       if (s && s.best) {
         save = Object.assign(save, s);
         save.daily = save.daily || {}; 
@@ -1462,7 +1462,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }
     } catch (e) {}
   }
-  function persist() { try { localStorage.setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
+  // On CrazyGames, saves go through their SDK so they follow the player's account across devices.
+  function store() { return PORTAL && CG.data ? CG.data : localStorage; }
+  function persist() { try { store().setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
@@ -2094,7 +2096,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // Privacy first: Google's consent form (Europe and other places that need it), then Apple's
     // "Allow tracking?" prompt, then start the ad SDK.
     function start() {
-      if (PORTAL) { try { CG.init().catch(function () {}); } catch (e) {} return; }
+      if (PORTAL) return;
       if (!AdMob) return;
       AdMob.addListener("interstitialAdDismissed", function () { finish(); load("interstitial"); });
       AdMob.addListener("interstitialAdFailedToShow", function () { finish(); load("interstitial"); });
@@ -2243,11 +2245,11 @@ if (typeof module !== "undefined") module.exports = TangoCore;
      Everything is synthesized with Web Audio, so there are no files to load.
      iOS only allows audio after a tap, so the context starts on the first touch. */
   var Audio = (function () {
-    var ctx = null, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
+    var ctx = null, muted = false, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
     function ensure() {
       if (!ctx) {
         var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
-        ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination);
+        ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination); master.gain.value = muted ? 0 : 1;
         musicBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus.connect(master); sfxBus.connect(master);
         volumes();
       }
@@ -2311,7 +2313,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     });
     // Quiet the music while a video ad plays.
     function hold(on) { if (on) stopMusic(); else if (ctx && save.music) startMusic(); }
-    return { sfx: sfx, volumes: volumes, hold: hold };
+    // CrazyGames' own mute button.
+    function mute(on) { muted = !!on; if (master) master.gain.value = muted ? 0 : 1; }
+    return { sfx: sfx, volumes: volumes, hold: hold, mute: mute };
   })();
 
   /* ---------- boot ---------- */
@@ -2345,7 +2349,17 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];
     return { save: save, screen: cur };
   });
-  window.claude && window.claude.hot && window.claude.hot.ready
+  // CrazyGames: wait for their SDK so the saved game can be read from it, and follow their mute setting.
+  if (PORTAL) {
+    var boot = function () {
+      try {
+        Audio.mute(CG.game.settings.muteAudio);
+        CG.game.addSettingsChangeListener(function (s) { Audio.mute(s.muteAudio); });
+      } catch (e) {}
+      start({});
+    };
+    try { CG.init().then(boot, boot); } catch (e) { boot(); }
+  } else window.claude && window.claude.hot && window.claude.hot.ready
     ? window.claude.hot.ready(start)
     : start((window.claude && window.claude.hot && window.claude.hot.data) || {});
 })();

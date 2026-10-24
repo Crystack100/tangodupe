@@ -66,9 +66,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<!-- AdMob app ID. This is Google's test ID; replace it with Purrzle's own iOS app ID from admob.google.com. -->
+	<!-- Purrzle's iOS app ID from admob.google.com -->
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-5841268409443760~7514675191</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>Purrzle is free thanks to ads. Allowing this shows you ads that fit you better.</string>
 	<key>SKAdNetworkItems</key>

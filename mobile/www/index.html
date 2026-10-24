@@ -465,6 +465,24 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .mark.eq, .mark.op { box-shadow: 0 1px 3px rgb(0 0 0 / .12); }
 .mark svg { width: 14px; height: 14px; stroke-width: 4; }
 .mark.bad, .mark.eq.bad, .mark.op.bad { color: #fff; background: var(--bad); border: 0; box-shadow: 0 0 0 3px rgb(232 103 107 / .3); }
+/* Broken rules have to be impossible to miss: the tiles turn red, glow and wear a "!" badge,
+   the sign they break gets bigger, and the rule it breaks lights up above the board. */
+.board .cell.bad {
+  --tile: color-mix(in srgb, var(--bad) 42%, var(--surface)); z-index: 1;
+  background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--bad) 28%, transparent) 0 5px, transparent 5px 10px);
+  box-shadow: inset 0 0 0 3px var(--bad), 0 0 0 2px color-mix(in srgb, var(--bad) 40%, transparent), 0 0 14px 1px color-mix(in srgb, var(--bad) 55%, transparent);
+  animation: shake .3s, badPulse 1.1s ease-in-out .3s 3;
+}
+.board .cell.bad::after {
+  content: "!"; position: absolute; top: -5px; right: -5px; z-index: 2; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--bad); color: #fff; font: 800 12px/18px var(--font-display); text-align: center; box-shadow: 0 0 0 2px var(--surface);
+}
+@keyframes badPulse { 50% { box-shadow: inset 0 0 0 3px var(--bad), 0 0 0 4px color-mix(in srgb, var(--bad) 35%, transparent), 0 0 22px 5px color-mix(in srgb, var(--bad) 65%, transparent); } }
+.mark.bad, .mark.eq.bad, .mark.op.bad { scale: 1.3; box-shadow: 0 0 0 3px var(--surface), 0 0 0 6px color-mix(in srgb, var(--bad) 45%, transparent); }
+.err-lines .ln { stroke-width: 7; }
+.rule-strip div { transition: background-color .2s, color .2s; }
+.rule-strip div.broken { background: color-mix(in srgb, var(--bad) 16%, var(--cell)); color: var(--bad); box-shadow: inset 0 0 0 2px var(--bad); animation: shake .3s; }
+@media (prefers-reduced-motion: reduce) { .board .cell.bad, .rule-strip div.broken { animation: none; } }
 .actions { display: flex; justify-content: center; gap: 34px; padding-top: 4px; }
 .rbtn { border: 0; background: none; padding: 0; cursor: pointer; display: grid; justify-items: center; gap: 4px; font: 600 .82rem var(--font-display); color: var(--muted); }
 .rbtn .rb {
@@ -1751,6 +1769,22 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       return '<path class="halo" d="' + d + '"/><path class="ln" style="--len:' + L + '" d="' + d + '"/>';
     }).join("");
   }
+  // Light up the rule chip for each kind of break on show: too many of one cat in a line, three in a row, or a sign.
+  function markBrokenRules(res) {
+    var broke = [false, false, shown.edges.size > 0], r, c, k;
+    shown.cells.forEach(function (i) { if (res.triples.has(i)) broke[1] = true; });
+    function line(get) {
+      var cnt = [0, 0];
+      for (k = 0; k < N; k++) if (play.board[get(k)] !== -1) cnt[play.board[get(k)]]++;
+      [0, 1].forEach(function (v) {
+        if (cnt[v] <= N / 2) return;
+        for (k = 0; k < N; k++) if (play.board[get(k)] === v && shown.cells.has(get(k))) broke[0] = true;
+      });
+    }
+    for (r = 0; r < N; r++) line(function (k) { return r * N + k; });
+    for (c = 0; c < N; c++) line(function (k) { return k * N + c; });
+    document.querySelectorAll("#game .rule-strip > div").forEach(function (d, j) { d.classList.toggle("broken", broke[j]); });
+  }
   function render(changed, reveal) {
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
     if (res.solved && !play.done) win();
@@ -1785,6 +1819,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     });
     marks.forEach(function (m, j) { m.classList.toggle("bad", shown.edges.has(j)); });
     drawErrLines(res);
+    markBrokenRules(res);
     $("g-filled").firstChild.textContent = play.board.filter(function (v) { return v !== -1; }).length;
     $("undo").disabled = play.done || !play.history.length;
     $("hint").disabled = $("clear").disabled = play.done;

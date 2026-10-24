@@ -796,6 +796,8 @@ body.no-ads .ad-banner { display: none; }
 @keyframes tutReady { from { transform: scale(.94); } }
 /* rewarded videos */
 body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .ad-x { display: none; }
+/* Game sites like CrazyGames show their own ads and do not allow outside purchases. */
+body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .ad-x { display: none; }
 .pop-card { align-self: center; border-radius: 20px; margin: 16px; width: calc(100% - 32px); text-align: center; }
 .pop-card h3 { justify-content: center; }
 .pop-card .chunky, .pop-card .soft { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
@@ -1406,6 +1408,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   var $ = function (id) { return document.getElementById(id); };
   // In the phone app, Capacitor connects the game to native add-ons (ads, notifications, sharing).
   var Cap = window.Capacitor, NATIVE = !!(Cap && Cap.isNativePlatform && Cap.isNativePlatform());
+  // Set on the CrazyGames build, which loads their SDK before the game.
+  var CG = window.CrazyGames && window.CrazyGames.SDK, PORTAL = !!CG;
   function plugin(name) { return NATIVE && Cap.registerPlugin ? Cap.registerPlugin(name) : null; }
   var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, noAds: false, wins: 0, music: 40, sound: 70, theme: "light" };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
@@ -2037,6 +2041,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // Privacy first: Google's consent form (Europe and other places that need it), then Apple's
     // "Allow tracking?" prompt, then start the ad SDK.
     function start() {
+      if (PORTAL) { try { CG.init().catch(function () {}); } catch (e) {} return; }
       if (!AdMob) return;
       AdMob.addListener("interstitialAdDismissed", function () { finish(); load("interstitial"); });
       AdMob.addListener("interstitialAdFailedToShow", function () { finish(); load("interstitial"); });
@@ -2056,6 +2061,15 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }).catch(function () {});
     }
     function show(kind, done) {
+      if (PORTAL) {
+        open = true; Audio.hold(true);
+        var end = function (ok) { if (!open) return; open = false; Audio.hold(false); done(ok); };
+        try {
+          CG.ad.requestAd(kind === "rewarded" ? "rewarded" : "midgame",
+            { adStarted: function () {}, adFinished: function () { end(true); }, adError: function () { end(kind !== "rewarded"); } });
+        } catch (e) { end(kind !== "rewarded"); }
+        return;
+      }
       if (!NATIVE) { open = true; return showAd(function () { open = false; done(true); }, kind === "rewarded"); }
       if (!ready[kind]) return done(false);
       after = done; earned = false; open = true; ready[kind] = false; Audio.hold(true);
@@ -2265,7 +2279,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     buildTiles();
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin(); applyAds();
-    document.body.classList.toggle("native", NATIVE);
+    document.body.classList.toggle("native", NATIVE); document.body.classList.toggle("portal", PORTAL);
     paintRemind(); if (save.remind) scheduleReminders();
     var screen = data && data.screen;
     if (screen === "game" && play) resumeLevel(); else show(screen || "home");

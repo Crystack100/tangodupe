@@ -2024,9 +2024,10 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("ad-close").onclick = function () { $("ad-full").hidden = true; clearInterval(adT); if (adDone) { var f = adDone; adDone = null; f(); } };
   $("ad-full-x").onclick = $("ad-banner-x").onclick = $("noads-buy").onclick = removeAds;
   $("s-noads").onclick = function () { if (save.noAds) { save.noAds = false; persist(); applyAds(); } else removeAds(); };
-  // AdMob ad unit IDs from admob.google.com. While these are empty, Google's test ads are shown.
+  // AdMob ad unit IDs from admob.google.com. Test builds (and any ID left empty) show Google's test ads,
+  // so tapping ads while testing can't get the AdMob account in trouble.
   var AD_UNITS = {
-    android: { interstitial: "", rewarded: "" },
+    android: { interstitial: "ca-app-pub-5841268409443760/4304601652", rewarded: "ca-app-pub-5841268409443760/2991519986" },
     ios: { interstitial: "", rewarded: "" }
   };
   var TEST_UNITS = {
@@ -2038,7 +2039,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var AdMob = plugin("AdMob"), os = NATIVE ? Cap.getPlatform() : "web";
     var ready = { interstitial: false, rewarded: false }, on = false, open = false, privacy = false, after = null, earned = false;
     function opts(kind) {
-      var id = (AD_UNITS[os] || {})[kind];
+      var id = !Cap.DEBUG && (AD_UNITS[os] || {})[kind];
       return id ? { adId: id } : { adId: TEST_UNITS[os][kind], isTesting: true };
     }
     function load(kind) {

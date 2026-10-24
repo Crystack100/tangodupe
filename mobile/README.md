@@ -33,7 +33,7 @@ The repo root has `codemagic.yaml` with an "iOS TestFlight" workflow.
 ## Ads (Google AdMob)
 - Full-screen ad after every third win, plus optional reward videos (free hint, +3 bonus stars, free stars in the shop, double the daily treat).
 - On launch the app shows Google's consent form where the law needs it (Europe, UK), then Apple's "Allow tracking?" prompt on iPhone, then starts ads.
-- Until real IDs are added, Google's test ads show. To go live, replace the test IDs in three places:
+- Test builds (the GitHub APK, simulator) always show Google's test ads; store builds (Play bundle, TestFlight) show real ads. Never tap real ads on your own phone. The IDs live in three places:
   1. `src/game.html`: `AD_UNITS` (interstitial and rewarded ad unit IDs for Android and iOS), then run `python3 build.py`.
   2. `android/app/src/main/res/values/strings.xml`: `admob_app_id` (Android app ID, has a `~`).
   3. `ios/App/App/Info.plist`: `GADApplicationIdentifier` (iOS app ID, has a `~`).

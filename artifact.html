@@ -794,7 +794,7 @@ body.no-ads .ad-banner { display: none; }
 .tut-go:disabled { opacity: .45; filter: grayscale(.4); cursor: default; }
 .tut-go:not(:disabled) { animation: tutReady .5s cubic-bezier(.3, 1.8, .5, 1); }
 @keyframes tutReady { from { transform: scale(.94); } }
-/* rewarded videos, daily treat, streak */
+/* rewarded videos */
 body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .ad-x { display: none; }
 .pop-card { align-self: center; border-radius: 20px; margin: 16px; width: calc(100% - 32px); text-align: center; }
 .pop-card h3 { justify-content: center; }
@@ -808,15 +808,6 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
 .bonus-btn svg { width: 20px; height: 20px; fill: currentColor; } .bonus-btn svg.st { fill: #fff; filter: drop-shadow(0 1px 0 #c9861a); }
 .bonus-btn:active { transform: translateY(3px); box-shadow: 0 1px 0 #c9861a; }
 .win-row:has(#win-share) { grid-template-columns: 1fr 1fr 1fr; }
-.streak { border: 0; cursor: pointer; color: var(--ink); justify-self: start; padding-right: 12px; }
-.streak svg, .treat-streak svg { fill: #ff8a3d; }
-.treat-streak { margin: -4px 0 0; display: inline-flex; gap: 6px; justify-content: center; align-items: center; font: 700 1.2rem var(--font-display); }
-.treat-streak svg { width: 26px; height: 26px; }
-.treat-track { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
-.treat-track li { display: grid; gap: 2px; justify-items: center; padding: 7px 0 6px; border-radius: 10px; background: var(--cell); color: var(--muted); font: 700 .8rem var(--font-display); }
-.treat-track li svg { width: 18px; height: 18px; fill: var(--star-off); }
-.treat-track li.done { opacity: .55; } .treat-track li.done svg, .treat-track li.today svg { fill: var(--star); }
-.treat-track li.today { background: var(--accent); color: var(--on-accent); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 68%, #000); transform: scale(1.08); }
 .how-btn .onoff { margin-left: auto; font: 700 .9rem var(--font-display); color: var(--muted); }
 .how-btn .onoff.on { color: var(--accent); }
 .how-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 0; border-radius: 16px; cursor: pointer; text-align: left; color: var(--ink);
@@ -988,7 +979,7 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
   <!-- HOME -->
   <section id="home" class="screen" aria-label="Home">
     <div class="top3">
-      <button class="pill streak" id="h-streak" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c.6 3.2 4.8 5.6 4.8 10.6a4.8 4.8 0 0 1-9.6 0c0-2.4 1.2-3.9 2.3-5 .2 1.7.9 2.8 2 3.4-.4-3.3-.6-6 .5-9z"/></svg><span id="h-streak-n">1</span></button>
+      <span></span>
       <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
       <button class="round gear" id="t-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
     </div>
@@ -1146,17 +1137,6 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
     <button class="chunky" id="hint-ad" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video: free hint</button>
     <button class="soft" id="hint-pay" type="button">Use a hint (+15s on the clock)</button>
     <button class="soft" id="hint-no" type="button">Not now</button>
-  </div>
-</div>
-
-<div class="sheet-bg" id="treat" hidden>
-  <div class="sheet pop-card treat" role="dialog" aria-modal="true" aria-labelledby="treat-title">
-    <h3 id="treat-title">Daily treat!</h3>
-    <p class="treat-streak"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5c.6 3.2 4.8 5.6 4.8 10.6a4.8 4.8 0 0 1-9.6 0c0-2.4 1.2-3.9 2.3-5 .2 1.7.9 2.8 2 3.4-.4-3.3-.6-6 .5-9z"/></svg><span id="treat-day">Day 1</span></p>
-    <ol class="treat-track" id="treat-track"></ol>
-    <p class="note" id="treat-note">Come back every day to keep your streak. Day 7 is the big one!</p>
-    <button class="chunky" id="treat-claim" type="button">Claim</button>
-    <button class="soft" id="treat-double" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video to double it</button>
   </div>
 </div>
 
@@ -1468,7 +1448,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     });
     if (!inGame) stopClock();
     window.scrollTo(0, 0); $("scroll").scrollTop = 0; document.body.scrollTop = 0; document.documentElement.scrollTop = 0;
-    if (screen === "home") { renderHome(); setTimeout(checkTreat, 0); }
+    if (screen === "home") renderHome();
     if (screen === "levels") renderMap();
     if (screen === "store") renderStore();
   }
@@ -1989,7 +1969,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
 
   /* ---------- ads ----------
      In the phone app these are Google AdMob ads: a full-screen ad after every third win, and
-     reward videos the player chooses to watch (free hint, bonus stars, double daily treat).
+     reward videos the player chooses to watch (free hint, bonus stars).
      The web build fakes both with a 5 second card. "Remove ads" is web-only for now; in the
      app it becomes a one-time in-app purchase later. */
   function applyAds() {
@@ -2098,7 +2078,6 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   // Anything that offers a reward video hides itself while no video is loaded.
   function adsChanged() {
     paintBonus(); paintFree();
-    if (!$("treat").hidden) $("treat-double").hidden = !Ads.canReward();
     $("s-privacy").hidden = !Ads.privacy();
   }
   $("s-privacy").onclick = function () { $("sheet").hidden = true; Ads.privacyForm(); };
@@ -2125,60 +2104,16 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     });
   };
 
-  /* ---------- daily treat ----------
-     Opening the game on a new day gives a few stars. Coming back on back-to-back days builds a
-     streak; the gift grows through the week and day 7 is the biggest. */
-  var TREATS = [1, 2, 2, 3, 3, 4, 6];
-  function checkTreat() {
-    // Only on the home screen, so it never interrupts a puzzle or the first-time tutorial.
-    if (!save.tutDone || $("home").hidden || !$("splash").hidden) return;
-    var s = save.streak || (save.streak = { day: 0, n: 0 }), today = dayKey();
-    if (s.day !== today) {
-      var y = new Date(); y.setDate(y.getDate() - 1);
-      s.n = s.day === dayKey(y) ? s.n + 1 : 1; s.day = today; s.claim = TREATS[(s.n - 1) % 7];
-      persist(); scheduleReminders();
-    }
-    paintStreak();
-    if (s.claim) openTreat();
-  }
-  function paintStreak() {
-    var s = save.streak; $("h-streak").hidden = !(s && s.n);
-    if (s) { $("h-streak-n").textContent = s.n; $("h-streak").setAttribute("aria-label", s.n + " day streak"); }
-  }
-  function openTreat() {
-    var s = save.streak, at = (s.n - 1) % 7;
-    $("treat-day").textContent = s.n === 1 ? "Day 1" : s.n + " day streak!";
-    $("treat-track").innerHTML = TREATS.map(function (n, i) {
-      return '<li class="' + (i < at ? "done" : i === at ? "today" : "") + '">Day ' + (i + 1) + '<svg viewBox="0 0 24 24"><use href="#star"/></svg>+' + n + "</li>";
-    }).join("");
-    $("treat-claim").textContent = "Claim +" + s.claim + (s.claim === 1 ? " star" : " stars");
-    $("treat-double").hidden = !Ads.canReward();
-    $("treat").hidden = false;
-  }
-  function claimTreat(times) {
-    var s = save.streak; if (!s.claim) return;
-    var got = s.claim * times; save.wallet += got; s.claim = 0; persist();
-    $("treat").hidden = true; Audio.sfx("coin"); toast("+" + got + (got === 1 ? " star!" : " stars!")); renderHome();
-  }
-  $("treat-claim").onclick = function () { claimTreat(1); };
-  $("treat-double").onclick = function () { Ads.reward(function () { claimTreat(2); }); };
-  $("h-streak").onclick = function () { toast("Come back tomorrow for day " + (save.streak.n + 1) + "!"); };
-
   /* ---------- reminders (phone app only) ----------
-     A local notification every morning, and one the next evening when a streak is going. */
+     A local notification every morning. */
   var Notes = plugin("LocalNotifications");
   function scheduleReminders() {
     if (!Notes) return;
+    // id 2 was the old streak reminder; cancelling it clears any left from earlier versions.
     Notes.cancel({ notifications: [{ id: 1 }, { id: 2 }] }).catch(function () {}).then(function () {
       if (!save.remind) return;
       var list = [{ id: 1, title: "Today's puzzle is ready \ud83d\udc31", body: "Sunny and Luna saved you a fresh daily puzzle.",
         schedule: { on: { hour: 9, minute: 0 }, allowWhileIdle: true } }];
-      var s = save.streak;
-      if (s && s.n >= 2) {
-        var at = new Date(); at.setDate(at.getDate() + 1); at.setHours(19, 0, 0, 0);
-        list.push({ id: 2, title: "Keep your streak going \ud83d\udd25", body: "You're on a " + s.n + " day streak. Open Purrzle to claim today's treat!",
-          schedule: { at: at, allowWhileIdle: true } });
-      }
       return Notes.schedule({ notifications: list });
     }).catch(function () {});
   }
@@ -2331,15 +2266,14 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin(); applyAds();
     document.body.classList.toggle("native", NATIVE);
-    paintRemind(); paintStreak(); if (save.remind) scheduleReminders();
+    paintRemind(); if (save.remind) scheduleReminders();
     var screen = data && data.screen;
     if (screen === "game" && play) resumeLevel(); else show(screen || "home");
     var splash = $("splash");
     if (screen) splash.hidden = true;
     else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 1250);
-    setTimeout(function () { Ads.start(); checkTreat(); }, screen ? 0 : 1700);
+    setTimeout(Ads.start, screen ? 0 : 1700);
   }
-  document.addEventListener("visibilitychange", function () { if (!document.hidden) checkTreat(); });
   if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () {
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];
     return { save: save, screen: cur };

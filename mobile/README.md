@@ -31,7 +31,7 @@ The repo root has `codemagic.yaml` with an "iOS TestFlight" workflow.
   4. In Play Console, create the app Purrzle (package `com.alden.purrzle`), go to Testing > Internal testing, and upload the `.aab`.
 
 ## Ads (Google AdMob)
-- Full-screen ad after every third win, plus optional reward videos (free hint, +3 bonus stars, free stars in the shop, double the daily treat).
+- Full-screen ad after every third win, plus optional reward videos (free hint, +3 bonus stars, free stars in the shop).
 - On launch the app shows Google's consent form where the law needs it (Europe, UK), then Apple's "Allow tracking?" prompt on iPhone, then starts ads.
 - Test builds (the GitHub APK, simulator) always show Google's test ads; store builds (Play bundle, TestFlight) show real ads. Never tap real ads on your own phone. The IDs live in three places:
   1. `src/game.html`: `AD_UNITS` (interstitial and rewarded ad unit IDs for Android and iOS), then run `python3 build.py`.

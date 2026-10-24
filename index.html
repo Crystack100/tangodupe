@@ -717,8 +717,9 @@ body.no-ads .ad-banner { display: none; }
   position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
   background: var(--ink); color: var(--surface); padding: 10px 18px; border-radius: 10px; font: 600 1rem var(--font-display); z-index: 20; white-space: nowrap;
 }
-/* On a laptop or tablet, show the game inside a phone-shaped frame instead of stretching it. */
-@media (min-width: 600px) and (min-height: 640px) {
+/* On a laptop with a mouse, show the game inside a phone-shaped frame instead of stretching it.
+   Touch screens (phones, the app, tablets) always get the full-screen layout. */
+@media (min-width: 600px) and (min-height: 640px) and (hover: hover) and (pointer: fine) {
   html { height: 100%; overflow: hidden; background: #d9cabd radial-gradient(circle at 30% 20%, #efe4da, #cdbcae 70%); }
   html[data-theme="dark"], html[data-skin="midnight"], html[data-skin="ocean"], html[data-skin="arcade"] { background: #121012; }
   body {

@@ -10,7 +10,7 @@ face = ('<style>@font-face { font-family: "Fredoka"; font-style: normal; font-we
 gfonts = [l for l in game.splitlines() if "fonts.googleapis.com" in l or "fonts.gstatic.com" in l]
 for l in gfonts: game = game.replace(l + "\n", "")
 game = game.replace("<style>", face + "\n<style>", 1)
-(root / "artifact.html").write_text(game)
+(root / "artifact.html").write_text('<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + game)
 head = """<!doctype html>
 <html lang="en">
 <head>

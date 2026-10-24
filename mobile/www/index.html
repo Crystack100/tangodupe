@@ -825,6 +825,49 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
 .how-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; border: 0; border-radius: 16px; cursor: pointer; text-align: left; color: var(--ink);
   background: var(--cell); box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--cell) 86%, #000); font: 600 1.05rem var(--font-display); }
 .how-btn svg { width: 40px; height: 40px; flex: none; padding: 9px; box-sizing: border-box; border-radius: 12px; color: #fff; background: linear-gradient(var(--acc-lt, #f8c08c), var(--accent)); box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 68%, #000); fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---------- Handmade pass: ink outlines, paper grain, real board materials ---------- */
+:root { --ink-line: color-mix(in srgb, var(--ink) 88%, #000); --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .2 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); --scene: none; }
+:root[data-skin="pumpkin"] { --ink-line: #4a2a17; --scene: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='120' viewBox='0 0 390 120'%3E%3Cg opacity='.55'%3E%3Cpath d='M0 70 h390 M0 92 h390' stroke='%23c79a6c' stroke-width='6'/%3E%3Cg fill='%23d9b48a' stroke='%23b0845a' stroke-width='2'%3E%3Cpath d='M14 120 V52 l9 -9 l9 9 V120z M74 120 V52 l9 -9 l9 9 V120z M134 120 V52 l9 -9 l9 9 V120z M194 120 V52 l9 -9 l9 9 V120z M254 120 V52 l9 -9 l9 9 V120z M314 120 V52 l9 -9 l9 9 V120z M374 120 V52 l9 -9 l9 9 V120z'/%3E%3C/g%3E%3C/g%3E%3Cg stroke='%23a8501a' stroke-width='2.5'%3E%3Cellipse cx='60' cy='104' rx='30' ry='20' fill='%23f08a24'/%3E%3Cpath d='M50 86 q-6 18 0 36 M70 86 q6 18 0 36' fill='none'/%3E%3Cellipse cx='300' cy='108' rx='22' ry='15' fill='%23f39a3a'/%3E%3Cpath d='M293 95 q-4 13 0 26 M307 95 q4 13 0 26' fill='none'/%3E%3C/g%3E%3Cpath d='M60 85 q2 -9 7 -11 M300 94 q1 -7 6 -8' stroke='%234f6b22' stroke-width='4' fill='none' stroke-linecap='round'/%3E%3Cpath d='M98 112 q10 -16 24 -10 q-6 16 -24 10z M240 114 q-12 -14 -24 -6 q8 14 24 6z' fill='%23c8642a' opacity='.8'/%3E%3C/svg%3E"); }
+:root[data-skin="snow"] { --ink-line: #1f3550; --scene: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='390' height='130' viewBox='0 0 390 130'%3E%3Cg fill='%23a9c7e0' opacity='.6'%3E%3Cpath d='M40 96 l18 -44 l18 44z M52 70 l6 -14 l6 14z'/%3E%3Cpath d='M300 92 l22 -54 l22 54z'/%3E%3Cpath d='M340 100 l14 -34 l14 34z'/%3E%3C/g%3E%3Cpath d='M0 104 q60 -34 130 -10 q70 22 140 -6 q60 -22 120 4 V130 H0z' fill='%23ffffff' stroke='%23c3d9ec' stroke-width='2.5'/%3E%3Cpath d='M0 118 q90 -20 190 0 q100 18 200 -6 V130 H0z' fill='%23f4f9ff'/%3E%3C/svg%3E"); }
+body { background-image: var(--grain); }
+body::after { content: ""; position: fixed; left: 0; right: 0; bottom: 0; height: 130px; z-index: 0; pointer-events: none; background: var(--scene) center bottom / 100% auto no-repeat; }
+.chip, .rule-strip div, .rbtn .rb, .pillbtn, .board-wrap, .pill, .round {
+  border: 2.5px solid var(--ink-line) !important; box-shadow: 2px 3px 0 var(--ink-line) !important; }
+.chip, .pill { border-radius: 14px 12px 15px 11px; }
+.rule-strip div { border-radius: 12px 10px 13px 9px; background: var(--surface); }
+.rbtn .rb { border-radius: 18px 15px 19px 14px; background: var(--surface); }
+.pillbtn { border-radius: 22px 18px 24px 17px !important; }
+.pillbtn::after { display: none !important; }
+.board-wrap { border-radius: 22px 18px 24px 19px; }
+/* tiles: keep the bevel, add an ink edge so cats sit on real blocks */
+.cell.v0, .cell.v1 { box-shadow: inset 0 0 0 2px var(--ink-line), inset 0 -5px 0 color-mix(in srgb, var(--tile) 70%, #000), inset 0 3px 0 color-mix(in srgb, var(--tile) 55%, #fff) !important; }
+.mark.eq, .mark.op { border: 2px solid var(--ink-line); box-shadow: 1px 2px 0 var(--ink-line) !important; }
+/* Cozy: linen tray with a stitched edge */
+:root:not([data-skin]) .board-wrap, :root[data-skin="cozy"] .board-wrap { background: #fbf6ee var(--grain); }
+:root:not([data-skin]) .board-wrap::before, :root[data-skin="cozy"] .board-wrap::before { content: ""; position: absolute; inset: 4px; border: 2px dashed color-mix(in srgb, var(--accent) 70%, #fff); border-radius: 16px; pointer-events: none; }
+:root:not([data-skin]) .cell:not(.v0):not(.v1), :root[data-skin="cozy"] .cell:not(.v0):not(.v1) { background: #fffdf9; box-shadow: inset 0 0 0 1.5px #e6dccd, inset 0 3px 0 rgb(0 0 0 / .03) !important; }
+/* Pumpkin Patch: a wooden harvest crate */
+:root[data-skin="pumpkin"] .board-wrap { background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='60'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='3' seed='4'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .12 0 0 0 0 .04 0 0 0 .32 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E"), repeating-linear-gradient(0deg, #c98a4b 0 46px, #a8692f 46px 49px); }
+:root[data-skin="pumpkin"] .board-wrap::before { content: ""; position: absolute; inset: 3px; border-radius: 18px; pointer-events: none;
+  background: radial-gradient(circle, #5a3b22 0 2.5px, transparent 3px) 8px 8px / calc(100% - 16px) calc(100% - 16px); }
+:root[data-skin="pumpkin"] .cell:not(.v0):not(.v1) { background: #fbe9cf; box-shadow: inset 0 0 0 2px #8a5a2e, inset 0 4px 0 rgb(120 70 20 / .14) !important; }
+:root[data-skin="pumpkin"] .cell.v0 { --tile: #f6a04a; } :root[data-skin="pumpkin"] .cell.v1 { --tile: #8f73b8; }
+/* Snow Day: an ice tray with snow piled on top */
+:root[data-skin="snow"] .board-wrap { background: linear-gradient(180deg, #f7fbff, #dcebf8); overflow: visible; }
+:root[data-skin="snow"] .board-wrap::before { content: ""; position: absolute; left: 6px; right: 6px; top: -14px; height: 24px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='24' viewBox='0 0 96 24'%3E%3Cpath d='M0 13 q12 -13 24 -2 q12 -11 24 0 q12 -13 24 -2 q12 -11 24 2 V24 H0z' fill='%23ffffff'/%3E%3Cpath d='M0 13 q12 -13 24 -2 q12 -11 24 0 q12 -13 24 -2 q12 -11 24 2' fill='none' stroke='%231f3550' stroke-width='2.5'/%3E%3C/svg%3E") 0 0 / 96px 24px repeat-x; pointer-events: none; z-index: 4; }
+:root[data-skin="snow"] .cell:not(.v0):not(.v1) { background: linear-gradient(160deg, #ffffff, #e2eff9 70%); box-shadow: inset 0 0 0 2px #a9c4dc, inset 2px 3px 0 rgb(255 255 255 / .9) !important; }
+:root[data-skin="snow"] .cell.v1 { --tile: #9fbfdc; }
+
+/* Home: Sunny and Luna sit on their own game tiles, like the app icon */
+.home-cats { gap: 18px; margin-top: min(26px, 3svh) !important; }
+.home-cats svg { position: relative; z-index: 1; }
+html.on-home .home-cats svg { width: min(118px, 14svh) !important; height: min(118px, 14svh) !important; }
+.home-cats .seat { position: relative; display: grid; justify-items: center; }
+.home-cats .seat::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -2%; height: 62%; border-radius: 22px 18px 24px 19px; z-index: 0;
+  border: 2.5px solid var(--ink-line); box-shadow: inset 0 -7px 0 color-mix(in srgb, var(--tile) 70%, #000), inset 0 3px 0 color-mix(in srgb, var(--tile) 55%, #fff), 2px 4px 0 var(--ink-line); background: var(--tile); }
+.home-cats .seat.s0 { --tile: color-mix(in srgb, var(--sun-core) 75%, var(--sun)); }
+.home-cats .seat.s1 { --tile: color-mix(in srgb, var(--moon) 80%, var(--surface)); }
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -846,16 +889,30 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
     </radialGradient>
     <!-- Accessories for the newer skins, shared by both cats -->
     <symbol id="acc-pumpkin" viewBox="0 0 100 100">
-      <path d="M50 13 q1 -6 5 -8" stroke="#4f6b22" stroke-width="3" fill="none" stroke-linecap="round"/>
-      <ellipse cx="50" cy="20" rx="13" ry="9" fill="#f08a24" stroke="#a8501a" stroke-width="2"/>
-      <path d="M44 12 q-3 8 0 16 M56 12 q3 8 0 16 M50 11 v18" stroke="#a8501a" stroke-width="1.6" fill="none"/>
-      <path d="M55 8 q8 -4 10 2 q-6 2 -10 -2z" fill="#86c451" stroke="#3f6b22" stroke-width="1.4"/>
+      <!-- witch hat, tipped over one ear -->
+      <g transform="rotate(-12 50 26)" stroke="#2a1530" stroke-width="2.4" stroke-linejoin="round">
+        <path d="M30 27 Q46 22 70 27 L58 4 Q56 -1 51 1 Q44 6 38 2 Z" fill="#5a3b7a"/>
+        <path d="M38 2 Q42 10 47 6" fill="none" stroke-width="2"/>
+        <path d="M33 24 Q50 19 67 24 L68 29 Q50 24 32 29 Z" fill="#f08a24"/>
+        <ellipse cx="50" cy="29" rx="29" ry="5" fill="#462c63"/>
+        <path d="M60 20 l3 -4 l1 5z" fill="#ffd84d" stroke="#a87412" stroke-width="1.2"/>
+      </g>
     </symbol>
     <symbol id="acc-beanie" viewBox="0 0 100 100">
-      <path d="M31 27 q2 -21 19 -21 q17 0 19 21z" fill="#d9434f" stroke="#8f1f2a" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M40 14 l3 6 M50 11 v8 M60 14 l-3 6" stroke="#f07a83" stroke-width="1.6" stroke-linecap="round"/>
-      <rect x="29" y="22" width="42" height="7" rx="3.5" fill="#fff" stroke="#b9cfe3" stroke-width="1.6"/>
-      <circle cx="50" cy="5" r="5" fill="#fff" stroke="#b9cfe3" stroke-width="1.6"/>
+      <!-- knit beanie pulled down to the ears, plus a striped scarf -->
+      <g stroke="#7d1822" stroke-width="2.2" stroke-linejoin="round">
+        <path d="M24 34 Q22 6 50 5 Q78 6 76 34 Z" fill="#d9434f"/>
+        <path d="M33 14 v18 M41 9 v23 M50 7 v25 M59 9 v23 M67 14 v18" stroke="#b82f3b" stroke-width="2"/>
+        <path d="M21 31 Q50 23 79 31 L80 40 Q50 32 20 40 Z" fill="#fff" stroke="#9fb7cc"/>
+        <path d="M27 32 v6 M34 30 v6 M41 29 v6 M48 28.6 v6 M55 29 v6 M62 29.6 v6 M69 31 v6 M76 32 v6" stroke="#c9dae9" stroke-width="1.6"/>
+        <circle cx="50" cy="5" r="7" fill="#fff" stroke="#9fb7cc"/>
+      </g>
+      <g stroke="#7d1822" stroke-width="2" stroke-linejoin="round">
+        <path d="M64 88 l3 12 l9 -2 l-4 -11 Z" fill="#d9434f"/>
+        <path d="M66 95 l8 -2" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M19 83 Q50 95 81 83 L82 91 Q50 103 18 91 Z" fill="#d9434f"/>
+        <path d="M20 87 Q50 99 81 87" fill="none" stroke="#fff" stroke-width="2.6"/>
+      </g>
     </symbol>
     <symbol id="acc-bow" viewBox="0 0 100 100">
       <g transform="translate(27 30) rotate(-18)">
@@ -1001,8 +1058,8 @@ body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .a
         <svg class="tail" viewBox="0 0 92 44" aria-hidden="true"><path d="M8 6 q4 30 34 30 q30 0 30 -18 q0 -12 -12 -12" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round"/><path d="M24 30 l-4 9 M40 35 l0 9 M56 32 l4 9" stroke="var(--sun)" stroke-width="5" stroke-linecap="round"/></svg>
       </h1>
       <div class="home-cats" aria-hidden="true">
-        <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
-        <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
+        <span class="seat s0"><svg viewBox="0 0 100 100"><use href="#sun"/></svg></span>
+        <span class="seat s1"><svg viewBox="0 0 100 100"><use href="#moon"/></svg></span>
       </div>
       <button class="goal-badge" id="h-goal" type="button" aria-label="Next theme">
         <span class="ring">

@@ -66,5 +66,17 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<!-- Purrzle's iOS app ID from admob.google.com -->
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-5841268409443760~7514675191</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Purrzle is free thanks to ads. Allowing this shows you ads that fit you better.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
 </dict>
 </plist>

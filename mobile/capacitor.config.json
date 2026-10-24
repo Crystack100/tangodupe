@@ -1,5 +1,11 @@
 {
   "appId": "com.alden.purrzle",
   "appName": "Purrzle",
-  "webDir": "www"
+  "webDir": "www",
+  "plugins": {
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_purrzle",
+      "iconColor": "#F5A35B"
+    }
+  }
 }

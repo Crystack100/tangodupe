@@ -33,5 +33,11 @@ tail = """
 
 # Keep the mobile app's web bundle in step with the PWA.
 import shutil
-for f in ["index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "apple-touch-icon.png", "sw.js"]:
+for f in ["manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "apple-touch-icon.png"]:
     shutil.copy(root / f, root / "mobile/www" / f)
+shutil.copy(root / "mobile/sw-app.js", root / "mobile/www/sw.js")
+# The app also loads Capacitor's bridge, which the game uses for ads, reminders and sharing.
+core = root / "mobile/node_modules/@capacitor/core/dist/capacitor.js"
+if core.exists(): shutil.copy(core, root / "mobile/www/capacitor.js")
+# No offline worker in the app: its files are already on the phone.
+(root / "mobile/www/index.html").write_text(head.replace("<body>\n", '<body>\n<script src="capacitor.js"></script>\n') + game + "\n</body>\n</html>\n")

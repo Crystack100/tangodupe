@@ -1,10 +1,10 @@
-// Offline cache so the installed app works without a connection.
-const CACHE = "purrzle-v2";
-const FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png"];
-self.addEventListener("install", e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))));
+// The phone app loads its files straight from the device, so it needs no offline cache.
+// Earlier builds registered a caching worker that could keep serving an old version of the game
+// after an update; this one replaces it, clears the cache, removes itself and reloads the game.
+self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil(
-  caches.keys().then(ks => Promise.all(ks.filter(k => k !== CACHE).map(k => caches.delete(k))))));
-self.addEventListener("fetch", e => e.respondWith(
-  caches.match(e.request).then(r => r || fetch(e.request).then(res => {
-    const copy = res.clone(); caches.open(CACHE).then(c => c.put(e.request, copy)); return res;
-  }))));
+  self.clients.claim()
+    .then(() => caches.keys()).then(ks => Promise.all(ks.map(k => caches.delete(k))))
+    .then(() => self.registration.unregister())
+    .then(() => self.clients.matchAll({ type: "window" }))
+    .then(cs => cs.forEach(c => c.navigate(c.url)))));

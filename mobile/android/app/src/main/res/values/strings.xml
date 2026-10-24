@@ -4,4 +4,6 @@
     <string name="title_activity_main">Purrzle</string>
     <string name="package_name">com.alden.purrzle</string>
     <string name="custom_url_scheme">com.alden.purrzle</string>
+    <!-- Purrzle's Android app ID from admob.google.com -->
+    <string name="admob_app_id">ca-app-pub-5841268409443760~6599592506</string>
 </resources>

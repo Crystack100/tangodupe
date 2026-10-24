@@ -20,7 +20,7 @@ head = """<!doctype html>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
 """
@@ -33,5 +33,5 @@ tail = """
 
 # Keep the mobile app's web bundle in step with the PWA.
 import shutil
-for f in ["index.html", "manifest.webmanifest", "icon.svg", "sw.js"]:
+for f in ["index.html", "manifest.webmanifest", "icon.svg", "icon-192.png", "icon-512.png", "apple-touch-icon.png", "sw.js"]:
     shutil.copy(root / f, root / "mobile/www" / f)

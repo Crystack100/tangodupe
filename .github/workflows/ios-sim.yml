@@ -3,11 +3,12 @@ name: iOS simulator build
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: write
 concurrency:
-  group: ios-sim
+  group: ios-sim-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   sim:
@@ -20,6 +21,7 @@ jobs:
       - run: npm ci && npx cap sync ios
         working-directory: mobile
       - run: |
+          set -o pipefail
           xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build CODE_SIGNING_ALLOWED=NO build | tail -20
@@ -27,7 +29,9 @@ jobs:
       - run: |
           cd mobile/ios/App/build/Build/Products/Debug-iphonesimulator
           ditto -c -k --sequesterRsrc --keepParent App.app "$GITHUB_WORKSPACE/purrzle-ios-sim.zip"
-      - run: |
+      # Only builds from main replace the downloadable release.
+      - if: github.ref == 'refs/heads/main'
+        run: |
           gh release delete ios-preview --yes --cleanup-tag || true
           gh release create ios-preview purrzle-ios-sim.zip --title "Purrzle iOS preview (simulator)" --notes "Built from ${GITHUB_SHA::7}. Upload purrzle-ios-sim.zip at appetize.io/upload to play the iPhone app in your browser."
         env:

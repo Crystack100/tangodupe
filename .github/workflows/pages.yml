@@ -15,7 +15,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir site && cp index.html manifest.webmanifest icon.svg sw.js site/
+      - run: mkdir site && cp index.html privacy.html manifest.webmanifest icon.svg sw.js site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

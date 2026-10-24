@@ -29,3 +29,12 @@ The repo root has `codemagic.yaml` with an "iOS TestFlight" workflow.
   2. In Codemagic, Team settings > Code signing identities > Android keystores: generate a keystore and name its reference `purrzle_upload`. Keep it safe; every Play update must be signed with it.
   3. Run the "Android Play Store" workflow and download the `.aab`.
   4. In Play Console, create the app Purrzle (package `com.alden.purrzle`), go to Testing > Internal testing, and upload the `.aab`.
+
+## Ads (Google AdMob)
+- Full-screen ad after every third win, plus optional reward videos (free hint, +3 bonus stars, free stars in the shop, double the daily treat).
+- On launch the app shows Google's consent form where the law needs it (Europe, UK), then Apple's "Allow tracking?" prompt on iPhone, then starts ads.
+- Until real IDs are added, Google's test ads show. To go live, replace the test IDs in three places:
+  1. `src/game.html`: `AD_UNITS` (interstitial and rewarded ad unit IDs for Android and iOS), then run `python3 build.py`.
+  2. `android/app/src/main/res/values/strings.xml`: `admob_app_id` (Android app ID, has a `~`).
+  3. `ios/App/App/Info.plist`: `GADApplicationIdentifier` (iOS app ID, has a `~`).
+- Privacy policy: `privacy.html` at the repo root, published with the web app.

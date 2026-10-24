@@ -759,25 +759,36 @@ body.no-ads .ad-banner { display: none; }
 }
 /* Wide, landscape screens: puzzle on the right as big as the height allows, rules and buttons in a column beside it. */
 @media (min-width: 900px) and (min-aspect-ratio: 5/4) {
-  html.on-game .app { max-width: 1240px; }
+  /* Wide screens, from a small embedded game window to a full monitor: title, counters, rules and buttons
+     stack on the left, the board fills the height on the right, and everything scales with the window
+     height so nothing is ever cut off. */
+  html.on-game { --ad-h: clamp(40px, 7svh, 56px); --row-gap: clamp(6px, 1.8svh, 16px); --top: clamp(6px, 2svh, 20px); }
+  html.on-game body.no-ads, html.on-game body.native { --ad-h: 0px; }
+  html.on-game body.playing { padding-bottom: clamp(8px, 2svh, 24px); }
+  html.on-game .app { max-width: 1280px; }
   html.on-game #game {
-    display: grid; column-gap: 40px; row-gap: 18px; justify-content: center; align-content: center; min-height: calc(100svh - 40px);
-    grid-template-columns: minmax(280px, 360px) auto;
-    grid-template-rows: auto auto auto 1fr auto;
-    grid-template-areas: "head head" "chips board" "rules board" "actions board" "ad ad";
+    display: grid; column-gap: clamp(20px, 4svh, 44px); row-gap: var(--row-gap); justify-content: center; align-content: center;
+    height: calc(100svh - clamp(8px, 2svh, 24px)); padding-top: var(--top);
+    grid-template-columns: minmax(250px, 360px) auto;
+    grid-template-rows: auto auto auto auto 1fr auto;
+    grid-template-areas: "head board" "chips board" "rules board" "actions board" ". board" "ad ad";
   }
-  html.on-game .g-head { grid-area: head; }
-  html.on-game .chips { grid-area: chips; align-self: end; }
-  html.on-game .rule-strip { grid-area: rules; display: grid; grid-template-columns: 1fr; gap: 10px; }
-  html.on-game .rule-strip div { padding: 12px 14px; gap: 14px; font-size: 1.05rem; border-radius: 14px; }
-  html.on-game .rule-strip svg { width: 64px; height: 64px; }
-  html.on-game .actions { grid-area: actions; align-self: start; justify-content: space-around; gap: 12px; }
-  html.on-game .board-wrap { grid-area: board; align-self: center; width: min(calc(100svh - 170px), calc(100vw - 480px), 820px); }
-  html.on-game .ad-banner { grid-area: ad; }
-  html.on-game .g-head h2 { font-size: 1.7rem; }
-  html.on-game .mark { width: 36px; height: 36px; margin: -18px 0 0 -18px; }
-  html.on-game .mark svg { width: 21px; height: 21px; }
-
+  html.on-game .g-head { grid-area: head; padding-top: 0; grid-template-columns: 44px 1fr; }
+  html.on-game .g-head > :last-child { display: none; }
+  html.on-game .g-head h2 { font-size: clamp(1.2rem, 4svh, 1.8rem); text-align: left; }
+  html.on-game .chips { grid-area: chips; }
+  html.on-game .rule-strip { grid-area: rules; display: grid; grid-template-columns: 1fr; gap: clamp(4px, 1.2svh, 10px); padding: clamp(6px, 1.2svh, 10px); }
+  html.on-game .rule-strip div { padding: clamp(3px, 1svh, 12px) 14px; gap: 14px; font-size: clamp(.82rem, 2.1svh, 1.05rem); border-radius: 12px; }
+  html.on-game .rule-strip svg { width: clamp(30px, 7.6svh, 64px); height: clamp(30px, 7.6svh, 64px); }
+  html.on-game .actions { grid-area: actions; justify-content: space-around; gap: 12px; padding-top: 0; }
+  html.on-game .rbtn { font-size: clamp(.72rem, 1.8svh, .82rem); gap: 2px; }
+  html.on-game .rbtn .rb { width: clamp(40px, 8svh, 62px); height: clamp(40px, 8svh, 62px); }
+  html.on-game .rbtn svg { width: clamp(20px, 3.8svh, 28px); height: clamp(20px, 3.8svh, 28px); }
+  html.on-game .board-wrap { grid-area: board; align-self: start;
+    width: min(calc(100svh - clamp(8px, 2svh, 24px) - var(--top) - var(--ad-h) - var(--row-gap) - 4px), calc(100vw - 32px - 360px - 44px), 960px); }
+  html.on-game .ad-banner { grid-area: ad; min-height: var(--ad-h); padding-block: 0; }
+  html.on-game .mark { width: clamp(24px, 4.4svh, 36px); height: clamp(24px, 4.4svh, 36px); margin: calc(clamp(24px, 4.4svh, 36px) / -2) 0 0 calc(clamp(24px, 4.4svh, 36px) / -2); }
+  html.on-game .mark svg { width: clamp(14px, 2.6svh, 21px); height: clamp(14px, 2.6svh, 21px); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

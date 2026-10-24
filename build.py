@@ -28,7 +28,14 @@ head = """<!doctype html>
 <body>
 """
 tail = """
-<script>if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(function () {});</script>
+<script>
+if ("serviceWorker" in navigator) {
+  // When an update replaces an older worker, reload once so the new version shows straight away.
+  var hadWorker = !!navigator.serviceWorker.controller, reloaded = false;
+  navigator.serviceWorker.addEventListener("controllerchange", function () { if (hadWorker && !reloaded) { reloaded = true; location.reload(); } });
+  navigator.serviceWorker.register("sw.js").catch(function () {});
+}
+</script>
 </body>
 </html>
 """
@@ -44,3 +51,10 @@ core = root / "mobile/node_modules/@capacitor/core/dist/capacitor.js"
 if core.exists(): shutil.copy(core, root / "mobile/www/capacitor.js")
 # No offline worker in the app: its files are already on the phone.
 (root / "mobile/www/index.html").write_text(head.replace("<body>\n", '<body>\n<script src="capacitor.js"></script>\n') + game + "\n</body>\n</html>\n")
+
+# CrazyGames build: one file with their SDK (which runs the ads there) and no offline worker.
+# Zip the crazygames folder and upload it at developer.crazygames.com.
+cg = root / "crazygames"; cg.mkdir(exist_ok=True)
+cg_head = head.replace('<link rel="manifest" href="manifest.webmanifest">\n', "").replace('<link rel="icon" href="icon.svg">\n', "").replace('<link rel="apple-touch-icon" href="apple-touch-icon.png">\n', "")
+cg_head = cg_head.replace("</head>", '<script src="https://sdk.crazygames.com/crazygames-sdk-v3.js"></script>\n</head>')
+(cg / "index.html").write_text(cg_head + game + "\n</body>\n</html>\n")

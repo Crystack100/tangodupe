@@ -734,25 +734,10 @@ body.no-ads .ad-banner { display: none; }
   position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
   background: var(--ink); color: var(--surface); padding: 10px 18px; border-radius: 10px; font: 600 1rem var(--font-display); z-index: 20; white-space: nowrap;
 }
-/* On a laptop with a mouse, show the game inside a phone-shaped frame instead of stretching it.
-   Touch screens (phones, the app, tablets) always get the full-screen layout. */
-@media (min-width: 600px) and (min-height: 640px) and (hover: hover) and (pointer: fine) {
-  html { height: 100%; overflow: hidden; background: #d9cabd radial-gradient(circle at 30% 20%, #efe4da, #cdbcae 70%); }
-  html[data-theme="dark"], html[data-skin="midnight"], html[data-skin="ocean"], html[data-skin="arcade"], html[data-skin="royal"] { background: #121012; }
-  body {
-    width: 410px; height: min(880px, calc(100vh - 48px)); min-height: 0; margin: 24px auto; padding: 0; overflow: hidden;
-    border-radius: 46px; transform: translateZ(0); box-shadow: 0 0 0 11px #1d1a19, 0 0 0 13px #3a3532, 0 40px 80px -30px rgba(0, 0, 0, .55);
-  }
-  body.playing { padding-bottom: 0; }
-  #scroll { height: 100%; overflow-y: auto; overflow-x: hidden; padding: 14px 16px 96px; scrollbar-width: none; }
-  #scroll::-webkit-scrollbar { display: none; }
-  body.playing #scroll { padding-bottom: 24px; }
-  #home { min-height: calc(min(880px, 100vh - 48px) - 110px); }
-  html.on-home body, html.on-game body { position: static; inset: auto; box-sizing: content-box; }
-  html.on-home #scroll, html.on-game #scroll { overflow: hidden; }
-  html.on-game .board-wrap { width: min(100%, calc(min(880px, 100vh - 48px) - 410px)); }
-  html.on-home #home { height: calc(min(880px, 100vh - 48px) - 110px); }
-  .tabs { border-radius: 0 0 46px 46px; padding-bottom: 18px; }
+/* Big screens (laptops, desktop browsers): the same full-screen layout, just roomier. No phone frame. */
+@media (min-width: 700px) {
+  .app { max-width: 640px; }
+  .skins { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -796,6 +781,8 @@ body.no-ads .ad-banner { display: none; }
 @keyframes tutReady { from { transform: scale(.94); } }
 /* rewarded videos */
 body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .ad-x { display: none; }
+/* Game sites like CrazyGames show their own ads and do not allow outside purchases. */
+body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .ad-x { display: none; }
 .pop-card { align-self: center; border-radius: 20px; margin: 16px; width: calc(100% - 32px); text-align: center; }
 .pop-card h3 { justify-content: center; }
 .pop-card .chunky, .pop-card .soft { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
@@ -1469,6 +1456,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   var $ = function (id) { return document.getElementById(id); };
   // In the phone app, Capacitor connects the game to native add-ons (ads, notifications, sharing).
   var Cap = window.Capacitor, NATIVE = !!(Cap && Cap.isNativePlatform && Cap.isNativePlatform());
+  // Set on the CrazyGames build, which loads their SDK before the game.
+  var CG = window.CrazyGames && window.CrazyGames.SDK, PORTAL = !!CG;
   function plugin(name) { return NATIVE && Cap.registerPlugin ? Cap.registerPlugin(name) : null; }
   var save = { best: {}, times: {}, wallet: 0, owned: ["cozy"], skin: "cozy", play: null, daily: {}, noAds: false, wins: 0, music: 40, sound: 70, theme: "light" };
   var page = 0, play = null, cells = [], marks = [], tick = null, toastT = null;
@@ -2100,6 +2089,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // Privacy first: Google's consent form (Europe and other places that need it), then Apple's
     // "Allow tracking?" prompt, then start the ad SDK.
     function start() {
+      if (PORTAL) { try { CG.init().catch(function () {}); } catch (e) {} return; }
       if (!AdMob) return;
       AdMob.addListener("interstitialAdDismissed", function () { finish(); load("interstitial"); });
       AdMob.addListener("interstitialAdFailedToShow", function () { finish(); load("interstitial"); });
@@ -2119,6 +2109,15 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }).catch(function () {});
     }
     function show(kind, done) {
+      if (PORTAL) {
+        open = true; Audio.hold(true);
+        var end = function (ok) { if (!open) return; open = false; Audio.hold(false); done(ok); };
+        try {
+          CG.ad.requestAd(kind === "rewarded" ? "rewarded" : "midgame",
+            { adStarted: function () {}, adFinished: function () { end(true); }, adError: function () { end(kind !== "rewarded"); } });
+        } catch (e) { end(kind !== "rewarded"); }
+        return;
+      }
       if (!NATIVE) { open = true; return showAd(function () { open = false; done(true); }, kind === "rewarded"); }
       if (!ready[kind]) return done(false);
       after = done; earned = false; open = true; ready[kind] = false; Audio.hold(true);
@@ -2328,7 +2327,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     buildTiles();
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin(); applyAds();
-    document.body.classList.toggle("native", NATIVE);
+    document.body.classList.toggle("native", NATIVE); document.body.classList.toggle("portal", PORTAL);
     paintRemind(); if (save.remind) scheduleReminders();
     var screen = data && data.screen;
     if (screen === "game" && play) resumeLevel(); else show(screen || "home");

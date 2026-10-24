@@ -1,0 +1,34 @@
+# Builds an iPhone Simulator version of the app (no Apple account needed) for browser previews on appetize.io.
+name: iOS simulator build
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ios-sim
+  cancel-in-progress: true
+jobs:
+  sim:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci && npx cap sync ios
+        working-directory: mobile
+      - run: |
+          xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build CODE_SIGNING_ALLOWED=NO build | tail -20
+        working-directory: mobile/ios/App
+      - run: |
+          cd mobile/ios/App/build/Build/Products/Debug-iphonesimulator
+          ditto -c -k --sequesterRsrc --keepParent App.app "$GITHUB_WORKSPACE/purrzle-ios-sim.zip"
+      - run: |
+          gh release delete ios-preview --yes --cleanup-tag || true
+          gh release create ios-preview purrzle-ios-sim.zip --title "Purrzle iOS preview (simulator)" --notes "Built from ${GITHUB_SHA::7}. Upload purrzle-ios-sim.zip at appetize.io/upload to play the iPhone app in your browser."
+        env:
+          GH_TOKEN: ${{ github.token }}

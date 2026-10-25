@@ -567,6 +567,8 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .lg-rank-pop { animation: pop .35s cubic-bezier(.3, 1.8, .5, 1); }
 .lg-more { font: 600 .8rem var(--font-display); color: var(--accent); text-align: center; }
 #board-sheet { z-index: 27; }
+.lg-rows li { grid-template-columns: 28px 1fr auto; }
+.lg-rows li.empty { display: block; color: var(--muted); text-align: center; }
 .lb-sheet .lb-all { position: relative; max-height: 62svh; overflow-y: auto; }
 .lb-sheet, .league { --acc-dk: color-mix(in srgb, var(--accent) 68%, #000); --acc-lt: color-mix(in srgb, var(--accent) 70%, #fff); }
 .win-tip { margin: 0; color: var(--muted); font: 600 .95rem var(--font-display); min-height: 1.4em; }
@@ -1137,10 +1139,10 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
       <div class="st-ticks" id="st-ticks" aria-hidden="true"></div>
       <p class="st-why" id="st-why"></p>
     </div>
-    <button class="league" id="league" type="button" aria-label="Open the leaderboard">
-      <div class="lg-head"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg>Cat League</span><b id="lg-rank">#50</b><i id="lg-up" hidden></i></div>
+    <button class="league" id="league" type="button" aria-label="Open your records">
+      <div class="lg-head"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg>Your record</span><b id="lg-rank">0★</b><i id="lg-up" hidden></i></div>
       <ol class="lg-rows" id="lg-rows"></ol>
-      <span class="lg-more">See full leaderboard</span>
+      <span class="lg-more">See all your records</span>
     </button>
     <div class="win-btns">
       <button class="bonus-btn" id="win-bonus" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video for <b>+3</b><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><use href="#star"/></svg></button>
@@ -1156,8 +1158,8 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 
 <div class="sheet-bg" id="board-sheet" hidden>
   <div class="sheet lb-sheet" role="dialog" aria-modal="true" aria-labelledby="lb-title">
-    <h3><span id="lb-title">Cat League</span><button class="round" id="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
-    <p class="note">Ranked by total stars. Solve faster to climb.</p>
+    <h3><span id="lb-title">Your records</span><button class="round" id="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <p class="note">Your best stars and times on every puzzle you have solved.</p>
     <ol class="lg-rows lb-all" id="lb-all"></ol>
   </div>
 </div>
@@ -1910,57 +1912,33 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     paintBonus();
 
   }
-  /* Cat League. Rivals are simulated for now: once the app ships, swap this list for
-     Game Center / Google Play Games or a small leaderboard server. */
-  var RIVALS = ["Mochi", "Biscuit", "Nala", "Tofu", "Pixel", "Luna_77", "Oreo", "Pumpkin", "Kiko", "Mittens", "Sushi", "Bean",
-    "Ziggy", "Pepper", "Momo", "Waffles", "Clover", "Nori", "Ginger", "Socks", "Boba", "Maple", "Felix", "Cookie", "Yuki",
-    "Peanut", "Simba", "Latte", "Miso", "Toast", "Hazel", "Cleo", "Kitkat", "Mango", "Olive", "Pudding", "Sesame", "Ash",
-    "Jellybean", "Noodle", "Taro", "Whiskers", "Paprika", "Ramen", "Dumpling", "Chai", "Marble", "Tiger", "Pebble"];
-  function leagueTable(myScore) {
-    // Spread rivals from beginners to experts; they creep up a little each day so the league feels alive.
-    var day = Math.floor(Date.now() / 864e5), rows = RIVALS.map(function (name, k) {
-      var base = Math.round(420 * Math.pow((RIVALS.length - k) / RIVALS.length, 2.4));
-      var drift = Math.floor(T.rng(day * 131 + k)() * 4) + (day % 97) % (k % 5 + 2);
-      return { name: name, score: base + drift, cat: k % 2 ? "moon" : "sun" };
-    });
-    rows.push({ name: "You", score: myScore, cat: "sun", me: true });
-    rows.sort(function (a, b) { return b.score - a.score || (a.me ? -1 : b.me ? 1 : 0); });
-    return rows;
+  /* Your record: real numbers from this device only. A shared leaderboard needs accounts
+     (CrazyGames, Game Center or Google Play Games), so until then nothing here is made up. */
+  function recRow(icon, label, value, extra) {
+    return '<li class="' + (extra || "") + '"><svg class="av" viewBox="0 0 100 100"><use href="#' + icon + '"/></svg><span>' + label +
+      '</span><span class="sc">' + value + '</span></li>';
   }
-  function rowHtml(r, i, extra) {
-    return '<li class="' + (r.me ? "me " : "") + (i < 3 ? "medal " : "") + (extra || "") + '"><span class="n">#' + (i + 1) +
-      '</span><svg class="av" viewBox="0 0 100 100"><use href="#' + r.cat + '"/></svg><span>' + r.name +
-      '</span><span class="sc">' + r.score + '<svg viewBox="0 0 24 24"><use href="#star"/></svg></span></li>';
-  }
+  var STAR = '<svg viewBox="0 0 24 24"><use href="#star"/></svg>';
   function showLeague(before, after) {
-    var table = leagueTable(after), me = table.findIndex(function (r) { return r.me; });
-    var old = leagueTable(before).findIndex(function (r) { return r.me; }), climbed = Math.max(0, old - me);
-    $("lg-rank").textContent = "#" + (me + 1);
-    $("lg-up").hidden = !climbed; $("lg-up").textContent = "\u25B2 " + climbed;
-    // Show who is just ahead, you, and the players you just passed.
-    var start = Math.max(0, me - 1), html = "";
-    for (var i = start; i < Math.min(table.length, start + 4); i++) html += rowHtml(table[i], i, i > me && i <= me + climbed ? "passed" : "");
-    $("lg-rows").innerHTML = html;
-    var mine = $("lg-rows").querySelector(".me");
-    if (mine) mine.style.setProperty("--from", "calc(" + Math.min(climbed, 3 - (me - start)) + " * (100% + 4px))");
-    // Count the rank number down while your row slides up.
-    clearInterval(showLeague.t);
-    if (mine && climbed) {
-      var n = old + 1, num = mine.querySelector(".n"), head = $("lg-rank");
-      num.textContent = head.textContent = "#" + n;
-      setTimeout(function () {
-        showLeague.t = setInterval(function () {
-          n--; num.textContent = head.textContent = "#" + n; Audio.sfx("tap");
-          if (n <= me + 1) { clearInterval(showLeague.t); head.classList.remove("lg-rank-pop"); head.offsetWidth; head.classList.add("lg-rank-pop"); Audio.sfx("coin"); }
-        }, Math.max(60, 950 / climbed));
-      }, 1500);
-    }
+    var tkey = play.daily ? "d" + play.daily : play.level, solved = 0, three = 0, k;
+    for (k in save.best) { solved++; if (save.best[k] >= 3) three++; }
+    for (k in save.daily || {}) { solved++; if (save.daily[k] >= 3) three++; }
+    $("lg-rank").textContent = after + "\u2605";
+    $("lg-up").hidden = after <= before; $("lg-up").textContent = "+" + (after - before);
+    $("lg-rows").innerHTML =
+      recRow("sun", "Best time here", save.times[tkey] ? fmt(save.times[tkey]) : "-", "me") +
+      recRow("moon", "Puzzles solved", solved) +
+      recRow("sun", "3-star puzzles", three + STAR);
   }
   $("league").onclick = function () {
-    var table = leagueTable(totalStars());
-    $("lb-all").innerHTML = table.map(function (r, i) { return rowHtml(r, i); }).join("");
+    var rows = [], k;
+    for (k in save.best) rows.push({ name: "Level " + k, n: +k, stars: save.best[k], time: save.times[k] });
+    for (k in save.daily || {}) rows.push({ name: "Daily #" + k, n: 1e6 + +k, stars: save.daily[k], time: save.times["d" + k] });
+    rows.sort(function (a, b) { return a.n - b.n; });
+    $("lb-all").innerHTML = rows.length ? rows.map(function (r, i) {
+      return recRow(i % 2 ? "moon" : "sun", r.name, (r.time ? fmt(r.time) + " \u00b7 " : "") + r.stars + STAR);
+    }).join("") : '<li class="empty">Solve a puzzle to start your records.</li>';
     $("board-sheet").hidden = false;
-    var list = $("lb-all"), mine = list.querySelector(".me"); if (mine) list.scrollTop = mine.offsetTop - list.clientHeight / 2;
   };
   $("lb-close").onclick = function () { $("board-sheet").hidden = true; };
   $("board-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };

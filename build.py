@@ -5,6 +5,7 @@ game = (root / "src/game.html").read_text().replace("/*CORE*/", (root / "src/cor
 # The two cat pieces are painted images, inlined so the game stays one offline file.
 for kind in ("sun", "moon"):
     game = game.replace("/*CAT_" + kind.upper() + "*/", "data:image/webp;base64," + base64.b64encode((root / f"src/cat-{kind}.webp").read_bytes()).decode())
+    game = game.replace("/*CAT_" + kind.upper() + "_MASK*/", "data:image/webp;base64," + base64.b64encode((root / f"src/cat-{kind}-mask.webp").read_bytes()).decode())
 # Bundle the font so the app works offline and does not wait on Google Fonts.
 import base64
 font = base64.b64encode((root / "src/fredoka-latin.woff2").read_bytes()).decode()

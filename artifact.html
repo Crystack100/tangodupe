@@ -585,6 +585,11 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .win-tip { margin: 0; color: var(--muted); font: 600 .95rem var(--font-display); min-height: 1.4em; }
 .win-btns { margin-top: auto; width: 100%; display: grid; gap: 10px; padding-top: 6px; }
 .win-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* The results page keeps just the time and star bar; a small home button in the corner is the way out. */
+.win-x { position: absolute; top: 0; left: 0; z-index: 3; width: 44px; height: 44px; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+  background: var(--surface); color: var(--ink); box-shadow: 0 3px 0 color-mix(in srgb, var(--surface) 80%, #000), 0 8px 14px -8px var(--shadow); }
+.win-x svg { width: 22px; height: 22px; fill: currentColor; }
+.win-x:active { transform: translateY(2px); }
 .win-btns .chunky { font-size: 1.3rem; padding: 17px; }
 
 /* results page: depth pass */
@@ -1127,6 +1132,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 <section class="win" id="win" aria-label="Level complete" hidden>
   <div class="confetti" id="confetti" aria-hidden="true"></div>
   <div class="win-page">
+    <button class="win-x" id="win-x" type="button" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></button>
     <div class="win-ribbon"><span id="win-label">Level 1</span></div>
     <div class="win-hero" aria-hidden="true">
       <div class="rays"></div>
@@ -1150,7 +1156,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
       <div class="st-ticks" id="st-ticks" aria-hidden="true"></div>
       <p class="st-why" id="st-why"></p>
     </div>
-    <button class="league" id="league" type="button" aria-label="Open your records">
+    <button class="league" id="league" type="button" hidden aria-label="Open your records">
       <div class="lg-head"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0zM7 6H4a3 3 0 0 0 3 4M17 6h3a3 3 0 0 1-3 4M12 14v4M8 21h8"/></svg>Your record</span><b id="lg-rank">0★</b><i id="lg-up" hidden></i></div>
       <ol class="lg-rows" id="lg-rows"></ol>
       <span class="lg-more">See all your records</span>
@@ -1158,7 +1164,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     <div class="win-btns">
       <button class="bonus-btn" id="win-bonus" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video for <b>+3</b><svg class="st" viewBox="0 0 24 24" aria-hidden="true"><use href="#star"/></svg></button>
       <button class="chunky" id="win-next" type="button">Next level</button>
-      <div class="win-row">
+      <div class="win-row" hidden>
         <button class="soft" id="win-replay" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Replay</button>
         <button class="soft" id="win-home" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
         <button class="soft" id="win-share" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Share</button>
@@ -1744,7 +1750,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   function resumeLevel() {
     show("game");
     $("g-title").textContent = play.daily ? "Daily Puzzle" : "Level " + play.level;
-    $("win-next").textContent = play.daily ? "Back home" : "Next level";
+    $("win-next").textContent = play.daily ? "Back home" : "Next: Level " + (play.level + 1);
     build(); render(); if (!play.done) startClock();
   }
   function build() {
@@ -2214,7 +2220,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     else if (navigator.share) navigator.share({ title: "Purrzle", text: text }).catch(function () {});
     else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { toast("Copied! Paste it anywhere"); }, function () {});
   };
-  $("win-home").onclick = function () { show("home"); };
+  $("win-home").onclick = $("win-x").onclick = function () { show("home"); };
   $("win-replay").onclick = function () { if (play.daily) { play = null; $("h-daily").onclick(); } else startLevel(play.level); };
 
   /* ---------- shop ---------- */

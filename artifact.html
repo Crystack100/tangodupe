@@ -1788,6 +1788,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     $("tut").hidden = false; tutStep();
   }
   function closeTut() {
+    if (tut) clearTimeout(tut.badTimer);
     $("tut").hidden = true; save.tutDone = true; persist();
     var f = tut && tut.then; tut = null; if (f) f();
   }
@@ -1836,19 +1837,29 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     tut.row[i] = v; tut.changed = i;
     Audio.sfx(v === -1 ? "clear" : "place" + v);
     var bad = L.bad && L.bad[v];
+    // A wrong cat waits a moment before it's flagged, so double-tapping
+    // straight to Luna passes through Sunny without flashing an error.
+    clearTimeout(tut.badTimer);
+    if (bad) {
+      tutMsg("", ""); tutRow();
+      tut.badTimer = setTimeout(function () {
+        if (!tut || TUT[tut.step] !== L || tut.row[i] !== v) return;
+        tutMsg(bad.msg, "bad"); Audio.sfx("oops"); tutRow(bad.cells, bad.edge);
+      }, 600);
+      return;
+    }
     if (L.say && L.say[v] != null) tutMsg(L.say[v], v === L.answer ? "good" : "");
-    else if (bad) { tutMsg(bad.msg, "bad"); Audio.sfx("oops"); }
     else if (v === L.answer) tutMsg(["", "Nice! Luna fits.", "Perfect, 3 of each.", "Yes! Both are Luna.", "Right! Sunny and Luna differ."][tut.step] || "Nice!", "good");
     else tutMsg("", "");
     if (v === L.answer && !tut.solved) {
       tut.solved = true; $("tut-go").disabled = false; Audio.sfx("star", 1);
       var cat = $("tut-cat"); cat.classList.remove("bounce"); void cat.offsetWidth; cat.classList.add("bounce");
     }
-    tutRow(bad && bad.cells, bad && bad.edge);
+    tutRow();
   }
   $("tut-go").onclick = function () {
     if (tut.step >= TUT.length - 1) return closeTut();
-    tut.step++; tut.solved = false; tutStep();
+    clearTimeout(tut.badTimer); tut.step++; tut.solved = false; tutStep();
   };
   $("tut-skip").onclick = closeTut;
   $("s-how").onclick = function () { $("sheet").hidden = true; openTut(null); };

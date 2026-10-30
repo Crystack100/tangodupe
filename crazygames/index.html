@@ -25,12 +25,6 @@
   --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
   --font-body: "Fredoka", "Avenir Next Rounded", system-ui, -apple-system, sans-serif;
 }
-:root[data-theme="dark"] {
-  --bg: #1c1917; --bg2: #1c1917; --surface: #282421; --cell: #312c28; --given: #3b3530; --line: #4a423b;
-  --ink: #f6eee8; --muted: #b9aca2; --accent: #f5a35b; --on-accent: #2a1a10; --alt: #6fb6dc; --brand: #f3d6bf;
-  --sun: #e38b3e; --sun-core: #ffc583; --moon: #a9c3d4; --eye2-base: #34495a; --star: #ffc54d; --star-off: #4a423b;
-  --bad: #ff6b70; --bad-soft: rgba(255, 107, 112, .18); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
-}
 /* Shop skins come after the system blocks so they win when equipped. */
 :root[data-skin="midnight"] { --eye2-base: initial; --alt: #8e9bef; --brand: #ffe3a1;
   --bg: #0f1230; --bg2: #24184a; --surface: #1a1d42; --cell: #212553; --given: #2c3166; --line: #383e7a;
@@ -276,13 +270,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 #sheet .slider input::-webkit-slider-thumb { width: 18px; height: 18px; border: 0; background: radial-gradient(circle at 50% 35%, #fff, #ffe9d4); box-shadow: 0 0 0 2.5px var(--accent), 0 2px 0 2.5px var(--acc-dk); }
 #sheet .slider input::-moz-range-thumb { width: 14px; height: 14px; border: 3px solid var(--accent); background: #fff; }
 
-.theme-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px 10px 16px; background: var(--cell); border-radius: 16px; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--cell) 86%, #000); }
 .tr-label { font: 600 1.05rem var(--font-display); }
-.theme-seg { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 4px; border-radius: 12px; background: color-mix(in srgb, var(--cell) 80%, var(--ink) 8%); }
-.theme-seg button { display: inline-flex; align-items: center; gap: 6px; border: 0; border-radius: 9px; padding: 8px 12px; background: transparent; color: var(--muted); font: 500 .95rem var(--font-display); cursor: pointer; }
-.theme-seg button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
-.theme-seg button[data-theme-pick="dark"] svg { fill: currentColor; stroke: none; }
-.theme-seg button[aria-pressed="true"] { background: var(--accent); color: #fff; box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 68%, #000); }
 /* settings sheet */
 .sheet-bg { position: fixed; inset: 0; z-index: 25; background: rgba(20, 12, 10, .45); display: grid; align-items: end; justify-items: center; }
 .sheet {
@@ -370,7 +358,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .node { width: 74px; height: 74px; font: 700 1.7rem/1 var(--font-display); color: var(--ink);
   background: radial-gradient(circle at 50% 28%, #fffaf3, #ffe3c6 75%);
   box-shadow: inset 0 -4px 0 rgb(0 0 0 / .06), 0 6px 0 color-mix(in srgb, var(--accent) 55%, var(--slab)), 0 14px 18px -10px rgb(0 0 0 / .45); }
-:root[data-theme="dark"] .node:not(.current):not(.locked), .node:not(.current):not(.locked) { color: #6b4433; }
+.node:not(.current):not(.locked) { color: #6b4433; }
 .node:active { scale: 1; transform: translateX(var(--x)) translateY(4px); box-shadow: 0 2px 0 color-mix(in srgb, var(--accent) 55%, var(--slab)); }
 .node .ns { bottom: auto; top: -15px; gap: 0; }
 .node .ns svg { width: 20px; height: 20px; stroke: color-mix(in srgb, var(--star) 50%, #8a5200); stroke-width: 1.4; filter: drop-shadow(0 1.5px 0 rgb(0 0 0 / .2)); }
@@ -1267,13 +1255,6 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 <div class="sheet-bg" id="sheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
     <h3 class="set-head"><span id="sheet-title">Settings</span><button class="round set-x" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
-    <div class="theme-row">
-      <span class="tr-label">Theme</span>
-      <div class="theme-seg" role="group" aria-label="Theme">
-        <button type="button" data-theme-pick="light"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12h2.5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>Light</button>
-        <button type="button" data-theme-pick="dark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>Dark</button>
-      </div>
-    </div>
     <div class="slider">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="3" fill="currentColor"/><circle cx="17.5" cy="16" r="3" fill="currentColor"/></svg>
       <label for="s-music">Music</label>
@@ -1650,13 +1631,10 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   document.querySelectorAll(".tab[data-to]").forEach(function (t) { t.onclick = function () { show(t.dataset.to); }; });
   $("t-settings").onclick = function () { openSheet(); };
   function applyTheme() {
-    document.documentElement.setAttribute("data-theme", save.theme === "dark" ? "dark" : "light");
-    document.querySelectorAll("[data-theme-pick]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.themePick === (save.theme || "light"))); });
-    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = save.theme === "dark" ? "#1c1917" : "#f6f5f3";
+    // One look only: the light theme (dark mode was removed).
+    document.documentElement.setAttribute("data-theme", "light");
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.content = "#f6f5f3";
   }
-  document.querySelectorAll("[data-theme-pick]").forEach(function (b) {
-    b.onclick = function () { save.theme = b.dataset.themePick; persist(); applyTheme(); };
-  });
   function applySkin() {
     applyTheme();
     if (save.skin === "cozy") document.documentElement.removeAttribute("data-skin");

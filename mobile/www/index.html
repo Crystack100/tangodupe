@@ -179,7 +179,7 @@ html.on-home, html.on-home body, html.on-game, html.on-game body { overflow: hid
 html.on-home body, html.on-game body { position: fixed; inset: 0; box-sizing: border-box; }
 /* The puzzle fits one screen: the board shrinks on short phones instead of the page scrolling. */
 html.on-game #game { gap: min(14px, 1.6svh); touch-action: manipulation; }
-html.on-game .board-wrap { width: min(100%, calc(100svh - 420px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))); margin-inline: auto; box-sizing: border-box; }
+html.on-game .board-wrap { width: min(100%, calc(100svh - 330px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))); margin-inline: auto; box-sizing: border-box; }
 html.on-home #home { height: calc(100svh - 96px - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top, 0px)); min-height: 0; overflow: hidden; touch-action: none; }
 /* In the iPhone app the page runs edge to edge: keep clear of the Dynamic Island and the home bar. */
 body { padding-top: env(safe-area-inset-top, 0px); }
@@ -191,7 +191,7 @@ body.playing { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
   html.on-game #game .actions { margin-bottom: auto; }
   /* No banner in the app (or after Remove ads), so the board gets that room too. */
   html.on-game body.native .board-wrap, html.on-game body.no-ads .board-wrap {
-    width: min(100%, calc(100svh - 340px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))); }
+    width: min(100%, calc(100svh - 250px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px))); }
 }
 .gear { width: 48px; height: 48px; border-radius: 50%; color: var(--ink); box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 4px 0 color-mix(in srgb, var(--surface) 80%, #000), 0 10px 18px -8px var(--shadow); }
 .gear svg { width: 28px; height: 28px; fill: currentColor; stroke: none; transition: rotate .4s; }
@@ -780,6 +780,30 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .noads .chunky:disabled { opacity: .6; }
 body.no-ads .ad-banner { display: none; }
 .splash.out { opacity: 0; pointer-events: none; }
+/* How to play: the rules as a list in a sheet, opened from the ? in the puzzle header. */
+.how-card { text-align: left; }
+.how-card h3, .how-card .note { text-align: center; }
+.rule-strip.how-rules { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 0; background: none; box-shadow: none; border: 0; }
+.rule-strip.how-rules div { padding: 10px 12px; gap: 14px; font: 500 .98rem/1.35 var(--font-body); border-radius: 12px; text-align: left; }
+.rule-strip.how-rules b { font-family: var(--font-display); }
+.rule-strip.how-rules svg { width: 56px; height: 56px; }
+#how-sheet { z-index: 27; }
+.g-how.alert { color: var(--bad); animation: shake .3s; }
+/* Hint explanation: a speech bubble over the buttons, with the hinted cat and its clues outlined on the board. */
+.why {
+  position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 22;
+  width: min(420px, calc(100% - 24px)); display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 4px 12px;
+  background: var(--surface); color: var(--ink); border-radius: 18px; padding: 12px 14px; text-align: left;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--surface) 78%, #000), 0 16px 32px -12px rgb(0 0 0 / .45); animation: whyIn .3s cubic-bezier(.3, 1.4, .5, 1);
+}
+@keyframes whyIn { from { transform: translate(-50%, 20px); opacity: 0; } }
+.why-cat { width: 44px; height: 44px; grid-row: span 2; }
+.why p { margin: 0; font: 600 .98rem/1.35 var(--font-body); }
+.why-ok { justify-self: end; border: 0; background: var(--accent); color: #fff; font: 700 .9rem var(--font-display); padding: 7px 16px; border-radius: 999px; cursor: pointer; }
+.board .cell.hinted { z-index: 1; box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent), 0 0 18px 2px color-mix(in srgb, var(--accent) 55%, transparent); animation: hintPulse 1s ease-in-out 2; }
+.board .cell.clue { box-shadow: inset 0 0 0 2.5px color-mix(in srgb, var(--accent) 80%, transparent); }
+.board .cell.clue::after { content: ""; position: absolute; inset: -3px; border: 2px dashed var(--accent); border-radius: 11px; pointer-events: none; }
+@keyframes hintPulse { 50% { transform: scale(1.06); } }
 .toast {
   position: fixed; left: 50%; bottom: calc(100px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
   background: var(--ink); color: var(--surface); padding: 10px 18px; border-radius: 10px; font: 600 1rem var(--font-display); z-index: 20; white-space: nowrap;
@@ -1107,17 +1131,12 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     <div class="g-head">
       <button class="g-icon" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
       <h2 id="g-title">Level 1</h2>
-      <span class="g-icon" aria-hidden="true"></span>
+      <button class="g-icon g-how" id="g-how" type="button" aria-label="How to play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.3-2.7 4"/><circle cx="12" cy="17.6" r=".7" fill="currentColor"/></svg></button>
     </div>
     <div class="chips">
       <span class="chip"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg><span id="g-filled" aria-label="Squares filled"><b>0</b>/36</span></span>
       <div class="goals" id="goals"></div>
       <span class="chip"><svg class="sw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="2"/><path d="M12 9.5v4l2.6 1.8" stroke="var(--brand)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 2.5h4M12 2.5v3" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/></svg><span id="timer" aria-label="Time">0:00</span></span>
-    </div>
-    <div class="rule-strip">
-      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="6.5" width="15" height="15"/><rect x="15.3" y="8.0" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="14.3" y="6.5" width="15" height="15"/><rect x="29.6" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="6.5" width="15" height="15"/><rect x="1.0" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="0.0" y="20.8" width="15" height="15"/><rect x="15.3" y="22.3" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="20.8" width="15" height="15"/><rect x="29.6" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="28.6" y="20.8" width="15" height="15"/></svg><span>3 of each per row &amp; col</span></div>
-      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="14.0" width="15" height="15"/><rect x="15.3" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="14.0" width="15" height="15"/><rect x="29.6" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="14.0" width="15" height="15"/><path d="M6 10 38 34M38 10 6 34" stroke="var(--bad)" stroke-width="2.6" opacity=".9" stroke-linecap="round"/></svg><span>No 3 in a row</span></div>
-      <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="2.5" width="16" height="16"/><rect x="29" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="28" y="2.5" width="16" height="16"/><rect x="1" y="26" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="24.5" width="16" height="16"/><rect x="29" y="26" width="14" height="14" rx="2.5" class="rt t1"/><use href="#moon" x="28" y="24.5" width="16" height="16"/><text x="22" y="15.5" class="rs">=</text><text x="22" y="37.5" class="rs">&#215;</text></svg><span>= same<br>&#215; opposite</span></div>
     </div>
     <div class="board-wrap">
       <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>
@@ -1193,10 +1212,30 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
   </div>
 </div>
 
+<div class="sheet-bg" id="how-sheet" hidden>
+  <div class="sheet pop-card how-card" role="dialog" aria-modal="true" aria-labelledby="how-title">
+    <h3 id="how-title">How to play</h3>
+    <p class="note">Fill every square with Sunny or Luna.</p>
+    <div class="rule-strip how-rules">
+        <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="6.5" width="15" height="15"/><rect x="15.3" y="8.0" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="14.3" y="6.5" width="15" height="15"/><rect x="29.6" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="6.5" width="15" height="15"/><rect x="1.0" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="0.0" y="20.8" width="15" height="15"/><rect x="15.3" y="22.3" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="20.8" width="15" height="15"/><rect x="29.6" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="28.6" y="20.8" width="15" height="15"/></svg><span><b>3 of each.</b> Every row and column has 3 Sunnys and 3 Lunas.</span></div>
+        <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="14.0" width="15" height="15"/><rect x="15.3" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="14.0" width="15" height="15"/><rect x="29.6" y="15.5" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="14.0" width="15" height="15"/><path d="M6 10 38 34M38 10 6 34" stroke="var(--bad)" stroke-width="2.6" opacity=".9" stroke-linecap="round"/></svg><span><b>No 3 in a row.</b> Never more than 2 of the same cat side by side.</span></div>
+        <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="2.5" width="16" height="16"/><rect x="29" y="4" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="28" y="2.5" width="16" height="16"/><rect x="1" y="26" width="14" height="14" rx="2.5" class="rt t0"/><use href="#sun" x="0" y="24.5" width="16" height="16"/><rect x="29" y="26" width="14" height="14" rx="2.5" class="rt t1"/><use href="#moon" x="28" y="24.5" width="16" height="16"/><text x="22" y="15.5" class="rs">=</text><text x="22" y="37.5" class="rs">&#215;</text></svg><span><b>Signs.</b> = means the two cats match. &#215; means they are opposite.</span></div>
+    </div>
+    <button class="chunky" id="how-tut" type="button">Play the tutorial</button>
+    <button class="soft" id="how-close" type="button">Got it</button>
+  </div>
+</div>
+
+<div class="why" id="why" role="status" hidden>
+  <svg class="why-cat" id="why-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
+  <p id="why-text"></p>
+  <button class="why-ok" id="why-ok" type="button">Got it</button>
+</div>
+
 <div class="sheet-bg" id="hint-sheet" hidden>
   <div class="sheet pop-card" role="dialog" aria-modal="true" aria-labelledby="hint-title">
     <h3 id="hint-title">Need a hint?</h3>
-    <p class="note">A hint fixes a wrong square or fills an empty one.</p>
+    <p class="note">A hint shows the next cat you can work out and explains why.</p>
     <button class="chunky" id="hint-ad" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video: free hint</button>
     <button class="soft" id="hint-pay" type="button">Use a hint (+15s on the clock)</button>
     <button class="soft" id="hint-no" type="button">Not now</button>
@@ -1369,6 +1408,87 @@ var TangoCore = (function () {
     return out;
   }
 
+  /* ---------- Logic solver ----------
+     Finds the next cell a person can work out without guessing, and says why.
+     Tier 1 rules: a sign next to a placed cat, two alike side by side, a gap between two alike,
+     and a line that already has its 3 of one cat. Tier 2 adds "line logic": try a cat in a cell and
+     see that its row or column can no longer be finished. Every level must be solvable this way. */
+  var NAMES = ["Sunny", "Luna"];
+  function lineName(isRow, n) { return (isRow ? "row " : "column ") + (n + 1); }
+  function lines() {
+    var out = [], r, c, k;
+    for (r = 0; r < N; r++) { var a = []; for (k = 0; k < N; k++) a.push(r * N + k); out.push({ cells: a, row: true, n: r }); }
+    for (c = 0; c < N; c++) { var b = []; for (k = 0; k < N; k++) b.push(k * N + c); out.push({ cells: b, row: false, n: c }); }
+    return out;
+  }
+  var LINES = lines();
+  function nextStep(board, edges, tier) {
+    var i, k, L, e, v;
+    // 1. A sign next to a placed cat.
+    for (k = 0; k < edges.length; k++) {
+      e = edges[k];
+      var x = board[e.a], y = board[e.b];
+      if ((x === -1) === (y === -1)) continue;
+      var empty = x === -1 ? e.a : e.b, known = x === -1 ? y : x;
+      v = e.type === "=" ? known : 1 - known;
+      return { i: empty, v: v, cells: [x === -1 ? e.b : e.a], rule: "sign",
+        why: e.type === "=" ? "The = sign means both cats match, so this one is " + NAMES[v] + " too."
+                            : "The \u00d7 sign means the cats are opposite, so this one is " + NAMES[v] + "." };
+    }
+    for (var l = 0; l < LINES.length; l++) {
+      L = LINES[l]; var c = L.cells, nm = lineName(L.row, L.n);
+      for (k = 0; k < N; k++) {
+        // 2. Two alike side by side: the cells on either end take the other cat.
+        if (k + 1 < N && board[c[k]] !== -1 && board[c[k]] === board[c[k + 1]]) {
+          v = 1 - board[c[k]];
+          var ends = [k - 1, k + 2];
+          for (var q = 0; q < 2; q++) if (ends[q] >= 0 && ends[q] < N && board[c[ends[q]]] === -1)
+            return { i: c[ends[q]], v: v, cells: [c[k], c[k + 1]], rule: "pair",
+              why: "Two " + NAMES[1 - v] + "s are already side by side. A third would make 3 in a row, so this one is " + NAMES[v] + "." };
+        }
+        // 3. A gap between two alike.
+        if (k + 2 < N && board[c[k]] !== -1 && board[c[k]] === board[c[k + 2]] && board[c[k + 1]] === -1)
+          return { i: c[k + 1], v: 1 - board[c[k]], cells: [c[k], c[k + 2]], rule: "gap",
+            why: "A " + NAMES[board[c[k]]] + " on each side. Another one in the middle would make 3 in a row, so this one is " + NAMES[1 - board[c[k]]] + "." };
+      }
+      // 4. A line that already has its 3 of one cat.
+      var cnt = [0, 0], holes = [];
+      for (k = 0; k < N; k++) { if (board[c[k]] === -1) holes.push(c[k]); else cnt[board[c[k]]]++; }
+      for (v = 0; v < 2; v++) if (cnt[v] === HALF && holes.length)
+        return { i: holes[0], v: 1 - v, cells: c.filter(function (j) { return board[j] === v; }), rule: "count",
+          why: nm.charAt(0).toUpperCase() + nm.slice(1) + " already has its 3 " + NAMES[v] + "s, so the rest are " + NAMES[1 - v] + "." };
+    }
+    if (tier < 2) return null;
+    // 5. Line logic: one cat in this cell leaves the row or column with no legal way to finish.
+    var eidx = edgeIndex(edges);
+    for (l = 0; l < LINES.length; l++) {
+      L = LINES[l]; var cs = L.cells, hole = cs.filter(function (j) { return board[j] === -1; });
+      if (!hole.length) continue;
+      var seen = hole.map(function () { return [false, false]; }), any = false, b = board.slice();
+      for (var m = 0; m < (1 << hole.length); m++) {
+        var ok = true;
+        for (k = 0; k < hole.length; k++) b[hole[k]] = (m >> k) & 1;
+        for (k = 0; k < hole.length && ok; k++) ok = okAt(b, hole[k], eidx);
+        if (!ok) continue;
+        any = true;
+        for (k = 0; k < hole.length; k++) seen[k][(m >> k) & 1] = true;
+      }
+      if (!any) return null;
+      for (k = 0; k < hole.length; k++) if (seen[k][0] !== seen[k][1]) {
+        v = seen[k][0] ? 0 : 1;
+        return { i: hole[k], v: v, cells: cs.filter(function (j) { return board[j] !== -1; }), rule: "line",
+          why: "Try " + NAMES[1 - v] + " here and " + lineName(L.row, L.n) + " can't be finished without breaking a rule (3 of each, no 3 in a row, and the signs). So it must be " + NAMES[v] + "." };
+      }
+    }
+    return null;
+  }
+  // Can a person solve this from the givens, step by step, with no guessing?
+  function logicSolvable(givens, edges, tier) {
+    var b = givens.slice(), s;
+    while ((s = nextStep(b, edges, tier))) b[s.i] = s.v;
+    return b.every(function (x) { return x !== -1; });
+  }
+
   // difficulty: "easy" | "medium" | "hard"
   function generate(seed, difficulty) {
     var rand = rng(seed);
@@ -1377,20 +1497,20 @@ var TangoCore = (function () {
     var edges = shuffle(allEdges(), rand).slice(0, nEdges).map(function (p) {
       return { a: p[0], b: p[1], type: sol[p[0]] === sol[p[1]] ? "=" : "x" };
     });
-    var givens = sol.slice();
-    // Strip givens while the puzzle keeps exactly one solution.
+    var givens = sol.slice(), tier = difficulty === "easy" ? 1 : 2;
+    // Strip givens while the puzzle can still be solved by logic alone (which also means one solution).
     var removed = [];
     shuffle(Array.from({ length: N * N }, function (_, i) { return i; }), rand).forEach(function (i) {
       var keep = givens[i];
       givens[i] = -1;
-      if (solve(givens, edges, 2).count !== 1) givens[i] = keep;
+      if (!logicSolvable(givens, edges, tier)) givens[i] = keep;
       else removed.push(i);
     });
     // Then try dropping edge clues too, for a leaner hard puzzle.
     if (difficulty === "hard") {
       for (var k = edges.length - 1; k >= 0; k--) {
         var e = edges.splice(k, 1)[0];
-        if (solve(givens, edges, 2).count !== 1) edges.splice(k, 0, e);
+        if (!logicSolvable(givens, edges, tier)) edges.splice(k, 0, e);
       }
     } else if (difficulty === "easy") {
       // Easy: hand back a few cells so there are more footholds.
@@ -1446,7 +1566,8 @@ var TangoCore = (function () {
   }
 
   return { N: N, generate: generate, level: level, levelDifficulty: levelDifficulty,
-    STAR_TIMES: STAR_TIMES, stars: stars, solve: solve, check: check, rng: rng };
+    STAR_TIMES: STAR_TIMES, stars: stars, solve: solve, check: check, rng: rng,
+    nextStep: nextStep, logicSolvable: logicSolvable };
 })();
 if (typeof module !== "undefined") module.exports = TangoCore;
 
@@ -1513,6 +1634,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
   function show(screen) {
     if (screen !== "game") $("win").hidden = true;
+    $("why").hidden = true;
     ["home", "levels", "store", "game"].forEach(function (s) { $(s).hidden = s !== screen; });
     var inGame = screen === "game";
     $("tabs").hidden = inGame; document.body.classList.toggle("playing", inGame);
@@ -1742,6 +1864,10 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   };
   $("tut-skip").onclick = closeTut;
   $("s-how").onclick = function () { $("sheet").hidden = true; openTut(null); };
+  $("g-how").onclick = function () { $("how-sheet").hidden = false; };
+  $("how-close").onclick = function () { $("how-sheet").hidden = true; };
+  $("how-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
+  $("how-tut").onclick = function () { $("how-sheet").hidden = true; openTut(null); };
   function startLevel(n) {
     if (n === 1 && !save.tutDone && !(tut)) return openTut(function () { startLevel(1); });
     var p = T.level(n);
@@ -1818,7 +1944,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     }
     for (r = 0; r < N; r++) line(function (k) { return r * N + k; });
     for (c = 0; c < N; c++) line(function (k) { return k * N + c; });
-    document.querySelectorAll("#game .rule-strip > div").forEach(function (d, j) { d.classList.toggle("broken", broke[j]); });
+    document.querySelectorAll("#how-sheet .rule-strip > div").forEach(function (d, j) { d.classList.toggle("broken", broke[j]); });
+    $("g-how").classList.toggle("alert", broke.some(Boolean));
   }
   function render(changed, reveal) {
     var res = T.check(play.board, play.edges), names = ["sun", "moon"], words = ["Sunny", "Luna"];
@@ -1886,7 +2013,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     Audio.sfx(v === -1 ? "clear" : "place" + v);
     render(i); persist();
   }
-  function tap(i) { set(i, play.board[i] === -1 ? 0 : play.board[i] === 0 ? 1 : -1); }
+  function tap(i) { if (!$("why").hidden) hideWhy(); set(i, play.board[i] === -1 ? 0 : play.board[i] === 0 ? 1 : -1); }
   function key(i, ev) {
     var r = Math.floor(i / N), c = i % N, to = null;
     if (ev.key === "ArrowRight") to = r * N + Math.min(N - 1, c + 1);
@@ -2013,18 +2140,40 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("hint-pay").onclick = function () { $("hint-sheet").hidden = true; useHint(HINT_COST); };
   $("hint-no").onclick = function () { $("hint-sheet").hidden = true; };
   $("hint-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
+  // A hint places the next cat you could work out yourself, highlights the cats that prove it, and says why.
+  var CAT = ["Sunny", "Luna"];
   function useHint(cost) {
     if (!play || play.done) return;
-    var sol = play.solution, pick = -1, i;
-    // Fix a wrong square first, otherwise fill an empty one.
+    var sol = play.solution, pick = -1, why = "", clues = [], i;
+    // A wrong cat comes first: nothing after it can be worked out.
     for (i = 0; i < N * N && pick < 0; i++) if (play.board[i] !== -1 && play.board[i] !== sol[i]) pick = i;
-    if (pick < 0) {
-      var empty = []; for (i = 0; i < N * N; i++) if (play.board[i] === -1) empty.push(i);
-      pick = empty[Math.floor(Math.random() * empty.length)];
+    if (pick >= 0) why = "This square can't be " + CAT[play.board[pick]] + ". It has to be " + CAT[sol[pick]] + ", so I swapped it.";
+    else {
+      var step = T.nextStep(play.board, play.edges, 2);
+      if (step && step.v === sol[step.i]) { pick = step.i; why = step.why; clues = step.cells; }
+      else {
+        var empty = []; for (i = 0; i < N * N; i++) if (play.board[i] === -1) empty.push(i);
+        pick = empty[Math.floor(Math.random() * empty.length)];
+        why = "This one is " + CAT[sol[pick]] + ".";
+      }
     }
-    if (pick == null) return;
+    if (pick == null || pick < 0) return;
     play.elapsed += cost; renderClock(); set(pick, sol[pick]); cells[pick].focus();
-  };
+    Audio.sfx("hint");
+    explain(pick, clues, why);
+  }
+  function explain(i, clues, text) {
+    hideWhy();
+    cells[i].classList.add("hinted");
+    clues.forEach(function (j) { cells[j].classList.add("clue"); });
+    $("why-cat").innerHTML = '<use href="#' + (play.board[i] === 1 ? "moon" : "sun") + '"/>';
+    $("why-text").textContent = text; $("why").hidden = false;
+  }
+  function hideWhy() {
+    $("why").hidden = true;
+    cells.forEach(function (c) { c.classList.remove("hinted", "clue"); });
+  }
+  $("why-ok").onclick = hideWhy;
   $("clear").onclick = function () {
     if (play.done) return;
     play.board = play.givens.slice(); play.history = []; render(); persist();
@@ -2255,12 +2404,19 @@ if (typeof module !== "undefined") module.exports = TangoCore;
      Everything is synthesized with Web Audio, so there are no files to load.
      iOS only allows audio after a tap, so the context starts on the first touch. */
   var Audio = (function () {
-    var ctx = null, muted = false, master, musicBus, sfxBus, nextBeat = 0, step = 0, timer = null;
+    var ctx = null, muted = false, master, musicBus, sfxBus, noiseBuf, nextBeat = 0, step = 0, timer = null;
     function ensure() {
       if (!ctx) {
         var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
         ctx = new AC(); master = ctx.createGain(); master.connect(ctx.destination); master.gain.value = muted ? 0 : 1;
         musicBus = ctx.createGain(); sfxBus = ctx.createGain(); musicBus.connect(master); sfxBus.connect(master);
+        // A soft room reverb under everything makes the plucks and meows sound warm instead of beepy.
+        var len = Math.floor(ctx.sampleRate * 1.6), ir = ctx.createBuffer(2, len, ctx.sampleRate);
+        for (var ch = 0; ch < 2; ch++) { var d = ir.getChannelData(ch); for (var n = 0; n < len; n++) d[n] = (Math.random() * 2 - 1) * Math.pow(1 - n / len, 3); }
+        var verb = ctx.createConvolver(), wet = ctx.createGain(); verb.buffer = ir; wet.gain.value = .22;
+        musicBus.connect(verb); sfxBus.connect(verb); verb.connect(wet); wet.connect(master);
+        noiseBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * .5), ctx.sampleRate);
+        var nd = noiseBuf.getChannelData(0); for (n = 0; n < nd.length; n++) nd[n] = Math.random() * 2 - 1;
         volumes();
       }
       if (ctx.state === "suspended") ctx.resume();
@@ -2281,31 +2437,73 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       g.gain.exponentialRampToValueAtTime(.0001, t + dur);
       o.connect(g); g.connect(bus); o.start(t); o.stop(t + dur + .05);
     }
+    // Kalimba-style pluck: a sine tine with a bright, fast-fading overtone.
+    function pluck(bus, f, t, vol, dur) {
+      dur = dur || .9;
+      note(bus, f, t, dur, "sine", vol);
+      note(bus, f * 3.01, t, dur * .18, "sine", vol * .22);
+    }
+    // A short burst of filtered noise: soft wooden clicks and brushed hi-hats.
+    function noise(bus, t, dur, vol, freq, q) {
+      var src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain();
+      src.buffer = noiseBuf; f.type = "bandpass"; f.frequency.value = freq; f.Q.value = q || 1;
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      src.connect(f); f.connect(g); g.connect(bus); src.start(t); src.stop(t + dur + .02);
+    }
+    // A little synthesized meow: a buzzy voice through two mouth-shaped filters that open ("eee-aa") and
+    // close ("-ow") while the pitch rises and falls. mood: "happy", "ask" (rises like a question), "grumpy".
+    function meow(t, pitch, len, vol, mood) {
+      pitch *= .94 + Math.random() * .12;
+      var o = ctx.createOscillator(), g = ctx.createGain(), f1 = ctx.createBiquadFilter(), f2 = ctx.createBiquadFilter(), g2 = ctx.createGain();
+      var lfo = ctx.createOscillator(), lg = ctx.createGain(), fr = o.frequency;
+      o.type = "sawtooth";
+      var peak = mood === "grumpy" ? .9 : 1.18, end = mood === "ask" ? 1.3 : mood === "grumpy" ? .62 : .72;
+      fr.setValueAtTime(pitch * .8, t); fr.linearRampToValueAtTime(pitch * peak, t + len * (mood === "ask" ? .5 : .32));
+      fr.linearRampToValueAtTime(pitch * end, t + len);
+      lfo.frequency.value = mood === "grumpy" ? 28 : 6.5; lg.gain.value = pitch * (mood === "grumpy" ? .06 : .018);
+      lfo.connect(lg); lg.connect(fr);
+      f1.type = f2.type = "bandpass"; f1.Q.value = 5; f2.Q.value = 7;
+      f1.frequency.setValueAtTime(450, t); f1.frequency.linearRampToValueAtTime(950, t + len * .35); f1.frequency.linearRampToValueAtTime(480, t + len);
+      f2.frequency.setValueAtTime(1500, t); f2.frequency.linearRampToValueAtTime(2100, t + len * .3); f2.frequency.linearRampToValueAtTime(1050, t + len);
+      g2.gain.value = .55;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .045);
+      g.gain.setValueAtTime(vol, t + len * .7); g.gain.exponentialRampToValueAtTime(.0001, t + len);
+      o.connect(f1); o.connect(f2); f2.connect(g2); f1.connect(g); g2.connect(g); g.connect(sfxBus);
+      o.start(t); lfo.start(t); o.stop(t + len + .05); lfo.stop(t + len + .05);
+    }
     var SFX = {
-      place0: function (t) { note(sfxBus, 620, t, .14, "sine", .35, 940); },
-      place1: function (t) { note(sfxBus, 520, t, .18, "triangle", .3, 390); },
-      clear: function (t) { note(sfxBus, 300, t, .08, "sine", .2, 200); },
-      tap: function (t) { note(sfxBus, 900, t, .05, "sine", .12); },
-      oops: function (t) { note(sfxBus, 330, t, .12, "square", .06); note(sfxBus, 262, t + .11, .16, "square", .06); },
-      coin: function (t) { note(sfxBus, 988, t, .1, "square", .08); note(sfxBus, 1319, t + .08, .3, "square", .08); },
-      star: function (t, i) { note(sfxBus, [784, 988, 1175][i || 0], t, .4, "triangle", .3); },
-      win: function (t) { [523, 659, 784, 1047].forEach(function (f, k) { note(sfxBus, f, t + k * .09, .35, "triangle", .28); }); }
+      place0: function (t) { pluck(sfxBus, 784, t, .3, .6); pluck(sfxBus, 1175, t + .05, .1, .4); },
+      place1: function (t) { pluck(sfxBus, 523.3, t, .3, .8); pluck(sfxBus, 392, t + .06, .1, .6); },
+      clear: function (t) { noise(sfxBus, t, .06, .25, 900, 2); },
+      tap: function (t) { noise(sfxBus, t, .04, .3, 2400, 1.5); },
+      oops: function (t) { meow(t, 420, .38, .5, "grumpy"); },
+      hint: function (t) { meow(t, 640, .3, .45, "ask"); },
+      coin: function (t) { pluck(sfxBus, 1318.5, t, .18, .5); pluck(sfxBus, 1760, t + .08, .18, .7); },
+      star: function (t, i) { pluck(sfxBus, [1046.5, 1318.5, 1568][i || 0], t, .3, 1.1); pluck(sfxBus, [2093, 2637, 3136][i || 0], t + .04, .06, .5); },
+      win: function (t) {
+        meow(t, 720, .42, .5, "happy"); meow(t + .5, 900, .3, .4, "happy");
+        [523.3, 659.3, 784, 1046.5].forEach(function (f, k) { pluck(sfxBus, f, t + .2 + k * .1, .22, 1.2); });
+      }
     };
     function sfx(name, arg) {
       if (!save.sound || !ensure()) return;
       SFX[name](ctx.currentTime + .01, arg);
     }
-    // A slow, cozy loop: C - Am - F - G, soft arpeggios over a sine bass.
-    var CHORDS = [[261.6, 329.6, 392], [220, 261.6, 329.6], [174.6, 220, 261.6], [196, 246.9, 293.7]];
-    var MELODY = [659.3, 0, 587.3, 523.3, 0, 440, 523.3, 0, 587.3, 0, 523.3, 440, 392, 0, 440, 0];
-    var BEAT = 60 / 84 / 2;
+    // Music: a slow lo-fi kalimba loop (Fmaj7, Em7, Dm7, Cmaj7) with a soft bass, brushed hats on the
+    // off-beats and a pentatonic tune that comes and goes so it doesn't wear thin.
+    var CHORDS = [[174.6, 220, 261.6, 329.6], [164.8, 196, 246.9, 293.7], [146.8, 174.6, 220, 261.6], [130.8, 164.8, 196, 246.9]];
+    var ARP = [0, 2, 1, 3, 2, 1, 3, 2];
+    var MELODY = [659.3, 0, 0, 784, 0, 659.3, 0, 0, 587.3, 0, 0, 523.3, 0, 0, 0, 0,
+                  523.3, 0, 0, 587.3, 0, 659.3, 0, 784, 880, 0, 0, 784, 0, 0, 0, 0];
+    var BEAT = 60 / 72 / 2;
     function schedule() {
-      while (nextBeat < ctx.currentTime + .35) {
-        var chord = CHORDS[Math.floor(step / 8) % 4], k = step % 8;
-        if (k === 0) note(musicBus, chord[0] / 2, nextBeat, BEAT * 7, "sine", .28);
-        note(musicBus, chord[[0, 1, 2, 1][k % 4]] * (k >= 4 ? 2 : 1), nextBeat, BEAT * 1.8, "triangle", .07);
-        var mel = MELODY[step % 32 < 16 ? step % 16 : (step + 5) % 16];
-        if (step % 2 === 0 && mel && step % 64 >= 16) note(musicBus, mel, nextBeat, BEAT * 3, "sine", .09);
+      while (nextBeat < ctx.currentTime + .4) {
+        var bar = Math.floor(step / 8), chord = CHORDS[bar % 4], k = step % 8, swing = k % 2 ? BEAT * .12 : 0, t = nextBeat + swing;
+        if (k === 0 || k === 4) note(musicBus, chord[0], t, BEAT * 3.6, "sine", .2);
+        pluck(musicBus, chord[ARP[k]] * 2, t, .05 + Math.random() * .025, 1.4);
+        if (k === 2 || k === 6) noise(musicBus, t, .07, .035, 6000, .8);
+        var mel = MELODY[step % 32];
+        if (mel && bar % 8 >= 4) pluck(musicBus, mel, t, .085, 1.8);
         nextBeat += BEAT; step++;
       }
     }

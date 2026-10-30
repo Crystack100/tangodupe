@@ -104,6 +104,87 @@ var TangoCore = (function () {
     return out;
   }
 
+  /* ---------- Logic solver ----------
+     Finds the next cell a person can work out without guessing, and says why.
+     Tier 1 rules: a sign next to a placed cat, two alike side by side, a gap between two alike,
+     and a line that already has its 3 of one cat. Tier 2 adds "line logic": try a cat in a cell and
+     see that its row or column can no longer be finished. Every level must be solvable this way. */
+  var NAMES = ["Sunny", "Luna"];
+  function lineName(isRow, n) { return (isRow ? "row " : "column ") + (n + 1); }
+  function lines() {
+    var out = [], r, c, k;
+    for (r = 0; r < N; r++) { var a = []; for (k = 0; k < N; k++) a.push(r * N + k); out.push({ cells: a, row: true, n: r }); }
+    for (c = 0; c < N; c++) { var b = []; for (k = 0; k < N; k++) b.push(k * N + c); out.push({ cells: b, row: false, n: c }); }
+    return out;
+  }
+  var LINES = lines();
+  function nextStep(board, edges, tier) {
+    var i, k, L, e, v;
+    // 1. A sign next to a placed cat.
+    for (k = 0; k < edges.length; k++) {
+      e = edges[k];
+      var x = board[e.a], y = board[e.b];
+      if ((x === -1) === (y === -1)) continue;
+      var empty = x === -1 ? e.a : e.b, known = x === -1 ? y : x;
+      v = e.type === "=" ? known : 1 - known;
+      return { i: empty, v: v, cells: [x === -1 ? e.b : e.a], rule: "sign",
+        why: e.type === "=" ? "The = sign means both cats match, so this one is " + NAMES[v] + " too."
+                            : "The \u00d7 sign means the cats are opposite, so this one is " + NAMES[v] + "." };
+    }
+    for (var l = 0; l < LINES.length; l++) {
+      L = LINES[l]; var c = L.cells, nm = lineName(L.row, L.n);
+      for (k = 0; k < N; k++) {
+        // 2. Two alike side by side: the cells on either end take the other cat.
+        if (k + 1 < N && board[c[k]] !== -1 && board[c[k]] === board[c[k + 1]]) {
+          v = 1 - board[c[k]];
+          var ends = [k - 1, k + 2];
+          for (var q = 0; q < 2; q++) if (ends[q] >= 0 && ends[q] < N && board[c[ends[q]]] === -1)
+            return { i: c[ends[q]], v: v, cells: [c[k], c[k + 1]], rule: "pair",
+              why: "Two " + NAMES[1 - v] + "s are already side by side. A third would make 3 in a row, so this one is " + NAMES[v] + "." };
+        }
+        // 3. A gap between two alike.
+        if (k + 2 < N && board[c[k]] !== -1 && board[c[k]] === board[c[k + 2]] && board[c[k + 1]] === -1)
+          return { i: c[k + 1], v: 1 - board[c[k]], cells: [c[k], c[k + 2]], rule: "gap",
+            why: "A " + NAMES[board[c[k]]] + " on each side. Another one in the middle would make 3 in a row, so this one is " + NAMES[1 - board[c[k]]] + "." };
+      }
+      // 4. A line that already has its 3 of one cat.
+      var cnt = [0, 0], holes = [];
+      for (k = 0; k < N; k++) { if (board[c[k]] === -1) holes.push(c[k]); else cnt[board[c[k]]]++; }
+      for (v = 0; v < 2; v++) if (cnt[v] === HALF && holes.length)
+        return { i: holes[0], v: 1 - v, cells: c.filter(function (j) { return board[j] === v; }), rule: "count",
+          why: nm.charAt(0).toUpperCase() + nm.slice(1) + " already has its 3 " + NAMES[v] + "s, so the rest are " + NAMES[1 - v] + "." };
+    }
+    if (tier < 2) return null;
+    // 5. Line logic: one cat in this cell leaves the row or column with no legal way to finish.
+    var eidx = edgeIndex(edges);
+    for (l = 0; l < LINES.length; l++) {
+      L = LINES[l]; var cs = L.cells, hole = cs.filter(function (j) { return board[j] === -1; });
+      if (!hole.length) continue;
+      var seen = hole.map(function () { return [false, false]; }), any = false, b = board.slice();
+      for (var m = 0; m < (1 << hole.length); m++) {
+        var ok = true;
+        for (k = 0; k < hole.length; k++) b[hole[k]] = (m >> k) & 1;
+        for (k = 0; k < hole.length && ok; k++) ok = okAt(b, hole[k], eidx);
+        if (!ok) continue;
+        any = true;
+        for (k = 0; k < hole.length; k++) seen[k][(m >> k) & 1] = true;
+      }
+      if (!any) return null;
+      for (k = 0; k < hole.length; k++) if (seen[k][0] !== seen[k][1]) {
+        v = seen[k][0] ? 0 : 1;
+        return { i: hole[k], v: v, cells: cs.filter(function (j) { return board[j] !== -1; }), rule: "line",
+          why: "Try " + NAMES[1 - v] + " here and " + lineName(L.row, L.n) + " can't be finished without breaking a rule (3 of each, no 3 in a row, and the signs). So it must be " + NAMES[v] + "." };
+      }
+    }
+    return null;
+  }
+  // Can a person solve this from the givens, step by step, with no guessing?
+  function logicSolvable(givens, edges, tier) {
+    var b = givens.slice(), s;
+    while ((s = nextStep(b, edges, tier))) b[s.i] = s.v;
+    return b.every(function (x) { return x !== -1; });
+  }
+
   // difficulty: "easy" | "medium" | "hard"
   function generate(seed, difficulty) {
     var rand = rng(seed);
@@ -112,20 +193,20 @@ var TangoCore = (function () {
     var edges = shuffle(allEdges(), rand).slice(0, nEdges).map(function (p) {
       return { a: p[0], b: p[1], type: sol[p[0]] === sol[p[1]] ? "=" : "x" };
     });
-    var givens = sol.slice();
-    // Strip givens while the puzzle keeps exactly one solution.
+    var givens = sol.slice(), tier = difficulty === "easy" ? 1 : 2;
+    // Strip givens while the puzzle can still be solved by logic alone (which also means one solution).
     var removed = [];
     shuffle(Array.from({ length: N * N }, function (_, i) { return i; }), rand).forEach(function (i) {
       var keep = givens[i];
       givens[i] = -1;
-      if (solve(givens, edges, 2).count !== 1) givens[i] = keep;
+      if (!logicSolvable(givens, edges, tier)) givens[i] = keep;
       else removed.push(i);
     });
     // Then try dropping edge clues too, for a leaner hard puzzle.
     if (difficulty === "hard") {
       for (var k = edges.length - 1; k >= 0; k--) {
         var e = edges.splice(k, 1)[0];
-        if (solve(givens, edges, 2).count !== 1) edges.splice(k, 0, e);
+        if (!logicSolvable(givens, edges, tier)) edges.splice(k, 0, e);
       }
     } else if (difficulty === "easy") {
       // Easy: hand back a few cells so there are more footholds.
@@ -181,6 +262,7 @@ var TangoCore = (function () {
   }
 
   return { N: N, generate: generate, level: level, levelDifficulty: levelDifficulty,
-    STAR_TIMES: STAR_TIMES, stars: stars, solve: solve, check: check, rng: rng };
+    STAR_TIMES: STAR_TIMES, stars: stars, solve: solve, check: check, rng: rng,
+    nextStep: nextStep, logicSolvable: logicSolvable };
 })();
 if (typeof module !== "undefined") module.exports = TangoCore;

@@ -1120,7 +1120,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     </div>
     <div class="actions">
       <button class="rbtn" id="undo" type="button"><span class="rb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>Undo</button>
-      <button class="rbtn" id="hint" type="button"><span class="rb"><svg viewBox="0 0 24 24"><path d="M12 2.5a7 7 0 0 0-4 12.7V18h8v-2.8A7 7 0 0 0 12 2.5z" fill="#ffd34d" stroke="#e3a21c" stroke-width="1.6"/><path d="M9 20.5h6" stroke="#9b8a7e" stroke-width="2.4" stroke-linecap="round"/><path d="M9.5 7.5a3 3 0 0 1 2.5-1.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg><i class="badge">+15s</i></span>Hint</button>
+      <button class="rbtn" id="hint" type="button"><span class="rb"><svg viewBox="0 0 24 24"><path d="M12 2.5a7 7 0 0 0-4 12.7V18h8v-2.8A7 7 0 0 0 12 2.5z" fill="#ffd34d" stroke="#e3a21c" stroke-width="1.6"/><path d="M9 20.5h6" stroke="#9b8a7e" stroke-width="2.4" stroke-linecap="round"/><path d="M9.5 7.5a3 3 0 0 1 2.5-1.5" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></span>Hint</button>
       <button class="rbtn" id="clear" type="button"><span class="rb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></span>Clear</button>
     </div>
     <div class="ad-banner" id="ad-banner"><span>Ad</span>Banner ad space (AdMob in the app)<button type="button" class="ad-x" id="ad-banner-x">Remove ads</button></div>
@@ -1209,15 +1209,6 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
   <button class="why-ok" id="why-ok" type="button">Got it</button>
 </div>
 
-<div class="sheet-bg" id="hint-sheet" hidden>
-  <div class="sheet pop-card" role="dialog" aria-modal="true" aria-labelledby="hint-title">
-    <h3 id="hint-title">Need a hint?</h3>
-    <p class="note">A hint shows the next cat you can work out and explains why.</p>
-    <button class="chunky" id="hint-ad" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Watch a video: free hint</button>
-    <button class="soft" id="hint-pay" type="button">Use a hint (+15s on the clock)</button>
-    <button class="soft" id="hint-no" type="button">Not now</button>
-  </div>
-</div>
 
 <nav class="tabs" id="tabs" aria-label="Main">
   <div class="tabs-in">
@@ -1276,7 +1267,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 </script>
 <script>
 (function () {
-  var T = TangoCore, N = T.N, PAGE = 20, HINT_COST = 15;
+  var T = TangoCore, N = T.N, PAGE = 20;
   // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
     { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
@@ -1831,7 +1822,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
   function startClock() {
     stopClock();
     tick = setInterval(function () {
-      if (!play || play.done || document.hidden || Ads.busy() || !$("hint-sheet").hidden) return;
+      if (!play || play.done || document.hidden || Ads.busy()) return;
       play.elapsed++; renderClock();
       if (play.elapsed % 5 === 0) persist();
     }, 1000);
@@ -1842,17 +1833,11 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     var h = play.history.pop(); if (!h) return;
     play.board[h[0]] = h[1]; render(h[0]); persist();
   };
-  $("hint").onclick = function () {
-    if (play.done) return;
-    if (Ads.canReward()) $("hint-sheet").hidden = false; else useHint(HINT_COST);
-  };
-  $("hint-ad").onclick = function () { $("hint-sheet").hidden = true; Ads.reward(function () { useHint(0); }); };
-  $("hint-pay").onclick = function () { $("hint-sheet").hidden = true; useHint(HINT_COST); };
-  $("hint-no").onclick = function () { $("hint-sheet").hidden = true; };
-  $("hint-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
+  // Hints are free: no ad, no time added.
+  $("hint").onclick = function () { useHint(); };
   // A hint places the next cat you could work out yourself, highlights the cats that prove it, and says why.
   var CAT = ["Sunny", "Luna"];
-  function useHint(cost) {
+  function useHint() {
     if (!play || play.done) return;
     var sol = play.solution, pick = -1, why = "", clues = [], i;
     // A wrong cat comes first: nothing after it can be worked out.
@@ -1868,7 +1853,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
       }
     }
     if (pick == null || pick < 0) return;
-    play.elapsed += cost; renderClock(); set(pick, sol[pick]); cells[pick].focus();
+    set(pick, sol[pick]); cells[pick].focus();
     Audio.sfx("hint");
     explain(pick, clues, why);
   }
@@ -1897,7 +1882,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 
   /* ---------- ads ----------
      In the phone app these are Google AdMob ads: a full-screen ad after every third win, and
-     reward videos the player chooses to watch (free hint, bonus stars).
+     reward videos the player chooses to watch (bonus stars).
      The web build fakes both with a 5 second card. "Remove ads" is web-only for now; in the
      app it becomes a one-time in-app purchase later. */
   function applyAds() {

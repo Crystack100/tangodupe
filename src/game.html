@@ -1268,6 +1268,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
 <script>
 (function () {
   var T = TangoCore, N = T.N, PAGE = 20;
+  var PUZZLE_V = 3; // bump when level generation changes so saved boards restart
   // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
     { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
@@ -1396,7 +1397,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     if (play && !play.done && play.daily === dayKey()) return resumeLevel();
     var key = dayKey(), p = T.generate((key * 2246822519) >>> 0, "medium");
     play = { level: 0, daily: key, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
-             board: p.givens.slice(), history: [], elapsed: 0, done: false };
+             board: p.givens.slice(), history: [], elapsed: 0, done: false, v: PUZZLE_V };
     save.play = play; persist(); resumeLevel();
   };
 
@@ -1573,7 +1574,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     if (n === 1 && !save.tutDone && !(tut)) return openTut(function () { startLevel(1); });
     var p = T.level(n);
     play = { level: n, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
-             board: p.givens.slice(), history: [], elapsed: 0, done: false };
+             board: p.givens.slice(), history: [], elapsed: 0, done: false, v: PUZZLE_V };
     save.play = play; persist();
     resumeLevel();
   }
@@ -1841,7 +1842,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
   // Cats the player placed ahead of that (maybe by guessing) are never used as a reason.
   function provenStep() {
     var known = play.givens.slice(), st, guard = 0;
-    while (guard++ < N * N && (st = T.nextStep(known, play.edges, 2))) {
+    while (guard++ < N * N && (st = T.nextStep(known, play.edges, 1))) {
       if (play.board[st.i] !== st.v) return st;
       known[st.i] = st.v;
     }
@@ -2247,6 +2248,8 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     if (!save.tutDone && (save.wins || Object.keys(save.best).length)) save.tutDone = true;
     play = save.play && save.play.board ? save.play : null;
     if (play && play.daily && play.daily !== dayKey()) play = save.play = null;
+    // Puzzles made by an older version may need guessing, so they're started fresh.
+    if (play && play.v !== PUZZLE_V) play = save.play = null;
     buildTiles();
     page = Math.floor((nextLevel() - 1) / PAGE);
     applySkin(); applyAds();

@@ -108,7 +108,8 @@ var TangoCore = (function () {
      Finds the next cell a person can work out without guessing, and says why.
      Tier 1 rules: a sign next to a placed cat, two alike side by side, a gap between two alike,
      and a line that already has its 3 of one cat. Tier 2 adds "line logic": try a cat in a cell and
-     see that its row or column can no longer be finished. Every level must be solvable this way. */
+     see that its row or column can no longer be finished. That feels like trial and error, so levels
+     are built to be solvable with tier 1 alone; tier 2 only backs up hints on old saved boards. */
   var NAMES = ["Sunny", "Luna"];
   function lineName(isRow, n) { return (isRow ? "row " : "column ") + (n + 1); }
   function lines() {
@@ -193,7 +194,7 @@ var TangoCore = (function () {
     var edges = shuffle(allEdges(), rand).slice(0, nEdges).map(function (p) {
       return { a: p[0], b: p[1], type: sol[p[0]] === sol[p[1]] ? "=" : "x" };
     });
-    var givens = sol.slice(), tier = difficulty === "easy" ? 1 : 2;
+    var givens = sol.slice(), tier = 1;
     // Strip givens while the puzzle can still be solved by logic alone (which also means one solution).
     var removed = [];
     shuffle(Array.from({ length: N * N }, function (_, i) { return i; }), rand).forEach(function (i) {

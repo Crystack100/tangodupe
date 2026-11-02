@@ -231,12 +231,6 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .pillbtn.alt { background: var(--alt); box-shadow: 0 10px 22px -10px var(--alt); }
 .pillbtn.alt:active { box-shadow: 0 4px 10px -6px var(--accent); }
 .pillbtn small { display: block; font: 600 .85rem var(--font-body); opacity: .9; margin-top: 4px; }
-.daily-wrap { display: grid; justify-items: center; }
-.timer-chip {
-  margin-top: -10px; position: relative; padding: 2px 10px 2px 8px; border-radius: 0 0 6px 6px; background: color-mix(in srgb, var(--alt) 86%, #000); color: #fff;
-  font: 600 .85rem/1.5 var(--font-display); font-variant-numeric: tabular-nums; display: inline-flex; align-items: center; gap: 4px;
-}
-.timer-chip svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.6; stroke-linecap: round; }
 
 
 /* settings: drops down from the top like a game menu */
@@ -1063,10 +1057,6 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
       </button>
       <div class="home-btns">
         <button class="pillbtn" id="h-play" type="button"><span id="h-play-label">Play</span><small id="h-play-sub">Level 1 · easy</small></button>
-        <div class="daily-wrap">
-          <button class="pillbtn alt" id="h-daily" type="button"><span id="h-daily-label">Daily Puzzle</span></button>
-          <span class="timer-chip"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><span id="h-daily-time">00:00:00</span></span>
-        </div>
       </div>
     </div>
   </section>
@@ -1634,10 +1624,6 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     var n = nextLevel(), resume = play && !play.done && !play.daily, lv = resume ? play.level : n;
     $("h-play-label").textContent = resume ? "Continue" : "Play";
     $("h-play-sub").textContent = "Level " + lv + " · " + T.levelDifficulty(lv);
-    var today = save.daily[dayKey()];
-    $("h-daily-label").textContent = play && !play.done && play.daily === dayKey() ? "Continue daily" :
-      today ? "Daily " + "★★★".slice(0, today) + "☆☆☆".slice(today) : "Daily Puzzle";
-    renderCountdown();
     // Progress toward the cheapest theme not owned yet, previewed in its own colors.
     var goal = SKINS.filter(function (s) { return save.owned.indexOf(s.id) < 0; })[0], duo = $("g-duo");
     duo.style.cssText = "";
@@ -1653,21 +1639,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     }
     renderWallet();
   }
-  function renderCountdown() {
-    var now = new Date(), mid = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1), t = Math.floor((mid - now) / 1000);
-    var two = function (x) { return (x < 10 ? "0" : "") + x; };
-    $("h-daily-time").textContent = two(Math.floor(t / 3600)) + ":" + two(Math.floor(t / 60) % 60) + ":" + two(t % 60);
-  }
-  setInterval(function () { if (!$("home").hidden) renderCountdown(); }, 1000);
   $("h-goal").onclick = function () { show("store"); };
-  $("h-daily").onclick = function () {
-    if (!save.tutDone) return openTut(function () { $("h-daily").onclick(); });
-    if (play && !play.done && play.daily === dayKey()) return resumeLevel();
-    var key = dayKey(), p = T.generate((key * 2246822519) >>> 0, "medium");
-    play = { level: 0, daily: key, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
-             board: p.givens.slice(), history: [], elapsed: 0, done: false, v: PUZZLE_V };
-    save.play = play; persist(); resumeLevel();
-  };
 
   /* ---------- settings ---------- */
   function openSheet() {
@@ -2315,7 +2287,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     // id 2 was the old streak reminder; cancelling it clears any left from earlier versions.
     Notes.cancel({ notifications: [{ id: 1 }, { id: 2 }] }).catch(function () {}).then(function () {
       if (!save.remind) return;
-      var list = [{ id: 1, title: "Today's puzzle is ready \ud83d\udc31", body: "Sunny and Luna saved you a fresh daily puzzle.",
+      var list = [{ id: 1, title: "Sunny and Luna miss you \ud83d\udc31", body: "Your next level is waiting.",
         schedule: { on: { hour: 9, minute: 0 }, allowWhileIdle: true } }];
       return Notes.schedule({ notifications: list });
     }).catch(function () {});
@@ -2348,7 +2320,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { toast("Copied! Paste it anywhere"); }, function () {});
   };
   $("win-home").onclick = $("win-x").onclick = function () { show("home"); };
-  $("win-replay").onclick = function () { if (play.daily) { play = null; $("h-daily").onclick(); } else startLevel(play.level); };
+  $("win-replay").onclick = function () { startLevel(play.level); };
 
   /* ---------- shop ---------- */
   function renderStore() {
@@ -2515,7 +2487,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (data && data.save) save = data.save;
     if (!save.tutDone && (save.wins || Object.keys(save.best).length)) save.tutDone = true;
     play = save.play && save.play.board ? save.play : null;
-    if (play && play.daily && play.daily !== dayKey()) play = save.play = null;
+    if (play && play.daily) play = save.play = null; // daily puzzles were removed
     // Puzzles made by an older version may need guessing, so they're started fresh.
     if (play && play.v !== PUZZLE_V) play = save.play = null;
     buildTiles();

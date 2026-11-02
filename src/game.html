@@ -1837,6 +1837,17 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
   $("hint").onclick = function () { useHint(); };
   // A hint places the next cat you could work out yourself, highlights the cats that prove it, and says why.
   var CAT = ["Sunny", "Luna"];
+  // Reason only from cats that are proven: the givens, then each step worked out from them.
+  // Cats the player placed ahead of that (maybe by guessing) are never used as a reason.
+  function provenStep() {
+    var known = play.givens.slice(), st, guard = 0;
+    while (guard++ < N * N && (st = T.nextStep(known, play.edges, 2))) {
+      if (play.board[st.i] !== st.v) return st;
+      known[st.i] = st.v;
+    }
+    // Old saves can hold puzzles the chain can't finish: fall back to the player's board.
+    return T.nextStep(play.board, play.edges, 2);
+  }
   function useHint() {
     if (!play || play.done) return;
     var sol = play.solution, pick = -1, why = "", clues = [], i;
@@ -1844,7 +1855,7 @@ body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .a
     for (i = 0; i < N * N && pick < 0; i++) if (play.board[i] !== -1 && play.board[i] !== sol[i]) pick = i;
     if (pick >= 0) why = "This square can't be " + CAT[play.board[pick]] + ". It has to be " + CAT[sol[pick]] + ", so I swapped it.";
     else {
-      var step = T.nextStep(play.board, play.edges, 2);
+      var step = provenStep();
       if (step && step.v === sol[step.i]) { pick = step.i; why = step.why; clues = step.cells; }
       else {
         var empty = []; for (i = 0; i < N * N; i++) if (play.board[i] === -1) empty.push(i);

@@ -858,7 +858,35 @@ body.no-ads .ad-banner { display: none; }
 .tut-go:not(:disabled) { animation: tutReady .5s cubic-bezier(.3, 1.8, .5, 1); }
 @keyframes tutReady { from { transform: scale(.94); } }
 /* rewarded videos */
-body.native .ad-banner, body.native #noads, body.native #s-noads, body.native .ad-x { display: none; }
+body.native .ad-banner, body.native .ad-x, body.native:not(.iap-ads) #noads, body.native:not(.iap-ads) #s-noads { display: none; }
+/* Purrzle Plus and Restore purchases: phone app only, once the app store has answered. */
+body:not(.iap) .iap-only { display: none !important; }
+.plus-btn { background: linear-gradient(135deg, #8a5cf0, #5b3cc4 70%); box-shadow: inset 0 2px 0 rgb(255 255 255 / .35), 0 5px 0 #3e2690, 0 14px 24px -12px #3e2690; }
+.plus-btn .na-txt b { text-shadow: 0 2px 0 #3e2690; }
+.plus-btn .na-ic::after { display: none; }
+.plus-btn .na-ic svg { width: 28px; height: 28px; }
+.plus-btn.owned .na-price { color: #2fa36b; }
+.noads.plus-card { background: linear-gradient(135deg, #8a5cf0, #5b3cc4 75%); color: #fff; }
+.noads.plus-card span { color: rgb(255 255 255 / .85); }
+.noads.plus-card .chunky { background: linear-gradient(#fff3b0, #ffc94a); color: #7a4300; box-shadow: 0 4px 0 #c9861a; }
+.plus-sheet { text-align: center; }
+.plus-sheet h3 { justify-content: center; }
+.plus-crown { width: 64px; height: 64px; justify-self: center; }
+.plus-perks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; text-align: left; }
+.plus-perks li { display: flex; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 12px; background: var(--cell); font: 600 1rem/1.25 var(--font-display); }
+.plus-perks li::before { content: "\2713"; flex: none; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: #6c46dc; color: #fff; font-size: .9rem; }
+.plans { display: grid; gap: 8px; }
+.plan { position: relative; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 2px 10px; padding: 12px 14px; border-radius: 14px; border: 2.5px solid var(--line);
+  background: var(--surface); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.plan b { font: 700 1.1rem/1.1 var(--font-display); }
+.plan small { grid-column: 1; color: var(--muted); font-weight: 600; font-size: .82rem; }
+.plan .plan-price { grid-column: 2; grid-row: 1 / span 2; font: 700 1.15rem/1 var(--font-display); }
+.plan[aria-pressed="true"] { border-color: #6c46dc; box-shadow: 0 0 0 3px color-mix(in srgb, #6c46dc 25%, transparent); }
+.plan .plan-tag { position: absolute; top: -10px; right: 12px; padding: 3px 8px; border-radius: 999px; background: #6c46dc; color: #fff; font: 700 .72rem/1 var(--font-display); letter-spacing: .03em; }
+#plus-go { background: linear-gradient(#9d74ff, #6c46dc); box-shadow: 0 5px 0 #3e2690; color: #fff; }
+.plus-legal { margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+.plus-links { display: flex; justify-content: center; gap: 16px; font-size: .8rem; font-weight: 700; }
+.plus-links a, .plus-links button { color: var(--muted); background: none; border: 0; padding: 4px; font: inherit; text-decoration: underline; cursor: pointer; }
 /* Game sites like CrazyGames show their own ads and do not allow outside purchases. */
 .portal-only { display: none !important; }
 /* The privacy policy link shows everywhere: App Store and Google Play require it inside the app. */
@@ -1091,6 +1119,10 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       <div><b>Free stars</b><span id="fs-sub">Watch a short video for 3 stars</span></div>
       <button class="chunky" id="fs-go" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>+3</button>
     </div>
+    <div class="noads plus-card iap-only" id="plus-card">
+      <div><b>Purrzle Plus</b><span id="plus-card-sub">No ads and every theme, while you're a member.</span></div>
+      <button class="chunky" id="plus-card-go" type="button">See plans</button>
+    </div>
     <div class="noads" id="noads">
       <div><b>Remove ads</b><span id="noads-sub">No banners or ads between levels, forever.</span></div>
       <button class="chunky" id="noads-buy" type="button">$2.99</button>
@@ -1197,6 +1229,27 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   </div>
 </div>
 
+<div class="sheet-bg" id="plus-sheet" hidden>
+  <div class="sheet pop-card plus-sheet" role="dialog" aria-modal="true" aria-labelledby="plus-title">
+    <svg class="plus-crown" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffc94a" stroke="#c9861a" stroke-width="1.2" stroke-linejoin="round"/></svg>
+    <h3 id="plus-title">Purrzle Plus</h3>
+    <ul class="plus-perks">
+      <li>No ads between levels</li>
+      <li>Every cat theme unlocked</li>
+      <li>Support two small cats and their maker</li>
+    </ul>
+    <div class="plans" id="plans"></div>
+    <button class="chunky" id="plus-go" type="button">Continue</button>
+    <button class="soft" id="plus-close" type="button">Not now</button>
+    <p class="plus-legal" id="plus-legal">Payment is charged to your account when you confirm. The subscription renews automatically at the same price unless you cancel at least 24 hours before the period ends. Manage or cancel it in your account settings.</p>
+    <div class="plus-links">
+      <button type="button" id="plus-restore">Restore</button>
+      <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of use</a>
+      <a href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener">Privacy</a>
+    </div>
+  </div>
+</div>
+
 <div class="why" id="why" role="status" hidden>
   <svg class="why-cat" id="why-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
   <p id="why-text"></p>
@@ -1247,7 +1300,13 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     <button class="how-btn" id="s-how" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg>How to play</button>
     <button class="how-btn" id="s-remind" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></svg><span>Daily reminder</span><b class="onoff" id="s-remind-v">Off</b></button>
     <button class="how-btn" id="s-privacy" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy choices</button>
+    <button class="how-btn iap-only" id="s-restore" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>Restore purchases</button>
     <a class="how-btn" id="s-policy" href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy policy</a>
+    <button class="noads-btn plus-btn iap-only" id="s-plus" type="button">
+      <span class="na-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffc94a" stroke="#c9861a" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
+      <span class="na-txt"><b id="sp-title">Purrzle Plus</b><small id="sp-sub">No ads and every theme</small></span>
+      <span class="na-price" id="sp-price">Try</span>
+    </button>
     <button class="noads-btn" id="s-noads" type="button">
       <span class="na-ic" aria-hidden="true"><b>AD</b></span>
       <span class="na-txt"><b id="na-title">Remove ads</b><small id="na-sub">No banners or pop-ups, forever</small></span>
@@ -1866,29 +1925,40 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   $("g-back").onclick = function () { persist(); show(play.done && !play.daily ? "levels" : "home"); };
   $("win-next").onclick = function () {
     var go = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
-    // An ad between levels every third win, unless ads were removed or the player just watched a bonus video.
-    if (!save.noAds && save.wins % 3 === 0 && !(play.result && play.result.bonus)) Ads.interstitial(go); else go();
+    // An ad between levels after every win from the third on, unless ads were removed (Plus or Remove ads)
+    // or the player just watched a bonus video. Every few ads, the Plus offer follows the ad.
+    if (!adFree() && save.wins >= 3 && !(play.result && play.result.bonus)) {
+      save.adsSeen = (save.adsSeen || 0) + 1; persist();
+      Ads.interstitial(function () { if (Shop.on() && save.adsSeen % PLUS_EVERY === 0) openPlus(go); else go(); });
+    } else go();
   };
 
   /* ---------- ads ----------
-     In the phone app these are Google AdMob ads: a full-screen ad after every third win, and
-     reward videos the player chooses to watch (bonus stars).
-     The web build fakes both with a 5 second card. "Remove ads" is web-only for now; in the
-     app it becomes a one-time in-app purchase later. */
+     In the phone app these are Google AdMob ads: a full-screen ad after every win (from the third),
+     and reward videos the player chooses to watch (bonus stars).
+     Players stop the ads with Purrzle Plus (a subscription) or Remove ads (a one-time purchase),
+     both sold through the app store (see Shop below). */
+  var PLUS_EVERY = 6; // show the Plus offer after every 6th ad
+  function adFree() { return !!(save.noAds || save.plus); }
   function applyAds() {
-    document.body.classList.toggle("no-ads", !!save.noAds);
-    $("noads-buy").textContent = save.noAds ? "Owned" : "$2.99"; $("noads-buy").disabled = !!save.noAds;
-    $("noads-sub").textContent = save.noAds ? "Thanks for supporting Purrzle!" : "No banners or ads between levels, forever.";
+    var off = adFree(), price = Shop.price("remove_ads") || "$2.99";
+    document.body.classList.toggle("no-ads", off);
+    $("noads-buy").textContent = save.noAds ? "Owned" : price; $("noads-buy").disabled = !!save.noAds;
+    $("noads-sub").textContent = save.noAds ? "Thanks for supporting Purrzle!" : "No ads between levels, forever. One payment.";
     $("s-noads").classList.toggle("owned", !!save.noAds);
     $("na-title").textContent = save.noAds ? "Ads removed" : "Remove ads";
-    $("na-sub").textContent = save.noAds ? "Thanks! Tap to bring them back (testing)" : "No banners or pop-ups, forever";
-    $("na-price").textContent = save.noAds ? "\u2713" : "$2.99";
+    $("na-sub").textContent = save.noAds ? "Thanks for supporting Purrzle!" : "No ads between levels, forever";
+    $("na-price").textContent = save.noAds ? "\u2713" : price;
+    $("s-plus").classList.toggle("owned", !!save.plus);
+    $("sp-title").textContent = save.plus ? "You're a Plus member" : "Purrzle Plus";
+    $("sp-sub").textContent = save.plus ? "No ads and every theme. Thank you!" : "No ads and every theme";
+    $("sp-price").textContent = save.plus ? "\u2713" : "Try";
+    $("plus-card-sub").textContent = save.plus ? "You're a member: no ads and every theme. Thank you!" : "No ads and every theme, while you're a member.";
+    $("plus-card-go").textContent = save.plus ? "Manage" : "See plans";
   }
   function removeAds() {
-    // Web test build: no real payment, this just flips the switch.
-    save.noAds = true; persist(); applyAds(); $("ad-full").hidden = true;
-    toast("Ads removed");
-    if (adDone) { var f = adDone; adDone = null; f(); }
+    if (save.noAds) return;
+    Shop.buy("remove_ads");
   }
   var adDone = null, adT = null;
   function showAd(done, reward) {
@@ -1905,8 +1975,114 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     }, 1000);
   }
   $("ad-close").onclick = function () { $("ad-full").hidden = true; clearInterval(adT); if (adDone) { var f = adDone; adDone = null; f(); } };
-  $("ad-full-x").onclick = $("ad-banner-x").onclick = $("noads-buy").onclick = removeAds;
-  $("s-noads").onclick = function () { if (save.noAds) { save.noAds = false; persist(); applyAds(); } else removeAds(); };
+  $("ad-full-x").onclick = $("ad-banner-x").onclick = $("noads-buy").onclick = $("s-noads").onclick = removeAds;
+
+  /* ---------- purchases (phone app only) ----------
+     Sold through the App Store and Google Play using RevenueCat, which checks receipts and tracks
+     renewals. Set up in RevenueCat (see mobile/README.md):
+       entitlement "plus"     <- the three Plus subscriptions
+       entitlement "no_ads"   <- the one-time Remove ads purchase
+       current offering       <- packages Weekly, Monthly, Annual and a custom package "remove_ads"
+     Until the API keys below are filled in, the store stays off and no purchase buttons show. */
+  var RC_KEYS = { ios: "", android: "" };
+  var PLANS = [
+    { pkg: "WEEKLY", name: "Weekly", per: "week" },
+    { pkg: "ANNUAL", name: "Yearly", per: "year", tag: "BEST VALUE" },
+    { pkg: "MONTHLY", name: "Monthly", per: "month" }
+  ];
+  var Shop = (function () {
+    var RC = plugin("Purchases"), os = NATIVE ? Cap.getPlatform() : "web", on = false, pkgs = {}, busy = false;
+    function apply(info) {
+      if (!info || !info.entitlements) return;
+      var act = info.entitlements.active || {};
+      var plus = !!act.plus, noAds = !!act.no_ads;
+      if (plus === !!save.plus && noAds === !!save.noAds) return;
+      save.plus = plus; save.noAds = noAds;
+      // Themes borrowed from Plus go back when it ends.
+      if (!plus && save.owned.indexOf(save.skin) < 0) { save.skin = "cozy"; applySkin(); }
+      persist(); applyAds(); if (!$("store").hidden) renderStore(); renderHome();
+    }
+    function start() {
+      var key = RC_KEYS[os];
+      if (!RC || !key) return;
+      RC.configure({ apiKey: key }).then(function () {
+        RC.addCustomerInfoUpdateListener(apply);
+        RC.getCustomerInfo().then(function (r) { apply(r.customerInfo); }).catch(function () {});
+        return RC.getOfferings();
+      }).then(function (o) {
+        var cur = o && o.current; if (!cur) return;
+        cur.availablePackages.forEach(function (p) { pkgs[p.packageType === "CUSTOM" ? p.identifier : p.packageType] = p; });
+        on = PLANS.some(function (pl) { return pkgs[pl.pkg]; });
+        document.body.classList.toggle("iap", on);
+        document.body.classList.toggle("iap-ads", !!pkgs.remove_ads);
+        applyAds(); if (!$("store").hidden) renderStore();
+      }).catch(function () {});
+    }
+    function buy(id, done) {
+      var p = pkgs[id];
+      if (!p) { toast("The store isn't available right now"); return; }
+      if (busy) return; busy = true;
+      RC.purchasePackage({ aPackage: p }).then(function (r) {
+        busy = false; apply(r.customerInfo); Audio.sfx("coin");
+        toast(id === "remove_ads" ? "Ads removed. Thank you!" : "Welcome to Purrzle Plus!");
+        if (done) done(true);
+      }).catch(function (e) {
+        busy = false;
+        if (!(e && (e.userCancelled || e.code === "1" || e.code === 1))) toast("The purchase didn't go through");
+        if (done) done(false);
+      });
+    }
+    function restore() {
+      if (!RC || !RC_KEYS[os]) return;
+      RC.restorePurchases().then(function (r) {
+        apply(r.customerInfo);
+        toast(save.plus || save.noAds ? "Purchases restored" : "No purchases to restore");
+      }).catch(function () { toast("Couldn't reach the store. Try again later"); });
+    }
+    return {
+      start: start, buy: buy, restore: restore,
+      on: function () { return on; },
+      price: function (id) { return pkgs[id] && pkgs[id].product.priceString; },
+      plan: function (id) { return pkgs[id] && pkgs[id].product; },
+      os: function () { return os; }
+    };
+  })();
+
+  // The Plus offer. `after` runs once it closes (used when it follows an ad).
+  var plusAfter = null, plusPick = "ANNUAL";
+  function openPlus(after) {
+    plusAfter = after || null;
+    if (save.plus) { closePlus(); toast("Manage your membership in your app store account"); return; }
+    if (!Shop.plan(plusPick)) plusPick = PLANS.filter(function (pl) { return Shop.plan(pl.pkg); }).map(function (pl) { return pl.pkg; })[0];
+    var box = $("plans"); box.innerHTML = "";
+    var week = Shop.plan("WEEKLY");
+    PLANS.forEach(function (pl) {
+      var pr = Shop.plan(pl.pkg); if (!pr) return;
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "plan"; b.setAttribute("aria-pressed", pl.pkg === plusPick);
+      var sub = "Renews every " + pl.per;
+      if (pl.pkg === "ANNUAL" && week && pr.price) {
+        var save52 = Math.round(100 - pr.price / (week.price * 52) * 100);
+        if (save52 > 0) sub = "Save " + save52 + "% vs weekly";
+      }
+      b.innerHTML = (pl.tag ? '<span class="plan-tag">' + pl.tag + "</span>" : "") + "<b>" + pl.name + "</b><small>" + sub +
+        '</small><span class="plan-price">' + pr.priceString + "</span>";
+      b.onclick = function () { plusPick = pl.pkg; box.querySelectorAll(".plan").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); };
+      box.appendChild(b);
+    });
+    // Apple's standard terms apply to App Store subscriptions; Google Play has its own.
+    document.querySelector('.plus-links a[href*="apple.com"]').hidden = Shop.os() !== "ios";
+    $("plus-sheet").hidden = false;
+  }
+  function closePlus() {
+    $("plus-sheet").hidden = true;
+    var f = plusAfter; plusAfter = null; if (f) f();
+  }
+  $("plus-go").onclick = function () { if (plusPick) Shop.buy(plusPick, function (ok) { if (ok) closePlus(); }); };
+  $("plus-close").onclick = closePlus;
+  $("plus-restore").onclick = $("s-restore").onclick = function () { Shop.restore(); };
+  $("s-plus").onclick = function () { $("sheet").hidden = true; openPlus(); };
+  $("plus-card-go").onclick = function () { openPlus(); };
   // AdMob ad unit IDs from admob.google.com. Test builds (and any ID left empty) show Google's test ads,
   // so tapping ads while testing can't get the AdMob account in trouble.
   var AD_UNITS = {
@@ -2065,7 +2241,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     renderWallet(); paintFree();
     var box = $("skins"); box.innerHTML = "";
     SKINS.forEach(function (s) {
-      var owned = save.owned.indexOf(s.id) >= 0, on = save.skin === s.id, css = "";
+      var owned = save.owned.indexOf(s.id) >= 0 || !!save.plus, on = save.skin === s.id, css = "";
       for (var k in s.v) css += "--" + k + ":" + s.v[k] + ";";
       var card = document.createElement("div");
       card.className = "skin sk-" + s.id + (on ? " equipped" : "");
@@ -2239,6 +2415,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     if (screen) splash.hidden = true;
     else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 1250);
     setTimeout(Ads.start, screen ? 0 : 1700);
+    setTimeout(Shop.start, screen ? 0 : 1700);
   }
   if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () {
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];

@@ -73,19 +73,103 @@
   --sun: #f0a43a; --sun-core: #ffd98a; --moon: #c9b6ff; --star: #ffd84d; --star-off: #4a3277;
   --bad: #ff5f7e; --bad-soft: rgba(255, 95, 126, .2); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
 }
+:root[data-skin="strawberry"] { --eye2-base: initial; --alt: #6cbf6a; --brand: #b0304a;
+  --bg: #ffe8ee; --bg2: #fff6ea; --surface: #fffafb; --cell: #fff0f4; --given: #fbd6df; --line: #f5c6d2;
+  --ink: #5a2232; --muted: #a0606f; --accent: #e8445e; --on-accent: #ffffff;
+  --sun: #e0606e; --sun-core: #ffb3bd; --moon: #f6c3d4; --star: #ffb33d; --star-off: #f5c6d2;
+  --bad: #c92f45; --bad-soft: color-mix(in srgb, #c92f45 18%, transparent); --shadow: rgba(140, 50, 70, .2); color-scheme: light;
+}
+:root[data-skin="froggy"] { --eye2-base: initial; --alt: #f0a83c; --brand: #2c5a26;
+  --bg: #e2f2d9; --bg2: #f3f9e4; --surface: #fbfff8; --cell: #eef8e7; --given: #d3eac5; --line: #c0dfac;
+  --ink: #24401c; --muted: #5f7d55; --accent: #3fa34d; --on-accent: #ffffff;
+  --sun: #a2b83a; --sun-core: #c6e27a; --moon: #7dbf8a; --star: #f0b42f; --star-off: #c0dfac;
+  --bad: #d0434f; --bad-soft: color-mix(in srgb, #d0434f 18%, transparent); --shadow: rgba(40, 80, 30, .2); color-scheme: light;
+}
+:root[data-skin="calico"] { --eye2-base: initial; --alt: #e48a3a; --brand: #5a3a26;
+  --bg: #fbf1e3; --bg2: #fff8ee; --surface: #fffdf9; --cell: #fdf5ea; --given: #f1e2cd; --line: #ead7bd;
+  --ink: #46301f; --muted: #8f7458; --accent: #d9733a; --on-accent: #ffffff;
+  --sun: #d9733a; --sun-core: #f5e9da; --moon: #efe7de; --star: #f7b13a; --star-off: #ead7bd;
+  --bad: #cf3f4a; --bad-soft: color-mix(in srgb, #cf3f4a 18%, transparent); --shadow: rgba(90, 60, 30, .2); color-scheme: light;
+}
+:root[data-skin="tiger"] { --eye2-base: initial; --alt: #3a7bd5; --brand: #7a3a0e;
+  --bg: #fff0dc; --bg2: #fff8ec; --surface: #fffcf6; --cell: #fff4e6; --given: #f7dfc0; --line: #f0d2ab;
+  --ink: #4a2610; --muted: #94684a; --accent: #ef7d1f; --on-accent: #ffffff;
+  --sun: #ef7d1f; --sun-core: #ffab4a; --moon: #eef0f4; --star: #ffb733; --star-off: #f0d2ab;
+  --bad: #cc3b3b; --bad-soft: color-mix(in srgb, #cc3b3b 18%, transparent); --shadow: rgba(120, 60, 20, .2); color-scheme: light;
+}
+:root[data-skin="tux"] { --eye2-base: initial; --alt: #c9a24a; --brand: #1e1d24;
+  --bg: #efece7; --bg2: #e4dfd7; --surface: #fbfaf8; --cell: #f6f4f0; --given: #e3ded6; --line: #d8d2c8;
+  --ink: #1e1d24; --muted: #6f6a72; --accent: #2f2d38; --on-accent: #ffffff;
+  --sun: #2f2d38; --sun-core: #f3efe8; --moon: #e9e6ea; --star: #e0b13e; --star-off: #d8d2c8;
+  --bad: #c33a44; --bad-soft: color-mix(in srgb, #c33a44 18%, transparent); --shadow: rgba(20, 20, 30, .22); color-scheme: light;
+}
+:root[data-skin="cow"] { --eye2-base: initial; --alt: #7cc46a; --brand: #2b5b86;
+  --bg: #e6f3fd; --bg2: #eef8e6; --surface: #fbfdff; --cell: #f0f7fd; --given: #d6e8f5; --line: #c6dcee;
+  --ink: #1f3346; --muted: #5d7489; --accent: #3e94d8; --on-accent: #ffffff;
+  --sun: #e88aa0; --sun-core: #fff3ee; --moon: #f2f2f4; --star: #ffc13d; --star-off: #c6dcee;
+  --bad: #d0434f; --bad-soft: color-mix(in srgb, #d0434f 18%, transparent); --shadow: rgba(30, 60, 90, .2); color-scheme: light;
+}
+:root[data-skin="galaxy"] { --eye2-base: initial; --alt: #4fd6ff; --brand: #ffd6f5;
+  --bg: #0b0a24; --bg2: #241a5a; --surface: #16143c; --cell: #1d1a4a; --given: #2a2563; --line: #3a3480;
+  --ink: #f2efff; --muted: #aaa4dc; --accent: #ff6ec7; --on-accent: #16143c;
+  --sun: #ff9d6b; --sun-core: #ffc79a; --moon: #9fb0ff; --star: #ffd56b; --star-off: #3a3480;
+  --bad: #ff6f8a; --bad-soft: color-mix(in srgb, #ff6f8a 18%, transparent); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+}
+:root[data-skin="witch"] { --eye2-base: initial; --alt: #7fd65a; --brand: #ffd84d;
+  --bg: #1a1230; --bg2: #2a1a46; --surface: #241a3e; --cell: #2b2049; --given: #372a5c; --line: #463670;
+  --ink: #f4ecff; --muted: #b3a5d6; --accent: #8fe05f; --on-accent: #1a1230;
+  --sun: #f08a3a; --sun-core: #ffb36b; --moon: #6b5d8a; --star: #ffd84d; --star-off: #463670;
+  --bad: #ff6f8a; --bad-soft: color-mix(in srgb, #ff6f8a 18%, transparent); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+}
+:root[data-skin="astro"] { --eye2-base: initial; --alt: #ff8a5c; --brand: #ffe3a1;
+  --bg: #0c1a33; --bg2: #1d2f5a; --surface: #132544; --cell: #182d52; --given: #223a66; --line: #2d4a7e;
+  --ink: #eaf3ff; --muted: #9db4d6; --accent: #ffb347; --on-accent: #0c1a33;
+  --sun: #f2953f; --sun-core: #ffcf8f; --moon: #c2d0e6; --star: #ffd56b; --star-off: #2d4a7e;
+  --bad: #ff6f8a; --bad-soft: color-mix(in srgb, #ff6f8a 18%, transparent); --shadow: rgba(0, 0, 0, .55); color-scheme: dark;
+}
+:root[data-skin="dragon"] { --eye2-base: initial; --alt: #f0743a; --brand: #14513d;
+  --bg: #dff3ea; --bg2: #fdf0dc; --surface: #f8fffb; --cell: #eaf8f1; --given: #cdeadc; --line: #b6dfcb;
+  --ink: #123a2d; --muted: #4f7a69; --accent: #1f9e7a; --on-accent: #ffffff;
+  --sun: #f0743a; --sun-core: #ffa36b; --moon: #5fbfa0; --star: #ffb733; --star-off: #b6dfcb;
+  --bad: #d0434f; --bad-soft: color-mix(in srgb, #d0434f 18%, transparent); --shadow: rgba(20, 80, 60, .22); color-scheme: light;
+}
+:root[data-skin="lucky"] { --eye2-base: initial; --alt: #ffd84d; --brand: #ffe7a3;
+  --bg: #5a0d16; --bg2: #8a1a24; --surface: #701520; --cell: #7c1a26; --given: #8d2532; --line: #a33440;
+  --ink: #fff3dc; --muted: #f0c0a6; --accent: #ffcc3d; --on-accent: #5a0d16;
+  --sun: #f2b632; --sun-core: #ffd451; --moon: #dfe6ee; --star: #ffd84d; --star-off: #a33440;
+  --bad: #ffb0c0; --bad-soft: color-mix(in srgb, #ffb0c0 18%, transparent); --shadow: rgba(0, 0, 0, .5); color-scheme: dark;
+}
+:root[data-skin="celestial"] { --eye2-base: initial; --alt: #8ae2ff; --brand: #7a5cc9;
+  --bg: #f3efff; --bg2: #ffeef7; --surface: #fdfcff; --cell: #f7f3ff; --given: #e8e0fb; --line: #dcd2f5;
+  --ink: #3a2d66; --muted: #8a80b0; --accent: #a77bff; --on-accent: #ffffff;
+  --sun: #ff8fd0; --sun-core: #ffd9ef; --moon: #e6ecff; --star: #ffc94d; --star-off: #dcd2f5;
+  --bad: #e0456a; --bad-soft: color-mix(in srgb, #e0456a 18%, transparent); --shadow: rgba(90, 70, 160, .22); color-scheme: light;
+}
 /* Skin identity: background motif and the accessory both cats wear. Also set on shop cards (.sk-*) for previews. */
 :root, .skin.sk-cozy { --tiles: .55; --cat-tint: 0; }
 :root[data-skin] { --cat-tint: 1; }
-:root[data-skin="midnight"], .skin.sk-midnight { --tiles: .3; --acc-star: inline; --motif: radial-gradient(circle at 82% 6%, rgba(255, 227, 161, .22), transparent 32%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23ffe3a1'%3E%3Ccircle cx='14' cy='20' r='1.6' opacity='.7'/%3E%3Ccircle cx='88' cy='12' r='1.1' opacity='.5'/%3E%3Ccircle cx='120' cy='70' r='1.4' opacity='.6'/%3E%3Ccircle cx='40' cy='100' r='1' opacity='.5'/%3E%3Ccircle cx='100' cy='130' r='1.7' opacity='.7'/%3E%3Cpath d='M60 52 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z' opacity='.55'/%3E%3Cpath d='M130 108 l1.4 4 4 1.4 -4 1.4 -1.4 4 -1.4 -4 -4 -1.4 4 -1.4z' opacity='.45'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
-:root[data-skin="sakura"], .skin.sk-sakura { --tiles: .35; --acc-blossom: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23f39abd' opacity='.45'%3E%3Cpath d='M20 30 q8 -12 16 0 q-8 10 -16 0z' transform='rotate(25 28 30)'/%3E%3Cpath d='M110 20 q6 -9 12 0 q-6 8 -12 0z' transform='rotate(-30 116 20)'/%3E%3Cpath d='M70 90 q8 -12 16 0 q-8 10 -16 0z' transform='rotate(70 78 90)'/%3E%3Cpath d='M20 130 q6 -9 12 0 q-6 8 -12 0z' transform='rotate(10 26 130)'/%3E%3Cpath d='M130 120 q7 -10 14 0 q-7 9 -14 0z' transform='rotate(-60 137 120)'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
-:root[data-skin="matcha"], .skin.sk-matcha { --tiles: .35; --acc-sprout: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%238fae6a' opacity='.4'%3E%3Cpath d='M20 40 q10 -20 26 -14 q-6 18 -26 14z'/%3E%3Cpath d='M100 20 q8 -14 20 -10 q-5 13 -20 10z'/%3E%3Cpath d='M70 110 q10 -20 26 -14 q-6 18 -26 14z'/%3E%3Ccircle cx='130' cy='80' r='3'/%3E%3Ccircle cx='40' cy='120' r='2.4'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
-:root[data-skin="ocean"], .skin.sk-ocean { --tiles: .25; --acc-bubbles: inline; --motif: linear-gradient(180deg, rgba(127, 224, 234, .16), transparent 45%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='none' stroke='%23a2e6f0' stroke-width='2' opacity='.35'%3E%3Ccircle cx='24' cy='30' r='9'/%3E%3Ccircle cx='40' cy='12' r='4'/%3E%3Ccircle cx='110' cy='70' r='12'/%3E%3Ccircle cx='70' cy='130' r='6'/%3E%3Ccircle cx='140' cy='140' r='4'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
-:root[data-skin="arcade"], .skin.sk-arcade { --tiles: .2; --acc-shades: inline; --motif: radial-gradient(ellipse at 50% 110%, rgba(255, 79, 191, .35), transparent 55%), linear-gradient(rgba(255, 79, 191, .14) 1px, transparent 1px) 0 0/34px 34px, linear-gradient(90deg, rgba(68, 232, 255, .12) 1px, transparent 1px) 0 0/34px 34px; }
-:root[data-skin="pumpkin"], .skin.sk-pumpkin { --tiles: .3; --acc-pumpkin: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23e8742a' opacity='.22'%3E%3Ccircle cx='24' cy='30' r='7'/%3E%3Ccircle cx='118' cy='96' r='9'/%3E%3Ccircle cx='70' cy='140' r='5'/%3E%3C/g%3E%3Cg fill='%23c0662a' opacity='.28'%3E%3Cpath d='M80 30 q10 -10 18 0 q-8 12 -18 0z'/%3E%3Cpath d='M30 110 q8 -8 14 0 q-6 9 -14 0z'/%3E%3Cpath d='M130 40 q6 -7 12 0 q-6 8 -12 0z'/%3E%3C/g%3E%3C/svg%3E"); }
-:root[data-skin="snow"], .skin.sk-snow { --tiles: .3; --acc-beanie: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='20' cy='24' r='3'/%3E%3Ccircle cx='92' cy='16' r='2'/%3E%3Ccircle cx='60' cy='70' r='2.6'/%3E%3Ccircle cx='120' cy='88' r='3.4'/%3E%3Ccircle cx='30' cy='112' r='2.2'/%3E%3Ccircle cx='100' cy='128' r='1.8'/%3E%3C/g%3E%3C/svg%3E"); }
-:root[data-skin="lavender"], .skin.sk-lavender { --tiles: .35; --acc-bow: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23a88bd6' opacity='.3'%3E%3Cellipse cx='24' cy='26' rx='3' ry='5'/%3E%3Cellipse cx='29' cy='35' rx='3' ry='5'/%3E%3Cellipse cx='24' cy='44' rx='3' ry='5'/%3E%3Cellipse cx='116' cy='96' rx='3' ry='5'/%3E%3Cellipse cx='121' cy='105' rx='3' ry='5'/%3E%3Cellipse cx='116' cy='114' rx='3' ry='5'/%3E%3C/g%3E%3Cg fill='%23e58fb8' opacity='.3'%3E%3Ccircle cx='96' cy='30' r='3'/%3E%3Ccircle cx='40' cy='130' r='3.5'/%3E%3C/g%3E%3C/svg%3E"); }
-:root[data-skin="royal"], .skin.sk-royal { --tiles: .2; --acc-crown: inline; --motif: radial-gradient(circle at 50% -10%, rgba(242, 201, 76, .22), transparent 45%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23f2c94c' opacity='.2'%3E%3Cpath d='M30 20 l6 8 -6 8 -6 -8z'/%3E%3Cpath d='M110 80 l8 10 -8 10 -8 -10z'/%3E%3Cpath d='M64 124 l4 6 -4 6 -4 -6z'/%3E%3C/g%3E%3C/svg%3E"); }
-.skin { --cat-tint: 1; --motif: none; --acc-star: none; --acc-blossom: none; --acc-sprout: none; --acc-bubbles: none; --acc-shades: none; --acc-pumpkin: none; --acc-beanie: none; --acc-bow: none; --acc-crown: none; }
+:root[data-skin="midnight"], .skin.sk-midnight, .skin-preview.sk-midnight { --tiles: .3; --acc-star: inline; --pat: url(#p-dust); --motif: radial-gradient(circle at 82% 6%, rgba(255, 227, 161, .22), transparent 32%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23ffe3a1'%3E%3Ccircle cx='14' cy='20' r='1.6' opacity='.7'/%3E%3Ccircle cx='88' cy='12' r='1.1' opacity='.5'/%3E%3Ccircle cx='120' cy='70' r='1.4' opacity='.6'/%3E%3Ccircle cx='40' cy='100' r='1' opacity='.5'/%3E%3Ccircle cx='100' cy='130' r='1.7' opacity='.7'/%3E%3Cpath d='M60 52 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z' opacity='.55'/%3E%3Cpath d='M130 108 l1.4 4 4 1.4 -4 1.4 -1.4 4 -1.4 -4 -4 -1.4 4 -1.4z' opacity='.45'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="sakura"], .skin.sk-sakura, .skin-preview.sk-sakura { --tiles: .35; --acc-blossom: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23f39abd' opacity='.45'%3E%3Cpath d='M20 30 q8 -12 16 0 q-8 10 -16 0z' transform='rotate(25 28 30)'/%3E%3Cpath d='M110 20 q6 -9 12 0 q-6 8 -12 0z' transform='rotate(-30 116 20)'/%3E%3Cpath d='M70 90 q8 -12 16 0 q-8 10 -16 0z' transform='rotate(70 78 90)'/%3E%3Cpath d='M20 130 q6 -9 12 0 q-6 8 -12 0z' transform='rotate(10 26 130)'/%3E%3Cpath d='M130 120 q7 -10 14 0 q-7 9 -14 0z' transform='rotate(-60 137 120)'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="matcha"], .skin.sk-matcha, .skin-preview.sk-matcha { --tiles: .35; --acc-sprout: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%238fae6a' opacity='.4'%3E%3Cpath d='M20 40 q10 -20 26 -14 q-6 18 -26 14z'/%3E%3Cpath d='M100 20 q8 -14 20 -10 q-5 13 -20 10z'/%3E%3Cpath d='M70 110 q10 -20 26 -14 q-6 18 -26 14z'/%3E%3Ccircle cx='130' cy='80' r='3'/%3E%3Ccircle cx='40' cy='120' r='2.4'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="ocean"], .skin.sk-ocean, .skin-preview.sk-ocean { --tiles: .25; --acc-bubbles: inline; --pat: url(#p-waves); --pat-blend: screen; --motif: linear-gradient(180deg, rgba(127, 224, 234, .16), transparent 45%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='none' stroke='%23a2e6f0' stroke-width='2' opacity='.35'%3E%3Ccircle cx='24' cy='30' r='9'/%3E%3Ccircle cx='40' cy='12' r='4'/%3E%3Ccircle cx='110' cy='70' r='12'/%3E%3Ccircle cx='70' cy='130' r='6'/%3E%3Ccircle cx='140' cy='140' r='4'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="arcade"], .skin.sk-arcade, .skin-preview.sk-arcade { --tiles: .2; --acc-shades: inline; --fx-twinkle: inline; --tw: #44e8ff; --motif: radial-gradient(ellipse at 50% 110%, rgba(255, 79, 191, .35), transparent 55%), linear-gradient(rgba(255, 79, 191, .14) 1px, transparent 1px) 0 0/34px 34px, linear-gradient(90deg, rgba(68, 232, 255, .12) 1px, transparent 1px) 0 0/34px 34px; }
+:root[data-skin="pumpkin"], .skin.sk-pumpkin, .skin-preview.sk-pumpkin { --tiles: .3; --acc-pumpkin: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23e8742a' opacity='.22'%3E%3Ccircle cx='24' cy='30' r='7'/%3E%3Ccircle cx='118' cy='96' r='9'/%3E%3Ccircle cx='70' cy='140' r='5'/%3E%3C/g%3E%3Cg fill='%23c0662a' opacity='.28'%3E%3Cpath d='M80 30 q10 -10 18 0 q-8 12 -18 0z'/%3E%3Cpath d='M30 110 q8 -8 14 0 q-6 9 -14 0z'/%3E%3Cpath d='M130 40 q6 -7 12 0 q-6 8 -12 0z'/%3E%3C/g%3E%3C/svg%3E"); }
+:root[data-skin="snow"], .skin.sk-snow, .skin-preview.sk-snow { --tiles: .3; --acc-beanie: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='20' cy='24' r='3'/%3E%3Ccircle cx='92' cy='16' r='2'/%3E%3Ccircle cx='60' cy='70' r='2.6'/%3E%3Ccircle cx='120' cy='88' r='3.4'/%3E%3Ccircle cx='30' cy='112' r='2.2'/%3E%3Ccircle cx='100' cy='128' r='1.8'/%3E%3C/g%3E%3C/svg%3E"); }
+:root[data-skin="lavender"], .skin.sk-lavender, .skin-preview.sk-lavender { --tiles: .35; --acc-bow: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%23a88bd6' opacity='.3'%3E%3Cellipse cx='24' cy='26' rx='3' ry='5'/%3E%3Cellipse cx='29' cy='35' rx='3' ry='5'/%3E%3Cellipse cx='24' cy='44' rx='3' ry='5'/%3E%3Cellipse cx='116' cy='96' rx='3' ry='5'/%3E%3Cellipse cx='121' cy='105' rx='3' ry='5'/%3E%3Cellipse cx='116' cy='114' rx='3' ry='5'/%3E%3C/g%3E%3Cg fill='%23e58fb8' opacity='.3'%3E%3Ccircle cx='96' cy='30' r='3'/%3E%3Ccircle cx='40' cy='130' r='3.5'/%3E%3C/g%3E%3C/svg%3E"); }
+:root[data-skin="royal"], .skin.sk-royal, .skin-preview.sk-royal { --tiles: .2; --acc-crown: inline; --acc-ermine: inline; --sheen: url(#p-sheen); --fx-aura: inline; --aura: #f2c94c; --fx-twinkle: inline; --tw: #ffe7a3; --motif: radial-gradient(circle at 50% -10%, rgba(242, 201, 76, .22), transparent 45%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23f2c94c' opacity='.2'%3E%3Cpath d='M30 20 l6 8 -6 8 -6 -8z'/%3E%3Cpath d='M110 80 l8 10 -8 10 -8 -10z'/%3E%3Cpath d='M64 124 l4 6 -4 6 -4 -6z'/%3E%3C/g%3E%3C/svg%3E"); }
+.skin, .skin-preview { --cat-tint: 1; --motif: none; --acc-star: none; --acc-blossom: none; --acc-sprout: none; --acc-bubbles: none; --acc-shades: none; --acc-pumpkin: none; --acc-beanie: none; --acc-bow: none; --acc-crown: none; --acc-berry: none; --acc-frog: none; --acc-bell: none; --acc-tux: none; --acc-witch: none; --acc-horns: none; --acc-ermine: none; --acc-planet: none; --acc-halo: none; --acc-helmet: none; --fx-twinkle: none; --fx-float: none; --fx-aura: none; --pat: none; --pat-moon: initial; --pat-sun: initial; --pat-blend: normal; --pat-op: 1; --sheen: none; }
+:root[data-skin="strawberry"], .skin.sk-strawberry, .skin-preview.sk-strawberry { --tiles: .35; --acc-berry: inline; --pat-moon: url(#p-milk); --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23ea3b52' opacity='.22'%3E%3Cpath d='M20 24 q0 -9 8 -9 q8 0 8 9 q-4 6 -8 6 q-4 0 -8 -6z'/%3E%3Cpath d='M104 92 q0 -7 6 -7 q6 0 6 7 q-3 5 -6 5 q-3 0 -6 -5z'/%3E%3C/g%3E%3Cg fill='%236cbf6a' opacity='.3'%3E%3Cpath d='M22 15 l6 -3 6 3z'/%3E%3Cpath d='M105 85 l5 -2 5 2z'/%3E%3C/g%3E%3Cg fill='%23ea3b52' opacity='.15'%3E%3Ccircle cx='70' cy='40' r='2.4'/%3E%3Ccircle cx='40' cy='120' r='3'/%3E%3Ccircle cx='130' cy='30' r='2'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="froggy"], .skin.sk-froggy, .skin-preview.sk-froggy { --tiles: .35; --acc-frog: inline; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%235fae4b' opacity='.22'%3E%3Cpath d='M30 40 a16 12 0 1 1 1 0 l-1 -12z'/%3E%3Cpath d='M120 120 a12 9 0 1 1 1 0 l-1 -9z'/%3E%3C/g%3E%3Cg fill='%23ff9bc0' opacity='.35'%3E%3Ccircle cx='36' cy='34' r='3'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="calico"], .skin.sk-calico, .skin-preview.sk-calico { --tiles: .4; --acc-bell: inline; --collar: #d9434f; --pat: url(#p-calico); --pat-moon: url(#p-calico2); --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23ea8a2e' opacity='.14'%3E%3Ccircle cx='24' cy='26' r='12'/%3E%3Ccircle cx='110' cy='96' r='16'/%3E%3C/g%3E%3Cg fill='%233a2c27' opacity='.09'%3E%3Ccircle cx='96' cy='24' r='9'/%3E%3Ccircle cx='34' cy='110' r='11'/%3E%3C/g%3E%3C/svg%3E") 0 0/140px 140px; }
+:root[data-skin="tiger"], .skin.sk-tiger, .skin-preview.sk-tiger { --tiles: .35; --pat: url(#p-tiger); --pat-moon: url(#p-tigerw); --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%233a1d0a' opacity='.08'%3E%3Cellipse cx='30' cy='34' rx='9' ry='8'/%3E%3Ccircle cx='18' cy='22' r='4'/%3E%3Ccircle cx='28' cy='16' r='4'/%3E%3Ccircle cx='39' cy='18' r='4'/%3E%3Ccircle cx='44' cy='27' r='3.6'/%3E%3Cellipse cx='110' cy='104' rx='9' ry='8'/%3E%3Ccircle cx='98' cy='92' r='4'/%3E%3Ccircle cx='108' cy='86' r='4'/%3E%3Ccircle cx='119' cy='88' r='4'/%3E%3Ccircle cx='124' cy='97' r='3.6'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="tux"], .skin.sk-tux, .skin-preview.sk-tux { --tiles: .25; --acc-tux: inline; --pat: url(#p-tuxg); --pat-moon: url(#p-tux); --motif: linear-gradient(90deg, rgba(30, 29, 36, .05) 1px, transparent 1px) 0 0/18px 18px; }
+:root[data-skin="cow"], .skin.sk-cow, .skin-preview.sk-cow { --tiles: .35; --acc-bell: inline; --collar: #3e94d8; --pat: url(#p-cowb); --pat-moon: url(#p-cow); --motif: linear-gradient(0deg, rgba(124, 196, 106, .22), transparent 30%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='170' height='170'%3E%3Cg fill='%231f3346' opacity='.06'%3E%3Cpath d='M20 30 q8 -14 22 -6 q6 14 -8 18 q-14 2 -14 -12z'/%3E%3Cpath d='M110 110 q10 -10 22 -2 q2 14 -12 14 q-12 -2 -10 -12z'/%3E%3C/g%3E%3C/svg%3E") 0 0/170px 170px; }
+:root[data-skin="galaxy"], .skin.sk-galaxy, .skin-preview.sk-galaxy { --tiles: .25; --pat: url(#p-galaxyw); --pat-moon: url(#p-galaxy); --pat-op: .9; --acc-planet: inline; --fx-twinkle: inline; --tw: #fff3c9; --motif: radial-gradient(ellipse at 20% 10%, rgba(255, 110, 199, .22), transparent 45%), radial-gradient(ellipse at 90% 80%, rgba(79, 214, 255, .18), transparent 50%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='14' cy='20' r='1.4' opacity='.8'/%3E%3Ccircle cx='88' cy='12' r='1' opacity='.6'/%3E%3Ccircle cx='120' cy='70' r='1.6' opacity='.8'/%3E%3Ccircle cx='40' cy='100' r='1' opacity='.6'/%3E%3Ccircle cx='100' cy='130' r='1.4' opacity='.7'/%3E%3Ccircle cx='66' cy='56' r='.8' opacity='.6'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="witch"], .skin.sk-witch, .skin-preview.sk-witch { --tiles: .25; --acc-witch: inline; --fx-float: inline; --fl: #a8f07a; --pat-moon: url(#p-ink); --pat-blend: multiply; --motif: radial-gradient(circle at 85% 8%, rgba(255, 245, 200, .25), transparent 18%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='%238fe05f' opacity='.25'%3E%3Cpath d='M30 30 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z'/%3E%3Cpath d='M120 110 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z'/%3E%3C/g%3E%3Cg fill='%23c9a2ff' opacity='.2'%3E%3Ccircle cx='100' cy='40' r='2'/%3E%3Ccircle cx='50' cy='130' r='2.6'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="astro"], .skin.sk-astro, .skin-preview.sk-astro { --tiles: .25; --acc-helmet: inline; --fx-twinkle: inline; --tw: #bfe3ff; --motif: radial-gradient(circle at 88% 12%, rgba(255, 179, 71, .35) 0 18px, transparent 19px), radial-gradient(circle at 10% 90%, rgba(130, 170, 255, .25) 0 34px, transparent 35px), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23fff'%3E%3Ccircle cx='20' cy='30' r='1.2' opacity='.7'/%3E%3Ccircle cx='100' cy='20' r='1' opacity='.6'/%3E%3Ccircle cx='130' cy='90' r='1.4' opacity='.7'/%3E%3Ccircle cx='60' cy='120' r='1' opacity='.5'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="dragon"], .skin.sk-dragon, .skin-preview.sk-dragon { --tiles: .3; --acc-horns: inline; --pat: url(#p-scales); --pat-blend: multiply; --fx-float: inline; --fl: #ff9a3c; --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='none' stroke='%231f9e7a' stroke-width='2' opacity='.16'%3E%3Cpath d='M10 40 q20 -20 40 0 t40 0'/%3E%3Cpath d='M70 120 q20 -20 40 0 t40 0'/%3E%3C/g%3E%3Cg fill='%23ff9a3c' opacity='.22'%3E%3Ccircle cx='130' cy='30' r='3'/%3E%3Ccircle cx='30' cy='120' r='2.4'/%3E%3C/g%3E%3C/svg%3E") 0 0/160px 160px; }
+:root[data-skin="lucky"], .skin.sk-lucky, .skin-preview.sk-lucky { --tiles: .2; --acc-bell: inline; --collar: #d62f3a; --pat: url(#p-gold); --pat-moon: url(#p-silver); --pat-blend: hard-light; --sheen: url(#p-sheen); --fx-aura: inline; --aura: #ffd451; --fx-twinkle: inline; --motif: radial-gradient(circle at 50% -10%, rgba(255, 212, 81, .3), transparent 50%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='none' stroke='%23ffd451' stroke-width='2' opacity='.2'%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3Crect x='26' y='26' width='8' height='8'/%3E%3Ccircle cx='110' cy='104' r='13'/%3E%3Crect x='105' y='99' width='10' height='10'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
+:root[data-skin="celestial"], .skin.sk-celestial, .skin-preview.sk-celestial { --tiles: .3; --acc-halo: inline; --pat: url(#p-holow); --pat-moon: url(#p-holo); --pat-blend: color; --pat-op: .85; --sheen: url(#p-sheen); --fx-aura: inline; --aura: #c9b2ff; --fx-twinkle: inline; --tw: #ffffff; --motif: linear-gradient(135deg, rgba(255, 143, 208, .22), rgba(255, 208, 138, .18) 25%, rgba(168, 245, 154, .16) 50%, rgba(138, 226, 255, .2) 75%, rgba(196, 155, 255, .24)), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cg fill='%23fff'%3E%3Cpath d='M30 30 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z' opacity='.9'/%3E%3Cpath d='M110 100 l1.5 4 4 1.5 -4 1.5 -1.5 4 -1.5 -4 -4 -1.5 4 -1.5z' opacity='.8'/%3E%3C/g%3E%3C/svg%3E") 0 0/150px 150px; }
 body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background: var(--motif, none); }
 :root[data-skin="arcade"] .board-wrap { box-shadow: 0 0 0 2px var(--accent), 0 0 30px -4px rgba(255, 79, 191, .55), 0 14px 34px -18px var(--shadow); }
 :root[data-skin="arcade"] .cell svg { filter: drop-shadow(0 0 5px rgba(68, 232, 255, .35)); }
@@ -733,6 +817,114 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .skin .chunky:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 62%, #000); }
 .skin .chunky:disabled { box-shadow: none; text-shadow: none; }
 
+
+/* ---------- Mystery Box shop ---------- */
+:root { --r-common: #8d9cab; --r-rare: #3d8bfd; --r-epic: #a457f0; --r-legendary: #f2a81d; --r-starter: #b9b2ab; }
+.boxcard { position: relative; overflow: hidden; border-radius: 16px; padding: 14px 14px 12px; color: #fff;
+  background: radial-gradient(circle at 18% 30%, rgb(255 255 255 / .22), transparent 40%), linear-gradient(135deg, #7a4cf0, #e2549b 60%, #ff9a5a);
+  box-shadow: 0 14px 30px -14px #7a4cf0; }
+.boxcard::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cg fill='%23fff' opacity='.35'%3E%3Cpath d='M14 14 l2 6 6 2 -6 2 -2 6 -2 -6 -6 -2 6 -2z'/%3E%3Ccircle cx='70' cy='30' r='1.6'/%3E%3Ccircle cx='40' cy='70' r='1.2'/%3E%3Cpath d='M72 66 l1.4 4 4 1.4 -4 1.4 -1.4 4 -1.4 -4 -4 -1.4 4 -1.4z'/%3E%3C/g%3E%3C/svg%3E") 0 0/90px 90px; }
+.bc-top { position: relative; display: flex; align-items: center; gap: 12px; }
+.bc-art { flex: none; width: 112px; height: 112px; border: 0; padding: 0; background: none; cursor: pointer; animation: bob 2.6s ease-in-out infinite; }
+.bc-art svg, .bo-box svg { width: 100%; height: 100%; overflow: visible; }
+@keyframes bob { 50% { transform: translateY(-5px) rotate(-2deg); } }
+.bc-txt { display: grid; gap: 4px; min-width: 0; flex: 1; }
+.bc-txt b { font: 700 1.45rem/1.05 var(--font-display); text-shadow: 0 2px 0 rgb(0 0 0 / .15); }
+.bc-txt span { font: 500 .9rem/1.3 var(--font-body); opacity: .95; }
+.bc-txt .chunky { margin-top: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 11px 10px; border-radius: 12px;
+  background: linear-gradient(#fff3a6, #ffcc3d); color: #6b3d06; font: 700 1.15rem/1 var(--font-display); box-shadow: inset 0 2px 0 rgb(255 255 255 / .6), 0 4px 0 #c98a12, 0 12px 20px -10px #000; }
+.bc-txt .chunky:active { transform: translateY(3px); box-shadow: inset 0 2px 0 rgb(255 255 255 / .6), 0 1px 0 #c98a12; }
+.bc-txt .chunky svg { width: 18px; height: 18px; fill: #e08a00; }
+.bc-txt .chunky.short { background: rgb(255 255 255 / .9); color: #7a4cf0; box-shadow: 0 4px 0 rgb(0 0 0 / .15); }
+.odds { position: relative; list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.odds li { background: rgb(255 255 255 / .16); border-radius: 10px; padding: 6px 2px 5px; text-align: center; font: 600 .72rem/1.2 var(--font-body); }
+.odds li b { display: block; font: 700 1.05rem/1.1 var(--font-display); }
+.odds li i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 4px; background: var(--rc); box-shadow: 0 0 0 1.5px #fff; vertical-align: 0; }
+.bc-note { position: relative; margin: 9px 2px 0; font: 500 .78rem/1.35 var(--font-body); opacity: .92; }
+.coll-head { display: flex; align-items: baseline; justify-content: space-between; margin-top: 6px; }
+.coll-head b { font: 700 1.25rem var(--font-display); }
+.coll-head span { font: 700 1rem var(--font-display); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tier-head { display: flex; align-items: center; gap: 8px; margin: 8px 2px 8px; font: 700 .95rem var(--font-display); color: var(--rc); letter-spacing: .04em; text-transform: uppercase; }
+.tier-head::after { content: ""; flex: 1; height: 2px; border-radius: 2px; background: linear-gradient(90deg, var(--rc), transparent); opacity: .5; }
+.tier-head small { color: var(--muted); font: 600 .85rem var(--font-body); text-transform: none; letter-spacing: 0; }
+.tier { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 6px; }
+.skin { position: relative; border-color: var(--rc, transparent); overflow: hidden; padding-top: 28px; }
+.skin.equipped { border-color: var(--rc, var(--accent)); box-shadow: 0 0 0 3px var(--surface), 0 0 0 6px var(--accent), 0 6px 16px -8px var(--shadow); }
+.rar-tag { position: absolute; top: 0; left: 0; z-index: 1; padding: 3px 9px 4px 8px; border-radius: 0 0 10px 0; background: var(--rc); color: #fff; font: 700 .68rem/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase; }
+.skin.r-legendary .rar-tag, .rar-chip.r-legendary { background: linear-gradient(90deg, #f7b733, #ffe27a, #f2a81d); color: #6b3d06; }
+.skin.r-legendary::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / .45) 50%, transparent 65%) -200% 0/250% 100% no-repeat; animation: cardShine 3.4s ease-in-out infinite; }
+@keyframes cardShine { 0%, 55% { background-position: 200% 0; } 100% { background-position: -100% 0; } }
+.skin.r-epic { box-shadow: 0 0 0 1px color-mix(in srgb, var(--rc) 40%, transparent), 0 8px 22px -10px var(--rc); }
+.skin.locked .mini { filter: saturate(.85); }
+.skin .lockline { display: inline-flex; justify-content: center; align-items: center; gap: 5px; padding: 10px 6px; border-radius: 12px; border: 2px dashed color-mix(in srgb, var(--muted) 55%, transparent);
+  color: var(--muted); font: 500 .9rem/1 var(--font-display); background: none; cursor: pointer; }
+.skin .lockline svg { width: 14px; height: 14px; fill: currentColor; }
+.skin .mini svg { overflow: visible; }
+
+/* ---------- Mystery Box opening ---------- */
+.box-ov { position: fixed; inset: 0; z-index: 40; display: grid; place-items: center; overflow: hidden; color: #fff; --rc: #fff;
+  background: radial-gradient(circle at 50% 45%, #3a2470, #140b2e 70%); animation: boFade .25s ease-out; }
+@keyframes boFade { from { opacity: 0; } }
+.bo-glow { position: absolute; left: 50%; top: 45%; width: 360px; height: 360px; translate: -50% -50%; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, var(--rc), transparent 65%); opacity: .25; transition: opacity .4s, background .4s; }
+.bo-rays { position: absolute; left: 50%; top: 45%; width: 900px; height: 900px; translate: -50% -50%; pointer-events: none; opacity: 0; transition: opacity .5s;
+  background: repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--rc) 55%, transparent) 0 8deg, transparent 8deg 22deg);
+  -webkit-mask: radial-gradient(circle, #000 10%, transparent 60%); mask: radial-gradient(circle, #000 10%, transparent 60%); animation: spin 14s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
+.bo-box { position: relative; width: min(56vw, 230px); aspect-ratio: 1; border: 0; padding: 0; background: none; cursor: pointer; margin-top: -40px;
+  animation: boDrop .55s cubic-bezier(.3, 1.5, .5, 1); }
+@keyframes boDrop { from { transform: translateY(-60vh) rotate(-12deg); } }
+.bo-hint { position: absolute; bottom: calc(18% + env(safe-area-inset-bottom, 0px)); left: 0; right: 0; text-align: center; margin: 0;
+  font: 700 1.3rem var(--font-display); animation: hintBlink 1.4s ease-in-out infinite; }
+@keyframes hintBlink { 50% { opacity: .45; } }
+.box-ov[data-stage="shake"] .bo-box { animation: boShake .36s ease-in-out infinite; }
+.box-ov[data-stage="shake"] .bo-hint, .box-ov[data-stage="card"] .bo-hint { visibility: hidden; }
+.box-ov[data-stage="shake"] .bo-glow { opacity: .7; }
+@keyframes boShake { 0%, 100% { transform: rotate(0) scale(1); } 25% { transform: rotate(-7deg) scale(1.04); } 75% { transform: rotate(7deg) scale(1.04); } }
+.box-ov[data-stage="open"] .bo-box { animation: boPop .5s ease-in forwards; }
+.box-ov[data-stage="open"] .bo-box .mb-lid { animation: lidOff .5s ease-out forwards; }
+@keyframes boPop { 60% { transform: scale(1.15); opacity: 1; } 100% { transform: scale(.4) translateY(30px); opacity: 0; } }
+@keyframes lidOff { to { transform: translate(30px, -120px) rotate(40deg); opacity: 0; } }
+.box-ov[data-stage="open"] .bo-glow, .box-ov[data-stage="card"] .bo-glow { opacity: 1; }
+.box-ov[data-stage="card"] .bo-rays { opacity: 1; }
+.box-ov[data-stage="card"] .bo-box { display: none; }
+.bo-card { position: relative; width: min(88vw, 340px); padding: 20px 18px 16px; border-radius: 20px; text-align: center; color: var(--ink);
+  background: var(--motif, none), var(--bg); border: 4px solid var(--rc); box-shadow: 0 0 0 4px rgb(255 255 255 / .12), 0 0 60px -6px var(--rc), 0 30px 60px -20px #000;
+  animation: cardIn .55s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes cardIn { from { transform: scale(.3) rotate(-8deg); opacity: 0; } }
+.rar-chip { display: inline-block; padding: 5px 14px 6px; border-radius: 999px; background: var(--rc); color: #fff; font: 700 .9rem/1 var(--font-display); letter-spacing: .08em; text-transform: uppercase;
+  box-shadow: 0 4px 12px -4px var(--rc); }
+.bo-cats { display: flex; justify-content: center; gap: 4px; margin: 14px 0 6px; }
+.bo-cats span { width: 42%; aspect-ratio: 1; border-radius: 16px; background: var(--cell); display: grid; place-items: center; box-shadow: inset 0 -3px 0 color-mix(in srgb, var(--line) 80%, transparent); }
+.bo-cats svg { width: 86%; height: 86%; overflow: visible; }
+.bo-cats span:first-child { animation: catHop .6s .25s ease-out both; } .bo-cats span:last-child { animation: catHop .6s .4s ease-out both; }
+@keyframes catHop { 0% { transform: translateY(16px) scale(.6); opacity: 0; } 60% { transform: translateY(-8px) scale(1.05); opacity: 1; } }
+.bo-card h3 { margin: 8px 0 0; font: 700 1.7rem/1.1 var(--font-display); }
+.bo-card p { margin: 4px 0 14px; color: var(--muted); font: 500 1rem/1.35 var(--font-body); }
+.bo-card p b { color: var(--ink); }
+.bo-card .chunky { font: 700 1.25rem/1 var(--font-display); padding: 14px; border-radius: 14px; box-shadow: inset 0 2px 0 rgb(255 255 255 / .35), 0 4px 0 color-mix(in srgb, var(--accent) 62%, #000); }
+.bo-row { display: flex; gap: 8px; margin-top: 10px; }
+.bo-btn { flex: 1; border: 2px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; padding: 11px 6px; cursor: pointer;
+  font: 600 1rem/1 var(--font-display); display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.bo-btn svg { width: 15px; height: 15px; fill: var(--star); }
+.bo-btn:disabled { opacity: .45; cursor: default; }
+.box-ov[data-r="rare"] { --rc: var(--r-rare); } .box-ov[data-r="epic"] { --rc: var(--r-epic); } .box-ov[data-r="legendary"] { --rc: var(--r-legendary); } .box-ov[data-r="common"] { --rc: #c9d3dd; }
+/* Taps on Epic and Legendary cats send out a little burst. */
+.bp { position: fixed; z-index: 30; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; pointer-events: none; border-radius: 50%; background: var(--c);
+  animation: bp .7s cubic-bezier(.2, .7, .3, 1) forwards; }
+.bp-star, .bp-spark { width: 13px; height: 13px; margin: -6.5px 0 0 -6.5px; border-radius: 0; clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%); }
+.bp-coin { width: 12px; height: 12px; margin: -6px 0 0 -6px; background: radial-gradient(circle at 35% 30%, #fff6c2, #ffd451 45%, #c98a12); box-shadow: inset 0 0 0 1px #a8700f; }
+@keyframes bp { 0% { transform: translate(0, 0) scale(.3); opacity: 1; } 70% { opacity: 1; } 100% { transform: translate(var(--dx), var(--dy)) scale(1) rotate(120deg); opacity: 0; } }
+.goal-badge.ready .ring { animation: ready 1.2s ease-in-out infinite; }
+@keyframes ready { 50% { transform: scale(1.07) rotate(-3deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .bc-art, .bo-rays, .bo-hint, .skin.r-legendary::after, .goal-badge.ready .ring { animation: none; }
+  .box-ov[data-stage="shake"] .bo-box { animation-duration: 1s; }
+}
+@media (min-width: 700px) { .tier { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); } }
+
 /* tab bar */
 .tabs {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 8; display: flex; justify-content: center;
@@ -1047,12 +1239,236 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       <circle cx="50" cy="14" r="2.6" fill="#e5484d"/><circle cx="50" cy="14" r="2.6" fill="url(#acc-vol)"/><circle cx="41" cy="20" r="2" fill="#44b8ff"/><circle cx="41" cy="20" r="2" fill="url(#acc-vol)"/><circle cx="59" cy="20" r="2" fill="#44b8ff"/><circle cx="59" cy="20" r="2" fill="url(#acc-vol)"/>
     </g>
     </symbol>
+    <!-- ===== Collectible skins: fur patterns, accessories and effects ===== -->
+    <!-- Fur patterns (Rare and up), painted over the fur only, in each cat's own 0-100 space. -->
+    <pattern id="p-calico" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#fffaf2" opacity=".6"/>
+      <path d="M6 32 Q6 10 24 8 Q42 10 46 24 Q42 40 26 42 Q10 44 6 32Z" fill="#ea8a2e" opacity=".9"/>
+      <path d="M60 16 Q72 4 90 12 Q98 26 92 40 Q80 48 68 40 Q56 30 60 16Z" fill="#3a2c27" opacity=".9"/>
+      <path d="M70 74 Q80 64 92 70 Q94 86 80 90 Q68 88 70 74Z" fill="#ea8a2e" opacity=".85"/>
+      <path d="M8 66 Q14 58 22 64 Q24 76 14 78 Q6 76 8 66Z" fill="#3a2c27" opacity=".8"/>
+    </pattern>
+    <pattern id="p-calico2" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#fffaf2" opacity=".3"/>
+      <path d="M94 32 Q94 10 76 8 Q58 10 54 24 Q58 40 74 42 Q90 44 94 32Z" fill="#ea8a2e" opacity=".9"/>
+      <path d="M40 16 Q28 4 10 12 Q2 26 8 40 Q20 48 32 40 Q44 30 40 16Z" fill="#3a2c27" opacity=".9"/>
+      <path d="M12 72 Q20 64 30 72 Q30 86 18 88 Q8 84 12 72Z" fill="#3a2c27" opacity=".85"/>
+      <path d="M30 60 Q38 54 46 60 Q44 70 36 70 Q28 68 30 60Z" fill="#3a2c27" opacity=".8"/>
+      <path d="M78 66 Q86 60 92 66 Q94 76 86 78 Q78 76 78 66Z" fill="#ea8a2e" opacity=".8"/>
+    </pattern>
+    <pattern id="p-tiger" patternUnits="userSpaceOnUse" width="100" height="100">
+      <g fill="#3a1d0a" opacity=".78">
+        <path d="M40 12 Q43 19 42 27 Q46 20 45 12Z"/><path d="M48 9 Q51 16 50 22 Q54 16 53 9Z"/><path d="M60 12 Q57 19 58 27 Q54 20 55 12Z"/>
+        <path d="M5 50 Q15 47 25 52 Q15 55 5 54Z"/><path d="M6 61 Q16 59 25 63 Q16 66 7 65Z"/><path d="M10 72 Q17 70 23 74 Q16 77 10 76Z"/>
+        <path d="M95 50 Q85 47 75 52 Q85 55 95 54Z"/><path d="M94 61 Q84 59 75 63 Q84 66 93 65Z"/><path d="M90 72 Q83 70 77 74 Q84 77 90 76Z"/>
+        <path d="M12 34 Q21 35 27 42 Q19 42 11 39Z"/><path d="M88 34 Q79 35 73 42 Q81 42 89 39Z"/>
+        <path d="M34 86 Q40 82 44 88 Q38 90 34 86Z"/><path d="M66 86 Q60 82 56 88 Q62 90 66 86Z"/>
+      </g>
+    </pattern>
+    <pattern id="p-tigerw" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#fff" opacity=".6"/>
+      <g fill="#2b2a33" opacity=".8">
+        <path d="M40 12 Q43 19 42 27 Q46 20 45 12Z"/><path d="M48 9 Q51 16 50 22 Q54 16 53 9Z"/><path d="M60 12 Q57 19 58 27 Q54 20 55 12Z"/>
+        <path d="M5 50 Q15 47 25 52 Q15 55 5 54Z"/><path d="M6 61 Q16 59 25 63 Q16 66 7 65Z"/><path d="M10 72 Q17 70 23 74 Q16 77 10 76Z"/>
+        <path d="M95 50 Q85 47 75 52 Q85 55 95 54Z"/><path d="M94 61 Q84 59 75 63 Q84 66 93 65Z"/><path d="M90 72 Q83 70 77 74 Q84 77 90 76Z"/>
+        <path d="M12 34 Q21 35 27 42 Q19 42 11 39Z"/><path d="M88 34 Q79 35 73 42 Q81 42 89 39Z"/>
+        <path d="M34 86 Q40 82 44 88 Q38 90 34 86Z"/><path d="M66 86 Q60 82 56 88 Q62 90 66 86Z"/>
+      </g>
+    </pattern>
+    <pattern id="p-cow" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#fff" opacity=".72"/>
+      <g fill="#2a2524" opacity=".92">
+        <path d="M10 30 Q12 14 26 14 Q38 18 36 30 Q32 42 20 40 Q10 40 10 30Z"/>
+        <path d="M66 12 Q78 8 86 18 Q90 30 80 32 Q70 32 66 24 Q62 16 66 12Z"/>
+        <path d="M76 66 Q86 60 92 70 Q90 82 80 82 Q72 78 76 66Z"/>
+        <path d="M12 72 Q18 68 22 74 Q20 80 14 79 Q9 77 12 72Z"/>
+        <path d="M54 84 Q60 80 64 86 Q60 92 55 90Z"/>
+      </g>
+    </pattern>
+    <pattern id="p-tux" patternUnits="userSpaceOnUse" width="100" height="100">
+      <path fill-rule="evenodd" fill="#24232b" opacity=".93" d="M0 0H100V100H0Z M50 54 C33 54 27 66 29 80 C33 96 67 96 71 80 C73 66 67 54 50 54Z"/>
+      <path d="M50 54 C33 54 27 66 29 80 C33 96 67 96 71 80 C73 66 67 54 50 54Z" fill="#fff" opacity=".55"/>
+    </pattern>
+    <pattern id="p-dust" patternUnits="userSpaceOnUse" width="34" height="34">
+      <g fill="#fff4c2"><circle cx="5" cy="7" r=".9" opacity=".9"/><circle cx="21" cy="3" r=".6" opacity=".7"/><circle cx="28" cy="19" r="1" opacity=".85"/><circle cx="12" cy="24" r=".6" opacity=".7"/><circle cx="20" cy="30" r=".8" opacity=".8"/></g>
+    </pattern>
+    <pattern id="p-waves" patternUnits="userSpaceOnUse" width="24" height="14">
+      <path d="M0 7 Q6 2 12 7 T24 7" fill="none" stroke="#c9fbff" stroke-width="1.3" opacity=".55"/>
+    </pattern>
+    <pattern id="p-scales" patternUnits="userSpaceOnUse" width="10" height="8" patternTransform="scale(1.3)">
+      <g fill="none" stroke="#14513d" stroke-width="1" opacity=".38"><path d="M0 8 Q5 1 10 8"/><path d="M-5 4 Q0 -3 5 4 M5 4 Q10 -3 15 4"/></g>
+    </pattern>
+    <pattern id="p-ink" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="#4a3f63"/></pattern>
+    <radialGradient id="g-cosmos" cx=".32" cy=".3" r=".9"><stop offset="0" stop-color="#7b55e0"/><stop offset=".45" stop-color="#2b1d78"/><stop offset="1" stop-color="#0d0a2e"/></radialGradient>
+    <pattern id="p-galaxy" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="url(#g-cosmos)" opacity=".9"/>
+      <ellipse cx="68" cy="30" rx="24" ry="11" fill="#ff6ec7" opacity=".3" transform="rotate(-25 68 30)"/>
+      <ellipse cx="30" cy="74" rx="22" ry="9" fill="#4fd6ff" opacity=".26" transform="rotate(20 30 74)"/>
+      <g fill="#fff"><circle cx="14" cy="40" r="1.1"/><circle cx="24" cy="22" r=".7"/><circle cx="40" cy="14" r=".9"/><circle cx="62" cy="18" r="1.2"/><circle cx="80" cy="28" r=".7"/><circle cx="88" cy="46" r="1"/><circle cx="74" cy="62" r=".8"/><circle cx="86" cy="76" r="1.2"/><circle cx="60" cy="86" r=".7"/><circle cx="38" cy="88" r="1"/><circle cx="18" cy="68" r=".8"/><circle cx="10" cy="54" r=".6"/><circle cx="52" cy="48" r=".6"/><circle cx="30" cy="34" r=".5"/><circle cx="70" cy="42" r=".5"/></g>
+    </pattern>
+    <!-- Gold for Lucky Gold: a metal ramp laid over the fur's light and shade. -->
+    <linearGradient id="g-gold" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff1a8"/><stop offset=".45" stop-color="#f6c33c"/><stop offset="1" stop-color="#c47d12"/></linearGradient>
+    <pattern id="p-gold" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="url(#g-gold)"/></pattern>
+    <!-- Moving light: a soft streak that sweeps across Legendary fur every few seconds. -->
+    <linearGradient id="g-sheen" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="40">
+      <stop offset=".38" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".8"/><stop offset=".62" stop-color="#fff" stop-opacity="0"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="-130 0; 130 0; 130 0" keyTimes="0; .45; 1" dur="3.2s" repeatCount="indefinite"/>
+    </linearGradient>
+    <!-- Rainbow that drifts through the fur for Celestial. -->
+    <linearGradient id="g-holow" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="60" y2="60" spreadMethod="repeat">
+      <stop offset="0" stop-color="#ff8fc0"/><stop offset=".2" stop-color="#ffc07a"/><stop offset=".4" stop-color="#ffe98a"/><stop offset=".6" stop-color="#ffa3a3"/><stop offset=".8" stop-color="#ffb8e8"/><stop offset="1" stop-color="#ff8fd0"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="0 0; 60 60" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="g-holo" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="60" y2="60" spreadMethod="repeat">
+      <stop offset="0" stop-color="#8ae2ff"/><stop offset=".2" stop-color="#a8f5d9"/><stop offset=".4" stop-color="#9fb8ff"/><stop offset=".6" stop-color="#c49bff"/><stop offset=".8" stop-color="#a8f0ff"/><stop offset="1" stop-color="#8ae2ff"/>
+      <animateTransform attributeName="gradientTransform" type="translate" values="0 0; 60 60" dur="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    <pattern id="p-holo" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="url(#g-holo)"/></pattern>
+    <pattern id="p-sheen" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="url(#g-sheen)"/></pattern>
+    <radialGradient id="g-cosmosw" cx=".32" cy=".3" r=".9"><stop offset="0" stop-color="#ffab6b"/><stop offset=".45" stop-color="#b8327a"/><stop offset="1" stop-color="#3a0f3e"/></radialGradient>
+    <pattern id="p-galaxyw" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="url(#g-cosmosw)" opacity=".9"/>
+      <ellipse cx="68" cy="30" rx="24" ry="11" fill="#ffd56b" opacity=".32" transform="rotate(-25 68 30)"/>
+      <ellipse cx="30" cy="74" rx="22" ry="9" fill="#ff6ec7" opacity=".3" transform="rotate(20 30 74)"/>
+      <g fill="#fff"><circle cx="14" cy="40" r="1.1"/><circle cx="24" cy="22" r=".7"/><circle cx="40" cy="14" r=".9"/><circle cx="62" cy="18" r="1.2"/><circle cx="80" cy="28" r=".7"/><circle cx="88" cy="46" r="1"/><circle cx="74" cy="62" r=".8"/><circle cx="86" cy="76" r="1.2"/><circle cx="60" cy="86" r=".7"/><circle cx="38" cy="88" r="1"/><circle cx="18" cy="68" r=".8"/><circle cx="10" cy="54" r=".6"/><circle cx="52" cy="48" r=".6"/><circle cx="30" cy="34" r=".5"/><circle cx="70" cy="42" r=".5"/></g>
+    </pattern>
+    <pattern id="p-holow" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="url(#g-holow)"/></pattern>
+    <linearGradient id="g-silver" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#c9d3de"/><stop offset="1" stop-color="#76818e"/></linearGradient>
+    <pattern id="p-silver" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="url(#g-silver)"/></pattern>
+    <pattern id="p-milk" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="#fff4f7" opacity=".5"/></pattern>
+    <pattern id="p-cowb" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#fff" opacity=".72"/>
+      <g fill="#8a5232" opacity=".9">
+        <path d="M10 30 Q12 14 26 14 Q38 18 36 30 Q32 42 20 40 Q10 40 10 30Z"/>
+        <path d="M66 12 Q78 8 86 18 Q90 30 80 32 Q70 32 66 24 Q62 16 66 12Z"/>
+        <path d="M76 66 Q86 60 92 70 Q90 82 80 82 Q72 78 76 66Z"/>
+        <path d="M12 72 Q18 68 22 74 Q20 80 14 79 Q9 77 12 72Z"/>
+        <path d="M54 84 Q60 80 64 86 Q60 92 55 90Z"/>
+      </g>
+    </pattern>
+    <pattern id="p-tuxg" patternUnits="userSpaceOnUse" width="100" height="100">
+      <path fill-rule="evenodd" fill="#e07a2c" opacity=".85" d="M0 0H100V100H0Z M50 54 C33 54 27 66 29 80 C33 96 67 96 71 80 C73 66 67 54 50 54Z"/>
+      <path d="M50 54 C33 54 27 66 29 80 C33 96 67 96 71 80 C73 66 67 54 50 54Z" fill="#fff" opacity=".55"/>
+    </pattern>
+    <path id="spark4" d="M0 -1 Q.14 -.14 1 0 Q.14 .14 0 1 Q-.14 .14 -1 0 Q-.14 -.14 0 -1Z"/>
+
+    <symbol id="acc-berry" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)" transform="rotate(-14 50 14)">
+        <path d="M33 17 Q33 1 50 1 Q67 1 67 17 Q59 25 50 25 Q41 25 33 17Z" fill="#ea3b52" stroke="#9e1f33" stroke-width="1.2"/>
+        <path d="M33 17 Q33 1 50 1 Q67 1 67 17 Q59 25 50 25 Q41 25 33 17Z" fill="url(#acc-vol)"/>
+        <g fill="#ffe08a"><ellipse cx="41" cy="10" rx="1" ry="1.5"/><ellipse cx="50" cy="8" rx="1" ry="1.5"/><ellipse cx="59" cy="10" rx="1" ry="1.5"/><ellipse cx="45" cy="16" rx="1" ry="1.5"/><ellipse cx="55" cy="16" rx="1" ry="1.5"/><ellipse cx="39" cy="18" rx="1" ry="1.4"/><ellipse cx="61" cy="18" rx="1" ry="1.4"/><ellipse cx="50" cy="21" rx="1" ry="1.4"/></g>
+        <path d="M40 3 L44 -3 L49 2 L53 -4 L56 2 L61 -1 L60 5 Q50 9 40 3Z" fill="#5fb84a" stroke="#2f6b22" stroke-width="1"/>
+      </g>
+    </symbol>
+    <symbol id="acc-frog" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <circle cx="36" cy="14" r="9.5" fill="#79c85a" stroke="#2f6b22" stroke-width="1.2"/><circle cx="36" cy="14" r="9.5" fill="url(#acc-vol)"/>
+        <circle cx="64" cy="14" r="9.5" fill="#79c85a" stroke="#2f6b22" stroke-width="1.2"/><circle cx="64" cy="14" r="9.5" fill="url(#acc-vol)"/>
+        <circle cx="36" cy="12.5" r="5.8" fill="#fff"/><circle cx="64" cy="12.5" r="5.8" fill="#fff"/>
+        <circle cx="37" cy="13" r="3.2" fill="#1d2a12"/><circle cx="63" cy="13" r="3.2" fill="#1d2a12"/>
+        <circle cx="38.2" cy="11.6" r="1.1" fill="#fff"/><circle cx="64.2" cy="11.6" r="1.1" fill="#fff"/>
+      </g>
+    </symbol>
+    <symbol id="acc-bell" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <path d="M22 84 Q50 99 78 84" fill="none" stroke="var(--collar, #d9434f)" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="M22 84 Q50 99 78 84" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.4" stroke-linecap="round" transform="translate(0 -1.6)"/>
+        <circle cx="50" cy="95" r="6" fill="var(--bell, #ffd84d)" stroke="#9c6a10" stroke-width="1"/><circle cx="50" cy="95" r="6" fill="url(#acc-vol)"/>
+        <path d="M44.5 94.5 H55.5 M50 96 V100" stroke="#9c6a10" stroke-width="1.1" stroke-linecap="round"/>
+      </g>
+    </symbol>
+    <symbol id="acc-tux" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <g transform="rotate(-10 50 14)">
+          <ellipse cx="50" cy="17" rx="18" ry="4" fill="#1b1a20"/>
+          <path d="M38 17 V2 Q38 -1 41 -1 H59 Q62 -1 62 2 V17Z" fill="#27262e"/><path d="M38 17 V2 Q38 -1 41 -1 H59 Q62 -1 62 2 V17Z" fill="url(#acc-vol)"/>
+          <rect x="38" y="11" width="24" height="4" fill="#c9a24a"/>
+        </g>
+        <path d="M50 91 L39 85 Q37 91 39 97Z M50 91 L61 85 Q63 91 61 97Z" fill="#1b1a20" stroke="#000" stroke-width=".8" stroke-linejoin="round"/>
+        <path d="M50 91 L39 85 Q37 91 39 97Z M50 91 L61 85 Q63 91 61 97Z" fill="url(#acc-vol)"/>
+        <circle cx="50" cy="91" r="2.8" fill="#2d2c35"/>
+      </g>
+    </symbol>
+    <symbol id="acc-witch" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)" transform="rotate(-8 50 18)">
+        <ellipse cx="50" cy="20" rx="31" ry="6.5" fill="#3c2566" stroke="#1f1238" stroke-width="1"/>
+        <path d="M33 19 Q42 2 58 -9 Q55 4 67 19Z" fill="#53348c" stroke="#1f1238" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M33 19 Q42 2 58 -9 Q55 4 67 19Z" fill="url(#acc-vol)"/>
+        <path d="M34.5 15 Q50 19.5 65.5 15 L67 19 Q50 24 33 19Z" fill="#7fd65a"/>
+        <rect x="46" y="15" width="7" height="6" rx="1" fill="none" stroke="#ffd84d" stroke-width="1.5"/>
+        <use href="#spark4" transform="translate(60 2) scale(3)" fill="#ffe98a"/>
+      </g>
+    </symbol>
+    <symbol id="acc-helmet" viewBox="0 0 100 100" overflow="visible">
+      <circle cx="50" cy="51" r="48" fill="#bfe3ff" fill-opacity=".13" stroke="#eef4fa" stroke-width="3.4"/>
+      <circle cx="50" cy="51" r="48" fill="none" stroke="#7c8ea3" stroke-width="1" stroke-opacity=".6"/>
+      <path d="M17 33 Q25 15 44 9" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".85"/>
+      <path d="M22 44 Q22 38 25 34" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".6"/>
+      <path d="M86 64 Q84 74 77 82" stroke="#fff" stroke-width="2.4" stroke-linecap="round" fill="none" opacity=".45"/>
+      <g filter="url(#acc-drop)">
+        <path d="M16 90 Q50 106 84 90" fill="none" stroke="#a3b2c4" stroke-width="7" stroke-linecap="round"/>
+        <path d="M16 90 Q50 106 84 90" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".55" transform="translate(0 -2)"/>
+        <circle cx="72" cy="95" r="3" fill="#ff6b6b"/><circle cx="64" cy="97.5" r="2.2" fill="#6bd6ff"/>
+      </g>
+    </symbol>
+    <symbol id="acc-horns" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <path d="M33 22 Q26 10 31 -2 Q37 9 43 19Z" fill="#fff0c4" stroke="#b58a3a" stroke-width="1.1" stroke-linejoin="round"/><path d="M33 22 Q26 10 31 -2 Q37 9 43 19Z" fill="url(#acc-vol)"/>
+        <path d="M67 22 Q74 10 69 -2 Q63 9 57 19Z" fill="#fff0c4" stroke="#b58a3a" stroke-width="1.1" stroke-linejoin="round"/><path d="M67 22 Q74 10 69 -2 Q63 9 57 19Z" fill="url(#acc-vol)"/>
+        <path d="M31 13 l6 -1 M31 7 l4 -.5 M69 13 l-6 -1 M69 7 l-4 -.5" stroke="#b58a3a" stroke-width="1" stroke-linecap="round"/>
+        <path d="M6 46 Q-4 34 2 24 Q8 32 14 34 Q10 40 12 48Z" fill="#3fb89a" stroke="#14513d" stroke-width="1"/><path d="M94 46 Q104 34 98 24 Q92 32 86 34 Q90 40 88 48Z" fill="#3fb89a" stroke="#14513d" stroke-width="1"/>
+      </g>
+    </symbol>
+    <symbol id="acc-planet" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -3; 0 0" dur="3s" repeatCount="indefinite"/>
+        <ellipse cx="83" cy="15" rx="13" ry="3.6" fill="none" stroke="#ffe3a1" stroke-width="2" transform="rotate(-22 83 15)"/>
+        <circle cx="83" cy="15" r="7" fill="#ff9d6b"/><circle cx="83" cy="15" r="7" fill="url(#acc-vol)"/>
+        <path d="M71.5 18.5 Q83 16 94.5 11.5" fill="none" stroke="#ffe3a1" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </symbol>
+    <symbol id="acc-ermine" viewBox="0 0 100 100" overflow="visible">
+      <g filter="url(#acc-drop)">
+        <path d="M14 84 Q50 104 86 84 Q88 92 84 96 Q50 112 16 96 Q12 92 14 84Z" fill="#b3203a" stroke="#6e0f22" stroke-width="1"/>
+        <path d="M16 82 Q50 100 84 82 L86 88 Q50 106 14 88Z" fill="#fffdf8" stroke="#d9cfc0" stroke-width=".9"/>
+        <g fill="#1b1a20"><path d="M26 89 l1.2 3 1.2 -3z"/><path d="M38 93 l1.2 3 1.2 -3z"/><path d="M50 95 l1.2 3 1.2 -3z"/><path d="M62 93 l1.2 3 1.2 -3z"/><path d="M74 89 l1.2 3 1.2 -3z"/></g>
+        <circle cx="50" cy="99" r="3.4" fill="#ffd84d" stroke="#a87412" stroke-width=".9"/>
+      </g>
+    </symbol>
+    <symbol id="acc-halo" viewBox="0 0 100 100" overflow="visible">
+      <g>
+        <animateTransform attributeName="transform" type="translate" values="0 0; 0 -2.5; 0 0" dur="2.6s" repeatCount="indefinite"/>
+        <ellipse cx="50" cy="4" rx="19" ry="5" fill="none" stroke="#fff3c2" stroke-opacity=".55" stroke-width="7"/>
+        <ellipse cx="50" cy="4" rx="19" ry="5" fill="none" stroke="#ffd95a" stroke-width="3"/>
+        <ellipse cx="50" cy="3.2" rx="17" ry="3.8" fill="none" stroke="#fff" stroke-width="1" opacity=".8"/>
+      </g>
+    </symbol>
+    <!-- Effects for Epic and Legendary cats -->
+    <symbol id="fx-twinkle" viewBox="0 0 100 100" overflow="visible">
+      <g style="fill: var(--tw, #fff3b0)">
+        <use href="#spark4" transform="translate(9 24) scale(6)"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.2;.45;1" dur="2.2s" repeatCount="indefinite"/></use>
+        <use href="#spark4" transform="translate(92 40) scale(4.5)"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.2;.45;1" dur="2.2s" begin=".75s" repeatCount="indefinite"/></use>
+        <use href="#spark4" transform="translate(86 88) scale(5)"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.2;.45;1" dur="2.2s" begin="1.4s" repeatCount="indefinite"/></use>
+        <use href="#spark4" transform="translate(14 82) scale(3.5)"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.2;.45;1" dur="2.2s" begin="1.1s" repeatCount="indefinite"/></use>
+      </g>
+    </symbol>
+    <symbol id="fx-float" viewBox="0 0 100 100" overflow="visible">
+      <g style="fill: var(--fl, #c9a2ff)">
+        <circle cx="14" r="2.2"><animate attributeName="cy" values="92;30" dur="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="2.6s" repeatCount="indefinite"/></circle>
+        <circle cx="88" r="1.8"><animate attributeName="cy" values="88;24" dur="2.9s" begin=".9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="2.9s" begin=".9s" repeatCount="indefinite"/></circle>
+        <circle cx="78" r="2.4"><animate attributeName="cy" values="96;40" dur="2.4s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="2.4s" begin="1.6s" repeatCount="indefinite"/></circle>
+        <circle cx="24" r="1.6"><animate attributeName="cy" values="96;44" dur="2.2s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="2.2s" begin="1.2s" repeatCount="indefinite"/></circle>
+      </g>
+    </symbol>
     <!-- Sunny: the orange tabby (the "sun" piece) -->
     <symbol id="sun" viewBox="0 0 100 100" overflow="visible">
+      <g style="display: var(--fx-aura, none); fill: var(--aura, #ffd95a)"><circle cx="50" cy="52" r="52" opacity=".1"/><circle cx="50" cy="52" r="45" opacity=".14"/><circle cx="50" cy="52" r="38" opacity=".18"/><animate attributeName="opacity" values=".55;1;.55" dur="2.4s" repeatCount="indefinite"/></g>
       <ellipse cx="50" cy="93" rx="32" ry="4.5" fill="#000" opacity=".16"/>
       <g style="isolation: isolate">
         <image href="/*CAT_SUN*/" x="3" y="3" width="94" height="94"/>
         <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-sun)" style="fill: var(--sun-core); mix-blend-mode: color; opacity: var(--cat-tint, 0)"/>
+        <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-sun)" style="fill: var(--pat-sun, var(--pat, none)); mix-blend-mode: var(--pat-blend, normal); opacity: var(--pat-op, 1)"/>
+        <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-sun)" style="fill: var(--sheen, none); mix-blend-mode: var(--sheen-blend, normal)"/>
       </g>
       <!-- skin accessories, switched on per skin with --acc-* -->
       <g filter="url(#acc-drop)" style="display: var(--acc-blossom, none)" transform="translate(25 31)">
@@ -1081,13 +1497,28 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       <use href="#acc-beanie" y="-4" width="100" height="100" style="display: var(--acc-beanie, none)"/>
       <use href="#acc-bow" width="100" height="100" style="display: var(--acc-bow, none)"/>
       <use href="#acc-crown" y="-4" width="100" height="100" style="display: var(--acc-crown, none)"/>
+      <use href="#acc-berry" width="100" height="100" style="display: var(--acc-berry, none)"/>
+      <use href="#acc-frog" width="100" height="100" style="display: var(--acc-frog, none)"/>
+      <use href="#acc-bell" width="100" height="100" style="display: var(--acc-bell, none)"/>
+      <use href="#acc-tux" width="100" height="100" style="display: var(--acc-tux, none)"/>
+      <use href="#acc-witch" width="100" height="100" style="display: var(--acc-witch, none)"/>
+      <use href="#acc-horns" width="100" height="100" style="display: var(--acc-horns, none)"/>
+      <use href="#acc-ermine" width="100" height="100" style="display: var(--acc-ermine, none)"/>
+      <use href="#acc-planet" width="100" height="100" style="display: var(--acc-planet, none)"/>
+      <use href="#acc-halo" width="100" height="100" style="display: var(--acc-halo, none)"/>
+      <use href="#acc-helmet" width="100" height="100" style="display: var(--acc-helmet, none)"/>
+      <use href="#fx-twinkle" width="100" height="100" style="display: var(--fx-twinkle, none)"/>
+      <use href="#fx-float" width="100" height="100" style="display: var(--fx-float, none)"/>
     </symbol>
     <!-- Luna: the sleepy night cat (the "moon" piece) -->
     <symbol id="moon" viewBox="0 0 100 100" overflow="visible">
+      <g style="display: var(--fx-aura, none); fill: var(--aura, #ffd95a)"><circle cx="50" cy="52" r="52" opacity=".1"/><circle cx="50" cy="52" r="45" opacity=".14"/><circle cx="50" cy="52" r="38" opacity=".18"/><animate attributeName="opacity" values=".55;1;.55" dur="2.4s" repeatCount="indefinite"/></g>
       <ellipse cx="50" cy="93" rx="32" ry="4.5" fill="#000" opacity=".16"/>
       <g style="isolation: isolate">
         <image href="/*CAT_MOON*/" x="3" y="3" width="94" height="94"/>
         <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-moon)" style="fill: var(--moon); mix-blend-mode: color; opacity: var(--cat-tint, 0)"/>
+        <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-moon)" style="fill: var(--pat-moon, var(--pat, none)); mix-blend-mode: var(--pat-blend, normal); opacity: var(--pat-op, 1)"/>
+        <rect x="3" y="3" width="94" height="94" mask="url(#m-fur-moon)" style="fill: var(--sheen, none); mix-blend-mode: var(--sheen-blend, normal)"/>
       </g>
       <!-- skin accessories, switched on per skin with --acc-* -->
       <g filter="url(#acc-drop)" style="display: var(--acc-blossom, none)" transform="translate(25 31)">
@@ -1116,6 +1547,18 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       <use href="#acc-beanie" y="-4" width="100" height="100" style="display: var(--acc-beanie, none)"/>
       <use href="#acc-bow" width="100" height="100" style="display: var(--acc-bow, none)"/>
       <use href="#acc-crown" y="-4" width="100" height="100" style="display: var(--acc-crown, none)"/>
+      <use href="#acc-berry" width="100" height="100" style="display: var(--acc-berry, none)"/>
+      <use href="#acc-frog" width="100" height="100" style="display: var(--acc-frog, none)"/>
+      <use href="#acc-bell" width="100" height="100" style="display: var(--acc-bell, none)"/>
+      <use href="#acc-tux" width="100" height="100" style="display: var(--acc-tux, none)"/>
+      <use href="#acc-witch" width="100" height="100" style="display: var(--acc-witch, none)"/>
+      <use href="#acc-horns" width="100" height="100" style="display: var(--acc-horns, none)"/>
+      <use href="#acc-ermine" width="100" height="100" style="display: var(--acc-ermine, none)"/>
+      <use href="#acc-planet" width="100" height="100" style="display: var(--acc-planet, none)"/>
+      <use href="#acc-halo" width="100" height="100" style="display: var(--acc-halo, none)"/>
+      <use href="#acc-helmet" width="100" height="100" style="display: var(--acc-helmet, none)"/>
+      <use href="#fx-twinkle" width="100" height="100" style="display: var(--fx-twinkle, none)"/>
+      <use href="#fx-float" width="100" height="100" style="display: var(--fx-float, none)"/>
     </symbol>
     <symbol id="star" viewBox="0 0 24 24">
       <path d="M12 2.2c.5 0 .9.3 1.1.7l2.3 4.7 5.1.8c1 .1 1.4 1.4.7 2.1l-3.7 3.6.9 5.1c.2 1-.9 1.8-1.8 1.3L12 18.1l-4.6 2.4c-.9.5-2-.3-1.8-1.3l.9-5.1-3.7-3.6c-.7-.7-.3-2 .7-2.1l5.1-.8 2.3-4.7c.2-.4.6-.7 1.1-.7z"/>
@@ -1185,8 +1628,20 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       <h2>Cat shop</h2>
       <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
     </div>
-    <p class="shop-intro">Win stars by solving fast, then dress up the whole game.</p>
-    <div class="skins" id="skins"></div>
+    <div class="boxcard" id="boxcard">
+      <div class="bc-top">
+        <button class="bc-art" id="bc-art" type="button" aria-label="Open a Mystery Box"></button>
+        <div class="bc-txt">
+          <b>Mystery Box</b>
+          <span id="bc-sub">A surprise cat look inside.</span>
+          <button class="chunky" id="bc-open" type="button"></button>
+        </div>
+      </div>
+      <ul class="odds" id="odds" aria-label="Base odds per box"></ul>
+      <p class="bc-note" id="bc-note"></p>
+    </div>
+    <div class="coll-head"><b>Your collection</b><span id="coll-n"></span></div>
+    <div id="skins"></div>
     <div class="noads freestars" id="freestars" hidden>
       <div><b>Free stars</b><span id="fs-sub">Watch a short video for 3 stars</span></div>
       <button class="chunky" id="fs-go" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>+3</button>
@@ -1337,6 +1792,20 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
   </div>
 </nav>
+<div class="box-ov" id="box-ov" role="dialog" aria-modal="true" aria-label="Mystery Box" hidden>
+  <div class="bo-rays" aria-hidden="true"></div>
+  <div class="bo-glow" aria-hidden="true"></div>
+  <button class="bo-box" id="bo-box" type="button" aria-label="Open the box"></button>
+  <p class="bo-hint" id="bo-hint">Tap to open!</p>
+  <div class="bo-card" id="bo-card" hidden>
+    <span class="rar-chip" id="bo-rar"></span>
+    <div class="bo-cats" id="bo-cats"></div>
+    <h3 id="bo-name"></h3>
+    <p id="bo-sub"></p>
+    <button class="chunky" id="bo-equip" type="button">Wear it now</button>
+    <div class="bo-row"><button class="bo-btn" id="bo-again" type="button"></button><button class="bo-btn" id="bo-done" type="button">Done</button></div>
+  </div>
+</div>
 <div class="toast" id="toast" role="status" hidden></div>
 
 <div class="tut" id="tut" role="dialog" aria-modal="true" aria-labelledby="tut-title" hidden>
@@ -1396,18 +1865,31 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 (function () {
   var T = TangoCore, N = T.N;
   var PUZZLE_V = 3; // bump when level generation changes so saved boards restart
-  // Each skin's colors, so the shop can preview a look before it is equipped.
+  // Every cat look. r is its rarity: Mystery Boxes hand them out at the odds in BOX below.
+  // Rare and up wear fur patterns, Epic adds moving effects and a burst on every tap, Legendary adds shining fur and a glow.
   var SKINS = [
-    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
-    { id: "midnight", name: "Midnight", tag: "Starry night", price: 8, v: { "eye2-base": "initial", muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
-    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { "eye2-base": "initial", muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
-    { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { "eye2-base": "initial", muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
-    { id: "ocean", name: "Deep Ocean", tag: "Bubbly deep sea", price: 55, v: { "eye2-base": "initial", muted: "#a2d3df", bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
-    { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } },
-    { id: "pumpkin", name: "Pumpkin Patch", tag: "Spooky-cozy autumn", price: 110, v: { "eye2-base": "initial", muted: "#9a6d4f", bg: "#fbe6cf", surface: "#fffaf3", cell: "#fff1e2", ink: "#4a2a17", accent: "#e8742a", "on-accent": "#ffffff", line: "#efcfae", sun: "#d9661f", "sun-core": "#ffab5e", moon: "#6c4f8f" } },
-    { id: "snow", name: "Snow Day", tag: "Warm winter hats", price: 150, v: { "eye2-base": "initial", muted: "#607c98", bg: "#e3f0fa", surface: "#ffffff", cell: "#eef6fd", ink: "#1f3550", accent: "#d9434f", "on-accent": "#ffffff", line: "#c3d9ec", sun: "#e0873a", "sun-core": "#ffc98f", moon: "#8aa9c9" } },
-    { id: "lavender", name: "Lavender", tag: "Bows and blooms", price: 200, v: { "eye2-base": "initial", muted: "#7d6a9e", bg: "#ece4fa", surface: "#fdfbff", cell: "#f3edfd", ink: "#3b2a5a", accent: "#9b6fd6", "on-accent": "#ffffff", line: "#d3c4ee", sun: "#e48a4a", "sun-core": "#ffc49a", moon: "#7a6bc4" } },
-    { id: "royal", name: "Royal Court", tag: "Golden crowns", price: 300, v: { "eye2-base": "initial", muted: "#c3b0e0", bg: "#1a0f2e", surface: "#241540", cell: "#2d1b4f", ink: "#fbf3ff", accent: "#f2c94c", "on-accent": "#241540", line: "#4a3277", sun: "#f0a43a", "sun-core": "#ffd98a", moon: "#c9b6ff" } }
+    { id: "cozy", name: "Cozy", tag: "Classic kitties", r: "starter", v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
+    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", r: "common", v: { "eye2-base": "initial", muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
+    { id: "matcha", name: "Matcha", tag: "Garden sprouts", r: "common", v: { "eye2-base": "initial", muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
+    { id: "pumpkin", name: "Pumpkin Patch", tag: "Spooky-cozy autumn", r: "common", v: { "eye2-base": "initial", muted: "#9a6d4f", bg: "#fbe6cf", surface: "#fffaf3", cell: "#fff1e2", ink: "#4a2a17", accent: "#e8742a", "on-accent": "#ffffff", line: "#efcfae", sun: "#d9661f", "sun-core": "#ffab5e", moon: "#6c4f8f" } },
+    { id: "snow", name: "Snow Day", tag: "Warm winter hats", r: "common", v: { "eye2-base": "initial", muted: "#607c98", bg: "#e3f0fa", surface: "#ffffff", cell: "#eef6fd", ink: "#1f3550", accent: "#d9434f", "on-accent": "#ffffff", line: "#c3d9ec", sun: "#e0873a", "sun-core": "#ffc98f", moon: "#8aa9c9" } },
+    { id: "lavender", name: "Lavender", tag: "Bows and blooms", r: "common", v: { "eye2-base": "initial", muted: "#7d6a9e", bg: "#ece4fa", surface: "#fdfbff", cell: "#f3edfd", ink: "#3b2a5a", accent: "#9b6fd6", "on-accent": "#ffffff", line: "#d3c4ee", sun: "#e48a4a", "sun-core": "#ffc49a", moon: "#7a6bc4" } },
+    { id: "strawberry", name: "Strawberry Milk", tag: "Berry beret", r: "common", v: { "eye2-base": "initial", muted: "#a0606f", bg: "#ffe8ee", surface: "#fffafb", cell: "#fff0f4", ink: "#5a2232", accent: "#e8445e", "on-accent": "#ffffff", line: "#f5c6d2", sun: "#e0606e", "sun-core": "#ffb3bd", moon: "#f6c3d4", alt: "#6cbf6a" } },
+    { id: "froggy", name: "Froggy", tag: "Pond-hopper hood", r: "common", v: { "eye2-base": "initial", muted: "#5f7d55", bg: "#e2f2d9", surface: "#fbfff8", cell: "#eef8e7", ink: "#24401c", accent: "#3fa34d", "on-accent": "#ffffff", line: "#c0dfac", sun: "#a2b83a", "sun-core": "#c6e27a", moon: "#7dbf8a", alt: "#f0a83c" } },
+    { id: "midnight", name: "Midnight", tag: "Starry night", r: "rare", v: { "eye2-base": "initial", muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
+    { id: "ocean", name: "Deep Ocean", tag: "Bubbly deep sea", r: "rare", v: { "eye2-base": "initial", muted: "#a2d3df", bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
+    { id: "calico", name: "Calico Café", tag: "Patchy and proud", r: "rare", v: { "eye2-base": "initial", muted: "#8f7458", bg: "#fbf1e3", surface: "#fffdf9", cell: "#fdf5ea", ink: "#46301f", accent: "#d9733a", "on-accent": "#ffffff", line: "#ead7bd", sun: "#d9733a", "sun-core": "#f5e9da", moon: "#efe7de", alt: "#e48a3a" } },
+    { id: "tiger", name: "Little Tiger", tag: "Bold stripes", r: "rare", v: { "eye2-base": "initial", muted: "#94684a", bg: "#fff0dc", surface: "#fffcf6", cell: "#fff4e6", ink: "#4a2610", accent: "#ef7d1f", "on-accent": "#ffffff", line: "#f0d2ab", sun: "#ef7d1f", "sun-core": "#ffab4a", moon: "#eef0f4", alt: "#3a7bd5" } },
+    { id: "tux", name: "Gentlecat", tag: "Top hat and bow tie", r: "rare", v: { "eye2-base": "initial", muted: "#6f6a72", bg: "#efece7", surface: "#fbfaf8", cell: "#f6f4f0", ink: "#1e1d24", accent: "#2f2d38", "on-accent": "#ffffff", line: "#d8d2c8", sun: "#2f2d38", "sun-core": "#f3efe8", moon: "#e9e6ea", alt: "#c9a24a" } },
+    { id: "cow", name: "Moo Moo", tag: "Spots and a cowbell", r: "rare", v: { "eye2-base": "initial", muted: "#5d7489", bg: "#e6f3fd", surface: "#fbfdff", cell: "#f0f7fd", ink: "#1f3346", accent: "#3e94d8", "on-accent": "#ffffff", line: "#c6dcee", sun: "#e88aa0", "sun-core": "#fff3ee", moon: "#f2f2f4", alt: "#7cc46a" } },
+    { id: "arcade", name: "Neon Arcade", tag: "Neon glow", r: "epic", burst: { sh: "spark", c: ["#ff4fbf", "#44e8ff", "#fff3a6"] }, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } },
+    { id: "galaxy", name: "Cosmic", tag: "Fur full of stars", r: "epic", burst: { sh: "star", c: ["#fff3c9", "#ff6ec7", "#4fd6ff"] }, v: { "eye2-base": "initial", muted: "#aaa4dc", bg: "#0b0a24", surface: "#16143c", cell: "#1d1a4a", ink: "#f2efff", accent: "#ff6ec7", "on-accent": "#16143c", line: "#3a3480", sun: "#ff9d6b", "sun-core": "#ffc79a", moon: "#9fb0ff", alt: "#4fd6ff" } },
+    { id: "witch", name: "Little Witch", tag: "Hat, sparks and a black cat", r: "epic", burst: { sh: "star", c: ["#a8f07a", "#c9a2ff", "#ffd84d"] }, v: { "eye2-base": "initial", muted: "#b3a5d6", bg: "#1a1230", surface: "#241a3e", cell: "#2b2049", ink: "#f4ecff", accent: "#8fe05f", "on-accent": "#1a1230", line: "#463670", sun: "#f08a3a", "sun-core": "#ffb36b", moon: "#6b5d8a", alt: "#7fd65a" } },
+    { id: "astro", name: "Space Cadet", tag: "Ready for liftoff", r: "epic", burst: { sh: "star", c: ["#ffb347", "#bfe3ff", "#ffffff"] }, v: { "eye2-base": "initial", muted: "#9db4d6", bg: "#0c1a33", surface: "#132544", cell: "#182d52", ink: "#eaf3ff", accent: "#ffb347", "on-accent": "#0c1a33", line: "#2d4a7e", sun: "#f2953f", "sun-core": "#ffcf8f", moon: "#c2d0e6", alt: "#ff8a5c" } },
+    { id: "dragon", name: "Baby Dragon", tag: "Scales, horns, embers", r: "epic", burst: { sh: "dot", c: ["#ff9a3c", "#ffd84d", "#ff5a3c"] }, v: { "eye2-base": "initial", muted: "#4f7a69", bg: "#dff3ea", surface: "#f8fffb", cell: "#eaf8f1", ink: "#123a2d", accent: "#1f9e7a", "on-accent": "#ffffff", line: "#b6dfcb", sun: "#f0743a", "sun-core": "#ffa36b", moon: "#5fbfa0", alt: "#f0743a" } },
+    { id: "royal", name: "Royal Court", tag: "Crown, robe and gold", r: "legendary", burst: { sh: "star", c: ["#ffd84d", "#fff3c2", "#e5484d"] }, v: { "eye2-base": "initial", muted: "#c3b0e0", bg: "#1a0f2e", surface: "#241540", cell: "#2d1b4f", ink: "#fbf3ff", accent: "#f2c94c", "on-accent": "#241540", line: "#4a3277", sun: "#f0a43a", "sun-core": "#ffd98a", moon: "#c9b6ff" } },
+    { id: "lucky", name: "Lucky Gold", tag: "Solid gold and silver", r: "legendary", burst: { sh: "coin", c: ["#ffd451"] }, v: { "eye2-base": "initial", muted: "#f0c0a6", bg: "#5a0d16", surface: "#701520", cell: "#7c1a26", ink: "#fff3dc", accent: "#ffcc3d", "on-accent": "#5a0d16", line: "#a33440", sun: "#f2b632", "sun-core": "#ffd451", moon: "#dfe6ee", alt: "#ffd84d" } },
+    { id: "celestial", name: "Celestial", tag: "Rainbow fur and a halo", r: "legendary", burst: { sh: "star", c: ["#ff8fd0", "#ffd08a", "#a8f59a", "#8ae2ff", "#c49bff"] }, v: { "eye2-base": "initial", muted: "#8a80b0", bg: "#f3efff", surface: "#fdfcff", cell: "#f7f3ff", ink: "#3a2d66", accent: "#a77bff", "on-accent": "#ffffff", line: "#dcd2f5", sun: "#ff8fd0", "sun-core": "#ffd9ef", moon: "#e6ecff", alt: "#8ae2ff" } }
   ];
   var $ = function (id) { return document.getElementById(id); };
   // In the phone app, Capacitor connects the game to native add-ons (ads, notifications, sharing).
@@ -1495,18 +1977,22 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     var n = nextLevel(), resume = play && !play.done && !play.daily, lv = resume ? play.level : n;
     $("h-play-label").textContent = resume ? "Continue" : "Play";
     $("h-play-sub").textContent = "Level " + lv;
-    // Progress toward the cheapest theme not owned yet, previewed in its own colors.
-    var goal = SKINS.filter(function (s) { return save.owned.indexOf(s.id) < 0; })[0], duo = $("g-duo");
+    // Progress toward the next Mystery Box, previewing the rarest look still to find (a different one each day).
+    var left = missing(), duo = $("g-duo"), rank = { legendary: 0, epic: 1, rare: 2, common: 3 };
+    left.sort(function (a, b) { return rank[a.r] - rank[b.r]; });
+    var top = left.filter(function (s) { return s.r === (left[0] || {}).r; }), goal = top[dayKey() % (top.length || 1)];
     duo.style.cssText = "";
     $("h-goal").hidden = !goal;
     if (goal) {
       for (var v in goal.v) duo.style.setProperty("--" + v, goal.v[v]);
+      duo.className = "duo skin-preview sk-" + goal.id;
       duo.style.setProperty("--g-bg", goal.v.cell);
-      $("g-tag").textContent = Math.min(save.wallet, goal.price) + "/" + goal.price;
-      var len = 2 * Math.PI * 33, frac = Math.min(1, save.wallet / goal.price);
+      var len = 2 * Math.PI * 33, frac = Math.min(1, save.wallet / BOX.price);
+      $("g-tag").textContent = frac >= 1 ? "Open!" : save.wallet + "/" + BOX.price;
       $("g-arc").setAttribute("stroke-dasharray", (len * frac).toFixed(1) + " 999");
       $("g-arc").style.opacity = frac > 0 ? 1 : 0;
-      $("h-goal").setAttribute("aria-label", "Next theme: " + goal.name + ", " + save.wallet + " of " + goal.price + " stars");
+      $("h-goal").classList.toggle("ready", frac >= 1);
+      $("h-goal").setAttribute("aria-label", frac >= 1 ? "Mystery Box ready to open" : "Next Mystery Box: " + save.wallet + " of " + BOX.price + " stars");
     }
     renderWallet();
   }
@@ -1874,6 +2360,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
         (v === -1 ? "empty" : words[v]) + (given ? ", fixed" : ""));
       el.classList.toggle("pop", i === changed);
     });
+    if (changed != null && !reveal && play.board[changed] !== -1) burst(cells[changed], skinOf(save.skin).burst, 7, .9);
     marks.forEach(function (m, j) { m.classList.toggle("bad", shown.edges.has(j)); });
     drawErrLines(res); drawBands();
     markBrokenRules(res);
@@ -2392,31 +2879,182 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   $("win-home").onclick = $("win-x").onclick = function () { show("home"); };
   $("win-replay").onclick = function () { startLevel(play.level); };
 
-  /* ---------- shop ---------- */
+  /* ---------- shop: Mystery Boxes ----------
+     Stars buy boxes, each box holds one random cat look. The odds are on the shop card before every purchase.
+     No repeats while that rarity still has looks to find; once it is complete, a repeat pays stars back.
+     If 9 boxes in a row hold nothing Epic or better, the 10th is guaranteed to. */
+  var RAR = {
+    starter: { name: "Starter" },
+    common: { name: "Common", odds: 60, back: 5 },
+    rare: { name: "Rare", odds: 27, back: 10 },
+    epic: { name: "Epic", odds: 10, back: 20 },
+    legendary: { name: "Legendary", odds: 3, back: 40 }
+  };
+  var TIERS = ["legendary", "epic", "rare", "common"], BOX = { price: 20, pity: 10 };
+  var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#star"/></svg>';
+  function skinOf(id) { return SKINS.filter(function (s) { return s.id === id; })[0] || SKINS[0]; }
+  function ownsReal(id) { return save.owned.indexOf(id) >= 0; }
+  function missing() { return SKINS.filter(function (s) { return !ownsReal(s.id); }); }
+  function boxState() { return save.box || (save.box = { n: 0, dry: 0 }); }
+  function palette(s) { var css = ""; for (var k in s.v) css += "--" + k + ":" + s.v[k] + ";"; return css; }
+  function catSvg(id) { return '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + id + '"/></svg>'; }
+  function boxArt() {
+    return '<svg viewBox="0 0 120 120" aria-hidden="true">' +
+      '<defs><linearGradient id="mb-b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb3c9"/><stop offset="1" stop-color="#f0679a"/></linearGradient>' +
+      '<linearGradient id="mb-l" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd0de"/><stop offset="1" stop-color="#ff86ad"/></linearGradient>' +
+      '<linearGradient id="mb-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff3a6"/><stop offset="1" stop-color="#f6b324"/></linearGradient></defs>' +
+      '<ellipse cx="60" cy="112" rx="42" ry="6" fill="#000" opacity=".22"/>' +
+      '<rect x="18" y="54" width="84" height="54" rx="10" fill="url(#mb-b)" stroke="#c4487a" stroke-width="2"/>' +
+      '<rect x="52" y="54" width="16" height="54" fill="url(#mb-g)"/>' +
+      '<g fill="#fff" opacity=".5"><circle cx="32" cy="94" r="3"/><circle cx="27" cy="88" r="1.6"/><circle cx="31" cy="86.5" r="1.6"/><circle cx="36" cy="87.5" r="1.6"/><circle cx="88" cy="74" r="3"/><circle cx="83" cy="68" r="1.6"/><circle cx="87" cy="66.5" r="1.6"/><circle cx="92" cy="67.5" r="1.6"/></g>' +
+      '<text x="60" y="97" text-anchor="middle" font-family="Fredoka, sans-serif" font-weight="700" font-size="30" fill="#fff" stroke="#c4487a" stroke-width="1.5" paint-order="stroke">?</text>' +
+      '<g class="mb-lid" style="transform-box: fill-box; transform-origin: 50% 100%">' +
+      '<path d="M22 40 L29 14 L47 36Z M98 40 L91 14 L73 36Z" fill="url(#mb-l)" stroke="#c4487a" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="M28 35 L31 22 L39 34Z M92 35 L89 22 L81 34Z" fill="#ffe3ec"/>' +
+      '<rect x="12" y="36" width="96" height="22" rx="8" fill="url(#mb-l)" stroke="#c4487a" stroke-width="2"/>' +
+      '<rect x="52" y="36" width="16" height="22" fill="url(#mb-g)"/>' +
+      '<path d="M60 36 C48 22 36 30 46 38 Z M60 36 C72 22 84 30 74 38 Z" fill="url(#mb-g)" stroke="#c98a12" stroke-width="1.6" stroke-linejoin="round"/>' +
+      '<circle cx="60" cy="37" r="4.5" fill="#ffd84d" stroke="#c98a12" stroke-width="1.6"/>' +
+      '<path d="M18 42 h84" stroke="#fff" stroke-opacity=".55" stroke-width="2.5" stroke-linecap="round"/>' +
+      '</g></svg>';
+  }
   function renderStore() {
     renderWallet(); paintFree();
+    var left = missing(), b = boxState(), done = !left.length, can = save.wallet >= BOX.price;
+    $("bc-art").innerHTML = boxArt();
+    $("bc-sub").textContent = done ? "You found every cat look. Amazing!" : left.length + " cat looks still to find.";
+    var open = $("bc-open");
+    open.disabled = done;
+    open.classList.toggle("short", !can && !done);
+    open.innerHTML = done ? "All found!" : can ? "Open " + STAR + BOX.price : STAR + (BOX.price - save.wallet) + " more";
+    open.setAttribute("aria-label", done ? "Collection complete" : "Open a Mystery Box for " + BOX.price + " stars");
+    $("odds").innerHTML = TIERS.slice().reverse().map(function (r) {
+      return '<li style="--rc: var(--r-' + r + ')"><b>' + RAR[r].odds + "%</b><i></i>" + RAR[r].name + "</li>";
+    }).join("");
+    var toGo = BOX.pity - b.dry;
+    // Base odds are in the chips above. The guarantee raises Epic and Legendary over many boxes, so the overall rates are stated too
+    // (measured by running rollBox 200,000 times; update them if the odds or the guarantee change).
+    $("bc-note").textContent = "Base odds per box. Every 10th box in a row without an Epic or Legendary is guaranteed one, so over many boxes the chances are about " +
+      "Common 57%, Rare 26%, Epic 13%, Legendary 4%. " + (toGo <= 1 ? "Your next box is guaranteed Epic or better. " : "Epic or better guaranteed within " + toGo + " boxes. ") +
+      "No repeats until you own every look of that rarity, then repeats give stars back.";
+    $("coll-n").textContent = (SKINS.length - left.length) + "/" + SKINS.length;
     var box = $("skins"); box.innerHTML = "";
-    SKINS.forEach(function (s) {
-      var owned = save.owned.indexOf(s.id) >= 0 || !!save.plus, on = save.skin === s.id, css = "";
-      for (var k in s.v) css += "--" + k + ":" + s.v[k] + ";";
-      var card = document.createElement("div");
-      card.className = "skin sk-" + s.id + (on ? " equipped" : "");
-      card.style.cssText = css;
-      var cat = function (id) { return '<span><svg viewBox="0 0 100 100"><use href="#' + id + '"/></svg></span>'; };
-      var label = on ? "Equipped" : owned ? "Equip" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
-      card.innerHTML = '<div class="mini">' + cat("sun") + cat("moon") + cat("moon") + cat("sun") + "</div><b>" + s.name + "</b><small>" + s.tag +
-        '</small><button class="chunky" type="button" ' + (on ? "disabled" : "") + ">" + label + "</button>";
-      card.querySelector("button").onclick = function () {
-        if (!owned) {
-          if (save.wallet < s.price) { toast("You need " + (s.price - save.wallet) + " more ★"); return; }
-          save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked!"); Audio.sfx("coin");
-        }
-        save.skin = s.id; applySkin(); persist(); renderStore();
-      };
-      box.appendChild(card);
+    TIERS.forEach(function (r) {
+      var list = SKINS.filter(function (s) { return s.r === r || (r === "common" && s.r === "starter"); });
+      var have = list.filter(function (s) { return ownsReal(s.id); }).length;
+      var head = document.createElement("div");
+      head.className = "tier-head"; head.style.setProperty("--rc", "var(--r-" + r + ")");
+      head.innerHTML = RAR[r].name + " <small>" + have + "/" + list.length + "</small>";
+      var grid = document.createElement("div"); grid.className = "tier";
+      list.forEach(function (s) { grid.appendChild(skinCard(s)); });
+      box.appendChild(head); box.appendChild(grid);
     });
   }
+  function skinCard(s) {
+    var owned = ownsReal(s.id) || !!save.plus, on = save.skin === s.id;
+    var card = document.createElement("div");
+    card.className = "skin sk-" + s.id + " r-" + s.r + (on ? " equipped" : "") + (owned ? "" : " locked");
+    card.style.cssText = palette(s) + "--rc: var(--r-" + s.r + ");";
+    var act = owned ? '<button class="chunky" type="button" ' + (on ? "disabled" : "") + ">" + (on ? "Wearing" : "Wear") + "</button>"
+      : '<button class="lockline" type="button"><svg viewBox="0 0 24 24"><path d="M7 10V7a5 5 0 0 1 10 0v3h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V7a3 3 0 0 0-6 0z"/></svg>In boxes</button>';
+    card.innerHTML = '<span class="rar-tag">' + RAR[s.r].name + '</span><div class="mini"><span>' + catSvg("sun") + "</span><span>" + catSvg("moon") +
+      "</span><span>" + catSvg("moon") + "</span><span>" + catSvg("sun") + "</span></div><b>" + s.name + "</b><small>" + s.tag + "</small>" + act;
+    card.querySelector("button").onclick = function () {
+      if (!owned) { toast(RAR[s.r].name + ": " + RAR[s.r].odds + "% per Mystery Box"); return; }
+      wear(s.id);
+    };
+    return card;
+  }
+  function wear(id) { save.skin = id; applySkin(); persist(); renderStore(); }
 
+  /* Picks what is in a box and saves it straight away, so closing the app mid-animation can't lose or reroll it. */
+  function rollBox() {
+    var b = boxState(), pity = b.dry >= BOX.pity - 1;
+    var pool = (pity ? ["epic", "legendary"] : ["common", "rare", "epic", "legendary"]);
+    var draw = pool, tot = 0, x, r = draw[draw.length - 1];
+    draw.forEach(function (k) { tot += RAR[k].odds; });
+    x = Math.random() * tot;
+    for (var i = 0; i < draw.length; i++) { x -= RAR[draw[i]].odds; if (x < 0) { r = draw[i]; break; } }
+    var all = SKINS.filter(function (s) { return s.r === r; }), fresh = all.filter(function (s) { return !ownsReal(s.id); });
+    var from = fresh.length ? fresh : all, pick = from[Math.floor(Math.random() * from.length)], dup = !fresh.length;
+    b.n++; b.dry = r === "epic" || r === "legendary" ? 0 : b.dry + 1;
+    if (dup) save.wallet += RAR[r].back; else save.owned.push(pick.id);
+    persist();
+    return { s: pick, r: r, dup: dup, back: dup ? RAR[r].back : 0 };
+  }
+
+  var boxRes = null, boxT = [];
+  function buyBox() {
+    if (!missing().length) return;
+    if (save.wallet < BOX.price) { toast("You need " + (BOX.price - save.wallet) + " more ★"); return; }
+    save.wallet -= BOX.price;
+    boxRes = rollBox();
+    renderWallet(); renderStore();
+    var ov = $("box-ov");
+    ov.dataset.stage = "box"; ov.dataset.r = "";
+    $("bo-box").innerHTML = boxArt(); $("bo-card").hidden = true;
+    ov.hidden = false; $("bo-box").focus();
+    Audio.sfx("tap");
+  }
+  function crack() {
+    var ov = $("box-ov"), r = boxRes && boxRes.r;
+    if (!r || ov.dataset.stage !== "box") return;
+    ov.dataset.stage = "shake";
+    // Longer shakes for better finds; the glow turns the rarity's color part way through.
+    var shake = { common: 900, rare: 1200, epic: 1600, legendary: 2100 }[r], tick = 0;
+    var knock = setInterval(function () { Audio.sfx("tap"); if (++tick > shake / 360) clearInterval(knock); }, 360);
+    boxT.push(knock);
+    boxT.push(setTimeout(function () { ov.dataset.r = r === "legendary" ? "epic" : r; }, shake * .45));
+    boxT.push(setTimeout(function () { ov.dataset.r = r; }, shake * .8));
+    boxT.push(setTimeout(function () { ov.dataset.stage = "open"; Audio.sfx("coin"); }, shake));
+    boxT.push(setTimeout(reveal, shake + 420));
+  }
+  function reveal() {
+    var ov = $("box-ov"), res = boxRes, s = res.s, card = $("bo-card");
+    ov.dataset.stage = "card";
+    card.className = "bo-card skin-preview sk-" + s.id;
+    card.style.cssText = palette(s) + "--rc: var(--r-" + s.r + ");";
+    $("bo-rar").className = "rar-chip r-" + s.r; $("bo-rar").textContent = RAR[s.r].name;
+    $("bo-cats").innerHTML = "<span>" + catSvg("sun") + "</span><span>" + catSvg("moon") + "</span>";
+    $("bo-name").textContent = s.name;
+    $("bo-sub").innerHTML = res.dup ? "Already in your collection, so here are <b>" + res.back + " stars</b> back." : "<b>New!</b> " + s.tag + ".";
+    $("bo-equip").hidden = res.dup || save.skin === s.id;
+    var again = $("bo-again"), left = missing().length;
+    again.disabled = !left || save.wallet < BOX.price;
+    again.innerHTML = left ? "Again " + STAR + BOX.price : "All found!";
+    card.hidden = false;
+    var good = s.r === "epic" || s.r === "legendary";
+    Audio.sfx(good ? "win" : "star", 2);
+    if (res.dup) setTimeout(function () { Audio.sfx("coin"); }, 500);
+    burst($("bo-cats"), { sh: s.r === "legendary" ? "coin" : "star", c: s.burst ? s.burst.c : ["#ffffff", "#ffe27a"] }, good ? 16 : 10, 1.6);
+    if (s.r === "legendary") boxT.push(setTimeout(function () { burst($("bo-cats"), s.burst, 18, 2.2); }, 350));
+    (res.dup ? $("bo-done") : $("bo-equip")).focus();
+  }
+  function closeBox() {
+    boxT.forEach(function (t) { clearTimeout(t); clearInterval(t); }); boxT = [];
+    $("box-ov").hidden = true; boxRes = null; renderStore(); renderHome();
+  }
+  $("bc-open").onclick = $("bc-art").onclick = buyBox;
+  $("bo-box").onclick = crack;
+  $("bo-done").onclick = closeBox;
+  $("bo-equip").onclick = function () { var id = boxRes.s.id; closeBox(); wear(id); toast("Looking good!"); };
+  $("bo-again").onclick = function () { boxT.forEach(clearTimeout); boxT = []; buyBox(); };
+  $("box-ov").addEventListener("keydown", function (e) { if (e.key === "Escape" && $("box-ov").dataset.stage === "card") closeBox(); });
+
+  /* A little burst of stars, coins or sparks from a cat. scale stretches the throw for the big reveal. */
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function burst(el, b, n, scale) {
+    if (!b || calm || !el) return;
+    var r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, size = Math.min(r.width, 160) * (scale || 1);
+    n = n || 7;
+    for (var k = 0; k < n; k++) {
+      var i = document.createElement("i"), a = Math.PI * 2 * k / n + Math.random() * .7, d = size * (.5 + Math.random() * .4);
+      i.className = "bp bp-" + b.sh;
+      i.style.cssText = "left:" + cx + "px;top:" + cy + "px;--dx:" + (Math.cos(a) * d).toFixed(1) + "px;--dy:" + (Math.sin(a) * d).toFixed(1) + "px;--c:" + b.c[k % b.c.length];
+      document.body.appendChild(i);
+      setTimeout(i.remove.bind(i), 760);
+    }
+  }
   /* ---------- sound and music ----------
      Everything is synthesized with Web Audio, so there are no files to load.
      iOS only allows audio after a tap, so the context starts on the first touch. */

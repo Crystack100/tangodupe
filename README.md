@@ -1,6 +1,6 @@
 # Purrzle
 
-A cozy cat logic puzzle for phones: fill the grid with sun and moon cats so every row and column balances. Unlimited levels, 1-3 stars per level based on solve time, and a theme store paid for with stars.
+A cozy cat logic puzzle for phones: fill the grid with sun and moon cats so every row and column balances. Unlimited levels, 1-3 stars per level based on solve time, and Mystery Boxes bought with stars that hold 22 collectible cat looks in four rarities (odds shown in the shop).
 
 - `src/core.js`: puzzle generator, solver and rule checker (plain JavaScript).
 - `src/game.html`: the game screen.

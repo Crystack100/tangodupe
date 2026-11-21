@@ -1,22 +1,42 @@
 # Builds artifact.html (Claude preview fragment) and index.html (installable PWA) from src/.
 import pathlib, base64
 root = pathlib.Path(__file__).parent
-game = (root / "src/game.html").read_text().replace("/*CORE*/", (root / "src/core.js").read_text())
+game = (root / "src/game.html").read_text().replace("/*CORE*/", (root / "src/core.js").read_text()).replace("/*STATE*/", (root / "src/state.js").read_text())
 # The two cat pieces are painted images, inlined so the game stays one offline file.
 for kind in ("sun", "moon"):
     game = game.replace("/*CAT_" + kind.upper() + "*/", "data:image/webp;base64," + base64.b64encode((root / f"src/cat-{kind}.webp").read_bytes()).decode())
     game = game.replace("/*CAT_" + kind.upper() + "_MASK*/", "data:image/webp;base64," + base64.b64encode((root / f"src/cat-{kind}-mask.webp").read_bytes()).decode())
 # Bundle the font so the app works offline and does not wait on Google Fonts.
 import base64
-font = base64.b64encode((root / "src/fredoka-latin.woff2").read_bytes()).decode()
-face = ('<style>@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 300 700; font-display: swap; '
+# The fonts are cut down to the characters and weights the game uses (tools/subset-fonts.py).
+font = base64.b64encode((root / "src/fredoka-subset.woff2").read_bytes()).decode()
+face = ('<style>@font-face { font-family: "Fredoka"; font-style: normal; font-weight: 400 700; font-display: swap; '
         'src: url(data:font/woff2;base64,' + font + ') format("woff2"); }\n'
         # A sharper sans for menus and instructions (Settings, How to play).
         '@font-face { font-family: "Plus Jakarta Sans"; font-style: normal; font-weight: 500 800; font-display: swap; '
-        'src: url(data:font/woff2;base64,' + base64.b64encode((root / "src/jakarta-latin.woff2").read_bytes()).decode() + ') format("woff2"); }</style>')
+        'src: url(data:font/woff2;base64,' + base64.b64encode((root / "src/jakarta-subset.woff2").read_bytes()).decode() + ') format("woff2"); }</style>')
 gfonts = [l for l in game.splitlines() if "fonts.googleapis.com" in l or "fonts.gstatic.com" in l]
 for l in gfonts: game = game.replace(l + "\n", "")
 game = game.replace("<style>", face + "\n<style>", 1)
+
+# Smaller download: drop CSS comments and spacing, and the comment lines and indentation in the scripts.
+# Only whole-line // comments are removed, so nothing inside a string can be touched.
+import re
+def squeeze_css(css):
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    return re.sub(r" ?([{};>]) ?", r"\1", css).replace(";}", "}").strip()
+def squeeze_js(js):
+    out = []
+    for line in js.split("\n"):
+        t = line.strip()
+        if not t or t.startswith("//"): continue
+        out.append(t)
+    return "\n".join(out)
+game = re.sub(r"<style>(.*?)</style>", lambda m: "<style>" + squeeze_css(m.group(1)) + "</style>", game, flags=re.S)
+game = re.sub(r"<script>(.*?)</script>", lambda m: "<script>\n" + squeeze_js(m.group(1)) + "\n</script>", game, flags=re.S)
+game = re.sub(r"\n\s*<!--.*?-->", "", game)
+game = re.sub(r"\n[ \t]+<", "\n<", game)
 (root / "artifact.html").write_text('<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n' + game)
 head = """<!doctype html>
 <html lang="en">

@@ -9,17 +9,18 @@
 :root {
   --bg: #f6f5f3; --bg2: #f6f5f3;
   --surface: #ffffff; --cell: #ffffff; --given: #f1efec; --line: #e9e6e2;
-  --ink: #3f3a36; --muted: #958c86; --accent: #f5a35b; --on-accent: #ffffff; --alt: #6fb6dc; --brand: #6b4f40;
+  --ink: #3f3a36; --muted: #746d68; --accent: #f5a35b; --on-accent: #ffffff; --alt: #6fb6dc; --brand: #6b4f40;
   --sun: #e38b3e; --sun-core: #ffc583; --moon: #a9c3d4; --eye2-base: #34495a;
   --star: #ffc54d; --star-off: #e7e3df;
   --bad: #e8676b; --bad-soft: rgba(232, 103, 107, .16);
   --shadow: rgba(60, 50, 40, .14);
+  --on-accent-shadow: color-mix(in srgb, var(--accent) 55%, #000);
   --font-display: "Fredoka", "Avenir Next Rounded", "Arial Rounded MT Bold", system-ui, sans-serif;
   --font-ui: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Fredoka", "Avenir Next Rounded", system-ui, -apple-system, sans-serif;
 }
 /* Shop skins come after the system blocks so they win when equipped. */
-:root[data-skin="midnight"] { --eye2-base: initial; --alt: #8e9bef; --brand: #ffe3a1;
+:root[data-skin="midnight"] { --eye2-base: initial; --on-accent-shadow: transparent; --alt: #8e9bef; --brand: #ffe3a1;
   --bg: #0f1230; --bg2: #24184a; --surface: #1a1d42; --cell: #212553; --given: #2c3166; --line: #383e7a;
   --ink: #eef0ff; --muted: #a9afd6; --accent: #ffd56b; --on-accent: #1a1d42;
   --sun: #e89a2c; --sun-core: #ffd27a; --moon: #b8c0f0; --star: #ffd56b; --star-off: #383e7a;
@@ -27,23 +28,23 @@
 }
 :root[data-skin="sakura"] { --eye2-base: initial; --alt: #a98be0; --brand: #8a3a5c;
   --bg: #ffe3ee; --bg2: #fff4e3; --surface: #fffafc; --cell: #ffeef4; --given: #fbd5e3; --line: #f4c2d4;
-  --ink: #57243b; --muted: #95607a; --accent: #e3528f; --on-accent: #ffffff;
+  --ink: #57243b; --muted: #8c5871; --accent: #e3528f; --on-accent: #ffffff;
   --sun: #e0703a; --sun-core: #ffb48a; --moon: #8c5aa5; --star: #f7a83a; --star-off: #f4c2d4;
   --bad: #d12f4a; --bad-soft: rgba(209, 47, 74, .15); --shadow: rgba(122, 61, 92, .22); color-scheme: light;
 }
 :root[data-skin="matcha"] { --eye2-base: initial; --alt: #8fae6a; --brand: #4d5f30;
   --bg: #e4edd6; --bg2: #f5efdc; --surface: #fbfcf5; --cell: #eff4e4; --given: #dbe5c8; --line: #c6d4ad;
-  --ink: #2c3a21; --muted: #64735a; --accent: #6a9a3a; --on-accent: #ffffff;
+  --ink: #2c3a21; --muted: #5d6c53; --accent: #6a9a3a; --on-accent: #ffffff;
   --sun: #c98a1c; --sun-core: #f2cd6b; --moon: #4f6b45; --star: #e0a21e; --star-off: #c6d4ad;
   --bad: #c2412d; --bad-soft: rgba(194, 65, 45, .15); --shadow: rgba(44, 58, 33, .22); color-scheme: light;
 }
-:root[data-skin="ocean"] { --eye2-base: initial; --alt: #4fb8c8; --brand: #ffd2bd;
+:root[data-skin="ocean"] { --eye2-base: initial; --on-accent-shadow: transparent; --alt: #4fb8c8; --brand: #ffd2bd;
   --bg: #08334a; --bg2: #0b4d5e; --surface: #0e4158; --cell: #124c63; --given: #185d75; --line: #216d86;
   --ink: #e6fbff; --muted: #a2d3df; --accent: #ff9670; --on-accent: #08334a;
   --sun: #f07a52; --sun-core: #ffb999; --moon: #7fe0ea; --star: #ffd170; --star-off: #216d86;
   --bad: #ff5c7a; --bad-soft: rgba(255, 92, 122, .22); --shadow: rgba(0, 0, 0, .45); color-scheme: dark;
 }
-:root[data-skin="arcade"] { --eye2-base: initial; --alt: #7a5cff; --brand: #fff3a6;
+:root[data-skin="arcade"] { --eye2-base: initial; --on-accent-shadow: transparent; --alt: #7a5cff; --brand: #fff3a6;
   --bg: #0a0712; --bg2: #200a36; --surface: #151024; --cell: #1b142e; --given: #271d42; --line: #3d2c66;
   --ink: #f7f0ff; --muted: #b9a8de; --accent: #ff4fbf; --on-accent: #0a0712;
   --sun: #ffd23a; --sun-core: #fff09a; --moon: #44e8ff; --star: #ffe14a; --star-off: #3d2c66;
@@ -51,23 +52,23 @@
 }
 :root[data-skin="pumpkin"] { --eye2-base: initial; --alt: #8a5cb8; --brand: #6b3a1f;
   --bg: #fbe6cf; --bg2: #fff2df; --surface: #fffaf3; --cell: #fff1e2; --given: #f7dcc0; --line: #efcfae;
-  --ink: #4a2a17; --muted: #9a6d4f; --accent: #e8742a; --on-accent: #ffffff;
+  --ink: #4a2a17; --muted: #885e43; --accent: #e8742a; --on-accent: #ffffff;
   --sun: #d9661f; --sun-core: #ffab5e; --moon: #6c4f8f; --star: #f0a020; --star-off: #efcfae;
   --bad: #c8322d; --bad-soft: rgba(200, 50, 45, .15); --shadow: rgba(120, 60, 20, .22); color-scheme: light;
 }
 :root[data-skin="snow"] { --eye2-base: initial; --alt: #5aa0d8; --brand: #234a73;
   --bg: #e3f0fa; --bg2: #f4f8ff; --surface: #ffffff; --cell: #eef6fd; --given: #d6e7f5; --line: #c3d9ec;
-  --ink: #1f3550; --muted: #607c98; --accent: #d9434f; --on-accent: #ffffff;
+  --ink: #1f3550; --muted: #526c88; --accent: #d9434f; --on-accent: #ffffff;
   --sun: #e0873a; --sun-core: #ffc98f; --moon: #8aa9c9; --star: #f5b83d; --star-off: #c3d9ec;
   --bad: #c0283a; --bad-soft: rgba(192, 40, 58, .14); --shadow: rgba(40, 70, 110, .2); color-scheme: light;
 }
 :root[data-skin="lavender"] { --eye2-base: initial; --alt: #e58fb8; --brand: #4f3780;
   --bg: #ece4fa; --bg2: #f8f0ff; --surface: #fdfbff; --cell: #f3edfd; --given: #e2d7f6; --line: #d3c4ee;
-  --ink: #3b2a5a; --muted: #7d6a9e; --accent: #9b6fd6; --on-accent: #ffffff;
+  --ink: #3b2a5a; --muted: #705d90; --accent: #9b6fd6; --on-accent: #ffffff;
   --sun: #e48a4a; --sun-core: #ffc49a; --moon: #7a6bc4; --star: #f2b33d; --star-off: #d3c4ee;
   --bad: #d13a5c; --bad-soft: rgba(209, 58, 92, .15); --shadow: rgba(80, 50, 130, .2); color-scheme: light;
 }
-:root[data-skin="royal"] { --eye2-base: initial; --alt: #b48cff; --brand: #ffe7a3;
+:root[data-skin="royal"] { --eye2-base: initial; --on-accent-shadow: transparent; --alt: #b48cff; --brand: #ffe7a3;
   --bg: #1a0f2e; --bg2: #2b1446; --surface: #241540; --cell: #2d1b4f; --given: #3a2563; --line: #4a3277;
   --ink: #fbf3ff; --muted: #c3b0e0; --accent: #f2c94c; --on-accent: #241540;
   --sun: #f0a43a; --sun-core: #ffd98a; --moon: #c9b6ff; --star: #ffd84d; --star-off: #4a3277;
@@ -135,7 +136,7 @@ button { font: inherit; color: inherit; touch-action: manipulation; }
 /* chunky game buttons */
 .chunky {
   border: 0; border-radius: 10px; background: var(--accent); color: var(--on-accent);
-  font: 700 1.35rem var(--font-display); padding: 16px 24px; cursor: pointer; width: 100%;
+  font: 700 1.35rem var(--font-display); padding: 16px 24px; cursor: pointer; width: 100%; text-shadow: 0 1.5px 0 var(--on-accent-shadow);
   box-shadow: 0 10px 22px -10px var(--accent); transition: transform .08s, box-shadow .08s;
 }
 .chunky:active { transform: scale(.96); box-shadow: 0 4px 10px -6px var(--accent); }
@@ -226,7 +227,8 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .home-main { position: relative; flex: 1; display: flex; flex-direction: column; }
 .home-btns { margin-top: auto; display: grid; gap: 16px; padding-inline: 20px; padding-bottom: 8px; }
 .pillbtn {
-  border: 0; border-radius: 10px; padding: 18px 20px; font: 700 1.55rem/1 var(--font-display); color: #fff; cursor: pointer; width: 100%;
+  border: 0; border-radius: 10px; padding: 18px 20px; font: 700 1.55rem/1 var(--font-display); color: var(--on-accent); cursor: pointer; width: 100%;
+  text-shadow: 0 1.5px 0 var(--on-accent-shadow);
   background: var(--accent); box-shadow: 0 10px 22px -10px var(--accent); transition: transform .08s, box-shadow .08s;
 }
 .pillbtn:active { transform: scale(.96); box-shadow: 0 4px 10px -6px var(--accent); }
@@ -277,7 +279,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
   background: linear-gradient(var(--acc-lt), var(--accent) 65%);
   box-shadow: inset 0 2px 0 rgb(255 255 255 / .45), 0 5px 0 var(--acc-dk), 0 14px 24px -12px var(--acc-dk); transition: transform .08s, box-shadow .08s;
 }
-.noads-btn::after { content: ""; position: absolute; top: 0; bottom: 0; width: 35%; left: -50%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .4), transparent); animation: shine 2.6s 1s ease-in-out infinite; }
+.noads-btn::after { content: ""; position: absolute; top: 0; bottom: 0; width: 35%; left: 0; transform: translateX(-150%); will-change: transform; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .4), transparent); animation: shine 2.6s 1s ease-in-out infinite; }
 .noads-btn:active { transform: translateY(4px); box-shadow: inset 0 2px 0 rgb(255 255 255 / .45), 0 1px 0 var(--acc-dk); }
 .na-ic { position: relative; flex: none; width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; background: #fff; box-shadow: 0 3px 0 rgb(0 0 0 / .18); }
 .na-ic b { font: 700 1rem/1 var(--font-display); color: var(--acc-dk); letter-spacing: .02em; }
@@ -666,8 +668,8 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .win-btns .chunky, .win-btns .soft { position: relative; overflow: hidden; transition: transform .08s, box-shadow .08s; }
 .win-btns .chunky { background: linear-gradient(var(--acc-lt), var(--accent) 60%); color: #fff; text-shadow: 0 2px 0 var(--acc-dk); font-weight: 800; letter-spacing: .02em;
   box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 6px 0 var(--acc-dk), 0 16px 24px -10px var(--acc-dk); animation: nudge 2.4s 2.2s ease-in-out infinite; }
-.win-btns .chunky::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .45), transparent); animation: shine 2.4s 2.2s ease-in-out infinite; }
-@keyframes shine { 0%, 40% { left: -60%; } 75%, 100% { left: 130%; } }
+.win-btns .chunky::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: 0; transform: translateX(-150%); will-change: transform; background: linear-gradient(100deg, transparent, rgb(255 255 255 / .45), transparent); animation: shine 2.4s 2.2s ease-in-out infinite; }
+@keyframes shine { 0%, 40% { transform: translateX(-150%); } 75%, 100% { transform: translateX(330%); } }
 @keyframes nudge { 0%, 70%, 100% { transform: none; } 80% { transform: scale(1.04); } 90% { transform: scale(.99); } }
 .win-btns .soft { background: linear-gradient(color-mix(in srgb, var(--surface) 94%, #fff), var(--surface)); box-shadow: inset 0 1.5px 0 rgb(255 255 255 / .5), 0 5px 0 var(--slab), 0 12px 18px -10px rgb(0 0 0 / .4); padding: 14px 8px; }
 .win-btns .chunky:active { transform: translateY(5px); animation: none; box-shadow: inset 0 2px 0 rgb(255 255 255 / .5), 0 1px 0 var(--acc-dk); }
@@ -728,7 +730,7 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
 .shop-intro { font: 400 .95rem/1.4 var(--font-body); }
 .skin b { font: 500 1.2rem/1.1 var(--font-display); letter-spacing: .01em; }
 .skin small { margin-top: -10px; font: 400 .85rem var(--font-body); }
-.skin .chunky { font: 500 1.05rem/1 var(--font-display); padding: 11px 6px; border-radius: 12px; text-shadow: none;
+.skin .chunky { font: 600 1.05rem/1 var(--font-display); padding: 11px 6px; border-radius: 12px; text-shadow: 0 1px 0 var(--on-accent-shadow);
   box-shadow: inset 0 2px 0 rgb(255 255 255 / .35), 0 4px 0 color-mix(in srgb, var(--accent) 62%, #000); }
 .skin .chunky:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 62%, #000); }
 .skin .chunky:disabled { box-shadow: none; text-shadow: none; }
@@ -746,20 +748,21 @@ html.on-home .top3 { padding-top: min(12px, 1.4svh); }
   display: grid; justify-items: center; gap: 1px; font: 600 .8rem var(--font-display);
 }
 .tab svg { width: 26px; height: 26px; fill: currentColor; }
-.tab[aria-current="page"] { color: var(--accent); background: var(--cell); }
+.tab[aria-current="page"] { color: color-mix(in srgb, var(--accent) 45%, var(--ink)); background: var(--cell); }
+.tab[aria-current="page"] svg { fill: var(--accent); }
 
 /* splash and toast */
 .splash {
   position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; align-content: center; gap: 12px;
-  background: var(--bg); text-align: center; transition: opacity .35s;
+  background: var(--bg); text-align: center; transition: opacity .3s;
 }
 .sp-cats { display: flex; gap: 6px; }
 .sp-cats svg { width: 84px; height: 84px; animation: spIn .45s cubic-bezier(.3, 1.6, .5, 1) both; }
-.sp-cats svg + svg { animation-delay: .18s; }
+.sp-cats svg + svg { animation-delay: .1s; }
 @keyframes spIn { from { transform: translateY(18px) scale(.6); opacity: 0; } }
-.sp-name { margin: 6px 0 0; font: 800 1.9rem/1 var(--font-display); color: var(--brand); letter-spacing: .02em; text-transform: uppercase; animation: spIn .45s .3s both; }
+.sp-name { margin: 6px 0 0; font: 800 1.9rem/1 var(--font-display); color: var(--brand); letter-spacing: .02em; text-transform: uppercase; animation: spIn .4s .12s both; }
 .sp-bar { width: 140px; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin-top: 10px; }
-.sp-bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; animation: spFill 1s .15s ease-out forwards; }
+.sp-bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; animation: spFill .55s .05s ease-out forwards; }
 @keyframes spFill { to { width: 100%; } }
 .ad-banner {
   display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 8px 10px; border: 1.5px dashed var(--line); border-radius: 8px;
@@ -987,6 +990,24 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 /* Inside a framed line the red tiles are enough, so the "!" badges go away. */
 .board .cell.bad::after { content: none; }
 
+/* Accessibility helpers. */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+.logo { margin-bottom: .67em; }
+button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+[role="dialog"]:focus, .win:focus { outline: none; }
+.how-btn .hb-sub { display: block; margin-top: 2px; font: 500 .8rem/1.25 var(--font-ui); color: var(--muted); }
+.why-ok { min-height: 40px; }
+/* Sun and moon marks (Settings): a small sun or moon badge on every cat, so the two never depend on color. */
+html.marks .cell.v0::before, html.marks .cell.v1::before {
+  content: ""; position: absolute; z-index: 2; left: 3px; bottom: 3px; width: 34%; height: 34%; max-width: 24px; max-height: 24px; border-radius: 50%; pointer-events: none;
+  background: #fff center / 76% no-repeat; box-shadow: 0 0 0 1.5px rgb(0 0 0 / .35), 0 1px 2px rgb(0 0 0 / .3); }
+html.marks .cell.v0::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%23b55200'/%3E%3Cpath d='M12 1.6v2.6M12 19.8v2.6M1.6 12h2.6M19.8 12h2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8' stroke='%23b55200' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E"); }
+html.marks .cell.v1::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.6 2.6A9.6 9.6 0 1 0 21.4 18 7.6 7.6 0 0 1 15.6 2.6z' fill='%23233f6e'/%3E%3C/svg%3E"); }
+/* Reduce motion (Settings, or the phone's own setting): no movement, and anything that animates in just appears. */
+html.calm *, html.calm *::before, html.calm *::after { animation: none !important; transition: none !important; }
+html.calm .err-lines .ln { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) { .err-lines .ln { stroke-dashoffset: 0; } }
+
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1140,18 +1161,19 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 <div id="scroll">
 <div class="bg-tiles" id="bg-tiles" aria-hidden="true"></div>
 <main class="app">
+  <h1 class="sr-only">Purrzle</h1>
   <!-- HOME -->
   <section id="home" class="screen" aria-label="Home">
     <div class="top3">
       <span></span>
-      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
-      <button class="round gear" id="t-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
+      <span class="pill"><svg aria-hidden="true"><use href="#star"/></svg><span class="w-count">0</span><span class="sr-only"> stars to spend</span></span>
+      <button class="round gear" id="t-settings" type="button" aria-label="Settings"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.49.49 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.48.48 0 0 0-.48-.41h-3.84a.48.48 0 0 0-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.49.49 0 0 0-.59.22L2.74 8.87a.48.48 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.49.49 0 0 0-.12-.61zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg></button>
     </div>
     <div class="home-main">
-      <h1 class="logo" aria-label="Purrzle">
+      <div class="logo" role="img" aria-label="Purrzle">
         <span class="ln" aria-hidden="true">P<span class="eared">U<svg viewBox="0 0 60 24"><path d="M6 22 L10 2 L24 14 M54 22 L50 2 L36 14" fill="none" stroke="var(--alt)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/></svg></span>RR<span class="zle">ZLE</span></span>
         <svg class="tail" viewBox="0 0 92 44" aria-hidden="true"><path d="M8 6 q4 30 34 30 q30 0 30 -18 q0 -12 -12 -12" fill="none" stroke="var(--brand)" stroke-width="10" stroke-linecap="round"/><path d="M24 30 l-4 9 M40 35 l0 9 M56 32 l4 9" stroke="var(--sun)" stroke-width="5" stroke-linecap="round"/></svg>
-      </h1>
+      </div>
       <div class="home-cats" aria-hidden="true">
         <svg viewBox="0 0 100 100"><use href="#sun"/></svg>
         <svg viewBox="0 0 100 100"><use href="#moon"/></svg>
@@ -1173,7 +1195,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   <section id="levels" class="screen" aria-label="Levels" hidden>
     <div class="status">
       <h2 id="map-title">Levels</h2>
-      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+      <span class="pill"><svg aria-hidden="true"><use href="#star"/></svg><span class="w-count">0</span><span class="sr-only"> stars to spend</span></span>
     </div>
     <div class="map" id="map"></div>
     <button class="map-jump" id="map-jump" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>My level</button>
@@ -1183,7 +1205,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   <section id="store" class="screen" aria-label="Shop" hidden>
     <div class="status">
       <h2>Cat shop</h2>
-      <span class="pill" aria-label="Stars to spend"><svg><use href="#star"/></svg><span class="w-count">0</span></span>
+      <span class="pill"><svg aria-hidden="true"><use href="#star"/></svg><span class="w-count">0</span><span class="sr-only"> stars to spend</span></span>
     </div>
     <p class="shop-intro">Win stars by solving fast, then dress up the whole game.</p>
     <div class="skins" id="skins"></div>
@@ -1204,17 +1226,18 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   <!-- PUZZLE -->
   <section id="game" class="screen" aria-label="Puzzle" hidden>
     <div class="g-head">
-      <button class="g-icon" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="g-icon" id="g-back" type="button" aria-label="Back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <h2 id="g-title">Level 1</h2>
       <button class="g-icon g-how" id="g-how" type="button" aria-label="How to play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.4a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.3-2.7 4"/><circle cx="12" cy="17.6" r=".7" fill="currentColor"/></svg></button>
     </div>
     <div class="chips">
-      <span class="chip"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg><span id="g-filled" aria-label="Squares filled"><b>0</b>/36</span></span>
-      <div class="goals" id="goals"></div>
-      <span class="chip"><svg class="sw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="2"/><path d="M12 9.5v4l2.6 1.8" stroke="var(--brand)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 2.5h4M12 2.5v3" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/></svg><span id="timer" aria-label="Time">0:00</span></span>
+      <span class="chip"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg><span id="g-filled"><b>0</b>/36<span class="sr-only"> squares filled</span></span></span>
+      <div class="goals" id="goals" role="img" aria-label="3 stars if solved now"></div>
+      <span class="chip"><svg class="sw" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13.5" r="8" fill="var(--sun-core)" stroke="var(--sun)" stroke-width="2"/><path d="M12 9.5v4l2.6 1.8" stroke="var(--brand)" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M10 2.5h4M12 2.5v3" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/></svg><span class="sr-only">Time </span><span id="timer">0:00</span></span>
     </div>
     <div class="board-wrap">
-      <div class="board" id="board" role="grid" aria-label="Puzzle board, 6 by 6"></div>
+      <div class="board" id="board" role="group" aria-label="Puzzle board, 6 by 6" aria-describedby="board-help"></div>
+      <p class="sr-only" id="board-help">Tap a square to cycle Sunny, Luna and empty. With a keyboard, use the arrow keys to move, S for Sunny, M for Luna and 0 to clear.</p>
     </div>
     <div class="actions">
       <button class="rbtn" id="undo" type="button"><span class="rb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></span>Undo</button>
@@ -1226,7 +1249,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 </main>
 </div>
 
-<section class="win" id="win" aria-label="Level complete" hidden>
+<section class="win" id="win" role="dialog" aria-label="Level complete" hidden>
   <div class="confetti" id="confetti" aria-hidden="true"></div>
   <div class="win-page">
     <button class="win-x" id="win-x" type="button" aria-label="Home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg></button>
@@ -1243,7 +1266,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       </div>
     </div>
     <div class="win-stars" id="win-stars"></div>
-    <h3 id="win-title">Purrfect!</h3>
+    <h3 id="win-title" aria-level="2">Purrfect!</h3>
     <div class="win-card st">
       <div class="st-head"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M10 2h4"/></svg><b id="st-time">0:00</b><i class="new" id="win-new" hidden>Best!</i></div>
       <div class="st-track" id="st-track" aria-hidden="true">
@@ -1272,7 +1295,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 
 <div class="sheet-bg" id="board-sheet" hidden>
   <div class="sheet lb-sheet" role="dialog" aria-modal="true" aria-labelledby="lb-title">
-    <h3><span id="lb-title">Your records</span><button class="round" id="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <h3 aria-level="2"><span id="lb-title">Your records</span><button class="round" id="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <p class="note">Your best stars and times on every puzzle you have solved.</p>
     <ol class="lg-rows lb-all" id="lb-all"></ol>
   </div>
@@ -1289,7 +1312,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 
 <div class="sheet-bg" id="how-sheet" hidden>
   <div class="sheet pop-card how-card" role="dialog" aria-modal="true" aria-labelledby="how-title">
-    <h3 id="how-title">How to play</h3>
+    <h3 id="how-title" aria-level="2">How to play</h3>
     <p class="note">Put a Sunny or a Luna in every square.</p>
     <div class="rule-strip how-rules">
         <div><svg viewBox="0 0 44 44" aria-hidden="true"><rect x="1.0" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="0.0" y="6.5" width="15" height="15"/><rect x="15.3" y="8.0" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="14.3" y="6.5" width="15" height="15"/><rect x="29.6" y="8.0" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="28.6" y="6.5" width="15" height="15"/><rect x="1.0" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="0.0" y="20.8" width="15" height="15"/><rect x="15.3" y="22.3" width="13" height="13" rx="2.5" class="rt t0"/><use href="#sun" x="14.3" y="20.8" width="15" height="15"/><rect x="29.6" y="22.3" width="13" height="13" rx="2.5" class="rt t1"/><use href="#moon" x="28.6" y="20.8" width="15" height="15"/></svg><span><b>Half and half</b>Each row and column gets 3 Sunnys and 3 Lunas.</span></div>
@@ -1305,7 +1328,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 <div class="sheet-bg" id="plus-sheet" hidden>
   <div class="sheet pop-card plus-sheet" role="dialog" aria-modal="true" aria-labelledby="plus-title">
     <svg class="plus-crown" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffc94a" stroke="#c9861a" stroke-width="1.2" stroke-linejoin="round"/></svg>
-    <h3 id="plus-title">Purrzle Plus</h3>
+    <h3 id="plus-title" aria-level="2">Purrzle Plus</h3>
     <ul class="plus-perks">
       <li>No ads between levels</li>
       <li>Every cat theme unlocked</li>
@@ -1332,19 +1355,20 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 
 <nav class="tabs" id="tabs" aria-label="Main">
   <div class="tabs-in">
-    <button class="tab" data-to="home" type="button"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
-    <button class="tab" data-to="levels" type="button"><svg viewBox="0 0 40 34"><use href="#paw"/></svg>Levels</button>
-    <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
+    <button class="tab" data-to="home" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1z"/></svg>Home</button>
+    <button class="tab" data-to="levels" type="button"><svg viewBox="0 0 40 34" aria-hidden="true"><use href="#paw"/></svg>Levels</button>
+    <button class="tab" data-to="store" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke="currentColor" stroke-width="2" fill="none"/></svg>Shop</button>
   </div>
 </nav>
 <div class="toast" id="toast" role="status" hidden></div>
+<div class="sr-only" id="sr" aria-live="polite" aria-atomic="true"></div>
 
 <div class="tut" id="tut" role="dialog" aria-modal="true" aria-labelledby="tut-title" hidden>
   <div class="tut-card">
     <div class="tut-top"><div class="tut-dots" id="tut-dots"></div><button class="tut-skip" id="tut-skip" type="button">Skip</button></div>
     <svg class="tut-cat" id="tut-cat" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>
     <span class="tut-sign sign" id="tut-sign" aria-hidden="true" hidden></span>
-    <h3 id="tut-title">How to play</h3>
+    <h3 id="tut-title" aria-level="2">How to play</h3>
     <p class="tut-text" id="tut-text"></p>
     <div class="tut-row" id="tut-row"></div>
     <ul class="tut-rules" id="tut-rules" hidden>
@@ -1358,7 +1382,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 </div>
 <div class="sheet-bg" id="sheet" hidden>
   <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
-    <h3 class="set-head"><span id="sheet-title">Settings</span><button class="round set-x" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
+    <h3 class="set-head" aria-level="2"><span id="sheet-title">Settings</span><button class="round set-x" id="sheet-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></h3>
     <div class="slider">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="3" fill="currentColor"/><circle cx="17.5" cy="16" r="3" fill="currentColor"/></svg>
       <label for="s-music">Music</label>
@@ -1373,6 +1397,8 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     </div>
     <button class="how-btn" id="s-how" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.2-2.5 3.8"/><circle cx="12" cy="17.2" r=".6" fill="currentColor"/></svg>How to play</button>
     <button class="how-btn" id="s-remind" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></svg><span>Daily reminder</span><b class="onoff" id="s-remind-v">Off</b></button>
+    <button class="how-btn" id="s-marks" type="button" role="switch" aria-checked="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="3.2"/><path d="M8 5.5v1.3M8 17.2v1.3M1.5 12h1.3M13.2 12h1.3M3.4 7.4l.9.9M11.7 15.7l.9.9M3.4 16.6l.9-.9M11.7 8.3l.9-.9"/><path d="M19.8 8a4.4 4.4 0 1 0 2 7.6A5.2 5.2 0 0 1 19.8 8z"/></svg><span>Sun and moon marks<small class="hb-sub">Tells the cats apart without color</small></span><b class="onoff" id="s-marks-v">Off</b></button>
+    <button class="how-btn" id="s-calm" type="button" role="switch" aria-checked="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg><span>Reduce motion<small class="hb-sub">Fewer bounces, sparkles and slides</small></span><b class="onoff" id="s-calm-v">Off</b></button>
     <button class="how-btn" id="s-privacy" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy choices</button>
     <button class="how-btn iap-only" id="s-restore" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>Restore purchases</button>
     <a class="how-btn" id="s-policy" href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy policy</a>
@@ -1391,6 +1417,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 
 <script>
 /*CORE*/
+/*STATE*/
 </script>
 <script>
 (function () {
@@ -1398,15 +1425,15 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   var PUZZLE_V = 3; // bump when level generation changes so saved boards restart
   // Each skin's colors, so the shop can preview a look before it is equipped.
   var SKINS = [
-    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#958c86", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
+    { id: "cozy", name: "Cozy", tag: "Classic kitties", price: 0, v: { muted: "#746d68", bg: "#f6f5f3", surface: "#ffffff", cell: "#ffffff", ink: "#3f3a36", accent: "#f5a35b", "on-accent": "#ffffff", line: "#e9e6e2", sun: "#e38b3e", "sun-core": "#ffc583", moon: "#a9c3d4", "eye2-base": "#34495a", alt: "#6fb6dc" } },
     { id: "midnight", name: "Midnight", tag: "Starry night", price: 8, v: { "eye2-base": "initial", muted: "#a9afd6", bg: "#0f1230", surface: "#1a1d42", cell: "#212553", ink: "#eef0ff", accent: "#ffd56b", "on-accent": "#1a1d42", line: "#383e7a", sun: "#e89a2c", "sun-core": "#ffd27a", moon: "#b8c0f0" } },
-    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { "eye2-base": "initial", muted: "#95607a", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
-    { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { "eye2-base": "initial", muted: "#64735a", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
+    { id: "sakura", name: "Sakura", tag: "Cherry blossoms", price: 20, v: { "eye2-base": "initial", muted: "#8c5871", bg: "#ffe3ee", surface: "#fffafc", cell: "#ffeef4", ink: "#57243b", accent: "#e3528f", "on-accent": "#ffffff", line: "#f4c2d4", sun: "#e0703a", "sun-core": "#ffb48a", moon: "#8c5aa5" } },
+    { id: "matcha", name: "Matcha", tag: "Garden sprouts", price: 35, v: { "eye2-base": "initial", muted: "#5d6c53", bg: "#e4edd6", surface: "#fbfcf5", cell: "#eff4e4", ink: "#2c3a21", accent: "#6a9a3a", "on-accent": "#ffffff", line: "#c6d4ad", sun: "#c98a1c", "sun-core": "#f2cd6b", moon: "#4f6b45" } },
     { id: "ocean", name: "Deep Ocean", tag: "Bubbly deep sea", price: 55, v: { "eye2-base": "initial", muted: "#a2d3df", bg: "#08334a", surface: "#0e4158", cell: "#124c63", ink: "#e6fbff", accent: "#ff9670", "on-accent": "#08334a", line: "#216d86", sun: "#f07a52", "sun-core": "#ffb999", moon: "#7fe0ea" } },
     { id: "arcade", name: "Neon Arcade", tag: "Neon shades", price: 80, v: { "eye2-base": "initial", muted: "#b9a8de", bg: "#0a0712", surface: "#151024", cell: "#1b142e", ink: "#f7f0ff", accent: "#ff4fbf", "on-accent": "#0a0712", line: "#3d2c66", sun: "#ffd23a", "sun-core": "#fff09a", moon: "#44e8ff" } },
-    { id: "pumpkin", name: "Pumpkin Patch", tag: "Spooky-cozy autumn", price: 110, v: { "eye2-base": "initial", muted: "#9a6d4f", bg: "#fbe6cf", surface: "#fffaf3", cell: "#fff1e2", ink: "#4a2a17", accent: "#e8742a", "on-accent": "#ffffff", line: "#efcfae", sun: "#d9661f", "sun-core": "#ffab5e", moon: "#6c4f8f" } },
-    { id: "snow", name: "Snow Day", tag: "Warm winter hats", price: 150, v: { "eye2-base": "initial", muted: "#607c98", bg: "#e3f0fa", surface: "#ffffff", cell: "#eef6fd", ink: "#1f3550", accent: "#d9434f", "on-accent": "#ffffff", line: "#c3d9ec", sun: "#e0873a", "sun-core": "#ffc98f", moon: "#8aa9c9" } },
-    { id: "lavender", name: "Lavender", tag: "Bows and blooms", price: 200, v: { "eye2-base": "initial", muted: "#7d6a9e", bg: "#ece4fa", surface: "#fdfbff", cell: "#f3edfd", ink: "#3b2a5a", accent: "#9b6fd6", "on-accent": "#ffffff", line: "#d3c4ee", sun: "#e48a4a", "sun-core": "#ffc49a", moon: "#7a6bc4" } },
+    { id: "pumpkin", name: "Pumpkin Patch", tag: "Spooky-cozy autumn", price: 110, v: { "eye2-base": "initial", muted: "#885e43", bg: "#fbe6cf", surface: "#fffaf3", cell: "#fff1e2", ink: "#4a2a17", accent: "#e8742a", "on-accent": "#ffffff", line: "#efcfae", sun: "#d9661f", "sun-core": "#ffab5e", moon: "#6c4f8f" } },
+    { id: "snow", name: "Snow Day", tag: "Warm winter hats", price: 150, v: { "eye2-base": "initial", muted: "#526c88", bg: "#e3f0fa", surface: "#ffffff", cell: "#eef6fd", ink: "#1f3550", accent: "#d9434f", "on-accent": "#ffffff", line: "#c3d9ec", sun: "#e0873a", "sun-core": "#ffc98f", moon: "#8aa9c9" } },
+    { id: "lavender", name: "Lavender", tag: "Bows and blooms", price: 200, v: { "eye2-base": "initial", muted: "#705d90", bg: "#ece4fa", surface: "#fdfbff", cell: "#f3edfd", ink: "#3b2a5a", accent: "#9b6fd6", "on-accent": "#ffffff", line: "#d3c4ee", sun: "#e48a4a", "sun-core": "#ffc49a", moon: "#7a6bc4" } },
     { id: "royal", name: "Royal Court", tag: "Golden crowns", price: 300, v: { "eye2-base": "initial", muted: "#c3b0e0", bg: "#1a0f2e", surface: "#241540", cell: "#2d1b4f", ink: "#fbf3ff", accent: "#f2c94c", "on-accent": "#241540", line: "#4a3277", sun: "#f0a43a", "sun-core": "#ffd98a", moon: "#c9b6ff" } }
   ];
   var $ = function (id) { return document.getElementById(id); };
@@ -1421,21 +1448,37 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   var play = null, cells = [], marks = [], tick = null, toastT = null;
 
   function load() {
+    var raw = null;
+    try { raw = store().getItem("tango:v2"); } catch (e) {}
+    if (!raw) return;
     try {
-      var s = JSON.parse(store().getItem("tango:v2"));
-      if (s && s.best) {
-        save = Object.assign(save, s);
-        save.daily = save.daily || {}; 
-        // Earlier builds called the free skin "daybreak".
-        save.owned = save.owned.map(function (id) { return id === "daybreak" ? "cozy" : id; });
-        if (save.skin === "daybreak") save.skin = "cozy";
-      }
-    } catch (e) {}
+      // Anything damaged in the save is dropped and the rest kept (see state.js). Earlier builds called the free skin "daybreak".
+      save = PurrzleState.clean(JSON.parse(raw), save, SKINS.map(function (s) { return s.id; }));
+    } catch (e) {
+      // Unreadable: keep a copy so nothing is lost for good, and start fresh.
+      try { store().setItem("tango:v2:broken", raw); } catch (e2) {}
+    }
   }
   // On CrazyGames, saves go through their SDK so they follow the player's account across devices.
   function store() { return PORTAL && CG.data ? CG.data : localStorage; }
-  function persist() { try { store().setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
+  // Saving is batched: a burst of taps writes once, a moment later. Anything that matters right away
+  // (a win, stars spent or earned, a purchase) passes now=true, and leaving the app always writes.
+  var saveT = null, saveWarned = false;
+  function persist(now) {
+    clearTimeout(saveT); saveT = null;
+    if (now) write(); else saveT = setTimeout(write, 400);
+  }
+  function write() {
+    clearTimeout(saveT); saveT = null;
+    try { store().setItem("tango:v2", JSON.stringify(save)); }
+    catch (e) { if (!saveWarned) { saveWarned = true; toast("Couldn't save your progress on this device"); } }
+  }
+  function flushSave() { if (saveT) write(); }
+  document.addEventListener("visibilitychange", function () { if (document.hidden) flushSave(); });
+  window.addEventListener("pagehide", flushSave);
+  window.addEventListener("freeze", flushSave);
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+  function spoken(s) { var m = Math.floor(s / 60); s = s % 60; return (m ? m + (m === 1 ? " minute " : " minutes ") : "") + s + (s === 1 ? " second" : " seconds"); }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
   function totalStars() {
@@ -1448,6 +1491,13 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     var el = $("toast"); el.textContent = msg; el.hidden = false;
     clearTimeout(toastT); toastT = setTimeout(function () { el.hidden = true; }, 1800);
   }
+  // Read a short message out on screen readers (VoiceOver, TalkBack) without showing anything.
+  var sayT = null;
+  function say(text) {
+    var el = $("sr"); clearTimeout(sayT); el.textContent = "";
+    sayT = setTimeout(function () { el.textContent = text; }, 50);
+  }
+  function calm() { return !!save.calm || !!(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches); }
   // CrazyGames wants to know when the player is actually playing a puzzle.
   var cgPlaying = false;
   function gameplay(on) {
@@ -1561,8 +1611,9 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   function jumpToCurrent(smooth) {
     var box = $("map"), sc = mapScroller(), v = viewBox(), r = box.getBoundingClientRect(),
       dy = r.top + spotY(map.n) - (v[0] + v[1]) / 2;
-    if (sc) sc.scrollTo({ top: sc.scrollTop + dy, behavior: smooth ? "smooth" : "auto" });
-    else window.scrollTo({ top: window.scrollY + dy, behavior: smooth ? "smooth" : "auto" });
+    var how = smooth && !calm() ? "smooth" : "auto";
+    if (sc) sc.scrollTo({ top: sc.scrollTop + dy, behavior: how });
+    else window.scrollTo({ top: window.scrollY + dy, behavior: how });
     paintMap();
   }
   // Build the stretches of road near the screen and drop the ones far away.
@@ -1606,7 +1657,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       }
       var open = i <= n, best = save.best[i];
       html += '<div class="spot" style="left:' + spotX(i) + "px;top:" + spotY(i) + 'px"><button type="button" class="node' + (i === n ? " current" : "") + (open ? "" : " locked") + '" data-lv="' + i + '"' +
-        (open ? "" : " disabled") + ' aria-label="Level ' + i + (best ? ", " + best + " stars" : open ? "" : ", locked") + '">' +
+        (open ? "" : " disabled") + ' aria-label="Level ' + i + (i === n ? ", next to play" : "") + (best ? ", " + best + (best === 1 ? " star" : " stars") : open ? "" : ", locked") + '">' +
         (open ? i + (best ? '<span class="ns">' + starSvgs(best) + "</span>" : "") +
           (i === n ? '<svg class="peek" viewBox="0 0 100 100" aria-hidden="true"><use href="#sun"/></svg>' : "") : LOCK) + "</button></div>";
     }
@@ -1747,20 +1798,30 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     $("win-next").textContent = play.daily ? "Back home" : "Next: Level " + (play.level + 1);
     build(); render(); if (!play.done) startClock();
   }
+  // Screen readers hear each square's signs as part of its name, e.g. "matches the square on the right".
+  var signsAt = [], focusAt = 0;
   function build() {
     var boardEl = $("board");
-    boardEl.innerHTML = ""; cells = []; marks = [];
+    boardEl.innerHTML = ""; cells = []; marks = []; signsAt = [];
     for (var i = 0; i < N * N; i++) {
       var b = document.createElement("button");
       b.type = "button"; b.className = "cell"; b.id = "c" + i;
+      // One square in the board is in the Tab order; arrow keys move between squares.
+      b.tabIndex = i === focusAt ? 0 : -1;
       b.addEventListener("click", tap.bind(null, i));
       b.addEventListener("keydown", key.bind(null, i));
-      boardEl.appendChild(b); cells.push(b);
+      b.addEventListener("focus", rove.bind(null, i));
+      boardEl.appendChild(b); cells.push(b); signsAt.push([]);
     }
+    play.edges.forEach(function (e) {
+      var horiz = e.b === e.a + 1, same = e.type === "=";
+      signsAt[e.a].push((same ? "matches" : "is opposite") + " the square " + (horiz ? "on the right" : "below"));
+      signsAt[e.b].push((same ? "matches" : "is opposite") + " the square " + (horiz ? "on the left" : "above"));
+    });
     // Gap-aware placement: each cell is (100% - 5 gaps) / 6 wide, gaps are 3px.
     play.edges.forEach(function (e) {
       var m = document.createElement("span"), r = Math.floor(e.a / N), c = e.a % N, horiz = e.b === e.a + 1;
-      m.className = "mark " + (e.type === "=" ? "eq" : "op"); m.setAttribute("aria-label", e.type === "=" ? "same" : "opposite");
+      m.className = "mark " + (e.type === "=" ? "eq" : "op"); m.setAttribute("aria-hidden", "true");
       m.innerHTML = e.type === "=" ? '<svg viewBox="0 0 16 16"><path d="M3 5.2h10M3 10.8h10"/></svg>' : '<svg viewBox="0 0 16 16"><path d="M4 4l8 8M12 4l-8 8"/></svg>';
       var cx = horiz ? c + 1 : c + .5, cy = horiz ? r + .5 : r + 1;
       m.style.left = "calc((100% - 15px) * " + (cx / N) + " + " + (horiz ? 3 * c + 1.5 : 3 * c) + "px)";
@@ -1800,7 +1861,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   // Frame every row or column that breaks a rule (too many of one cat, or three alike in a row),
   // so it's obvious which line is wrong. Only breaks already showing are framed.
   function drawBands() {
-    if (!bandBox) return;
+    if (!bandBox) return [];
     var out = [], k;
     function line(get, isRow, n) {
       var cnt = [0, 0], idx = [], label = "";
@@ -1817,13 +1878,14 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     }
     for (var r = 0; r < N; r++) line(function (k) { return r * N + k; }, true, r);
     for (var c = 0; c < N; c++) line(function (k) { return k * N + c; }, false, c);
-    var key = out.join("|"); if (key === bandKey) return; bandKey = key;
+    var key = out.join("|"); if (key === bandKey) return out; bandKey = key;
     // Same gap-aware placement as the signs: each square is (100% - 5 gaps) / 6, gaps are 3px.
     var at = function (n) { return "calc((100% - 15px) * " + (n / N) + " + " + (3 * n - 3) + "px)"; }, size = "calc((100% - 15px) / " + N + " + 6px)";
     bandBox.innerHTML = out.map(function (b) {
       var st = b[0] === "row" ? "left:-3px;right:-3px;top:" + at(b[1]) + ";height:" + size : "top:-3px;bottom:-3px;left:" + at(b[1]) + ";width:" + size;
       return '<span class="err-band ' + b[0] + '" style="' + st + '"><i>' + b[2] + "</i></span>";
     }).join("");
+    return out;
   }
   // Light up the rule chip for each kind of break on show: too many of one cat in a line, three in a row, or a sign.
   function markBrokenRules(res) {
@@ -1861,21 +1923,31 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     } else {
       shown = { cells: res.badCells, edges: res.badEdges };
     }
-    if ((changed != null || reveal) && shown.cells.size > before) Audio.sfx("oops");
+    var newBreak = (changed != null || reveal) && shown.cells.size > before;
+    if (newBreak) Audio.sfx("oops");
     var full = play.board.every(function (v) { return v !== -1; });
     if (changed != null && full && !res.solved) toast("Not quite! Check the lines in red");
+    // Only squares whose cat, state or name changed are touched: rebuilding all 36 cat pictures on
+    // every tap was most of the cost of a move.
     cells.forEach(function (el, i) {
-      var v = play.board[i], given = play.givens[i] !== -1;
+      var v = play.board[i], given = play.givens[i] !== -1, bad = shown.cells.has(i);
       el.classList.toggle("given", given);
       el.classList.toggle("v0", v === 0); el.classList.toggle("v1", v === 1);
-      el.classList.toggle("bad", shown.cells.has(i));
-      el.innerHTML = v === -1 ? "" : '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
-      el.setAttribute("aria-label", "Row " + (Math.floor(i / N) + 1) + ", column " + (i % N + 1) + ": " +
-        (v === -1 ? "empty" : words[v]) + (given ? ", fixed" : ""));
+      el.classList.toggle("bad", bad);
+      if (el._v !== v || i === changed) {
+        el._v = v;
+        el.innerHTML = v === -1 ? "" : '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#' + names[v] + '"/></svg>';
+      }
+      var label = "Row " + (Math.floor(i / N) + 1) + ", column " + (i % N + 1) + ", " + (v === -1 ? "empty" : words[v]) + (given ? ", fixed" : "") +
+        (signsAt[i] && signsAt[i].length ? ". " + signsAt[i].join(", and ") : "") + (bad ? ". Breaks a rule" : "");
+      if (el._label !== label) { el._label = label; el.setAttribute("aria-label", label); }
       el.classList.toggle("pop", i === changed);
     });
     marks.forEach(function (m, j) { m.classList.toggle("bad", shown.edges.has(j)); });
-    drawErrLines(res); drawBands();
+    drawErrLines(res);
+    var bands = drawBands();
+    if (newBreak) say(bands.map(function (b) { return (b[0] === "row" ? "Row " : "Column ") + (b[1] + 1) + ": " + b[2]; })
+      .concat(shown.edges.size ? ["a sign isn't followed"] : []).join(". ") || "That breaks a rule");
     markBrokenRules(res);
     $("g-filled").firstChild.textContent = play.board.filter(function (v) { return v !== -1; }).length;
     $("undo").disabled = play.done || !play.history.length;
@@ -1908,13 +1980,23 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     Audio.sfx(v === -1 ? "clear" : "place" + v);
     render(i); persist();
   }
-  function tap(i) { if (!$("why").hidden) hideWhy(); set(i, play.board[i] === -1 ? 0 : play.board[i] === 0 ? 1 : -1); }
+  function tap(i) {
+    if (!$("why").hidden) hideWhy();
+    set(i, play.board[i] === -1 ? 0 : play.board[i] === 0 ? 1 : -1);
+    if (!play.done) say(play.givens[i] !== -1 ? "Fixed square" : ["Sunny", "Luna"][play.board[i]] || "Empty");
+  }
+  function rove(i) {
+    if (cells[focusAt] && focusAt !== i) cells[focusAt].tabIndex = -1;
+    focusAt = i; cells[i].tabIndex = 0;
+  }
   function key(i, ev) {
     var r = Math.floor(i / N), c = i % N, to = null;
     if (ev.key === "ArrowRight") to = r * N + Math.min(N - 1, c + 1);
     else if (ev.key === "ArrowLeft") to = r * N + Math.max(0, c - 1);
     else if (ev.key === "ArrowDown") to = Math.min(N - 1, r + 1) * N + c;
     else if (ev.key === "ArrowUp") to = Math.max(0, r - 1) * N + c;
+    else if (ev.key === "Home") to = r * N;
+    else if (ev.key === "End") to = r * N + N - 1;
     else if (ev.key === "s" || ev.key === "1") set(i, 0);
     else if (ev.key === "m" || ev.key === "2") set(i, 1);
     else if (ev.key === "Backspace" || ev.key === "Delete" || ev.key === "0") set(i, -1);
@@ -1938,7 +2020,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     if (Notes && save.wins === 2 && save.remind == null) setTimeout(function () { askReminders(false); }, 2500);
     for (var q = 0; q < got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
-    persist();
+    persist(true);
   }
   function fillWin(r) {
     var got = r.got, gain = r.gain, prev = r.prev, oldBest = r.best, tkey = play.daily ? "d" + play.daily : play.level;
@@ -1948,6 +2030,8 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     $("win-title").textContent = got === 3 ? "Purrfect!" : got === 2 ? "Nice paws!" : "Solved!";
     $("win-new").hidden = !(oldBest && play.elapsed < oldBest);
     $("win-label").textContent = play.daily ? "Daily clear" : "Level " + play.level + " clear";
+    say((play.daily ? "Daily puzzle" : "Level " + play.level) + " solved in " + spoken(play.elapsed) + ". " + got + (got === 1 ? " star." : " stars.") +
+      (gain ? " You earned " + gain + (gain === 1 ? " star." : " stars.") : ""));
     starTrack(got);
     confetti(got);
     var total = totalStars(); showLeague(total - gain, total);
@@ -2005,6 +2089,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   }
   function confetti(stars) {
     var box = $("confetti"), cs = getComputedStyle(document.documentElement), html = "";
+    if (calm()) { box.innerHTML = ""; return; }
     var cols = ["--accent", "--alt", "--star", "--sun-core", "--moon"].map(function (v) { return cs.getPropertyValue(v).trim(); });
     for (var i = 0; i < 14 + stars * 14; i++) {
       html += '<i style="left:' + Math.random() * 100 + "%;background:" + cols[i % cols.length] + ";--d:" + (1.6 + Math.random() * 1.4).toFixed(2) +
@@ -2078,7 +2163,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     if (play.done) return;
     play.board = play.givens.slice(); play.history = []; render(); persist();
   };
-  $("g-back").onclick = function () { persist(); show(play.done && !play.daily ? "levels" : "home"); };
+  $("g-back").onclick = function () { persist(true); show(play.done && !play.daily ? "levels" : "home"); };
   $("win-next").onclick = function () {
     var go = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
     // An ad between levels after every win from the third on, unless ads were removed (Plus or Remove ads)
@@ -2156,7 +2241,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
       save.plus = plus; save.noAds = noAds;
       // Themes borrowed from Plus go back when it ends.
       if (!plus && save.owned.indexOf(save.skin) < 0) { save.skin = "cozy"; applySkin(); }
-      persist(); applyAds(); if (!$("store").hidden) renderStore(); renderHome();
+      persist(true); applyAds(); if (!$("store").hidden) renderStore(); renderHome();
     }
     function start() {
       var key = RC_KEYS[os];
@@ -2331,7 +2416,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   function paintBonus() { $("win-bonus").hidden = !(play && play.result) || !!play.result.bonus || !Ads.canReward(); }
   $("win-bonus").onclick = function () {
     Ads.reward(function () {
-      play.result.bonus = true; save.wallet += BONUS; persist(); renderWallet();
+      play.result.bonus = true; save.wallet += BONUS; persist(true); renderWallet();
       Audio.sfx("coin"); toast("+" + BONUS + " bonus stars!"); paintBonus();
     });
   };
@@ -2345,7 +2430,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
   $("fs-go").onclick = function () {
     Ads.reward(function () {
       var f = save.free && save.free.day === dayKey() ? save.free : (save.free = { day: dayKey(), n: 0 });
-      f.n++; save.wallet += BONUS; persist(); Audio.sfx("coin"); toast("+" + BONUS + " stars!"); renderStore();
+      f.n++; save.wallet += BONUS; persist(true); Audio.sfx("coin"); toast("+" + BONUS + " stars!"); renderStore();
     });
   };
 
@@ -2374,6 +2459,30 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     $("s-remind").hidden = !Notes;
     $("s-remind-v").textContent = save.remind ? "On" : "Off"; $("s-remind-v").classList.toggle("on", !!save.remind);
   }
+  // Accessibility switches in Settings.
+  function applyA11y() {
+    document.documentElement.classList.toggle("calm", !!save.calm);
+    document.documentElement.classList.toggle("marks", !!save.marks);
+    [["s-calm", save.calm], ["s-marks", save.marks]].forEach(function (x) {
+      $(x[0]).setAttribute("aria-checked", !!x[1]);
+      var v = $(x[0] + "-v"); v.textContent = x[1] ? "On" : "Off"; v.classList.toggle("on", !!x[1]);
+    });
+  }
+  $("s-calm").onclick = function () { save.calm = !save.calm; persist(true); applyA11y(); };
+  $("s-marks").onclick = function () { save.marks = !save.marks; persist(true); applyA11y(); };
+  // Bigger text: on iPhone and iPad the system text size (Dynamic Type) reaches the page through
+  // -apple-system-body. Everything sized in rem grows with it, up to 25% so the board still fits.
+  function textSize() {
+    var probe = document.createElement("span");
+    probe.style.cssText = "position:absolute;visibility:hidden;font:-apple-system-body";
+    document.body.appendChild(probe);
+    var px = parseFloat(getComputedStyle(probe).fontSize), base = parseFloat(getComputedStyle(document.body).fontSize);
+    probe.remove();
+    // Where -apple-system-body isn't known the probe just inherits the body size: nothing to do.
+    var k = px && px !== base ? Math.max(1, Math.min(1.25, px / 17)) : 1;
+    document.documentElement.style.fontSize = k > 1 ? (16 * k).toFixed(1) + "px" : "";
+  }
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) textSize(); });
   $("s-remind").onclick = function () {
     if (save.remind) { save.remind = false; persist(); paintRemind(); scheduleReminders(); } else askReminders(true);
   };
@@ -2399,19 +2508,21 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     SKINS.forEach(function (s) {
       var owned = save.owned.indexOf(s.id) >= 0 || !!save.plus, on = save.skin === s.id, css = "";
       for (var k in s.v) css += "--" + k + ":" + s.v[k] + ";";
+      css += "--on-accent-shadow:" + (s.v["on-accent"] === "#ffffff" ? "color-mix(in srgb, " + s.v.accent + " 55%, #000)" : "transparent") + ";";
       var card = document.createElement("div");
       card.className = "skin sk-" + s.id + (on ? " equipped" : "");
       card.style.cssText = css;
       var cat = function (id) { return '<span><svg viewBox="0 0 100 100"><use href="#' + id + '"/></svg></span>'; };
       var label = on ? "Equipped" : owned ? "Equip" : '<svg viewBox="0 0 24 24"><use href="#star"/></svg>' + s.price;
       card.innerHTML = '<div class="mini">' + cat("sun") + cat("moon") + cat("moon") + cat("sun") + "</div><b>" + s.name + "</b><small>" + s.tag +
-        '</small><button class="chunky" type="button" ' + (on ? "disabled" : "") + ">" + label + "</button>";
+        '</small><button class="chunky" type="button" ' + (on ? "disabled" : "") + ' aria-label="' +
+        (on ? s.name + ", equipped" : owned ? "Equip " + s.name : "Buy " + s.name + " for " + s.price + " stars") + '">' + label + "</button>";
       card.querySelector("button").onclick = function () {
         if (!owned) {
           if (save.wallet < s.price) { toast("You need " + (s.price - save.wallet) + " more ★"); return; }
           save.wallet -= s.price; save.owned.push(s.id); toast(s.name + " unlocked!"); Audio.sfx("coin");
         }
-        save.skin = s.id; applySkin(); persist(); renderStore();
+        save.skin = s.id; applySkin(); persist(true); renderStore();
       };
       box.appendChild(card);
     });
@@ -2552,6 +2663,48 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     box.innerHTML = html;
   }
 
+  /* ---------- dialogs ----------
+     Settings, How to play, the tutorial, Plus, records, ads and the results page open over the game.
+     While one is open: focus moves into it, everything behind it is inert (no taps, Tab or screen
+     reader reaching it), Escape closes it, and focus returns to where it was when it closes. */
+  var MODALS = ["win", "sheet", "how-sheet", "plus-sheet", "board-sheet", "ad-full", "tut"],
+    ESCAPE = { sheet: "sheet-close", "how-sheet": "how-close", "plus-sheet": "plus-close", "board-sheet": "lb-close", tut: "tut-skip", "ad-full": "ad-close" },
+    modals = [];
+  function modalChanged(el) {
+    var at = -1;
+    modals.forEach(function (m, k) { if (m.el === el) at = k; });
+    if (!el.hidden && at < 0) {
+      modals.push({ el: el, from: document.activeElement });
+      setTimeout(function () {
+        if (el.hidden) return;
+        var target = el.id === "win" ? $("win-next") : el.matches("[role=dialog]") ? el : el.querySelector("[role=dialog]");
+        if (target !== $("win-next")) target.tabIndex = -1;
+        try { target.focus({ preventScroll: true }); } catch (e) {}
+      }, 30);
+    } else if (el.hidden && at >= 0) {
+      var m = modals.splice(at, 1)[0];
+      // Back to the button that opened it, if it is still on screen and usable.
+      if (at === modals.length) setTimeout(function () {
+        if (m.from && m.from.isConnected && m.from.getClientRects().length && !m.from.closest("[inert]") && document.activeElement !== m.from)
+          try { m.from.focus({ preventScroll: true }); } catch (e) {}
+      }, 0);
+    } else return;
+    var top = modals.length ? modals[modals.length - 1].el : null;
+    Array.prototype.forEach.call(document.body.children, function (c) {
+      if (c.tagName === "SCRIPT" || c.id === "sr" || c.id === "toast") return;
+      c.inert = !!top && c !== top;
+    });
+  }
+  if (window.MutationObserver) {
+    var watch = new MutationObserver(function (list) { list.forEach(function (r) { modalChanged(r.target); }); });
+    MODALS.forEach(function (id) { watch.observe($(id), { attributes: true, attributeFilter: ["hidden"] }); });
+  }
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape" || !modals.length) return;
+    var b = $(ESCAPE[modals[modals.length - 1].el.id]);
+    if (b && !b.disabled && b.getClientRects().length) { e.preventDefault(); b.click(); }
+  });
+
   function start(data) {
     load();
     if (data && data.save) save = data.save;
@@ -2561,16 +2714,18 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     // Puzzles made by an older version may need guessing, so they're started fresh.
     if (play && play.v !== PUZZLE_V) play = save.play = null;
     buildTiles();
-    applySkin(); applyAds();
+    applySkin(); applyAds(); applyA11y(); textSize();
     document.body.classList.toggle("native", NATIVE); document.body.classList.toggle("portal", PORTAL); document.body.classList.toggle("web", WEB);
     paintRemind(); if (save.remind) scheduleReminders();
     var screen = data && data.screen;
     if (screen === "game" && play) resumeLevel(); else show(screen || "home");
     var splash = $("splash");
     if (screen) splash.hidden = true;
-    else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 400); }, 1250);
-    setTimeout(Ads.start, screen ? 0 : 1700);
-    setTimeout(Shop.start, screen ? 0 : 1700);
+    // A short brand moment, then out of the way: taps go through the splash while it fades.
+    else setTimeout(function () { splash.classList.add("out"); setTimeout(function () { splash.hidden = true; }, 300); }, 650);
+    // Ads and the store start once the home screen is up, so they never slow the first frame.
+    setTimeout(Ads.start, screen ? 0 : 1200);
+    setTimeout(Shop.start, screen ? 0 : 1200);
   }
   if (window.claude && window.claude.hot) window.claude.hot.snapshot(function () {
     var cur = ["game", "levels", "store", "home"].filter(function (s) { return !$(s).hidden; })[0];

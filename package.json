@@ -1,0 +1,14 @@
+{
+  "name": "purrzle",
+  "private": true,
+  "description": "Tests and measurements for the Purrzle game. The game itself has no build dependencies (python3 build.py).",
+  "scripts": {
+    "test": "node --test \"tests/unit/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"tests/e2e/*.test.mjs\"",
+    "perf": "node tests/perf.mjs index.html"
+  },
+  "devDependencies": {
+    "axe-core": "4.10.3",
+    "playwright": "1.63.0"
+  }
+}

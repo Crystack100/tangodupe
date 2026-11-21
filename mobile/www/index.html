@@ -935,7 +935,7 @@ body:not(.iap) .iap-only { display: none !important; }
 /* The privacy policy link shows everywhere: App Store and Google Play require it inside the app. */
 a.how-btn { text-decoration: none; }
 body.portal .portal-only { display: flex !important; text-decoration: none; }
-body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .ad-x { display: none; }
+body.portal .ad-banner, body.portal #noads, body.portal #s-noads, body.portal .ad-x, body.portal #s-help { display: none; }
 /* The plain web app has no real ads or payments, so it shows neither. */
 body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.web #freestars { display: none; }
 .pop-card { align-self: center; border-radius: 20px; margin: 16px; width: calc(100% - 32px); text-align: center; }
@@ -1330,7 +1330,7 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     <div class="plus-links">
       <button type="button" id="plus-restore">Restore</button>
       <a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/" target="_blank" rel="noopener">Terms of use</a>
-      <a href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://crystack100.github.io/purrzle/privacy.html" target="_blank" rel="noopener">Privacy</a>
     </div>
   </div>
 </div>
@@ -1387,7 +1387,8 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
     <button class="how-btn" id="s-remind" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></svg><span>Daily reminder</span><b class="onoff" id="s-remind-v">Off</b></button>
     <button class="how-btn" id="s-privacy" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy choices</button>
     <button class="how-btn iap-only" id="s-restore" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7M4 4v4h4"/></svg>Restore purchases</button>
-    <a class="how-btn" id="s-policy" href="https://crystack100.github.io/tangodupe/privacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy policy</a>
+    <a class="how-btn" id="s-policy" href="https://crystack100.github.io/purrzle/privacy.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Privacy policy</a>
+    <a class="how-btn" id="s-help" href="https://crystack100.github.io/purrzle/support.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg>Help and contact</a>
     <button class="noads-btn plus-btn iap-only" id="s-plus" type="button">
       <span class="na-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 11H5z" fill="#ffc94a" stroke="#c9861a" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
       <span class="na-txt"><b id="sp-title">Purrzle Plus</b><small id="sp-sub">No ads and every theme</small></span>
@@ -2550,6 +2551,30 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       var f = after; after = null; if (f) f(earned);
       adsChanged();
     }
+    // Apple's "Allow tracking?" prompt. iOS silently skips it if the app isn't fully on screen yet,
+    // so wait until it is, and if the answer is still undecided afterwards, ask once more the next
+    // time Purrzle comes back to the foreground.
+    function onScreen() {
+      return new Promise(function (ok) {
+        if (!document.hidden) return setTimeout(ok, 300);
+        document.addEventListener("visibilitychange", function f() {
+          if (document.hidden) return;
+          document.removeEventListener("visibilitychange", f); setTimeout(ok, 300);
+        });
+      });
+    }
+    function askTracking(retry) {
+      return onScreen().then(function () { return AdMob.trackingAuthorizationStatus(); }).then(function (t) {
+        if (t.status !== "notDetermined") return;
+        return AdMob.requestTrackingAuthorization().then(function () { return AdMob.trackingAuthorizationStatus(); }).then(function (t2) {
+          if (!retry || t2.status !== "notDetermined") return;
+          document.addEventListener("visibilitychange", function again() {
+            if (document.hidden) return;
+            document.removeEventListener("visibilitychange", again); askTracking(false);
+          });
+        });
+      }).catch(function () {});
+    }
     // Privacy first: Google's consent form (Europe and other places that need it), then Apple's
     // "Allow tracking?" prompt, then start the ad SDK.
     function start() {
@@ -2566,10 +2591,10 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }).then(function (info) {
         privacy = info.privacyOptionsRequirementStatus === "REQUIRED"; adsChanged();
         if (!info.canRequestAds) return;
-        var att = os !== "ios" ? Promise.resolve() : AdMob.trackingAuthorizationStatus().then(function (t) {
-          if (t.status === "notDetermined") return AdMob.requestTrackingAuthorization();
-        }).catch(function () {});
-        return att.then(function () { return AdMob.initialize(); }).then(function () { on = true; load("interstitial"); load("rewarded"); });
+        var att = os !== "ios" ? Promise.resolve() : askTracking(true);
+        // Purrzle is rated 4+, so ads are limited to ones rated for general audiences.
+        return att.then(function () { return AdMob.initialize({ maxAdContentRating: "General" }); })
+          .then(function () { on = true; load("interstitial"); load("rewarded"); });
       }).catch(function () {});
     }
     function show(kind, done) {
@@ -2658,6 +2683,20 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("s-remind").onclick = function () {
     if (save.remind) { save.remind = false; persist(); paintRemind(); scheduleReminders(); } else askReminders(true);
   };
+
+  /* ---------- Android back button ----------
+     Closes whatever is on top first, then steps back toward Home. On Home it sends the app to the
+     background (like other games) instead of closing it mid-level. */
+  var AppPlugin = plugin("App");
+  if (AppPlugin && Cap.getPlatform() === "android") AppPlugin.addListener("backButton", function () {
+    if (Ads.busy()) return;
+    var shown = function (id) { return !$(id).hidden; };
+    var close = [["tut", "tut-skip"], ["plus-sheet", "plus-close"], ["how-sheet", "how-close"], ["board-sheet", "lb-close"],
+                 ["sheet", "sheet-close"], ["why", "why-ok"], ["win", "win-x"], ["game", "g-back"]];
+    for (var i = 0; i < close.length; i++) if (shown(close[i][0])) return $(close[i][1]).click();
+    if (!shown("home")) return show("home");
+    AppPlugin.minimizeApp();
+  });
 
   /* ---------- share ---------- */
   var SHARE_URL = ""; // add the App Store / Google Play link here once the game is live

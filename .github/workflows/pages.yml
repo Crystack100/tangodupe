@@ -17,7 +17,7 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir site && cp index.html privacy.html manifest.webmanifest icon.svg icon-192.png icon-512.png apple-touch-icon.png sw.js site/
+      - run: mkdir site && cp index.html privacy.html support.html manifest.webmanifest icon.svg icon-192.png icon-512.png apple-touch-icon.png sw.js site/
       - uses: actions/configure-pages@v5
         with:
           enablement: true

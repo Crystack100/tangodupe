@@ -180,7 +180,7 @@ html.on-home #home { height: calc(100svh - 96px - env(safe-area-inset-bottom, 0p
 /* In the iPhone app the page runs edge to edge: keep clear of the Dynamic Island and the home bar. */
 body { padding-top: env(safe-area-inset-top, 0px); }
 body.playing { padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
-@media (max-width: 899.98px), (max-aspect-ratio: 5/4) {
+@media (max-aspect-ratio: 5/4), (max-width: 899.98px) and (min-height: 560.02px) {
   /* Phones: the puzzle screen fills the height. The title stays on top and the rest sits centered in what's left. */
   html.on-game #game { height: calc(100svh - env(safe-area-inset-top, 0px) - 16px - env(safe-area-inset-bottom, 0px)); }
   html.on-game #game .chips { margin-top: auto; }
@@ -828,7 +828,8 @@ body.no-ads .ad-banner { display: none; }
   .skins { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important; }
 }
 /* Wide, landscape screens: puzzle on the right as big as the height allows, rules and buttons in a column beside it. */
-@media (min-width: 900px) and (min-aspect-ratio: 5/4) {
+/* Phones turned sideways (short and wide) use it too, or the board would shrink to a stamp. */
+@media (min-width: 900px) and (min-aspect-ratio: 5/4), (max-height: 560px) and (min-aspect-ratio: 5/4) {
   /* Wide screens, from a small embedded game window to a full monitor: title, counters, rules and buttons
      stack on the left, the board fills the height on the right, and everything scales with the window
      height so nothing is ever cut off. */
@@ -999,6 +1000,52 @@ body.web .ad-banner, body.web #noads, body.web #s-noads, body.web .ad-x, body.we
 /* Inside a framed line the red tiles are enough, so the "!" badges go away. */
 .board .cell.bad::after { content: none; }
 
+/* A tall lesson on a short screen (a phone on its side) scrolls instead of being cut off. */
+.tut { display: flex; flex-direction: column; overflow-y: auto; }
+.tut-card { margin: auto; flex: none; }
+/* Phone on its side: the next-theme badge moves up beside the logo so it doesn't sit on the Play button. */
+@media (max-height: 560px) and (min-aspect-ratio: 5/4) { html.on-home .goal-badge { top: 0; } }
+/* Short phones (iPhone SE and smaller): a slimmer results hero so "Next level" sits on screen without scrolling. */
+@media (max-height: 720px) {
+  .win-page { gap: 8px; }
+  .win-ribbon { margin-top: 4px; }
+  .win-hero { height: 140px; }
+  .rays { width: 290px; height: 290px; }
+  .win-hero .glow { width: 150px; height: 150px; }
+  .win-hero .podium { width: 170px; height: 28px; }
+  .win-cats { margin-bottom: 12px; }
+  .win-cats svg { width: 88px; height: 88px; }
+  .win-stars { margin-top: -14px; }
+  .win-stars svg { width: 50px; height: 50px; }
+  .win-stars svg:nth-child(2) { width: 66px; height: 66px; translate: 0 -10px; }
+  .win h3 { font-size: 2.4rem; }
+  .win-card.st { padding: 12px 14px 10px; }
+  .st-track { margin-top: 44px; }
+}
+/* Long messages wrap instead of running off a narrow screen. In a puzzle (no tab bar) the toast sits lower,
+   clear of the Undo, Hint and Clear buttons. */
+.toast { white-space: normal; width: max-content; max-width: calc(100% - 32px); text-align: center; }
+body.playing .toast { bottom: calc(22px + env(safe-area-inset-bottom, 0px)); }
+/* Solved: the cats hop in a wave across the board and the frame glows before the results appear. */
+.board.solved .cell svg { animation: solvedHop .55s cubic-bezier(.3, 1.6, .5, 1) both; animation-delay: calc(var(--wave, 0) * 45ms + 120ms); }
+@keyframes solvedHop { 40% { transform: translateY(-14%) scale(1.08); } }
+.board.solved .cell.v0, .board.solved .cell.v1 { transition: filter .3s; }
+html.on-game .board-wrap:has(.board.solved) { box-shadow: 0 0 0 3px var(--star), 0 0 28px 4px color-mix(in srgb, var(--star) 60%, transparent), 0 10px 28px -16px var(--shadow); transition: box-shadow .3s; }
+.board.solved .mark { opacity: 0; transition: opacity .3s; }
+/* Gold accents (Midnight, Royal) are too light for white lettering: buttons and banners use the skin's dark ink there. */
+:root:is([data-skin="midnight"], [data-skin="royal"]) :is(.pillbtn:not(.alt), .set-head, .node.current, .map-jump, .win-ribbon, .lg-rows li.me, .win-btns .chunky, .why-ok, .tut-rules b, .tut-go, .noads-btn:not(.plus-btn):not(.owned), .noads-btn:not(.plus-btn):not(.owned) .na-txt b) {
+  color: var(--on-accent); text-shadow: 0 1px 0 rgb(255 255 255 / .35); }
+:root:is([data-skin="midnight"], [data-skin="royal"]) :is(.set-x svg) { stroke: var(--on-accent); }
+:root:is([data-skin="midnight"], [data-skin="royal"]) :is(#sheet .slider svg, .how-btn svg) { color: var(--on-accent); }
+/* Enough stars for the next theme: the badge says so and gives a little bounce. */
+.goal-badge.ready .tag { background: var(--accent); color: var(--on-accent); }
+.goal-badge.ready .ring { animation: readyBob 1.8s ease-in-out infinite; }
+@keyframes readyBob { 0%, 70%, 100% { transform: none; } 80% { transform: scale(1.08) rotate(-4deg); } 90% { transform: scale(1.04) rotate(3deg); } }
+/* Bigger boards (tablets) get bigger signs, so they stay readable next to the cats. */
+@media (min-width: 600px) and (min-height: 820px) and (max-aspect-ratio: 5/4) {
+  html.on-game .mark { width: 30px; height: 30px; margin: -15px 0 0 -15px; }
+  html.on-game .mark svg { width: 18px; height: 18px; }
+}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -1715,7 +1762,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   }
   // On CrazyGames, saves go through their SDK so they follow the player's account across devices.
   function store() { return PORTAL && CG.data ? CG.data : localStorage; }
-  function persist() { try { store().setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
+  // Nothing is written until the saved game has been read, so an early save can't wipe it.
+  var booted = false;
+  function persist() { if (!booted) return; try { store().setItem("tango:v2", JSON.stringify(save)); } catch (e) {} }
   function fmt(s) { var m = Math.floor(s / 60); s = s % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
   function nextLevel() { var n = 1; while (save.best[n]) n++; return n; }
   function unlocked(n) { return n <= nextLevel(); }
@@ -1737,7 +1786,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     try { if (on) CG.game.gameplayStart(); else CG.game.gameplayStop(); } catch (e) {}
   }
   function show(screen) {
-    if (screen !== "game") $("win").hidden = true;
+    if (screen !== "game") { $("win").hidden = true; if (celebrating) { celebrating = null; clearTimeout(celebrateT); $("board").classList.remove("solved"); } }
     $("why").hidden = true;
     ["home", "levels", "store", "game"].forEach(function (s) { $(s).hidden = s !== screen; });
     var inGame = screen === "game";
@@ -1773,7 +1822,8 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   /* ---------- home ---------- */
   function dayKey(d) { d = d || new Date(); return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate(); }
   function renderHome() {
-    var n = nextLevel(), resume = play && !play.done && !play.daily, lv = resume ? play.level : n;
+    var n = nextLevel(), resume = playOn(), lv = resume ? play.level : n;
+    if (!resume && save.parked && save.parked.level === n && started(save.parked)) resume = true;
     $("h-play-label").textContent = resume ? "Continue" : "Play";
     $("h-play-sub").textContent = "Level " + lv;
     // Progress toward the cheapest theme not owned yet, previewed in its own colors.
@@ -1783,11 +1833,14 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (goal) {
       for (var v in goal.v) duo.style.setProperty("--" + v, goal.v[v]);
       duo.style.setProperty("--g-bg", goal.v.cell);
-      $("g-tag").textContent = Math.min(save.wallet, goal.price) + "/" + goal.price;
+      // Enough stars: say so, instead of a full counter that looks the same as "almost".
+      var ready = save.wallet >= goal.price;
+      $("g-tag").textContent = ready ? "Unlock" : save.wallet + "/" + goal.price;
+      $("h-goal").classList.toggle("ready", ready);
       var len = 2 * Math.PI * 33, frac = Math.min(1, save.wallet / goal.price);
       $("g-arc").setAttribute("stroke-dasharray", (len * frac).toFixed(1) + " 999");
       $("g-arc").style.opacity = frac > 0 ? 1 : 0;
-      $("h-goal").setAttribute("aria-label", "Next theme: " + goal.name + ", " + save.wallet + " of " + goal.price + " stars");
+      $("h-goal").setAttribute("aria-label", "Next theme: " + goal.name + (ready ? ", ready to unlock" : ", " + save.wallet + " of " + goal.price + " stars"));
     }
     renderWallet();
   }
@@ -1806,7 +1859,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     el.oninput = function () { save[k] = +el.value; paintSlider(el); Audio.volumes(); };
     el.onchange = function () { persist(); if (k === "sound") Audio.sfx("place0"); };
   });
-  $("h-play").onclick = function () { if (play && !play.done && !play.daily) resumeLevel(); else startLevel(nextLevel()); };
+  // Home's button carries on with the puzzle in hand, unless it's an old level that was only opened and left untouched.
+  function playOn() { return !!(play && !play.done && !play.daily && (play.level === nextLevel() || started(play))); }
+  $("h-play").onclick = function () { if (playOn()) resumeLevel(); else startLevel(nextLevel()); };
 
   /* ---------- level map ---------- */
   // One long winding road, level 1 at the bottom, like a saga map. It opens on the current level;
@@ -1945,7 +2000,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     cat.innerHTML = '<use href="#' + L.cat + '"/>'; cat.classList.remove("bounce");
     $("tut-dots").querySelectorAll("i").forEach(function (d, k) { d.className = k === tut.step ? "on" : k < tut.step ? "done" : ""; });
     $("tut-rules").hidden = !L.rules; $("tut-row").hidden = !!L.rules;
-    $("tut-skip").hidden = !!L.rules;
+    $("tut-skip").hidden = !!L.rules; $("tut-msg").hidden = !!L.rules; // the last card has no row to play, so no message line
     var last = tut.step === TUT.length - 1;
     $("tut-go").textContent = last ? (tut.then ? "Let's play!" : "Got it") : "Next";
     $("tut-go").disabled = !L.rules;
@@ -2014,11 +2069,21 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("how-close").onclick = function () { $("how-sheet").hidden = true; };
   $("how-sheet").onclick = function (e) { if (e.target === this) this.hidden = true; };
   $("how-tut").onclick = function () { $("how-sheet").hidden = true; openTut(null); };
-  function startLevel(n) {
-    if (n === 1 && !save.tutDone && !(tut)) return openTut(function () { startLevel(1); });
-    var p = T.level(n);
-    play = { level: n, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
-             board: p.givens.slice(), history: [], elapsed: 0, done: false, v: PUZZLE_V };
+  // A level with cats placed on it is worth keeping: opening another level parks it, and coming back picks it up.
+  function started(q) { return q && !q.done && q.v === PUZZLE_V && (q.elapsed > 0 || (q.history && q.history.length > 0)); }
+  function startLevel(n, fresh) {
+    if (n === 1 && !save.tutDone && !(tut)) return openTut(function () { startLevel(1, fresh); });
+    if (!fresh && play && !play.done && play.level === n) return resumeLevel();
+    if (started(play)) save.parked = play;
+    var parked = save.parked;
+    if (!fresh && parked && parked.level === n && started(parked)) {
+      play = parked; save.parked = null; play.history = play.history || [];
+    } else {
+      var p = T.level(n);
+      play = { level: n, difficulty: p.difficulty, givens: p.givens, edges: p.edges, solution: p.solution,
+               board: p.givens.slice(), history: [], elapsed: 0, done: false, v: PUZZLE_V };
+      if (parked && parked.level === n) save.parked = null;
+    }
     save.play = play; persist();
     resumeLevel();
   }
@@ -2033,7 +2098,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     boardEl.innerHTML = ""; cells = []; marks = [];
     for (var i = 0; i < N * N; i++) {
       var b = document.createElement("button");
-      b.type = "button"; b.className = "cell"; b.id = "c" + i;
+      b.type = "button"; b.className = "cell"; b.id = "c" + i; b.style.setProperty("--wave", Math.floor(i / N) + i % N);
       b.addEventListener("click", tap.bind(null, i));
       b.addEventListener("keydown", key.bind(null, i));
       boardEl.appendChild(b); cells.push(b);
@@ -2161,9 +2226,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     $("g-filled").firstChild.textContent = play.board.filter(function (v) { return v !== -1; }).length;
     $("undo").disabled = play.done || !play.history.length;
     $("hint").disabled = $("clear").disabled = play.done;
-    $("win").hidden = !play.done;
+    $("win").hidden = !play.done || !!celebrating;
     // Reopened on a finished puzzle (reload): fill the results page from what was saved.
-    if (play.done && !$("win").dataset.filled) {
+    if (play.done && !celebrating && !$("win").dataset.filled) {
       var got = T.stars(play.difficulty, play.elapsed);
       fillWin(play.result || { got: got, gain: 0, prev: got, best: 0 });
     }
@@ -2214,13 +2279,29 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     if (!save.times[tkey] || play.elapsed < save.times[tkey]) save.times[tkey] = play.elapsed;
     save.wallet += gain;
     play.result = { got: got, gain: gain, prev: prev, best: oldBest || 0 };
-    fillWin(play.result);
-    // After the second win, offer the daily reminder once.
-    if (Notes && save.wins === 2 && save.remind == null) setTimeout(function () { askReminders(false); }, 2500);
-    for (var q = 0; q < got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
     if (navigator.vibrate) try { navigator.vibrate([20, 40, 20]); } catch (e) {}
     persist();
+    // Let the finished board sit for a moment: the cats do a little wave, then the results come in.
+    // A tap on the board skips the wait.
+    var mine = play;
+    celebrating = mine; celebrateFrom = Date.now();
+    $("board").classList.add("solved");
+    clearTimeout(celebrateT);
+    celebrateT = setTimeout(function () { revealWin(mine); }, WIN_DELAY);
   }
+  var WIN_DELAY = 1600, celebrating = null, celebrateT = null, celebrateFrom = 0;
+  function revealWin(mine) {
+    if (celebrating !== mine) return;
+    celebrating = null; clearTimeout(celebrateT);
+    $("board").classList.remove("solved");
+    if (play !== mine || $("game").hidden) return; // left the puzzle: the win is saved, no results page
+    fillWin(play.result); $("win").hidden = false;
+    for (var q = 0; q < play.result.got; q++) setTimeout(Audio.sfx.bind(null, "star", q), 450 + q * 200);
+    // After the second win, offer the daily reminder once.
+    if (Notes && save.wins === 2 && save.remind == null) setTimeout(function () { askReminders(false); }, 2500);
+  }
+  // (Not the very tap that finished the puzzle: that click is still bubbling up when the wave starts.)
+  $("board").addEventListener("click", function () { if (celebrating && Date.now() - celebrateFrom > 350) revealWin(celebrating); });
   function fillWin(r) {
     var got = r.got, gain = r.gain, prev = r.prev, oldBest = r.best, tkey = play.daily ? "d" + play.daily : play.level;
     $("win").dataset.filled = "1";
@@ -2297,7 +2378,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   function startClock() {
     stopClock();
     tick = setInterval(function () {
-      if (!play || play.done || document.hidden || Ads.busy()) return;
+      if (!play || play.done || document.hidden || Ads.busy() || !$("tut").hidden || !$("how-sheet").hidden || $("game").hidden) return;
       play.elapsed++; renderClock();
       if (play.elapsed % 5 === 0) persist();
     }, 1000);
@@ -2305,8 +2386,12 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   function stopClock() { if (tick) clearInterval(tick); tick = null; }
 
   $("undo").onclick = function () {
+    if (play.done) return;
     var h = play.history.pop(); if (!h) return;
-    play.board[h[0]] = h[1]; render(h[0]); persist();
+    hideWhy();
+    if (h[0] === "all") { play.board = h[1].slice(); render(); }
+    else { play.board[h[0]] = h[1]; render(h[0]); }
+    persist();
   };
   // Hints are free: no ad, no time added.
   $("hint").onclick = function () { useHint(); };
@@ -2339,7 +2424,9 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }
     }
     if (pick == null || pick < 0) return;
-    set(pick, sol[pick]); cells[pick].focus();
+    set(pick, sol[pick]);
+    if (play.done) return;
+    cells[pick].focus({ preventScroll: true });
     Audio.sfx("hint");
     explain(pick, clues, why);
   }
@@ -2357,11 +2444,21 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   $("why-ok").onclick = hideWhy;
   $("clear").onclick = function () {
     if (play.done) return;
-    play.board = play.givens.slice(); play.history = []; render(); persist();
+    if (play.board.every(function (v, i) { return v === play.givens[i]; })) return;
+    // One undo brings the whole board back.
+    play.history.push(["all", play.board.slice()]);
+    play.board = play.givens.slice(); hideWhy(); Audio.sfx("clear"); render(); persist();
+    toast("Board cleared. Undo brings it back");
   };
   $("g-back").onclick = function () { persist(); show(play.done && !play.daily ? "levels" : "home"); };
+  // The level to go to is fixed at the tap, and a second tap while an ad loads is ignored:
+  // otherwise the ad closing later would start the level after that one, which is still locked.
+  var nextBusy = 0;
   $("win-next").onclick = function () {
-    var go = function () { if (play.daily) show("home"); else startLevel(play.level + 1); };
+    if (nextBusy > Date.now()) return;
+    nextBusy = Date.now() + 20000;
+    var daily = play.daily, lv = play.level + 1;
+    var go = function () { nextBusy = 0; if (daily) show("home"); else startLevel(lv); };
     // An ad between levels after every win from the third on, unless ads were removed (Plus or Remove ads)
     // or the player just watched a bonus video. Every few ads, the Plus offer follows the ad.
     if (!adFree() && save.wins >= 3 && !(play.result && play.result.bonus)) {
@@ -2573,6 +2670,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
       }).catch(function () {});
     }
     function show(kind, done) {
+      if (open) return; // one ad at a time
       if (PORTAL) {
         var was = cgPlaying; open = true; Audio.hold(true); gameplay(false);
         var end = function (ok) { if (!open) return; open = false; Audio.hold(false); gameplay(was); done(ok); };
@@ -2671,7 +2769,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     else if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { toast("Copied! Paste it anywhere"); }, function () {});
   };
   $("win-home").onclick = $("win-x").onclick = function () { show("home"); };
-  $("win-replay").onclick = function () { startLevel(play.level); };
+  $("win-replay").onclick = function () { startLevel(play.level, true); };
 
   /* ---------- shop ---------- */
   function renderStore() {
@@ -2824,6 +2922,19 @@ if (typeof module !== "undefined") module.exports = TangoCore;
     return { sfx: sfx, volumes: volumes, hold: hold, mute: mute };
   })();
 
+  // Phones can close a backgrounded app without warning: save as it goes out of view.
+  document.addEventListener("visibilitychange", function () { if (document.hidden) persist(); });
+  window.addEventListener("pagehide", persist);
+  // Escape (keyboard or a game site's back key) closes whatever is on top.
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    if (!$("tut").hidden) return closeTut();
+    var top = ["plus-sheet", "board-sheet", "how-sheet", "sheet"].filter(function (id) { return !$(id).hidden; })[0];
+    if (top === "plus-sheet") return closePlus();
+    if (top) { $(top).hidden = true; return; }
+    if (!$("why").hidden) return hideWhy();
+  });
+
   /* ---------- boot ---------- */
   function buildTiles() {
     // Faint board pattern behind every screen, with the odd cat and × like a puzzle in progress.
@@ -2836,6 +2947,7 @@ if (typeof module !== "undefined") module.exports = TangoCore;
   function start(data) {
     load();
     if (data && data.save) save = data.save;
+    booted = true;
     if (!save.tutDone && (save.wins || Object.keys(save.best).length)) save.tutDone = true;
     play = save.play && save.play.board ? save.play : null;
     if (play && play.daily) play = save.play = null; // daily puzzles were removed
